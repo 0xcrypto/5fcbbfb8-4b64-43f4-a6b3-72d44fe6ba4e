@@ -1,0 +1,73 @@
+<div id="wrapper">
+  <div class="noticeboard">
+      <div class="tab-bar">
+        <a (click)="openTab('graveyard-noticeboard')" [ngClass]="{'active': (activeTab == 'graveyard-noticeboard')}">_graveyard_noticeboard_</a>
+        <a (click)="openTab('book-of-dead')" [ngClass]="{'active': (activeTab == 'book-of-dead')}">_book_of_dead_</a>
+        <a (click)="openTab('search')" [ngClass]="{'active': (activeTab == 'search')}">_search_</a>
+        <a (click)="openTab('graveyard-burial')" [ngClass]="{'active': (activeTab == 'graveyard-burial')}">_graveyard_burial</a>
+        <a (click)="openTab('reservation')" [ngClass]="{'active': (activeTab == 'reservation')}">_reservation_</a>
+      </div>
+      <div class="tabs">
+          <div id="graveyard-noticeboard"  
+          [style.display]="(activeTab == 'graveyard-noticeboard') ? 'block' : 'none'">
+            <div class="popular-grave-col">
+                <div class="tile"></div>
+                <div class="tile"></div>
+                <div class="tile"></div>
+            </div>
+            <div class="options-col">
+                <button class="option">_Go_to_Graveyard_</button>
+                <button class="option">_Choose_graveyard_</button>
+                <button class="option">_Special_grave_</button>
+                <button class="option">_Grave_number_</button>
+                <button class="option">_Go_Back_to_main_gate</button>
+            </div>
+            <div class="advertisement-col">
+                <div *ngFor="let advertisement of advertisements" class="tile">
+					<img *ngIf="advertisement.image" [attr.src]="advertisement.image" />
+					<p *ngIf="advertisement.text">{{advertisement.text}}</p>
+					<a *ngIf="advertisement.url" [attr.href]="advertisement.url" target="_blank">{{advertisement.url}}</a>
+				</div>
+            </div>
+          </div>
+          <div id="book-of-dead" [style.display]="(activeTab == 'book-of-dead') ? 'block' : 'none'">
+            <p>Book of Dead</p>
+          </div>
+          <div id="search" [style.display]="(activeTab == 'search') ? 'block' : 'none'">
+            <h4>_Find a Person_</h4>
+            <p>_Enter any one field (Partial accepted)_</p>
+            <form>
+                <label>
+                    <span>_First Name_</span>
+                    <input type="text">
+                </label>
+                <label>
+                    <span>_Surname/Last Name_</span>
+                    <input type="text">
+                </label>
+                <label>
+                    <span>_Date of Birth_
+                        <span class="info">[dd-mm-yyyy]</span>
+                    </span>
+                    <input type="text">
+                </label>
+                <label>
+                    <span>_Date of Death_
+                        <span class="info">[dd-mm-yyyy]</span>
+                    </span>
+                    <input type="text">
+                </label>
+                <label>
+                    <button class="align-right">_Search_</button>
+                </label>
+            </form>
+          </div>
+          <div id="graveyard-burial"  [style.display]="(activeTab == 'graveyard-burial') ? 'block' : 'none'">
+            <p>Graveyard Burial</p>
+          </div>
+          <div id="reservation"  [style.display]="(activeTab == 'reservation') ? 'block' : 'none'">
+              <p>Reservation</p>
+          </div>
+      </div>
+  </div>
+</div>

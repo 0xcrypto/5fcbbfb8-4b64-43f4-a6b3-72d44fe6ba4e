@@ -1,0 +1,14 @@
+<div id="wrapper" [ngClass]="{'goto-notice-wall': isGateOpen}">
+    <div class="sky"></div>
+    <div class="birds"></div>
+    <div class="gate-wall">
+      <div class="top-board"></div>
+      <div class="lion-left"></div>
+      <div class="lion-right"></div>
+      <div class="main-gate">
+        <div class="gate-left" (click)="openGate()"></div>
+        <div class="gate-right" (click)="openGate()"></div>
+      </div>
+    </div>
+    <div class="notice-wall"></div>
+  </div>

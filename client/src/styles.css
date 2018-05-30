@@ -1,0 +1,365 @@
+*:focus{
+    outline: none;
+}
+.align-right{
+    float: right;
+}
+body{
+    background-color: #000;
+    background-repeat: repeat-x;
+    background-image: url(./assets/images/bg-top.jpg);
+    background-position: center top;
+}
+body footer{
+    position: absolute;
+    bottom: 0;
+    height: 100px;
+    background-image: url(./assets/images/bg-bottom.jpg);
+    background-repeat: repeat-x;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    left: 0;
+}
+body #wrapper{
+	height: 485px;
+    width: 1024px;
+    display: block;
+    margin: 55px auto;
+    overflow: hidden;
+    position: relative;
+}
+body #wrapper .sky{
+	height: 100%;
+    width: 100%;
+    display: block;
+    position: absolute;
+    background-image: url(./assets/images/sky.jpg);
+	background-size: 145%;
+    background-repeat: no-repeat;
+}
+body #wrapper .top-board{
+    height: 55px;
+    width: 225px;
+    display: block;
+    top: 0;
+    left: 50%;
+    overflow: hidden;
+    position: absolute;
+    z-index: 3;
+    background-image: url(./assets/images/top-board.png);
+    background-repeat: no-repeat;
+    margin-left: -120px;
+    background-size: cover;
+    background-position: 0;
+}
+body #wrapper .birds{
+    height: 155px;
+    width: 100%;
+    display: block;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: 2;
+    background-image: url(./assets/images/birds-flying.gif);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+body #wrapper.goto-notice-wall .birds{
+	display: none;
+}
+body #wrapper .gate-left{
+   width: 168px;
+   height: 270px;
+   background-image: url(./assets/images/gate-left.png);
+   background-repeat: no-repeat;
+   background-size: 168px 270px;
+   transition: -webkit-transform 2s linear;
+   transition: transform 2s linear;
+   transition: transform 2s linear, -webkit-transform 2s linear;
+   -webkit-transform: perspective(300) rotateY(0deg);
+   -webkit-transform-origin: 0% 0%;
+   display: inline-block;
+	   
+}
+body #wrapper.goto-notice-wall .main-gate .gate-left{
+	-webkit-transform: perspective(300) rotateY(90deg);
+	-webkit-transform-origin: 0% 0%;
+}
+body #wrapper .gate-right{
+    width: 167px;
+    height: 270px;
+    float: right;
+    z-index: 3;
+    background-image: url(./assets/images/gate-right.png);
+    background-size: 168px 270px;
+    background-repeat: no-repeat;
+    transition: -webkit-transform 2s linear;
+    transition: transform 2s linear;
+    transition: transform 2s linear, -webkit-transform 2s linear;
+    -webkit-transform: perspective(300) rotateY(0deg);
+    -webkit-transform-origin: 0% 0%;
+    display: inline-block;
+}
+body #wrapper.goto-notice-wall .main-gate .gate-right{
+	-webkit-transform: perspective(300) rotateY(-90deg);
+	-webkit-transform-origin: 100% 0%;
+}
+body #wrapper .gate-right:before{
+	content: "";
+    width: 135px;
+    height: 50px;
+    right: 23px;
+    z-index: 3;
+    background-image: url(./assets/images/entrance-board.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 150px;
+}
+body #wrapper .lion-left{
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 55px;
+    left: 170px;
+    z-index: 3;
+    background-image: url(./assets/images/lion.png);
+    background-repeat: no-repeat;
+}
+body #wrapper .lion-right{
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 55px;
+    right: 165px;
+    z-index: 3;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    -webkit-filter: FlipX;
+    filter: FlipX;
+    -ms-filter: "FlipX";
+    background-image: url(./assets/images/lion.png);
+    background-repeat: no-repeat;
+}
+body #wrapper .gate-wall {
+	position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    opacity: 1;
+	background-image: url(./assets/images/main-gate.png);
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: 1024px 420px;
+    transition: all 3s ease-in-out;
+    background-position: bottom center;
+}
+body #wrapper.goto-notice-wall .gate-wall{
+    transform: scale(5);
+    background-position: center 20px;
+    opacity: 0;
+    z-index: -1;
+}
+body #wrapper .notice-wall{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    background-image: url(./assets/images/notice-board.png);
+    background-position: center 370px;
+    background-repeat: no-repeat;
+    background-size: 45%;
+    transition: all 1.5s ease-in-out;
+    background-position: bottom center;
+}
+body #wrapper.goto-notice-wall .notice-wall{
+    background-size: 100%;
+    background-position: center 60px;
+    transform: scale(2.2);
+}
+body #wrapper .main-gate{
+    height: 280px;
+    width: 335px;
+    top: 120px;
+    position: relative;
+    left: 350px;
+}
+body #wrapper .noticeboard{
+    height: 100%;
+    width: 100%;
+    background-image: url(./assets/images/noticeboard.png);
+    background-size: 93%;
+    background-repeat: no-repeat;
+    background-position: center -180px;
+}
+body #wrapper .tab-bar{
+    width: 650px;
+    margin: 0 auto;
+}
+body #wrapper .tab-bar a{
+    background: #333;
+    color: #a6a6a6;
+    padding: 0 5px;
+    border-radius: 3px 3px 0 0;
+    border: 1px solid #000;
+    border-bottom: none;
+    cursor: pointer;
+    font-size: 15px;
+}
+body #wrapper .tab-bar a:focus{
+    outline: none;
+}
+body #wrapper .tab-bar a.active{
+    background: #b2973d;
+    color: #333;
+}
+body #wrapper .tabs{
+    width: 640px;
+    margin: 0 190px;
+    padding: 10px;
+    height: 410px;
+}
+body #wrapper .tabs > div{
+    color: #fff;
+    height: 100%;
+    padding: 10px;
+}
+body #wrapper .tabs > div h4{
+    color: #848484;
+    font-size: 14px;
+}
+body #wrapper .tabs > div p{
+    color: #515151;
+    font-size: 12px;
+}
+body #wrapper .tabs > div form > label{
+    display: block;
+    margin-bottom: 5px;
+}
+body #wrapper .tabs > div form > label .info{
+    color: #555;
+    font-size: 10px;
+}
+body #wrapper .tabs > div form > label > span{
+    color: #848484;
+    font-size: 14px;
+    width: 170px;
+    display: inline-block;
+    line-height: 20px;
+}
+body #wrapper .tabs > div form > label input{
+    border-radius: 3px;
+    border: none;
+    height: 20px;
+    font-size: 20px;
+    width: 150px;
+    line-height: 20px;
+}
+body #wrapper .tabs > div form > label button {
+    background: none;
+    color: #fff;
+    border: none;
+}
+body #wrapper .tabs > div form > label button:after {
+    content: ">>";
+}
+body #wrapper .tabs > div .popular-grave-col{
+    width: 40%;
+    margin-left: -80px;
+    height: 100%;
+    display: inline-block;
+    float: left;
+}
+body #wrapper .tabs > div .options-col{
+    width: 40%;
+    height: 100%;
+    display: inline-block;
+    float: left;
+    margin: 0 13px;
+}
+body #wrapper .tabs > div .options-col .option{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(./assets/images/option-background.png);
+    display: block;
+    color: #a6a6a6;
+    padding: 10px;
+    width: 200px;
+    background-color: transparent;
+    border: none;
+    position: relative;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+body #wrapper .tabs > div .options-col .option:before{
+    content: "";
+    background-image: url(./assets/images/option-arrow-right.png);
+    display: block;
+    width: 38px;
+    height: 35px;
+    position: absolute;
+    right: -10px;
+    top: 0;
+    background-repeat: no-repeat;
+}
+body #wrapper .tabs > div .options-col .option:after{
+    content: "";
+    background-image: url(./assets/images/option-shadow.png);
+    display: block;
+    position: absolute;
+    width: 100%;
+    bottom: -34px;
+    height: 63px;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
+body #wrapper .tabs > div .advertisement-col{
+    width: 40%;
+    margin-right: -80px;
+    height: 100%;
+    display: inline-block;
+    float: right;
+}
+
+body #wrapper .tabs > div .popular-grave-col .tile,
+body #wrapper .tabs > div .advertisement-col .tile{
+    width: 100%;
+    height: 105px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(./assets/images/floating-tile.png);
+	padding: 15px;
+}
+body #wrapper .tabs > div .popular-grave-col .tile p,
+body #wrapper .tabs > div .advertisement-col .tile p{
+	padding: 0 20px;
+    font-weight: normal;
+    overflow: hidden;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 180px;
+    margin: 0 auto;
+}
+body #wrapper .tabs > div .popular-grave-col .tile a,
+body #wrapper .tabs > div .advertisement-col .tile a{
+	padding: 0 10px;
+    width: 180px;
+    display: block;
+    color: #b2973d;
+    text-align: center;
+    margin: 0 auto;
+}
+body #wrapper .tabs > div .popular-grave-col .tile img,
+body #wrapper .tabs > div .advertisement-col .tile img{
+	width: 60px;
+    height: 60px;
+    display: block;
+    color: #b2973d;
+    margin: 5px auto;
+    border: 1px solid #b2973d;
+}
