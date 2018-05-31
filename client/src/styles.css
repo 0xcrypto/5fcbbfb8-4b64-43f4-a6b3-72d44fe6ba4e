@@ -21,6 +21,33 @@ body footer{
     padding: 0;
     left: 0;
 }
+body footer ul{
+    width: 1024px;
+    margin: 0 auto;
+    list-style-type: none;
+    background: #000;
+    margin-top: 25px;
+}
+body footer ul li {
+    float: left;
+    font-size: 12px;
+}
+body footer ul li a{
+    color: #585858;
+    text-decoration: none;
+}
+body footer ul li:before{
+    content: '+';
+    color: #585858;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+body footer ul li:last:after{
+    content: '+';
+    color: #585858;
+    padding-right: 10px;
+    padding-left: 10px;
+}
 body #wrapper{
 	height: 485px;
     width: 1024px;
@@ -28,6 +55,22 @@ body #wrapper{
     margin: 55px auto;
     overflow: hidden;
     position: relative;
+    color: #fff;
+}
+body #wrapper.noticeboard{
+    background-image: url(./assets/images/noticeboard.png);
+    background-size: 93%;
+    background-repeat: no-repeat;
+    background-position: center -180px;
+}
+body #wrapper .scroll-content{
+    width: 630px;
+    margin: 0 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 400px;
+    margin-top: 20px;
+    padding: 10px;
 }
 body #wrapper .sky{
 	height: 100%;
@@ -188,14 +231,6 @@ body #wrapper .main-gate{
     position: relative;
     left: 350px;
 }
-body #wrapper .noticeboard{
-    height: 100%;
-    width: 100%;
-    background-image: url(./assets/images/noticeboard.png);
-    background-size: 93%;
-    background-repeat: no-repeat;
-    background-position: center -180px;
-}
 body #wrapper .tab-bar{
     width: 650px;
     margin: 0 auto;
@@ -236,22 +271,22 @@ body #wrapper .tabs > div p{
     color: #515151;
     font-size: 12px;
 }
-body #wrapper .tabs > div form > label{
+form > label{
     display: block;
     margin-bottom: 5px;
 }
-body #wrapper .tabs > div form > label .info{
+form > label .info{
     color: #555;
     font-size: 10px;
 }
-body #wrapper .tabs > div form > label > span{
+form > label > span{
     color: #848484;
     font-size: 14px;
     width: 170px;
     display: inline-block;
     line-height: 20px;
 }
-body #wrapper .tabs > div form > label input{
+form > label input, form > label textarea{
     border-radius: 3px;
     border: none;
     height: 20px;
@@ -259,12 +294,12 @@ body #wrapper .tabs > div form > label input{
     width: 150px;
     line-height: 20px;
 }
-body #wrapper .tabs > div form > label button {
+form > label button {
     background: none;
     color: #fff;
     border: none;
 }
-body #wrapper .tabs > div form > label button:after {
+form > label button:after {
     content: ">>";
 }
 body #wrapper .tabs > div .popular-grave-col{

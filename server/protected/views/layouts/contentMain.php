@@ -91,6 +91,15 @@
 	                <li><a href="<?php echo Yii::app()->createUrl('StaticPage/admin');?>"><span class="lbl">Static Pages</span></a></li>
 	            </ul>
 	        </li>
+	        <li class="grey with-sub">
+	            <span>
+	                <i class="font-icon font-icon-dashboard"></i>
+	                <span class="lbl">Footer</span>
+	            </span>
+	            <ul>
+	                <li><a href="<?php echo Yii::app()->createUrl('FooterMenu/admin');?>"><span class="lbl">Menus</span></a></li>
+	            </ul>
+	        </li>
 		</ul>
 	</nav>
 	<div class="page-content">

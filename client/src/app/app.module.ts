@@ -10,6 +10,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { NoticeboardComponent } from './noticeboard/noticeboard.component';
+import { FootermenuComponent } from './footermenu/footermenu.component';
+import { ContactusComponent } from './contactus/contactus.component';
+import { StaticpageComponent } from './staticpage/staticpage.component';
+import { ForumComponent } from './forum/forum.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -21,7 +25,11 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     HomeComponent,
-    NoticeboardComponent
+    NoticeboardComponent,
+    FootermenuComponent,
+    ContactusComponent,
+    StaticpageComponent,
+    ForumComponent
   ],
   imports: [
     BrowserModule,

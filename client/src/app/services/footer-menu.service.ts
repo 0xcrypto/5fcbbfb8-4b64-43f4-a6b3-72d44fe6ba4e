@@ -4,7 +4,8 @@ import { HttpClient, HttpHeaders, HttpEvent, HttpHandler, HttpInterceptor, HttpR
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { StaticPage } from './../classes/static-page';
+import { FooterMenu } from './../classes/footermenu';
+
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
@@ -13,64 +14,65 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class StaticPageService {
-	private apiURL = 'http://localhost/virtualgrave/server/api/staticpage';  // URL to web api
+
+export class FooterMenuService {
+	private apiURL = 'http://localhost/virtualgrave/server/api/footermenu';  // URL to web api
 	
 	constructor(private http: HttpClient) { }
 	
-	getAll (): Observable<StaticPage[]> {
-		return this.http.get<StaticPage[]>(this.apiURL).pipe(
+	getAll (): Observable<FooterMenu[]> {
+		return this.http.get<FooterMenu[]>(this.apiURL).pipe(
 			//map(heroes => {console.log(heroes);}),
 			catchError(this.handleError('getAll', []))
 		);
 	}
 
-	getNo404<Data>(id: number): Observable<StaticPage> {
+	getNo404<Data>(id: number): Observable<FooterMenu> {
 		const url = `${this.apiURL}/?id=${id}`;
-		return this.http.get<StaticPage[]>(url).pipe(
+		return this.http.get<FooterMenu[]>(url).pipe(
 			map(data => data[0]), // returns a {0|1} element array
 			tap(h => {
 			  const outcome = h ? `fetched` : `did not find`;
 			}),
-			catchError(this.handleError<StaticPage>(`getStaticPage id=${id}`))
+			catchError(this.handleError<FooterMenu>(`getFooterMenu id=${id}`))
 		);
 	}
 
-	get(id: number): Observable<StaticPage> {
+	get(id: number): Observable<FooterMenu> {
 		const url = `${this.apiURL}/${id}`;
-		return this.http.get<StaticPage>(url).pipe(
-		  catchError(this.handleError<StaticPage>(`get id=${id}`))
+		return this.http.get<FooterMenu>(url).pipe(
+		  catchError(this.handleError<FooterMenu>(`get id=${id}`))
 		);
 	}
 
-	search(term: string): Observable<StaticPage[]> {
+	search(term: string): Observable<FooterMenu[]> {
 		if (!term.trim()) {
 		  return of([]);
 		}
-		return this.http.get<StaticPage[]>(`${this.apiURL}/?name=${term}`).pipe(
-		  catchError(this.handleError<StaticPage[]>('search', []))
+		return this.http.get<FooterMenu[]>(`${this.apiURL}/?name=${term}`).pipe(
+		  catchError(this.handleError<FooterMenu[]>('search', []))
 		);
 	}
 
-	add(StaticPage: StaticPage): Observable<StaticPage> {
-		let data = this.jsonToURLEncoded(StaticPage);
-		return this.http.post<StaticPage>(this.apiURL, data, httpOptions).pipe(
-		  catchError(this.handleError<StaticPage>('add'))
+	add(FooterMenu: FooterMenu): Observable<FooterMenu> {
+		let data = this.jsonToURLEncoded(FooterMenu);
+		return this.http.post<FooterMenu>(this.apiURL, data, httpOptions).pipe(
+		  catchError(this.handleError<FooterMenu>('add'))
 		);
 	}
 
-	delete (StaticPage: StaticPage | number): Observable<StaticPage> {
-		const id = typeof StaticPage === 'number' ? StaticPage : StaticPage.id;
+	delete (FooterMenu: FooterMenu | number): Observable<FooterMenu> {
+		const id = typeof FooterMenu === 'number' ? FooterMenu : FooterMenu.id;
 		const url = `${this.apiURL}/${id}`;
 
-		return this.http.delete<StaticPage>(url, httpOptions).pipe(
-		  catchError(this.handleError<StaticPage>('delete'))
+		return this.http.delete<FooterMenu>(url, httpOptions).pipe(
+		  catchError(this.handleError<FooterMenu>('delete'))
 		);
 	}
 
-	update (StaticPage: StaticPage): Observable<any> {
-		const url = `${this.apiURL}/${StaticPage.id}`;
-		return this.http.put(url, StaticPage, httpOptions).pipe(
+	update (FooterMenu: FooterMenu): Observable<any> {
+		const url = `${this.apiURL}/${FooterMenu.id}`;
+		return this.http.put(url, FooterMenu, httpOptions).pipe(
 		  catchError(this.handleError<any>('update'))
 		);
 	}

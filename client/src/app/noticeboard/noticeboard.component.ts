@@ -17,7 +17,7 @@ export class NoticeboardComponent implements OnInit {
 
   ngOnInit() {
     this.activeTab = 'graveyard-noticeboard';
-	this.getAdvertisements();
+	  this.getAdvertisements();
   }
 
   openTab(name:string) {

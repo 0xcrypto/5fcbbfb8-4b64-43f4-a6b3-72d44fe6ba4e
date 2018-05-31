@@ -35,6 +35,9 @@
 				case 'staticpage':
 					$models = StaticPage::model()->findAll();
 					break;
+				case 'footermenu':
+					$models = FooterMenu::model()->findAll();
+					break;
 				default:
 					// Model not implemented error
 					$this->_sendResponse(501, sprintf(
@@ -69,10 +72,10 @@
 					$model = Users::model()->findByPk($_GET['id']);
 					break;
 				case 'advertisement':
-					$models = Advertisement::model()->findByPk($_GET['id']);
+					$model = Advertisement::model()->findByPk($_GET['id']);
 					break;
 				case 'staticpage':
-					$models = StaticPage::model()->findByPk($_GET['id']);
+					$model = StaticPage::model()->findByPk($_GET['id']);
 					break;
 				default:
 					$this->_sendResponse(501, sprintf(
@@ -95,10 +98,10 @@
 					$model = new Users;                    
 					break;
 				case 'advertisement':
-					$models = new Advertisement;
+					$model = new Advertisement;
 					break;
 				case 'staticpage':
-					$models = new StaticPage;
+					$model = new StaticPage;
 					break;
 				default:
 					$this->_sendResponse(501, 

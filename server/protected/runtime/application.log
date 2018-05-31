@@ -4513,3 +4513,1357 @@ Stack trace:
 #3 {main}
 REQUEST_URI=/virtualgrave/server/js/lib/datatables-net/pdfmake.min.js.map
 ---
+2018/05/31 13:21:42 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "js". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('js')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('js')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('site/js/app.js')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/site/js/app.js
+HTTP_REFERER=http://localhost/virtualgrave/server/site/login
+---
+2018/05/31 13:21:42 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('site/img/avatar...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/site/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/site/login
+---
+2018/05/31 13:21:43 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "img/favicon.ico". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('img/favicon.ico')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/img/favicon.ico
+HTTP_REFERER=http://localhost/virtualgrave/server/site/login
+---
+2018/05/31 13:21:43 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "img/favicon.png". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('img/favicon.png')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/img/favicon.png
+HTTP_REFERER=http://localhost/virtualgrave/server/site/login
+---
+2018/05/31 13:24:45 [warning] [application] Failed to set unsafe attribute "rememberMe" of "UsersAuth".
+in /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/controllers/SiteController.php (94)
+in /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php (13)
+2018/05/31 13:24:46 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('Users/img/avata...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/Users/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/Users/admin
+---
+2018/05/31 13:24:49 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 13:55:45 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 13:55:57 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 13:56:08 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 13:56:20 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 13:56:21 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 14:00:03 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 14:01:27 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 14:03:49 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 15:24:58 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 15:25:00 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 15:25:27 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 15:25:43 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 15:25:46 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 15:25:58 [error] [exception.CHttpException.400] CHttpException: Your request is invalid. in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:337
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(310): CController->invalidActionParams(Object(CInlineAction))
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#5 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#7 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('update')
+#9 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('footerMenu/upda...')
+#10 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#11 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/virtualgrave/server/index.php/footerMenu/update/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/footerMenu/update/3
+---
+2018/05/31 15:26:09 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 15:26:17 [error] [exception.CHttpException.400] CHttpException: Your request is invalid. in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:337
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(310): CController->invalidActionParams(Object(CInlineAction))
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#5 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#7 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('update')
+#9 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('footerMenu/upda...')
+#10 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#11 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/virtualgrave/server/index.php/footerMenu/update/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/footerMenu/update/1
+---
+2018/05/31 15:26:24 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 15:27:34 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 15:27:46 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 15:28:12 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 15:28:20 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 15:28:29 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 15:28:36 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 15:28:50 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 15:28:57 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 15:29:11 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 15:29:17 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 15:29:45 [error] [exception.CHttpException.400] CHttpException: Your request is invalid. in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:337
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(310): CController->invalidActionParams(Object(CInlineAction))
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#5 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#7 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('Update')
+#9 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/Upda...')
+#10 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#11 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/Update/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/Update/1
+---
+2018/05/31 15:30:32 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('StaticPage/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/StaticPage/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/StaticPage/admin
+---
+2018/05/31 15:30:45 [error] [exception.CHttpException.400] CHttpException: Your request is invalid. in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:337
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(310): CController->invalidActionParams(Object(CInlineAction))
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#5 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#7 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('Update')
+#9 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('StaticPage/Upda...')
+#10 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#11 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/virtualgrave/server/index.php/StaticPage/Update/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/StaticPage/Update/1
+---
+2018/05/31 15:30:46 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "assets/4226a634/contents.css". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('assets/4226a634...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/assets/4226a634/contents.css
+---
+2018/05/31 15:30:46 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "assets/4226a634/contents.css". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('assets/4226a634...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/assets/4226a634/contents.css
+---
+2018/05/31 15:30:53 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('StaticPage/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/StaticPage/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/StaticPage/admin
+---
+2018/05/31 15:30:56 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 15:31:03 [error] [exception.CHttpException.400] CHttpException: Your request is invalid. in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:337
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(310): CController->invalidActionParams(Object(CInlineAction))
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#5 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#7 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('Update')
+#9 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/Upda...')
+#10 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#11 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/Update/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/Update/1
+---
+2018/05/31 15:31:47 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('StaticPage/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/StaticPage/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/StaticPage/admin
+---
+2018/05/31 15:32:03 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 15:32:50 [error] [exception.CHttpException.400] CHttpException: Your request is invalid. in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:337
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(310): CController->invalidActionParams(Object(CInlineAction))
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#5 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#7 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('Update')
+#9 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/Upda...')
+#10 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#11 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/Update/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/Update/3
+---
+2018/05/31 15:39:06 [error] [exception.CException] CException: Property "FooterMenu.TYPE" is not defined. in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CComponent.php:131
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/db/ar/CActiveRecord.php(144): CComponent->__get('TYPE')
+#1 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/views/footerMenu/_form.php(56): CActiveRecord->__get('TYPE')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CBaseController.php(127): require('/Applications/X...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CBaseController.php(96): CBaseController->renderInternal('/Applications/X...', Array, true)
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(870): CBaseController->renderFile('/Applications/X...', Array, true)
+#5 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/views/footerMenu/update.php(13): CController->renderPartial('_form', Array)
+#6 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CBaseController.php(127): require('/Applications/X...')
+#7 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CBaseController.php(96): CBaseController->renderInternal('/Applications/X...', Array, true)
+#8 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(870): CBaseController->renderFile('/Applications/X...', Array, true)
+#9 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(783): CController->renderPartial('update', Array, true)
+#10 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/controllers/FooterMenuController.php(104): CController->render('update', Array)
+#11 [internal function]: FooterMenuController->actionUpdate('3')
+#12 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/actions/CAction.php(107): ReflectionMethod->invokeArgs(Object(FooterMenuController), Array)
+#13 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/actions/CInlineAction.php(48): CAction->runWithParamsInternal(Object(FooterMenuController), Object(ReflectionMethod), Array)
+#14 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(309): CInlineAction->runWithParams(Array)
+#15 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#16 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#17 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#18 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#19 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#20 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#21 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('Update')
+#23 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/Upda...')
+#24 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#25 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/Update/3
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 15:39:14 [error] [exception.CHttpException.400] CHttpException: Your request is invalid. in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:337
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(310): CController->invalidActionParams(Object(CInlineAction))
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#5 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#7 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('Update')
+#9 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/Upda...')
+#10 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#11 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/Update/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/Update/3
+---
+2018/05/31 15:39:51 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "js/lib/datatables-net/pdfmake.min.js.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('js/lib/datatabl...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/js/lib/datatables-net/pdfmake.min.js.map
+---
+2018/05/31 15:39:52 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "css/lib/bootstrap/bootstrap.min.css.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('css/lib/bootstr...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/css/lib/bootstrap/bootstrap.min.css.map
+---
+2018/05/31 15:55:57 [error] [exception.CHttpException.400] CHttpException: Your request is invalid. in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:337
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(310): CController->invalidActionParams(Object(CInlineAction))
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#5 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#7 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('Update')
+#9 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/Upda...')
+#10 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#11 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/Update/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/Update/3
+---
+2018/05/31 15:55:58 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "css/lib/bootstrap/bootstrap.min.css.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('css/lib/bootstr...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/css/lib/bootstrap/bootstrap.min.css.map
+---
+2018/05/31 15:55:58 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "js/lib/datatables-net/pdfmake.min.js.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('js/lib/datatabl...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/js/lib/datatables-net/pdfmake.min.js.map
+---
+2018/05/31 15:56:45 [error] [exception.CException] CException: Property "FooterMenu.external_url" is not defined. in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CComponent.php:131
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/db/ar/CActiveRecord.php(144): CComponent->__get('external_url')
+#1 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/models/FooterMenu.php(97): CActiveRecord->__get('external_url')
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/views/footerMenu/admin.php(20): FooterMenu->search()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CBaseController.php(127): require('/Applications/X...')
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CBaseController.php(96): CBaseController->renderInternal('/Applications/X...', Array, true)
+#5 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(870): CBaseController->renderFile('/Applications/X...', Array, true)
+#6 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(783): CController->renderPartial('admin', Array, true)
+#7 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/controllers/FooterMenuController.php(144): CController->render('admin', Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/actions/CInlineAction.php(50): FooterMenuController->actionAdmin()
+#9 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(309): CInlineAction->runWithParams(Array)
+#10 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#11 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#12 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#13 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#14 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#15 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#16 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('admin')
+#18 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/admi...')
+#19 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#20 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/admin
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/StaticPage/admin
+---
+2018/05/31 15:57:19 [error] [exception.CException] CException: Property "FooterMenu.external_url" is not defined. in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CComponent.php:131
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/db/ar/CActiveRecord.php(144): CComponent->__get('external_url')
+#1 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/models/FooterMenu.php(97): CActiveRecord->__get('external_url')
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/views/footerMenu/admin.php(20): FooterMenu->search()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CBaseController.php(127): require('/Applications/X...')
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CBaseController.php(96): CBaseController->renderInternal('/Applications/X...', Array, true)
+#5 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(870): CBaseController->renderFile('/Applications/X...', Array, true)
+#6 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(783): CController->renderPartial('admin', Array, true)
+#7 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/controllers/FooterMenuController.php(144): CController->render('admin', Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/actions/CInlineAction.php(50): FooterMenuController->actionAdmin()
+#9 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(309): CInlineAction->runWithParams(Array)
+#10 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#11 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#12 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#13 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#14 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#15 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#16 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('admin')
+#18 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/admi...')
+#19 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#20 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/admin
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/StaticPage/admin
+---
+2018/05/31 15:57:58 [error] [exception.CException] CException: Property "FooterMenu.external_url" is not defined. in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CComponent.php:131
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/db/ar/CActiveRecord.php(144): CComponent->__get('external_url')
+#1 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/models/FooterMenu.php(97): CActiveRecord->__get('external_url')
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/views/footerMenu/admin.php(20): FooterMenu->search()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CBaseController.php(127): require('/Applications/X...')
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CBaseController.php(96): CBaseController->renderInternal('/Applications/X...', Array, true)
+#5 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(870): CBaseController->renderFile('/Applications/X...', Array, true)
+#6 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(783): CController->renderPartial('admin', Array, true)
+#7 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/controllers/FooterMenuController.php(144): CController->render('admin', Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/actions/CInlineAction.php(50): FooterMenuController->actionAdmin()
+#9 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(309): CInlineAction->runWithParams(Array)
+#10 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#11 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#12 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#13 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#14 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#15 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#16 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('admin')
+#18 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/admi...')
+#19 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#20 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/admin
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/StaticPage/admin
+---
+2018/05/31 15:58:50 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 15:58:51 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "js/lib/datatables-net/pdfmake.min.js.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('js/lib/datatabl...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/js/lib/datatables-net/pdfmake.min.js.map
+---
+2018/05/31 15:58:51 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "css/lib/bootstrap/bootstrap.min.css.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('css/lib/bootstr...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/css/lib/bootstrap/bootstrap.min.css.map
+---
+2018/05/31 15:58:53 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 15:58:54 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "css/lib/bootstrap/bootstrap.min.css.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('css/lib/bootstr...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/css/lib/bootstrap/bootstrap.min.css.map
+---
+2018/05/31 15:58:54 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "js/lib/datatables-net/pdfmake.min.js.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('js/lib/datatabl...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/js/lib/datatables-net/pdfmake.min.js.map
+---
+2018/05/31 15:59:01 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 15:59:02 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "css/lib/bootstrap/bootstrap.min.css.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('css/lib/bootstr...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/css/lib/bootstrap/bootstrap.min.css.map
+---
+2018/05/31 15:59:02 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "js/lib/datatables-net/pdfmake.min.js.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('js/lib/datatabl...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/js/lib/datatables-net/pdfmake.min.js.map
+---
+2018/05/31 16:02:41 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 16:03:06 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "js/lib/datatables-net/pdfmake.min.js.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('js/lib/datatabl...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/js/lib/datatables-net/pdfmake.min.js.map
+---
+2018/05/31 16:03:06 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "css/lib/bootstrap/bootstrap.min.css.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('css/lib/bootstr...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/css/lib/bootstrap/bootstrap.min.css.map
+---
+2018/05/31 16:17:01 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "css/lib/bootstrap/bootstrap.min.css.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('css/lib/bootstr...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/css/lib/bootstrap/bootstrap.min.css.map
+---
+2018/05/31 16:17:01 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 16:17:02 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "js/lib/datatables-net/pdfmake.min.js.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('js/lib/datatabl...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/js/lib/datatables-net/pdfmake.min.js.map
+---
+2018/05/31 16:29:01 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 16:29:02 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "css/lib/bootstrap/bootstrap.min.css.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('css/lib/bootstr...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/css/lib/bootstrap/bootstrap.min.css.map
+---
+2018/05/31 16:29:02 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "js/lib/datatables-net/pdfmake.min.js.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('js/lib/datatabl...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/js/lib/datatables-net/pdfmake.min.js.map
+---
+2018/05/31 16:29:23 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 16:29:23 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "css/lib/bootstrap/bootstrap.min.css.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('css/lib/bootstr...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/css/lib/bootstrap/bootstrap.min.css.map
+---
+2018/05/31 16:29:23 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "js/lib/datatables-net/pdfmake.min.js.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('js/lib/datatabl...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/js/lib/datatables-net/pdfmake.min.js.map
+---
+2018/05/31 16:29:51 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 16:29:51 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "css/lib/bootstrap/bootstrap.min.css.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('css/lib/bootstr...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/css/lib/bootstrap/bootstrap.min.css.map
+---
+2018/05/31 16:29:52 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "js/lib/datatables-net/pdfmake.min.js.map". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('js/lib/datatabl...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/js/lib/datatables-net/pdfmake.min.js.map
+---
+2018/05/31 16:30:22 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 16:30:38 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 16:30:59 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 16:31:05 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 16:31:25 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 16:31:28 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 16:31:35 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('StaticPage/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/StaticPage/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/StaticPage/admin
+---
+2018/05/31 16:31:39 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 16:31:40 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 16:32:00 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 16:32:02 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 16:32:03 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 16:32:12 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 16:32:17 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 16:32:23 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 16:32:28 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 16:32:41 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 16:33:11 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 16:33:22 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 16:33:27 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 16:33:39 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 16:33:44 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 16:33:56 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 19:04:45 [error] [php] Undefined variable: model (/Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/controllers/ApiController.php:87)
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(287): ApiController->runAction()
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(266): ApiController->runActionWithFilters()
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): ApiController->run()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController()
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#5 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/staticpage/1
+in /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/controllers/ApiController.php (87)
+in /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php (13)
+2018/05/31 19:05:24 [error] [php] Undefined variable: model (/Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/controllers/ApiController.php:87)
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(287): ApiController->runAction()
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(266): ApiController->runActionWithFilters()
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): ApiController->run()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController()
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#5 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/staticpage/1
+in /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/controllers/ApiController.php (87)
+in /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php (13)
+2018/05/31 19:05:33 [error] [php] Undefined variable: model (/Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/controllers/ApiController.php:87)
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(287): ApiController->runAction()
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(266): ApiController->runActionWithFilters()
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): ApiController->run()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController()
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#5 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/staticpage/1
+in /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/protected/controllers/ApiController.php (87)
+in /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php (13)
+2018/05/31 19:26:15 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/create
+---
+2018/05/31 19:26:17 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('StaticPage/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/StaticPage/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/StaticPage/admin
+---
+2018/05/31 19:26:21 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 19:26:31 [error] [exception.CHttpException.400] CHttpException: Your request is invalid. in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:337
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(310): CController->invalidActionParams(Object(CInlineAction))
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#5 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#7 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('Update')
+#9 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/Upda...')
+#10 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#11 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/Update/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/Update/4
+---
+2018/05/31 19:26:37 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/admin
+---
+2018/05/31 19:26:57 [error] [exception.CHttpException.400] CHttpException: Your request is invalid. in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:337
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(310): CController->invalidActionParams(Object(CInlineAction))
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#5 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#7 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('Update')
+#9 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('FooterMenu/Upda...')
+#10 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#11 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/virtualgrave/server/index.php/FooterMenu/Update/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/FooterMenu/Update/4
+---
+2018/05/31 19:27:27 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('StaticPage/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/StaticPage/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/StaticPage/create
+---
+2018/05/31 19:27:28 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "assets/4226a634/contents.css". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('assets/4226a634...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/assets/4226a634/contents.css
+---
+2018/05/31 19:27:28 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "assets/4226a634/contents.css". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('assets/4226a634...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/assets/4226a634/contents.css
+---
+2018/05/31 19:27:35 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "img". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:484
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(271): CController->missingAction('img')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('img')
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('StaticPage/img/...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#4 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/StaticPage/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/StaticPage/admin
+---
+2018/05/31 19:28:47 [error] [exception.CHttpException.400] CHttpException: Your request is invalid. in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php:337
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(310): CController->invalidActionParams(Object(CInlineAction))
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#3 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#4 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#5 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#7 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(283): CController->run('Update')
+#9 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('StaticPage/Upda...')
+#10 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#11 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/virtualgrave/server/index.php/StaticPage/Update/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/StaticPage/Update/1
+---
+2018/05/31 19:28:48 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "assets/4226a634/contents.css". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('assets/4226a634...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/assets/4226a634/contents.css
+---
+2018/05/31 19:28:48 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "assets/4226a634/contents.css". in /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php:287
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/web/CWebApplication.php(142): CWebApplication->runController('assets/4226a634...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /Applications/XAMPP/xamppfiles/htdocs/virtualgrave/server/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/assets/4226a634/contents.css
+---

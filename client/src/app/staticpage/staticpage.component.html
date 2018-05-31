@@ -1,0 +1,8 @@
+<div id="wrapper" class="noticeboard">
+  <div class="scroll-content">
+    <div *ngIf="page">
+        <h2 [innerHTML]="language == 'en' && page.heading_en || page.heading_pl"></h2>
+        <div [innerHTML]="language == 'en' && page.body_en || page.body_pl "></div>
+      </div>
+  </div>
+</div>
