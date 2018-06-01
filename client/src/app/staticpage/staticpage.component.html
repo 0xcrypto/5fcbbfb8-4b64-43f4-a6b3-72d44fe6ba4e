@@ -1,8 +1,10 @@
-<div id="wrapper" class="noticeboard">
+<div id="content" class="notice-bg">
   <div class="scroll-content">
-    <div *ngIf="page">
-        <h2 [innerHTML]="language == 'en' && page.heading_en || page.heading_pl"></h2>
-        <div [innerHTML]="language == 'en' && page.body_en || page.body_pl "></div>
-      </div>
+      <ng-scrollbar>
+          <!--<div *ngIf="page">-->
+              <h4 [innerHTML]="language == 'en' && page.heading_en || page.heading_pl"></h4>
+              <p [innerHTML]="language == 'en' && page.body_en || page.body_pl "></p>
+          <!--</div>-->
+      </ng-scrollbar>
   </div>
 </div>

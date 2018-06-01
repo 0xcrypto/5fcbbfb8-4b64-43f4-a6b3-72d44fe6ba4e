@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     this.isGateOpen = true;
     setTimeout(()=>{  
       this.router.navigateByUrl('/noticeboard');
-    },2000);
+    }, 1000);
   }
 
 }

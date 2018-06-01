@@ -1,0 +1,12 @@
+<footer>
+  <ul>
+    <li *ngFor="let menu of menus">
+        <a *ngIf="menu.type == 'EXTERNAL_LINK'" [attr.href]="menu.external_link" target="_target">
+          {{language == 'en' && menu.text_en || menu.text_pl }}</a>
+        <a *ngIf="menu.type == 'CUSTOM_COMPONENT'" [routerLink]="menu.custom_route">
+          {{language == 'en' && menu.text_en || menu.text_pl }}</a>
+        <a *ngIf="menu.type == 'STATIC_PAGE'" routerLink="/staticpage/{{menu.static_page}}">
+          {{language == 'en' && menu.text_en || menu.text_pl }}</a>
+    </li>
+  </ul>
+</footer>

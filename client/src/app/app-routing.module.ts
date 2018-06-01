@@ -3,10 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent }   from './home/home.component';
 import { NoticeboardComponent }      from './noticeboard/noticeboard.component';
-import { FootermenuComponent }      from './footermenu/footermenu.component';
+import { FooterComponent }      from './footer/footer.component';
 import { ContactusComponent }      from './contactus/contactus.component';
 import { StaticpageComponent }    from './staticpage/staticpage.component';
 import { ForumComponent }    from './forum/forum.component';
+import { PricingComponent }    from './pricing/pricing.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'noticeboard', component: NoticeboardComponent },
   { path: 'contactus', component: ContactusComponent },
   { path: 'forum', component: ForumComponent },
+  { path: 'pricing', component: PricingComponent },
   { path: 'staticpage/:id', component: StaticpageComponent }
 ];
 

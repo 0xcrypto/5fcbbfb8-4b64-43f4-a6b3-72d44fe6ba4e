@@ -4,16 +4,19 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient }    from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ScrollbarModule } from 'ngx-scrollbar';
 
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { NoticeboardComponent } from './noticeboard/noticeboard.component';
-import { FootermenuComponent } from './footermenu/footermenu.component';
+import { FooterComponent } from './footer/footer.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { StaticpageComponent } from './staticpage/staticpage.component';
 import { ForumComponent } from './forum/forum.component';
+import { HeaderComponent } from './header/header.component';
+import { PricingComponent } from './pricing/pricing.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -26,16 +29,19 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     HomeComponent,
     NoticeboardComponent,
-    FootermenuComponent,
+    FooterComponent,
     ContactusComponent,
     StaticpageComponent,
-    ForumComponent
+    ForumComponent,
+    HeaderComponent,
+    PricingComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-	  HttpClientModule,
+    HttpClientModule,
+    ScrollbarModule,
 	  TranslateModule.forRoot({
 		  loader: {
 		    provide: TranslateLoader,
