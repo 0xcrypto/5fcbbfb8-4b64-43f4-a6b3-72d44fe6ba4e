@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -11,17 +10,11 @@ export class HomeComponent implements OnInit {
   isGateOpen:boolean=false;
   router:Router = null;
 
-  constructor(private translate: TranslateService, private _router: Router) {
+  constructor(private _router: Router) {
     this.router = _router;
-    translate.addLangs(['en', 'pl']);
-    translate.setDefaultLang('en');
-    translate.use('en'); }
-
-  ngOnInit() {
   }
 
-  changeLang(lang: string) {
-    this.translate.use(lang);
+  ngOnInit() {
   }
 
   openGate() {

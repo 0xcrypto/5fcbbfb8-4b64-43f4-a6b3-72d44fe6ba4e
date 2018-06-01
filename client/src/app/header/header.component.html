@@ -1,3 +1,41 @@
 <header>
-    
+    <div>
+        <div>
+            <ul>
+                <li><span translate>header.menu.you_are_at</span><span></span></li>
+                <li><span translate>header.menu.go_to</span>:
+                    <ul>
+                        <li routerLink="/home" translate>header.menu.main_gate</li>
+                        <li routerLink="/noticeboard" translate>header.menu.graveyard_noticeboard</li>
+                        <li translate>header.menu.graveyard</li>
+                        <li translate>header.menu.catacomb</li>
+                        <li translate>header.menu.pet_graveyard</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <ul>
+                <li class="text-center">Ankit Sharma</li>
+            </ul>
+        </div>
+        <div>
+            <ul>
+                <li class="inline" translate>header.menu.shop</li>
+                <li class="inline" translate>header.menu.login</li>
+                <li class="inline" routerLink="/home" translate>header.menu.exit</li>
+                <div class="clear"></div>
+                <li class="inline">|<</li>
+                <li class="inline">[]</li>
+                <li class="inline">>|</li>
+                <li class="inline"><}</li>
+                <li class="inline"><span translate>header.menu.select_language</span>
+                    <ul>
+                        <li (click)="changeLang('en')">English</li>
+                        <li (click)="changeLang('pl')">Polish</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
 </header>

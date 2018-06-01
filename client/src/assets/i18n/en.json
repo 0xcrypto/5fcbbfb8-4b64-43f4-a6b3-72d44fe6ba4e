@@ -1,3 +1,18 @@
 {
-    "app.name" : "Virtual Grave"
+    "app.name" : "Virtual Grave",
+    "header" : {
+        "menu" : {
+            "you_are_at": "You are at",
+            "go_to": "Go to",
+            "main_gate": "Main Gate",
+            "graveyard_noticeboard": "Graveyard Noticeboard",
+            "graveyard": "Graveyard",
+            "catacomb": "Catacomb",
+            "pet_graveyard": "Pet Graveyard",
+            "shop": "Shop",
+            "login": "Login",
+            "exit": "Exit",
+            "select_language": "Select Language"
+        }
+    }
 }

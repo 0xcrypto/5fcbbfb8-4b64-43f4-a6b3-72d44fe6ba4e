@@ -1,3 +1,18 @@
 {
-    "app.name" : "Wirtualny grób"
+    "app.name" : "Wirtualny grób",
+    "header" : {
+        "menu" : {
+            "you_are_at": "Jesteś w",
+            "go_to": "Iść do",
+            "main_gate": "Brama główna",
+            "graveyard_noticeboard": "Tablica z cmentarzem",
+            "graveyard": "Cmentarz",
+            "catacomb": "Katakumba",
+            "pet_graveyard": "zwierząt Cmentarz",
+            "shop": "Sklep",
+            "login": "Zaloguj Się",
+            "exit": "Wyjście",
+            "select_language": "Wybierz język"
+        }
+    }
 }

@@ -1,5 +1,14 @@
+*{
+    font-family: verdana;
+}
 *:focus{
     outline: none;
+}
+.clear{
+    clear: both;
+}
+.text-center {
+    text-align: center;
 }
 .align-right{
     float: right;
@@ -14,6 +23,86 @@ body header{
     background-repeat: repeat-x;
     background-image: url(./assets/images/header.jpg);
     background-position: center top;
+}
+body header > div {
+    width: 1024px;
+    height: 50px;
+    margin: 0 auto;
+    position: relative;
+}
+body header > div > div:nth-child(1){
+    width: 300px;
+    height: 100%;
+    display: inline-block;
+    float: left;
+}
+body header > div > div:nth-child(2){
+    position: absolute;
+    left: 310px;
+    height: 100%;
+    width: 300px;
+}
+body header > div > div:nth-child(3){
+    float: right;
+    height: 100%;
+    width: 400px;
+}
+body header ul {
+    list-style-type: none;
+    padding: 4px;
+    width: 250px;
+    margin: 0 auto;
+}
+body header ul > li {
+    border: 1px solid #999;
+    height: 15px;
+    font-size: 13px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #bfbfbf;
+    padding: 1px 5px;
+    position: relative;
+    margin-bottom: 3px;
+    cursor: pointer;
+    font-size: 11px;
+    line-height: 14px;
+}
+body header ul > li.inline {
+    display: inline-block;
+    float: left;
+    margin-right: 3px;
+}
+body header ul ul {
+    display: none;
+    list-style-type: none;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    width: 228px;
+    left: -1px;
+    padding: 5px;
+    border: 1px solid #999;
+    top: 17px;
+    border-top: none;
+    padding: 0;
+    width: 100%;
+    z-index: 999;
+}
+body header ul > li:hover ul > li{
+    padding: 0 10px;
+    border: none;
+    margin-bottom: 0;
+    padding-bottom: 3px;
+}
+body header ul > li:hover{
+    border-bottom: none;
+    color: #b89a45;
+}
+body header ul > li:hover ul {
+    display: block;
+}
+body header ul > li:hover ul > li:hover{
+    color: #b89a45;
+    background: #333;
 }
 body #wrapper{
     height: auto;
@@ -34,7 +123,7 @@ body #content.notice-bg{
     background-image: url(./assets/images/noticeboard.png);
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center -100px;
 }
 body #content .scroll-content{
     width: 530px;
@@ -42,16 +131,18 @@ body #content .scroll-content{
     overflow-y: auto;
     overflow-x: hidden;
     height: 350px;
-    margin-top: 180px;
+    margin-top: 70px;
     padding: 10px;
     padding-left: 20px;
 }
 body #content .scroll-content h4{
     color: #848484;
     font-weight: bold;
+    font-size: 12px;
 }
 body #content .scroll-content p{
     color: #848484;
+    font-size: 11px;
 }
 body #content .sky{
 	height: 100%;
@@ -214,13 +305,14 @@ body #content .main-gate{
 body footer{
     position: absolute;
     bottom: 0;
-    height: 100px;
+    height: 80px;
     background-image: url(./assets/images/bg-bottom.jpg);
     background-repeat: repeat-x;
     width: 100%;
     margin: 0;
     padding: 0;
     left: 0;
+    z-index: 999;
 }
 body footer ul{
     width: 1024px;
@@ -231,7 +323,7 @@ body footer ul{
 }
 body footer ul li {
     float: left;
-    font-size: 12px;
+    font-size: 11px;
 }
 body footer ul li a{
     color: #585858;
@@ -240,14 +332,14 @@ body footer ul li a{
 body footer ul li:before{
     content: '+';
     color: #585858;
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
 }
 body footer ul li:last:after{
     content: '+';
     color: #585858;
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
 }
 form > label{
     display: block;
@@ -259,7 +351,7 @@ form > label .info{
 }
 form > label > span{
     color: #848484;
-    font-size: 14px;
+    font-size: 11px;
     width: 170px;
     display: inline-block;
     line-height: 20px;
@@ -283,7 +375,7 @@ form > label button:after {
 }
 .tabs-container{
     width: 560px;
-    margin: 154px auto;
+    margin: 54px auto;
     height: 400px;
 }
 .tab-bar{
@@ -298,7 +390,7 @@ form > label button:after {
     border: 1px solid #000;
     border-bottom: none;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 12px;
 }
 .tab-bar a:focus{
     outline: none;
@@ -319,11 +411,11 @@ form > label button:after {
 }
 .tabs > div h4{
     color: #848484;
-    font-size: 14px;
+    font-size: 12px;
 }
 .tabs > div p{
     color: #515151;
-    font-size: 12px;
+    font-size: 11px;
 }
 .popular-grave-col{
     width: 40%;
@@ -428,6 +520,7 @@ form > label button:after {
     color: #b2973d;
     text-align: center;
     margin: 0 auto;
+    font-size: 12px;
 }
 .popular-grave-col .tile img,
 .advertisement-col .tile img{
