@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {TranslateService} from '@ngx-translate/core';
 
 import { AppGlobals } from '../app.globals';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-header',
@@ -13,19 +14,13 @@ import { AppGlobals } from '../app.globals';
 export class HeaderComponent implements OnInit {
   currentComponentText:string = null;
 
-  constructor(private translate: TranslateService, private _global: AppGlobals, private router: Router) { 
-    translate.addLangs(['en', 'pl']);
-    translate.setDefaultLang('en');
-    translate.use('en');
-    this._global.setLanguage('en');
-  }
+  constructor(private translate: TranslateService, private _global: AppGlobals, private router: Router) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  changeLang(lang: string) {
-    this.translate.use(lang);
-    this._global.setLanguage(lang);
+  changeLanguage(lang:string){
+    let app = new AppComponent(this.translate, this._global);
+    app.changeLang(lang);
   }
 
   openRuote(component:string, routeLink:string){

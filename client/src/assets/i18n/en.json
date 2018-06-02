@@ -14,5 +14,14 @@
             "exit": "Exit",
             "select_language": "Select Language"
         }
+    },
+    "noticeboard" : {
+        "tab_bar" : {
+            "graveyard_noticeboard" : "Graveyard Noticeboard",
+            "book_of_dead" : "Book of Dead",
+            "search" : "Search",
+            "graveyard_burial" : "Graveyard Burial",
+            "reservation" : "Reservation"
+        }        
     }
 }

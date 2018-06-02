@@ -375,7 +375,7 @@ form > label button:after {
 }
 .tabs-container{
     width: 560px;
-    margin: 54px auto;
+    margin: 50px auto;
     height: 400px;
 }
 .tab-bar{
@@ -391,6 +391,9 @@ form > label button:after {
     border-bottom: none;
     cursor: pointer;
     font-size: 12px;
+    height: 19px;
+    display: inline-block;
+    line-height: 18px;
 }
 .tab-bar a:focus{
     outline: none;

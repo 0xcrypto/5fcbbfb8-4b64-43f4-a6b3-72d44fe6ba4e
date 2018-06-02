@@ -14,5 +14,14 @@
             "exit": "Wyjście",
             "select_language": "Wybierz język"
         }
+    },
+    "noticeboard" : {
+        "tab_bar" : {
+            "graveyard_noticeboard" : "Tablica z cmentarzem",
+            "book_of_dead" : "Księga zmarłych",
+            "search" : "Szukaj",
+            "graveyard_burial" : "Cmentarz pogrzebowy",
+            "reservation" : "Rezerwacja"
+        }        
     }
 }
