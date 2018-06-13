@@ -23,11 +23,17 @@
 		// Actions
 		public function actionList()
 		{
+			print_r($_GET);exit;
 			// Get the respective model instance
 			switch($_GET['model'])
 			{
 				case 'users':
-					$models = Users::model()->findAll();
+					if(isset($_GET['method']) && $_GET['method'] == 'browsing'){
+						
+					}
+					else{
+						$models = Users::model()->findAll();
+					}
 					break;
 				case 'advertisement':
 					$models = Advertisement::model()->findAll();
@@ -45,6 +51,7 @@
 						$_GET['model']) );
 					Yii::app()->end();
 			}
+
 			// Did we get some results?
 			if(empty($models)) {
 				// No

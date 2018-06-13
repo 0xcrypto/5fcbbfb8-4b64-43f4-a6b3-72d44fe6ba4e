@@ -5867,3 +5867,281 @@ Stack trace:
 #3 {main}
 REQUEST_URI=/virtualgrave/server/assets/4226a634/contents.css
 ---
+2018/06/13 09:28:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu
+---
+2018/06/13 09:29:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu
+---
+2018/06/13 09:32:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu
+---
+2018/06/13 09:32:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu
+---
+2018/06/13 09:34:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu
+---
+2018/06/13 09:34:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu
+---
+2018/06/13 09:34:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu
+---
+2018/06/13 11:13:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/sadd%7Cdasda%7Cdasdasd%7Cdasd
+---
+2018/06/13 11:14:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/sadd,
+---
+2018/06/13 11:14:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/sadd-fsf
+---
+2018/06/13 11:15:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/sadd;dasdasd;
+---
+2018/06/13 11:17:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/dasd213123@dasdads
+---
+2018/06/13 11:25:40 [error] [exception.CException] exception 'CException' with message 'The URL pattern "api/<model:\w+>/<method:\w+>/<options:\^[a-zA-Z0-9&._-]+$\>" for route "api/list/method/<method>/options/<options>" is not a valid regular expression.' in C:\wamp64\www\yii\framework\web\CUrlManager.php:712
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CUrlManager.php(270): CUrlRule->__construct(Array, 2)
+#1 C:\wamp64\www\yii\framework\web\CUrlManager.php(226): CUrlManager->createUrlRule(Array, 2)
+#2 C:\wamp64\www\yii\framework\web\CUrlManager.php(206): CUrlManager->processRules()
+#3 C:\wamp64\www\yii\framework\base\CModule.php(394): CUrlManager->init()
+#4 C:\wamp64\www\yii\framework\base\CApplication.php(531): CModule->getComponent('urlManager')
+#5 C:\wamp64\www\yii\framework\web\CWebApplication.php(140): CApplication->getUrlManager()
+#6 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#7 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/dasd213123@dasdads
+---
+2018/06/13 11:26:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/dasd213123@dasdads
+---
+2018/06/13 11:26:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/dasd21312
+---
+2018/06/13 11:26:42 [error] [exception.CException] exception 'CException' with message 'The URL pattern "api/<model:\w+>/<method:\w+>/<options:\^[a-zA-Z0-9&._-]+$\>" for route "api/list/method/<method>/options/<options>" is not a valid regular expression.' in C:\wamp64\www\yii\framework\web\CUrlManager.php:712
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CUrlManager.php(270): CUrlRule->__construct(Array, 2)
+#1 C:\wamp64\www\yii\framework\web\CUrlManager.php(226): CUrlManager->createUrlRule(Array, 2)
+#2 C:\wamp64\www\yii\framework\web\CUrlManager.php(206): CUrlManager->processRules()
+#3 C:\wamp64\www\yii\framework\base\CModule.php(394): CUrlManager->init()
+#4 C:\wamp64\www\yii\framework\base\CApplication.php(531): CModule->getComponent('urlManager')
+#5 C:\wamp64\www\yii\framework\web\CWebApplication.php(140): CApplication->getUrlManager()
+#6 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#7 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/dasd21312
+---
+2018/06/13 11:26:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/dasd_21312
+---
+2018/06/13 11:27:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/dasd_21312
+---
+2018/06/13 11:32:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/a%3A4%3A%7Bs%3A1%3A%22a%22%3Bs%3A8%3A%22Thusitha%22%3Bs%3A1
+---
+2018/06/13 11:35:02 [error] [exception.CException] exception 'CException' with message 'The URL pattern "api/<model:\w+>/<method:\w+>/<options[]:\w+>" for route "api/list/method/<method>/options/<options>" is not a valid regular expression.' in C:\wamp64\www\yii\framework\web\CUrlManager.php:712
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CUrlManager.php(270): CUrlRule->__construct(Array, 2)
+#1 C:\wamp64\www\yii\framework\web\CUrlManager.php(226): CUrlManager->createUrlRule(Array, 2)
+#2 C:\wamp64\www\yii\framework\web\CUrlManager.php(206): CUrlManager->processRules()
+#3 C:\wamp64\www\yii\framework\base\CModule.php(394): CUrlManager->init()
+#4 C:\wamp64\www\yii\framework\base\CApplication.php(531): CModule->getComponent('urlManager')
+#5 C:\wamp64\www\yii\framework\web\CWebApplication.php(140): CApplication->getUrlManager()
+#6 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#7 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/asdasd
+---
+2018/06/13 11:35:14 [error] [exception.CException] exception 'CException' with message 'The URL pattern "api/<model:\w+>/<method:\w+>/<options[]:\w+>" for route "api/list/method/<method>/options/<options[]>" is not a valid regular expression.' in C:\wamp64\www\yii\framework\web\CUrlManager.php:712
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CUrlManager.php(270): CUrlRule->__construct(Array, 2)
+#1 C:\wamp64\www\yii\framework\web\CUrlManager.php(226): CUrlManager->createUrlRule(Array, 2)
+#2 C:\wamp64\www\yii\framework\web\CUrlManager.php(206): CUrlManager->processRules()
+#3 C:\wamp64\www\yii\framework\base\CModule.php(394): CUrlManager->init()
+#4 C:\wamp64\www\yii\framework\base\CApplication.php(531): CModule->getComponent('urlManager')
+#5 C:\wamp64\www\yii\framework\web\CWebApplication.php(140): CApplication->getUrlManager()
+#6 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#7 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/asdasd
+---
+2018/06/13 11:35:29 [error] [exception.CException] exception 'CException' with message 'The URL pattern "api/<model:\w+>/<method:\w+>/<options[]:\w+>" for route "api/list/method/<method>/options/<options[]:\w+>" is not a valid regular expression.' in C:\wamp64\www\yii\framework\web\CUrlManager.php:712
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CUrlManager.php(270): CUrlRule->__construct(Array, 2)
+#1 C:\wamp64\www\yii\framework\web\CUrlManager.php(226): CUrlManager->createUrlRule(Array, 2)
+#2 C:\wamp64\www\yii\framework\web\CUrlManager.php(206): CUrlManager->processRules()
+#3 C:\wamp64\www\yii\framework\base\CModule.php(394): CUrlManager->init()
+#4 C:\wamp64\www\yii\framework\base\CApplication.php(531): CModule->getComponent('urlManager')
+#5 C:\wamp64\www\yii\framework\web\CWebApplication.php(140): CApplication->getUrlManager()
+#6 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#7 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/asdasd
+---
+2018/06/13 11:40:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/asdasd@dasdsad
+---
+2018/06/13 11:41:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/asdasd@dasdsad
+---
+2018/06/13 11:41:10 [error] [exception.CException] exception 'CException' with message 'The URL pattern "api/<model:\w+>/<method:\w+>/<options:*>" for route "api/list/method/<method>/options/<options>" is not a valid regular expression.' in C:\wamp64\www\yii\framework\web\CUrlManager.php:712
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CUrlManager.php(270): CUrlRule->__construct(Array, 2)
+#1 C:\wamp64\www\yii\framework\web\CUrlManager.php(226): CUrlManager->createUrlRule(Array, 2)
+#2 C:\wamp64\www\yii\framework\web\CUrlManager.php(206): CUrlManager->processRules()
+#3 C:\wamp64\www\yii\framework\base\CModule.php(394): CUrlManager->init()
+#4 C:\wamp64\www\yii\framework\base\CApplication.php(531): CModule->getComponent('urlManager')
+#5 C:\wamp64\www\yii\framework\web\CWebApplication.php(140): CApplication->getUrlManager()
+#6 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#7 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/asdasd@dasdsad
+---
+2018/06/13 11:41:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/special/asdasd@dasdsad
+---
