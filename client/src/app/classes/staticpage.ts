@@ -6,5 +6,4 @@ export class StaticPage {
   heading_pl: string;
   body_en: string;
   body_pl: string;
-  
 }

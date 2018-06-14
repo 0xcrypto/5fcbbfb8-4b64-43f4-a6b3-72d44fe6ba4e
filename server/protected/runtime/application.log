@@ -6145,3 +6145,529 @@ Stack trace:
 #5 {main}
 REQUEST_URI=/virtualgrave/server/api/footermenu/special/asdasd@dasdsad
 ---
+2018/06/14 10:22:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "users".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('users')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('users')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/users/metho...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/users/method/browsing/options/a%3A4%3A%7Bs%3A10%3A%22first_name%22%3Bs%3A4%3A%22dasd%22%3Bs%3A9%3A%22last_name%22%3Bs%3A7%3A%22wefrgrg%22%3Bs%3A3%3A%22age%22%3Bi%3A10%3Bs%3A5%3A%22email%22%3Bs%3A17%3A%22abdfas%40dasd.dsada%22%3B%7D
+---
+2018/06/14 10:22:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "users".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('users')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('users')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/users/metho...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/users/method/browsing/options/a%3A4%3A%7Bs%3A10%3A%22first_name%22%3Bs%3A4%3A%22dasd%22%3Bs%3A9%3A%22last_name%22%3Bs%3A7%3A%22wefrgrg%22%3Bs%3A3%3A%22age%22%3Bi%3A10%3Bs%3A5%3A%22email%22%3Bs%3A17%3A%22abdfas%40dasd.dsada%22%3B%7D
+---
+2018/06/14 10:23:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "users".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('users')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('users')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/users/metho...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/users/method/browsing/options/a%3A4%3A%7Bs%3A10%3A%22first_name%22%3Bs%3A4%3A%22dasd%22%3Bs%3A9%3A%22last_name%22%3Bs%3A7%3A%22wefrgrg%22%3Bs%3A3%3A%22age%22%3Bi%3A10%3Bs%3A5%3A%22email%22%3Bs%3A17%3A%22abdfas%40dasd.dsada%22%3B%7D
+---
+2018/06/14 10:23:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "users".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('users')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('users')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/users/metho...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/users/method/browsing/options/a%3A4%3A%7Bs%3A10%3A%22first_name%22%3Bs%3A4%3A%22dasd%22%3Bs%3A9%3A%22last_name%22%3Bs%3A7%3A%22wefrgrg%22%3Bs%3A3%3A%22age%22%3Bi%3A10%3Bs%3A5%3A%22email%22%3Bs%3A17%3A%22abdfas%40dasd.dsada%22%3B%7D
+---
+2018/06/14 10:23:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "users".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('users')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('users')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/users/metho...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/users/method/browsing/options/a%3A4%3A%7Bs%3A10%3A%22first_name%22%3Bs%3A4%3A%22dasd%22%3Bs%3A9%3A%22last_name%22%3Bs%3A7%3A%22wefrgrg%22%3Bs%3A3%3A%22age%22%3Bi%3A10%3Bs%3A5%3A%22email%22%3Bs%3A17%3A%22abdfas%40dasd.dsada%22%3B%7D
+---
+2018/06/14 10:23:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "users".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('users')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('users')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/users/metho...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/users/method/browsing/options/a%3A4%3A%7Bs%3A10%3A%22first_name%22%3Bs%3A4%3A%22dasd%22%3Bs%3A9%3A%22last_name%22%3Bs%3A7%3A%22wefrgrg%22%3Bs%3A3%3A%22age%22%3Bi%3A10%3Bs%3A5%3A%22email%22%3Bs%3A17%3A%22abdfas%40dasd.dsada%22%3B%7D
+---
+2018/06/14 10:23:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "users".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('users')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('users')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/users/metho...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/users/method/browsing/options/asdsad
+---
+2018/06/14 10:24:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/method/browsing/options/3213123
+---
+2018/06/14 10:24:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/method/browsing
+---
+2018/06/14 10:24:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/browsing/dasdasdsa
+---
+2018/06/14 10:25:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/browsing/dada
+---
+2018/06/14 10:25:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/browsing/dada
+---
+2018/06/14 10:25:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/browsing/dada
+---
+2018/06/14 10:26:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/browsing/dada
+---
+2018/06/14 10:26:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/browsing/dada
+---
+2018/06/14 10:26:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/browsing/dada
+---
+2018/06/14 10:26:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "footermenu".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('footermenu')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('footermenu')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/footermenu/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/api/footermenu/browsing/dada
+---
+2018/06/14 10:36:26 [error] [php] urldecode() expects parameter 1 to be string, array given (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:34)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/footermenu/browsing/a%3A4%3A%7Bs%3A10%3A%22first_name%22%3Bs%3A4%3A%22dasd%22%3Bs%3A9%3A%22last_name%22%3Bs%3A7%3A%22wefrgrg%22%3Bs%3A3%3A%22age%22%3Bi%3A10%3Bs%3A5%3A%22email%22%3Bs%3A17%3A%22abdfas%40dasd.dsada%22%3B%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (34)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 10:58:02 [error] [php] Undefined variable: option (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:405)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (405)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 10:58:43 [error] [php] Undefined variable: excludedGraves (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:441)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (441)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 10:59:02 [error] [php] mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:447)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\actions\CInlineAction.php(49): ApiController->actionList()
+#1 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#3 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#7 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (447)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:00:19 [error] [php] mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:447)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\actions\CInlineAction.php(49): ApiController->actionList()
+#1 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#3 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#7 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (447)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:01:23 [error] [php] mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:447)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\actions\CInlineAction.php(49): ApiController->actionList()
+#1 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#3 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#7 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (447)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:02:10 [error] [php] Undefined variable: order (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:451)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (451)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:02:35 [error] [php] Undefined variable: order (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:451)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (451)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:02:55 [error] [php] Undefined variable: limit (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:460)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (460)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:05:11 [error] [php] Undefined variable: position (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:460)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (460)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:05:45 [error] [php] Undefined index: excludedGraves (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:350)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing/a%3A2%3A%7Bs%3A8%3A%22position%22%3Bi%3A2%3Bs%3A5%3A%22limit%22%3Bs%3A2%3A%2210%22%3B%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (350)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:06:06 [error] [php] Undefined index: birth_date (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:357)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing/a%3A2%3A%7Bs%3A8%3A%22position%22%3Bi%3A2%3Bs%3A5%3A%22limit%22%3Bs%3A2%3A%2210%22%3B%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (357)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:06:31 [error] [php] Undefined index: firstname (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:408)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing/a%3A2%3A%7Bs%3A8%3A%22position%22%3Bi%3A2%3Bs%3A5%3A%22limit%22%3Bs%3A2%3A%2210%22%3B%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (408)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:10:40 [error] [php] Undefined variable: position (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:460)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing/a%3A2%3A%7Bs%3A8%3A%22position%22%3Bi%3A2%3Bs%3A5%3A%22limit%22%3Bs%3A2%3A%2210%22%3B%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (460)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:11:09 [error] [php] Undefined offset: 0 (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:467)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing/a%3A2%3A%7Bs%3A8%3A%22position%22%3Bi%3A2%3Bs%3A5%3A%22limit%22%3Bs%3A2%3A%2210%22%3B%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (467)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:14:57 [error] [php] Undefined offset: 0 (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:467)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing/a%3A2%3A%7Bs%3A8%3A%22position%22%3Bi%3A0%3Bs%3A5%3A%22limit%22%3Bs%3A2%3A%2210%22%3B%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (467)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:18:47 [error] [php] Array to string conversion (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:454)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing/a%3A2%3A%7Bs%3A8%3A%22position%22%3Bi%3A0%3Bs%3A5%3A%22limit%22%3Bs%3A2%3A%2210%22%3B%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (454)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:19:01 [error] [php] Array to string conversion (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:454)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing/a%3A2%3A%7Bs%3A8%3A%22position%22%3Bi%3A0%3Bs%3A5%3A%22limit%22%3Bs%3A2%3A%2210%22%3B%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (454)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:19:29 [error] [php] Array to string conversion (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:453)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing/a%3A2%3A%7Bs%3A8%3A%22position%22%3Bi%3A0%3Bs%3A5%3A%22limit%22%3Bs%3A2%3A%2210%22%3B%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (453)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:20:05 [error] [php] Undefined variable: results (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:474)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing/a%3A2%3A%7Bs%3A8%3A%22position%22%3Bi%3A0%3Bs%3A5%3A%22limit%22%3Bs%3A2%3A%2210%22%3B%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (474)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:20:37 [error] [php] Undefined offset: 1 (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:476)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing/a%3A2%3A%7Bs%3A8%3A%22position%22%3Bi%3A0%3Bs%3A5%3A%22limit%22%3Bs%3A2%3A%2210%22%3B%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (476)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:24:03 [error] [php] print_r() expects at least 1 parameter, 0 given (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:477)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\actions\CInlineAction.php(49): ApiController->actionList()
+#1 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#3 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#7 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing/a%3A2%3A%7Bs%3A8%3A%22position%22%3Bi%3A0%3Bs%3A5%3A%22limit%22%3Bs%3A2%3A%2210%22%3B%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (477)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:24:12 [error] [php] Undefined offset: 0 (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:482)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing/a%3A2%3A%7Bs%3A8%3A%22position%22%3Bi%3A0%3Bs%3A5%3A%22limit%22%3Bs%3A2%3A%2210%22%3B%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (482)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:24:25 [error] [php] mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:518)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\actions\CInlineAction.php(49): ApiController->actionList()
+#1 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#3 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#7 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing/a%3A2%3A%7Bs%3A8%3A%22position%22%3Bi%3A0%3Bs%3A5%3A%22limit%22%3Bs%3A2%3A%2210%22%3B%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (518)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:25:20 [error] [php] mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:541)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\actions\CInlineAction.php(49): ApiController->actionList()
+#1 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#3 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#7 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing/a%3A2%3A%7Bs%3A8%3A%22position%22%3Bi%3A0%3Bs%3A5%3A%22limit%22%3Bs%3A2%3A%2210%22%3B%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (541)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:33:40 [error] [php] Undefined variable: row3 (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:556)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing/a%3A2%3A%7Bs%3A8%3A%22position%22%3Bi%3A1%3Bs%3A5%3A%22limit%22%3Bs%3A2%3A%2210%22%3B%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (556)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/14 11:34:05 [error] [php] Undefined variable: row3 (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:549)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/users/browsing/a%3A2%3A%7Bs%3A8%3A%22position%22%3Bi%3A1%3Bs%3A5%3A%22limit%22%3Bs%3A2%3A%2210%22%3B%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (549)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (41)
+in C:\wamp64\www\virtualgrave\server\index.php (13)

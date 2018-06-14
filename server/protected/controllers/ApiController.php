@@ -23,13 +23,22 @@
 		// Actions
 		public function actionList()
 		{
-			print_r($_GET);exit;
-			// Get the respective model instance
+			$method = null;
+			$options = null;
+
+			if(isset($_GET['method'])){
+				$method = $_GET['method'];
+			}
+
+			if(isset($_GET['options'])){
+				$options = unserialize(urldecode($_GET['options']));
+			}
+
 			switch($_GET['model'])
 			{
 				case 'users':
-					if(isset($_GET['method']) && $_GET['method'] == 'browsing'){
-						
+					if($method == 'browsing'){
+						$models = $this->getBookofDead($options);
 					}
 					else{
 						$models = Users::model()->findAll();
@@ -332,6 +341,209 @@
 				// Error: Unauthorized
 				$this->_sendResponse(401, 'Error: User Password is invalid');
 			}
+		}
+
+		private function getBookofDead($options = NULL){
+			$excludedGraves = null;
+			$order = null;
+
+			if(isset($options['excludedGraves']) && count($options['excludedGraves'])>0)
+			{
+				$excludedGraves = $options['excludedGraves'];
+				foreach($excludedGraves as $k=>$v)
+					$excludedGraves[$k]=intval($v);
+			} 
+
+			if(isset($options['birth_date']) && !empty($options['birth_date']))
+			{
+				//we're processing the date format
+				$tmp=explode("-", $options['birth_date']);
+				if(count($tmp)==3)
+					$birth_date=$tmp[2].'-'.$tmp[1].'-'.$tmp[0];
+				elseif(count($tmp)==2)
+					$birth_date=$tmp[2].'-'.$tmp[1];
+			}
+			
+			if(isset($options['death_date']) && !empty($options['death_date']))
+			{
+				//we're processing the date format
+				$tmp=explode("-", $options['death_date']);
+				if(count($tmp)==3)
+					$death_date=$tmp[2].'-'.$tmp[1].'-'.$tmp[0];
+				elseif(count($tmp)==2)
+					$death_date=$tmp[2].'-'.$tmp[1];
+			}
+
+			//znicze = candles
+			//kwiatki = flowers
+			// 0 as koniec = 0 as end
+			//zmarli = dead
+			//dzieci = children
+			$query = "SELECT 
+                        u.user_id,
+						u.name1,
+                        u.surname,
+						u.date_death,						
+						u.date_birth,
+                        pl.name_pl as place_name,
+						ge.name_pl as gender_name,
+						u.graveyard_id,
+						u.gender,
+						grave_image,
+						'' as multigrave,
+						'' as znicze,
+						'' as kwiatki, 
+						u.grave_id,
+						null as ilosc,
+						0 as koniec, 
+						'other',
+						u.place_id
+                FROM 
+						Users u left join gender ge on u.gender=ge.gender_id
+								left join place pl on u.place_id=pl.place_id 
+								left join graves gr on u.grave_id=gr.grave_id
+								left join graveyards gy on u.graveyard_id=gy.graveyard_id
+								left join countries c1 on u.country_id=c1.country_id
+								left join countries c2 on u.country_d_id=c2.country_id
+								left join religion r on u.religion_id=r.religion_id
+								left join profession pr on u.profession_id=pr.profession_id
+								left join sex s on u.sex_id=s.sex_id
+				WHERE ( u.is_deleted=0 OR u.is_deleted=1 )" ;
+
+				if(isset($options['firstname'])) $query.=" and u.name1 like '%".mysql_real_escape_string($options['firstname'])."%'";
+				if(isset($options['lastname'])) $query.=" and u.surname like '%".mysql_real_escape_string($options['lastname'])."%'";
+				if(isset($options['lastname_start'])) $query.=" and u.surname like '".mysql_real_escape_string($options['lastname_start'])."%'";
+				if(isset($options['birth_date'])) $query.=" and u.date_birth like '".mysql_real_escape_string($options['birth_date'])."%'";
+				if(isset($options['death_date']) && $options['death_date']=='zmarli') $query.=" and u.date_death!='0000-00-00' and u.date_death is not null"; 
+				elseif(isset($options['death_date']) && $options['death_date']=='dzieci') $query.=" and PERIOD_DIFF(DATE_FORMAT(date_death,'%Y%m'),DATE_FORMAT(date_birth,'%Y%m'))/12<18"; 
+				elseif(isset($options['death_date'])) $query.=" and u.date_death like '".mysql_real_escape_string($options['death_date'])."%'";
+				if(isset($options['birth_date_c']) && $options['birth_date_c']=='AC') $query.=" and (u.c_birth='AC' or u.c_birth is null or u.c_birth='')";
+				elseif(isset($options['birth_date_c'])) $query.=" and u.c_birth='".mysql_real_escape_string($options['birth_date_c'])."'";
+				if(isset($options['death_date_c']) && $options['death_date_c']=='AC') $query.=" and (u.c_death='AC' or u.c_death is null or u.c_death='')";
+				elseif(isset($options['death_date_c'])) $query.=" and u.c_death='".mysql_real_escape_string($options['death_date_c'])."'";
+				if(isset($options['gender'])) $query.=" and u.gender='".mysql_real_escape_string($options['gender'])."'";
+				if(isset($options['religion_id'])) $query.=" and u.religion_id='".mysql_real_escape_string($options['religion_id'])."'";
+				if(isset($options['surname_other'])) $query.=" and u.surname_other like '%".mysql_real_escape_string($options['surname_other'])."%'";
+				if(isset($options['exwife_surname'])) $query.=" and u.exwife_surname like '%".mysql_real_escape_string($options['exwife_surname'])."%'";
+				if(isset($options['place_birth'])) $query.=" and u.place_birth='".mysql_real_escape_string($options['place_birth'])."'";
+				if(isset($options['place_death'])) $query.=" and u.place_death='".mysql_real_escape_string($options['place_death'])."'";
+				if(isset($options['death_reason'])) $query.=" and u.death_reason='".mysql_real_escape_string($options['death_reason'])."'";
+				if(isset($options['hobby'])) $query.=" and u.hobby='".mysql_real_escape_string($options['hobby'])."'";
+				if(isset($options['parent_surname'])) $query.=" and (u.father_surname like '%".mysql_real_escape_string($options['parent_surname'])."%' or u.mother_surname like '%".mysql_real_escape_string($parent_surname)."%')";
+				if(isset($options['country_birth'])) $query.=" and u.country_birth='".mysql_real_escape_string($options['country_birth'])."'";
+				if(isset($options['country_death'])) $query.=" and u.country_death='".mysql_real_escape_string($options['country_death'])."'";
+				if(isset($options['sex_id'])) $query.=" and u.sex_id='".mysql_real_escape_string($options['sex_id'])."'";
+				if(isset($options['religion_id'])) $query.=" and u.religion_id='".mysql_real_escape_string($options['religion_id'])."'";
+				if(isset($options['profession_id'])) $query.=" and u.profession_id='".mysql_real_escape_string($options['profession_id'])."'";
+
+				// --------------military 12 - military cemetery, 69 - professional military
+				if(isset($options['graveyard_id']) && $options['graveyard_id'] == 12) 
+					$query.=" and (u.graveyard_id='".mysql_real_escape_string($options['graveyard_id'])."' OR u.profession_id='69')";
+				// -------------- ten < 18
+				elseif(isset($options['graveyard_id']) && $options['graveyard_id'] == 13) 
+					$query.=" and (u.graveyard_id='".mysql_real_escape_string($options['graveyard_id'])."' OR ( u.date_death!='0000-00-00' AND PERIOD_DIFF(DATE_FORMAT(date_death,'%Y%m'),DATE_FORMAT(date_birth,'%Y%m'))/12<10 ) OR ( u.date_death='0000-00-00' AND PERIOD_DIFF(DATE_FORMAT(NOW(),'%Y%m'),DATE_FORMAT(date_birth,'%Y%m'))/12<10))";
+				elseif(isset($options['graveyard_id'])) $query.=" and u.graveyard_id='".mysql_real_escape_string($options['graveyard_id'])."'";
+
+				// if($place_id=='1') $query.=" and (u.place_id='".mysql_real_escape_string($place_id)."' or u.place_id>=10)";
+				if(isset($options['place_id'])) $query.=" and u.place_id='".mysql_real_escape_string($options['place_id'])."'";
+				if($excludedGraves && count($excludedGraves)>0) $query.=" and u.user_id not in (".implode(",",$excludedGraves).")";
+
+
+				$count_result = Yii::app()->db->createCommand("select count(user_id) as total from ($query) t")->queryRow();
+				
+				$end = "0 as koniec";
+
+				if(in_array($order,array('rand','surname', 'date_death', 'date_birth', 'user_id')))
+				{
+					$order = $order == 'rand'?'rand()':$order;
+					if($order!='rand()') $end = "IF((SELECT COUNT(uu.user_id) FROM ($query) uu WHERE uu.$order < u.$order ) >0,0,1) AS koniec";
+				}
+				else
+					$order="rand()";
+				
+				$query.=' ORDER BY '.$order.' DESC LIMIT ' .($options['position'] * $options['limit']).','.$options['limit'];
+				
+				$result = Yii::app()->db->createCommand(str_replace("0 as koniec",$end,$query))->queryAll();							
+					
+				
+				$data = array(); 
+				$i = 0; 
+				$pozostaloGrobow=$count_result['total'];
+				
+				
+				foreach ($result as $row)
+				{ 
+					$row['name1']=explode("|",$row['name1']);
+					$row['other']=explode("|",$row['other']);
+					$row['multigrave']=array();//multigrave
+					$row['znicze']=array();//znicze
+					$row['kwiatki']=array();//kwiatki
+					$row['ilosc']=$count_result['total'];//ilosc wszystkich grobow
+					
+					$date_birth=explode("-",$row['date_birth']);
+					if($date_birth[1]=='00' && $date_birth[2]=='00')
+						$row['date_birth']=$date_birth[0];
+					elseif($date_birth[1]!='00' && $date_birth[2]=='00')
+						$row['date_birth']=$date_birth[1].'-'.$date_birth[0];
+					else
+						$row['date_birth']=$date_birth[2].'-'.$date_birth[1].'-'.$date_birth[0];
+					
+					$date_death=explode("-",$row['date_death']);
+					if($date_death[1]=='00' && $date_death[2]=='00')
+						$row['date_death']=$date_death[0];
+					elseif($date_death[1]!='00' && $date_death[2]=='00')
+						$row['date_death']=$date_death[1].'-'.$date_death[0];
+					else
+						$row['date_death']=$date_death[2].'-'.$date_death[1].'-'.$date_death[0];
+						
+					if($order=='rand()')
+						$row['koniec']=$pozostaloGrobow-->=1?0:1;//czy jest to juz ostatni grob
+					
+					$user_id=$row['user_id'];
+					
+					$sql="select mg2.grave_id,
+								mg2.grave_image,
+								mg2.family_name,
+								u.name1,
+								u.surname,
+								u.date_death,						
+								u.date_birth,
+								u.grave_image,
+								'' AS znicze,
+								'' AS kwiatki,
+								u.gender
+							from multi_graves mg, multi_graves mg2, Users u 
+							where mg2.grave_id=u.user_id and mg.multigrave_id=mg2.multigrave_id and mg.grave_id=".$user_id."";
+					$result2 = Yii::app()->db->createCommand($sql)->queryAll();	
+					foreach($result2 as $row2)
+					{	//we overwrite initial data for family graves the name of the tomb
+						$row['name1']=$row2['family_name'];
+						$row['grave_image']=$row2['grave_image'];
+						$row2['surname']=explode("|",$row2['surname']);
+						///we collect flowers and candles for every deceased person in multigrain
+						$candles = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$row2['grave_id']." and (object_name like 'znicz%' or object_name like 'kamien%') and end_time>now() order by add_date desc limit 5")->queryAll();	
+						foreach($candles as $candle)
+							$row2['znicze'][]=$candle;
+							
+						$flowers = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$row2['grave_id']." and object_name like 'kwiat%' and end_time>now() order by add_date desc limit 2")->queryAll();	
+						foreach($flowers as $flower)
+							$row2['kwiatki'][]=$flower;
+							
+						$row['multigrave'][]=$row2;
+					}
+					
+					$candles = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$user_id." and (object_name like 'znicz%' or object_name like 'kamien%') and end_time>now() order by add_date desc limit 5")->queryAll();	
+					foreach($candles as $candle)
+						$row['znicze'][]=$candle;
+						
+					$flowers = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$user_id." and object_name like 'kwiat%' and end_time>now() order by add_date desc limit 2")->queryAll();	
+					foreach($flowers as $flower)
+						$row['kwiatki'][]=$flower;
+					$data[] = $row; 
+				} 
+
+				echo "<pre>";print_r(json_encode($data));echo "</pre>";exit;
+				return ($data); 
 		}
 	}
 ?>
