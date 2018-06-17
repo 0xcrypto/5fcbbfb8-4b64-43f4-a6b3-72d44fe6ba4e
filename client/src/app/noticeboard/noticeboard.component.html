@@ -47,7 +47,21 @@
             </div>
             </div>
             <div id="book-of-dead" [style.display]="(activeTab == 'book-of-dead') ? 'block' : 'none'">
-                
+                <table>
+                    <tr>
+                        <th>*</th>
+                        <th>_Surname/First Name_</th>
+                        <th>_Date of Birth_</th>
+                        <th>_Passed Away_</th>
+                        <th>Burial</th>
+                    </tr>
+                    <tr *ngFor="let user of users">
+                        <td></td>
+                        <td>{{user.surname}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
             </div>
             <div id="search" [style.display]="(activeTab == 'search') ? 'block' : 'none'">
             <h4>_Find a Person_</h4>
