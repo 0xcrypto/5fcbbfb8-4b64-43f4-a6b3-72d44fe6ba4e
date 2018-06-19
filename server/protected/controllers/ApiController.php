@@ -23,17 +23,15 @@
 		// Actions
 		public function actionList()
 		{
-			$method = null;
 			$options = null;
-
 			if(isset($_GET['method'])){
 				$method = $_GET['method'];
 			}
 
 			if(isset($_GET['options'])){
-				$options = unserialize(urldecode($_GET['options']));
+				$options = (array)json_decode($_GET['options']);
 			}
-
+			
 			switch($_GET['model'])
 			{
 				case 'users':
@@ -67,10 +65,15 @@
 				$this->_sendResponse(200, 
 						sprintf('No items where found for model <b>%s</b>', $_GET['model']) );
 			} else {
-				// Prepare response
 				$rows = array();
-				foreach($models as $model)
-					$rows[] = $model->attributes;
+				foreach($models as $model){
+					if(isset($model->attributes)){
+						$rows[] = $model->attributes;
+					}
+					else{
+						$rows[] = $model;
+					}
+				}
 				// Send the response
 				$this->_sendResponse(200, CJSON::encode($rows));
 			}
@@ -346,7 +349,6 @@
 		private function getBookofDead($options = NULL){
 			$excludedGraves = null;
 			$order = null;
-
 			if(isset($options['excludedGraves']) && count($options['excludedGraves'])>0)
 			{
 				$excludedGraves = $options['excludedGraves'];
@@ -410,42 +412,42 @@
 								left join sex s on u.sex_id=s.sex_id
 				WHERE ( u.is_deleted=0 OR u.is_deleted=1 )" ;
 
-				if(isset($options['firstname'])) $query.=" and u.name1 like '%".mysql_real_escape_string($options['firstname'])."%'";
-				if(isset($options['lastname'])) $query.=" and u.surname like '%".mysql_real_escape_string($options['lastname'])."%'";
-				if(isset($options['lastname_start'])) $query.=" and u.surname like '".mysql_real_escape_string($options['lastname_start'])."%'";
-				if(isset($options['birth_date'])) $query.=" and u.date_birth like '".mysql_real_escape_string($options['birth_date'])."%'";
+				if(isset($options['firstname'])) $query.=" and u.name1 like '%".$options['firstname']."%'";
+				if(isset($options['lastname'])) $query.=" and u.surname like '%".$options['lastname']."%'";
+				if(isset($options['lastname_start'])) $query.=" and u.surname like '".$options['lastname_start']."%'";
+				if(isset($options['birth_date'])) $query.=" and u.date_birth like '".$options['birth_date']."%'";
 				if(isset($options['death_date']) && $options['death_date']=='zmarli') $query.=" and u.date_death!='0000-00-00' and u.date_death is not null"; 
 				elseif(isset($options['death_date']) && $options['death_date']=='dzieci') $query.=" and PERIOD_DIFF(DATE_FORMAT(date_death,'%Y%m'),DATE_FORMAT(date_birth,'%Y%m'))/12<18"; 
-				elseif(isset($options['death_date'])) $query.=" and u.date_death like '".mysql_real_escape_string($options['death_date'])."%'";
+				elseif(isset($options['death_date'])) $query.=" and u.date_death like '".$options['death_date']."%'";
 				if(isset($options['birth_date_c']) && $options['birth_date_c']=='AC') $query.=" and (u.c_birth='AC' or u.c_birth is null or u.c_birth='')";
-				elseif(isset($options['birth_date_c'])) $query.=" and u.c_birth='".mysql_real_escape_string($options['birth_date_c'])."'";
+				elseif(isset($options['birth_date_c'])) $query.=" and u.c_birth='".$options['birth_date_c']."'";
 				if(isset($options['death_date_c']) && $options['death_date_c']=='AC') $query.=" and (u.c_death='AC' or u.c_death is null or u.c_death='')";
-				elseif(isset($options['death_date_c'])) $query.=" and u.c_death='".mysql_real_escape_string($options['death_date_c'])."'";
-				if(isset($options['gender'])) $query.=" and u.gender='".mysql_real_escape_string($options['gender'])."'";
-				if(isset($options['religion_id'])) $query.=" and u.religion_id='".mysql_real_escape_string($options['religion_id'])."'";
-				if(isset($options['surname_other'])) $query.=" and u.surname_other like '%".mysql_real_escape_string($options['surname_other'])."%'";
-				if(isset($options['exwife_surname'])) $query.=" and u.exwife_surname like '%".mysql_real_escape_string($options['exwife_surname'])."%'";
-				if(isset($options['place_birth'])) $query.=" and u.place_birth='".mysql_real_escape_string($options['place_birth'])."'";
-				if(isset($options['place_death'])) $query.=" and u.place_death='".mysql_real_escape_string($options['place_death'])."'";
-				if(isset($options['death_reason'])) $query.=" and u.death_reason='".mysql_real_escape_string($options['death_reason'])."'";
-				if(isset($options['hobby'])) $query.=" and u.hobby='".mysql_real_escape_string($options['hobby'])."'";
-				if(isset($options['parent_surname'])) $query.=" and (u.father_surname like '%".mysql_real_escape_string($options['parent_surname'])."%' or u.mother_surname like '%".mysql_real_escape_string($parent_surname)."%')";
-				if(isset($options['country_birth'])) $query.=" and u.country_birth='".mysql_real_escape_string($options['country_birth'])."'";
-				if(isset($options['country_death'])) $query.=" and u.country_death='".mysql_real_escape_string($options['country_death'])."'";
-				if(isset($options['sex_id'])) $query.=" and u.sex_id='".mysql_real_escape_string($options['sex_id'])."'";
-				if(isset($options['religion_id'])) $query.=" and u.religion_id='".mysql_real_escape_string($options['religion_id'])."'";
-				if(isset($options['profession_id'])) $query.=" and u.profession_id='".mysql_real_escape_string($options['profession_id'])."'";
+				elseif(isset($options['death_date_c'])) $query.=" and u.c_death='".$options['death_date_c']."'";
+				if(isset($options['gender'])) $query.=" and u.gender='".$options['gender']."'";
+				if(isset($options['religion_id'])) $query.=" and u.religion_id='".$options['religion_id']."'";
+				if(isset($options['surname_other'])) $query.=" and u.surname_other like '%".$options['surname_other']."%'";
+				if(isset($options['exwife_surname'])) $query.=" and u.exwife_surname like '%".$options['exwife_surname']."%'";
+				if(isset($options['place_birth'])) $query.=" and u.place_birth='".$options['place_birth']."'";
+				if(isset($options['place_death'])) $query.=" and u.place_death='".$options['place_death']."'";
+				if(isset($options['death_reason'])) $query.=" and u.death_reason='".$options['death_reason']."'";
+				if(isset($options['hobby'])) $query.=" and u.hobby='".$options['hobby']."'";
+				if(isset($options['parent_surname'])) $query.=" and (u.father_surname like '%".$options['parent_surname']."%' or u.mother_surname like '%".$parent_surname."%')";
+				if(isset($options['country_birth'])) $query.=" and u.country_birth='".$options['country_birth']."'";
+				if(isset($options['country_death'])) $query.=" and u.country_death='".$options['country_death']."'";
+				if(isset($options['sex_id'])) $query.=" and u.sex_id='".$options['sex_id']."'";
+				if(isset($options['religion_id'])) $query.=" and u.religion_id='".$options['religion_id']."'";
+				if(isset($options['profession_id'])) $query.=" and u.profession_id='".$options['profession_id']."'";
 
 				// --------------military 12 - military cemetery, 69 - professional military
 				if(isset($options['graveyard_id']) && $options['graveyard_id'] == 12) 
-					$query.=" and (u.graveyard_id='".mysql_real_escape_string($options['graveyard_id'])."' OR u.profession_id='69')";
+					$query.=" and (u.graveyard_id='".$options['graveyard_id']."' OR u.profession_id='69')";
 				// -------------- ten < 18
 				elseif(isset($options['graveyard_id']) && $options['graveyard_id'] == 13) 
-					$query.=" and (u.graveyard_id='".mysql_real_escape_string($options['graveyard_id'])."' OR ( u.date_death!='0000-00-00' AND PERIOD_DIFF(DATE_FORMAT(date_death,'%Y%m'),DATE_FORMAT(date_birth,'%Y%m'))/12<10 ) OR ( u.date_death='0000-00-00' AND PERIOD_DIFF(DATE_FORMAT(NOW(),'%Y%m'),DATE_FORMAT(date_birth,'%Y%m'))/12<10))";
-				elseif(isset($options['graveyard_id'])) $query.=" and u.graveyard_id='".mysql_real_escape_string($options['graveyard_id'])."'";
+					$query.=" and (u.graveyard_id='".$options['graveyard_id']."' OR ( u.date_death!='0000-00-00' AND PERIOD_DIFF(DATE_FORMAT(date_death,'%Y%m'),DATE_FORMAT(date_birth,'%Y%m'))/12<10 ) OR ( u.date_death='0000-00-00' AND PERIOD_DIFF(DATE_FORMAT(NOW(),'%Y%m'),DATE_FORMAT(date_birth,'%Y%m'))/12<10))";
+				elseif(isset($options['graveyard_id'])) $query.=" and u.graveyard_id='".$options['graveyard_id']."'";
 
-				// if($place_id=='1') $query.=" and (u.place_id='".mysql_real_escape_string($place_id)."' or u.place_id>=10)";
-				if(isset($options['place_id'])) $query.=" and u.place_id='".mysql_real_escape_string($options['place_id'])."'";
+				// if($place_id=='1') $query.=" and (u.place_id='".$place_id)."' or u.place_id>=10)";
+				if(isset($options['place_id'])) $query.=" and u.place_id='".$options['place_id']."'";
 				if($excludedGraves && count($excludedGraves)>0) $query.=" and u.user_id not in (".implode(",",$excludedGraves).")";
 
 
@@ -462,9 +464,7 @@
 					$order="rand()";
 				
 				$query.=' ORDER BY '.$order.' DESC LIMIT ' .($options['position'] * $options['limit']).','.$options['limit'];
-				
 				$result = Yii::app()->db->createCommand(str_replace("0 as koniec",$end,$query))->queryAll();							
-					
 				
 				$data = array(); 
 				$i = 0; 
@@ -542,7 +542,6 @@
 					$data[] = $row; 
 				} 
 
-				echo "<pre>";print_r(json_encode($data));echo "</pre>";exit;
 				return ($data); 
 		}
 	}

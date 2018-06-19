@@ -47,21 +47,32 @@
             </div>
             </div>
             <div id="book-of-dead" [style.display]="(activeTab == 'book-of-dead') ? 'block' : 'none'">
+                <ul class="paging">
+                    <li class="label">Show: </li>
+                    <li *ngFor="let page of alphabetPages">
+                        <a href="javascript:void(0);" (click)="showData(page)">{{page}}</a>
+                    </li>
+                </ul>
                 <table>
                     <tr>
-                        <th>*</th>
-                        <th>_Surname/First Name_</th>
-                        <th>_Date of Birth_</th>
-                        <th>_Passed Away_</th>
-                        <th>Burial</th>
+                        <th class="x">*</th>
+                        <th class="xxx">_Surname/First Name_</th>
+                        <th class="xx">_Date of Birth_</th>
+                        <th class="xx">_Passed Away_</th>
+                        <th class="xx">_Burial_</th>
                     </tr>
-                    <tr *ngFor="let user of users">
-                        <td></td>
-                        <td>{{user.surname}}</td>
-                        <td></td>
-                        <td></td>
+                    <tr *ngFor="let user of users; let i = index">
+                        <td class="x">{{ i +1 }}</td>
+                        <td class="xxx">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</td>
+                        <td class="xx">{{user.date_birth}}</td>
+                        <td class="xx">{{user.date_death}}</td>
+                        <td class="xx"></td>
                     </tr>
                 </table>
+                <ul class="bottom-paging">
+                    <li class="left"><a href="javascript:void(0);" (click)="goBack()">&lt;&lt;_Previous_</a></li>
+                    <li class="right"><a href="javascript:void(0);" (click)="goNext()">_Next_&gt;&gt;</a></li>
+                </ul>
             </div>
             <div id="search" [style.display]="(activeTab == 'search') ? 'block' : 'none'">
             <h4>_Find a Person_</h4>

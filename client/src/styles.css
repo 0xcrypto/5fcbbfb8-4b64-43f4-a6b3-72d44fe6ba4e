@@ -534,3 +534,61 @@ form > label button:after {
     margin: 5px auto;
     border: 1px solid #b2973d;
 }
+table, tr, td, th{
+    border-collapse: collapse;
+    border: none;
+    font-size: 12px;
+    height: 20px;
+}
+table tr td.x {
+    width: 5%;
+}
+table tr td.xx {
+    width: 15%;
+}
+table tr td.xxx {
+    width: 25%;
+}
+table tr th {
+    color: #848484; 
+    font-weight: bold;
+}
+table tr td { 
+    color: #BFBFBF; 
+}
+table tr:nth-child(even) {
+    background: #313131;
+}
+table tr:nth-child(odd) {
+    background: #272727;
+}
+.paging {
+    list-style-type: none;
+}
+.paging li {
+    margin: 0 5px;
+    float: left;
+}
+.paging li a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 10px;
+}
+.paging .label{
+    font-size: 10px;
+    color: #848484; 
+}
+.bottom-paging{
+    list-style-type: none;
+}
+.bottom-paging li.left{
+    float: left;
+}
+.bottom-paging li.right{
+    float: right;
+}
+.bottom-paging li a{
+    font-size: 10px;
+    color: #fff; 
+    text-decoration: none;
+}

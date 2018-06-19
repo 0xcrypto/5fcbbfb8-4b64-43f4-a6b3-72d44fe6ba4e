@@ -8,6 +8,7 @@ import { Options } from 'selenium-webdriver/firefox';
 export interface UserOptions {
   position: number;
   limit: number;  
+  firstname: string;
 };
 
 @Component({
@@ -18,13 +19,13 @@ export interface UserOptions {
 export class NoticeboardComponent implements OnInit {
   isHiddenTab:boolean = true;
   activeTab:string = null;
-  pageSize:number = 10;
-  pageNumber:number = 0;
+  alphabetPages: any[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
   advertisements: Advertisement[] = [];
   users: User[] = [];
   options: UserOptions = {
-    position: this.pageSize,
-    limit: this.pageNumber
+    position: 0,
+    limit: 10,
+    firstname: "A"
   };
   
   constructor(private advertisementService: AdvertisementService, private usersService: UsersService) {
@@ -33,8 +34,38 @@ export class NoticeboardComponent implements OnInit {
   ngOnInit() {
     this.activeTab = 'graveyard-noticeboard';
     this.getAdvertisements();
+    let options = encodeURIComponent(this.serialize(this.options));
     debugger;
-    this.getUsers(this.options.toString());
+    this.getUsers(options);
+  }
+
+  serialize(object: any){
+    var str = [];
+      for (var p in object)
+        if (object.hasOwnProperty(p)) {
+          if(isNaN(object[p])){
+            str.push('"' + encodeURIComponent(p) + '": "'+encodeURIComponent(object[p])+'"');
+          }
+          else{
+            str.push('"' + encodeURIComponent(p) + '": '+encodeURIComponent(object[p]));
+          }
+        }
+      return " { " + str.join(', ') + " } ";
+  }
+
+  showData(data: string){
+    this.options.firstname = data;
+    this.getUsers(encodeURIComponent(this.serialize(this.options)));
+  }
+
+  goNext(){
+    this.options.position +=1;
+    this.getUsers(encodeURIComponent(this.serialize(this.options)));
+  }
+
+  goBack(){
+    this.options.position -=1;
+    this.getUsers(encodeURIComponent(this.serialize(this.options)));
   }
 
   openTab(name:string) {

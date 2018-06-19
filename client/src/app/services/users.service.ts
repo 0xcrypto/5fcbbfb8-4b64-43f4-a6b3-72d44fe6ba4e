@@ -26,8 +26,8 @@ export class UsersService {
   }
   
   getWithMethodAndOptions (method: string, options: string): Observable<User[]> {
-    const url = `${this.apiURL}/${method}/${options}`;
-		return this.http.get<User[]>(this.apiURL).pipe(
+		const url = `${this.apiURL}/${method}/${options}`;
+    return this.http.get<any[]>(url).pipe(
 			catchError(this.handleError('getWithMethodAndOptions', []))
 		);
 	}
