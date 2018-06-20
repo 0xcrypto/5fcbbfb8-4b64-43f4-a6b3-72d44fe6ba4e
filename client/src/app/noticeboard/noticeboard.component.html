@@ -47,61 +47,152 @@
             </div>
             </div>
             <div id="book-of-dead" [style.display]="(activeTab == 'book-of-dead') ? 'block' : 'none'">
-                <ul class="paging">
-                    <li class="label">Show: </li>
-                    <li *ngFor="let page of alphabetPages">
-                        <a href="javascript:void(0);" (click)="showData(page)">{{page}}</a>
-                    </li>
-                </ul>
                 <table>
-                    <tr>
-                        <th class="x">*</th>
-                        <th class="xxx">_Surname/First Name_</th>
-                        <th class="xx">_Date of Birth_</th>
-                        <th class="xx">_Passed Away_</th>
-                        <th class="xx">_Burial_</th>
-                    </tr>
-                    <tr *ngFor="let user of users; let i = index">
-                        <td class="x">{{ i +1 }}</td>
-                        <td class="xxx">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</td>
-                        <td class="xx">{{user.date_birth}}</td>
-                        <td class="xx">{{user.date_death}}</td>
-                        <td class="xx"></td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <td colspan="5">
+                                <span class="label left-item">_Show_: </span>
+                                <span class="page" *ngFor="let page of alphabetPages">
+                                    <a href="javascript:void(0);" (click)="searchUsersByName(page)">{{page}}</a>
+                                </span>
+                                <a href="javascript:void(0);" class="page right-item" (click)="showAllUsers();">_Show All_</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="x">*</th>
+                            <th class="xxx">_Surname/First Name_</th>
+                            <th class="xx">_Date of Birth_</th>
+                            <th class="xx">_Passed Away_</th>
+                            <th class="xx">_Burial_</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--<ng-scrollbar>-->
+                            <tr *ngFor="let user of users; let i = index">
+                                <td class="x text-center">{{ i +1 }}</td>
+                                <td class="xxx">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</td>
+                                <td class="xx">{{user.date_birth}}</td>
+                                <td class="xx">{{user.date_death}}</td>
+                                <td class="xx"></td>
+                            </tr>
+                        <!--</ng-scrollbar>-->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">
+                                <span class="left-item">
+                                    <a href="javascript:void(0);" (click)="goBack()">
+                                        <i class="fa fa-backward"></i>
+                                        _Previous_
+                                    </a>
+                                </span>
+                            </td>
+                            <td colspan="2"></td>
+                            <td>
+                                <span class="right-item">
+                                    <a href="javascript:void(0);" (click)="goNext()">
+                                        _Next_
+                                        <i class="fa fa-forward"></i>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
-                <ul class="bottom-paging">
-                    <li class="left"><a href="javascript:void(0);" (click)="goBack()">&lt;&lt;_Previous_</a></li>
-                    <li class="right"><a href="javascript:void(0);" (click)="goNext()">_Next_&gt;&gt;</a></li>
-                </ul>
             </div>
             <div id="search" [style.display]="(activeTab == 'search') ? 'block' : 'none'">
-            <h4>_Find a Person_</h4>
-            <p>_Enter any one field (Partial accepted)_</p>
-            <form>
-                <label>
-                    <span>_First Name_</span>
-                    <input type="text">
-                </label>
-                <label>
-                    <span>_Surname/Last Name_</span>
-                    <input type="text">
-                </label>
-                <label>
-                    <span>_Date of Birth_
-                        <span class="info">[dd-mm-yyyy]</span>
-                    </span>
-                    <input type="text">
-                </label>
-                <label>
-                    <span>_Date of Death_
-                        <span class="info">[dd-mm-yyyy]</span>
-                    </span>
-                    <input type="text">
-                </label>
-                <label>
-                    <button class="align-right">_Search_</button>
-                </label>
-            </form>
+                <div class="search-form" *ngIf="showSearchForm">
+                    <h4>_Find a Person_</h4>
+                    <p>_Enter any one field (Partial accepted)_</p>
+                    <form>
+                        <label>
+                            <span>_First Name_</span>
+                            <input type="text" [(ngModel)]="_userFirstname" name="_userFirstname"/>
+                        </label>
+                        <label>
+                            <span>_Surname/Last Name_</span>
+                            <input type="text" [(ngModel)]="_userSurname" name="_userSurname"/>
+                        </label>
+                        <label>
+                            <span>_Date of Birth_
+                                <span class="info">[dd-mm-yyyy]</span>
+                            </span>
+                            <input type="date" [(ngModel)]="_userDob" name="_userDob"/>
+                        </label>
+                        <label>
+                            <span>_Date of Death_
+                                <span class="info">[dd-mm-yyyy]</span>
+                            </span>
+                            <input type="date" [(ngModel)]="_userDod" name="_userDod"/>
+                        </label>
+                        <label>
+                            <button class="align-right" (click)="searchUsers()">
+                                _Search_
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                </div>
+                <div class="search-result"  *ngIf="!showSearchForm">
+                    <table>
+                        <thead>
+                            <tr *ngIf="!showSearchForm">
+                                <td colspan="5">
+                                    <a (click)="backToSearch();" class="button left-item" >
+                                        <i class="fa fa-backward"></i>
+                                        _Back to search_
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <span class="label left-item">_Show_: </span>
+                                    <span class="page" *ngFor="let page of alphabetPages">
+                                        <a href="javascript:void(0);" (click)="searchUsersByName(page)">{{page}}</a>
+                                    </span>
+                                    <a href="javascript:void(0);" class="page right-item" (click)="showAllUsers();">_Show All_</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="x">*</th>
+                                <th class="xxx">_Surname/First Name_</th>
+                                <th class="xx">_Date of Birth_</th>
+                                <th class="xx">_Passed Away_</th>
+                                <th class="xx">_Burial_</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of users; let i = index">
+                                <td class="x">{{ i +1 }}</td>
+                                <td class="xxx">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</td>
+                                <td class="xx">{{user.date_birth}}</td>
+                                <td class="xx">{{user.date_death}}</td>
+                                <td class="xx"></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">
+                                    <span class="left-item">
+                                        <a href="javascript:void(0);" (click)="goBack()">
+                                            <i class="fa fa-backward"></i>
+                                            _Previous_
+                                        </a>
+                                    </span>
+                                </td>
+                                <td colspan="2"></td>
+                                <td>
+                                    <span class="right-item">
+                                        <a href="javascript:void(0);" (click)="goNext()">
+                                            _Next_
+                                            <i class="fa fa-forward"></i>
+                                        </a>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
             <div id="graveyard-burial"  [style.display]="(activeTab == 'graveyard-burial') ? 'block' : 'none'">
             <p>Graveyard Burial</p>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { Advertisement } from '../classes/advertisement';
 import { AdvertisementService } from '../services/advertisement.service';
 import { UsersService } from '../services/users.service';
@@ -7,8 +8,7 @@ import { Options } from 'selenium-webdriver/firefox';
 
 export interface UserOptions {
   position: number;
-  limit: number;  
-  firstname: string;
+  limit: number;
 };
 
 @Component({
@@ -18,25 +18,28 @@ export interface UserOptions {
 })
 export class NoticeboardComponent implements OnInit {
   isHiddenTab:boolean = true;
+  showSearchForm:boolean = true;
   activeTab:string = null;
+
+  _userFirstname:string = null;
+  _userSurname:string = null;
+  _userDob:string = null;
+  _userDod:string = null;
+
   alphabetPages: any[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
   advertisements: Advertisement[] = [];
   users: User[] = [];
   options: UserOptions = {
     position: 0,
-    limit: 10,
-    firstname: "A"
+    limit: 10
   };
   
   constructor(private advertisementService: AdvertisementService, private usersService: UsersService) {
   }
 
   ngOnInit() {
-    this.activeTab = 'graveyard-noticeboard';
     this.getAdvertisements();
-    let options = encodeURIComponent(this.serialize(this.options));
-    debugger;
-    this.getUsers(options);
+    this.activeTab = 'graveyard-noticeboard';
   }
 
   serialize(object: any){
@@ -53,8 +56,13 @@ export class NoticeboardComponent implements OnInit {
       return " { " + str.join(', ') + " } ";
   }
 
-  showData(data: string){
-    this.options.firstname = data;
+  searchUsersByName(alphabet: string){
+    this.options['firstname'] = alphabet;
+    this.getUsers(encodeURIComponent(this.serialize(this.options)));
+  }
+
+  showAllUsers(){
+    this.options.position = 0;
     this.getUsers(encodeURIComponent(this.serialize(this.options)));
   }
 
@@ -70,8 +78,45 @@ export class NoticeboardComponent implements OnInit {
 
   openTab(name:string) {
     this.activeTab = name;
+    if(name == 'book-of-dead'){
+      let options = encodeURIComponent(this.serialize(this.options));
+      this.getUsers(options);
+    }
+    else if(name == 'graveyard-noticeboard'){
+      this.getAdvertisements();
+    }
   }
   
+  searchUsers(){
+    debugger;
+    if(this._userFirstname){
+      this.options['firstname'] = this._userFirstname;
+    }
+
+    if(this._userSurname){
+      this.options['lastname'] = this._userSurname;
+    }
+
+    if(this._userDob){
+      let dateComponent = this._userDob.split('-');
+      let validDOB = dateComponent[2]+'-'+dateComponent[1]+'-'+dateComponent[0];
+      this.options['birth_date'] = validDOB;
+    }
+    
+    if(this._userDod){
+      let dateComponent = this._userDod.split('-');
+      let validDOD = dateComponent[2]+'-'+dateComponent[1]+'-'+dateComponent[0];
+      this.options['death_date'] = validDOD;
+    }
+
+    this.showSearchForm = false;
+    this.getUsers(encodeURIComponent(this.serialize(this.options)));
+  }
+
+  backToSearch(){
+    this.showSearchForm = false;
+  }
+
   getAdvertisements(): void {
     this.advertisementService.getAll()
       .subscribe(advertisements => this.advertisements = advertisements);
