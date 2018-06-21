@@ -15,13 +15,59 @@
             "select_language": "Wybierz język"
         }
     },
-    "noticeboard" : {
-        "tab_bar" : {
-            "graveyard_noticeboard" : "Tablica z cmentarzem",
-            "book_of_dead" : "Księga zmarłych",
-            "search" : "Szukaj",
-            "graveyard_burial" : "Cmentarz pogrzebowy",
-            "reservation" : "Rezerwacja"
-        }        
+
+    "graveyard": {
+        "noticeboard" : {
+            "tabs" : {
+                "graveyard_noticeboard" : {
+                    "title": "Tablica z cmentarzem",
+                    "go_to_graveyard": "Idź do Graveyard",
+                    "choose_graveyard": "Wybierz cmentarz",
+                    "special_grave": "Specjalny grób",
+                    "grave_number": "Liczba poważna",
+                    "go_back_to_main_gate" : "Wróć do głównej bramy"
+                },
+                "book_of_dead" : {
+                    "title": "Księga zmarłych",
+                    "show": "Pokazać :",
+                    "show_all": "Pokaż wszystko",
+                    "previous": "Poprzedni",
+                    "next": "Kolejny",
+                    "surname_firstname": "Nazwisko Imię",
+                    "dob": "Data urodzenia",
+                    "passed_away": "Zmarł",
+                    "burial": "Pogrzeb"
+                },
+                "search" : {
+                    "title": "Szukaj",
+                    "form": {
+                        "find_a_person": "Znajdź osobę",
+                        "enter_any_one_field": "Wprowadź dowolne pole (Częściowa akceptacja)",
+                        "first_name": "Imię",
+                        "surname_lastname": "Nazwisko",
+                        "dob": "Data urodzenia",
+                        "dod": "Data zgonu",
+                        "search": "Szukaj"
+                    },
+                    "list": {
+                        "back_to_search": "Powrót do wyszukiwania",
+                        "show": "Pokazać",
+                        "show_all": "Pokaż wszystko",
+                        "previous": "Poprzedni",
+                        "next": "Kolejny",
+                        "surname_firstname": "Nazwisko Imię",
+                        "dob": "Data urodzenia",
+                        "passed_away": "Zmarł",
+                        "burial": "Pogrzeb"
+                    }
+                },
+                "graveyard_burial" : {
+                    "title": "Cmentarz pogrzebowy"
+                },
+                "reservation" : {
+                    "title": "Rezerwacja"
+                }
+            }        
+        }
     }
 }

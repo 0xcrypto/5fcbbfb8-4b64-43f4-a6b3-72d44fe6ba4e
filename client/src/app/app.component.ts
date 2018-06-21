@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
-
-
 import { AppGlobals } from './app.globals';
 
 @Component({

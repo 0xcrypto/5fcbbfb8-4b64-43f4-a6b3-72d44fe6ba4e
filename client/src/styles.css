@@ -536,6 +536,11 @@ form > label button {
     margin: 5px auto;
     border: 1px solid #b2973d;
 }
+.page-seperator{
+    color: #848484;
+    font-size: 10px;
+    margin: 0 3px;
+}
 table, tr, td, th{
     border-collapse: collapse;
     border: none;

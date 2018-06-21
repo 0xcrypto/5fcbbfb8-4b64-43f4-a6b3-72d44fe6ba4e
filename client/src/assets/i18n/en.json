@@ -15,13 +15,58 @@
             "select_language": "Select Language"
         }
     },
-    "noticeboard" : {
-        "tab_bar" : {
-            "graveyard_noticeboard" : "Graveyard Noticeboard",
-            "book_of_dead" : "Book of Dead",
-            "search" : "Search",
-            "graveyard_burial" : "Graveyard Burial",
-            "reservation" : "Reservation"
-        }        
+    "graveyard": {
+        "noticeboard" : {
+            "tabs" : {
+                "graveyard_noticeboard" : {
+                    "title": "Graveyard Noticeboard",
+                    "go_to_graveyard": "Go to Graveyard",
+                    "choose_graveyard": "Choose graveyard",
+                    "special_grave": "Special grave",
+                    "grave_number": "Grave number",
+                    "go_back_to_main_gate" : "Go Back to main gate"
+                },
+                "book_of_dead" : {
+                    "title": "Book of Dead",
+                    "show": "Show :",
+                    "show_all": "Show All",
+                    "previous": "Previous",
+                    "next": "Next",
+                    "surname_firstname": "Surname/First Name",
+                    "dob": "Date of Birth",
+                    "passed_away": "Passed Away",
+                    "burial": "Burial"
+                },
+                "search" : {
+                    "title": "Search",
+                    "form": {
+                        "find_a_person": "Find a Person",
+                        "enter_any_one_field": "Enter any one field (Partial Accepted)",
+                        "first_name": "First Name",
+                        "surname_lastname": "Surname/Last Name",
+                        "dob": "Date of Birth",
+                        "dod": "Date of Death",
+                        "search": "Search"
+                    },
+                    "list": {
+                        "back_to_search": "Back to search",
+                        "show": "Show :",
+                        "show_all": "Show All",
+                        "previous": "Previous",
+                        "next": "Next",
+                        "surname_firstname": "Surname/First Name",
+                        "dob": "Date of Birth",
+                        "passed_away": "Passed Away",
+                        "burial": "Burial"
+                    }
+                },
+                "graveyard_burial" : {
+                    "title": "Graveyard Burial"
+                },
+                "reservation" : {
+                    "title": "Reservation"
+                }
+            }        
+        }
     }
 }

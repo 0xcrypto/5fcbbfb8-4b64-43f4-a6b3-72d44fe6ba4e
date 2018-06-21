@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 import { Advertisement } from '../classes/advertisement';
 import { AdvertisementService } from '../services/advertisement.service';
 import { UsersService } from '../services/users.service';
@@ -18,9 +19,15 @@ export interface UserOptions {
 })
 export class NoticeboardComponent implements OnInit {
   isHiddenTab:boolean = true;
-  showSearchForm:boolean = true;
+  _showform:boolean = true;
   activeTab:string = null;
-
+  totalUsers: number = 0;
+  totalSearchedUsers: number = 0;
+  totalUserPages: number = 0;
+  totalSearchedUserPages: number = 0;
+  userPages: number[] = [];
+  userSearchedPages: number[] = [];
+  
   _userFirstname:string = null;
   _userSurname:string = null;
   _userDob:string = null;
@@ -29,12 +36,18 @@ export class NoticeboardComponent implements OnInit {
   alphabetPages: any[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
   advertisements: Advertisement[] = [];
   users: User[] = [];
+  searchedUsers: User[] = [];
+  
   options: UserOptions = {
     position: 0,
     limit: 10
   };
+  searchOptions: UserOptions = {
+    position: 0,
+    limit: 10
+  };
   
-  constructor(private advertisementService: AdvertisementService, private usersService: UsersService) {
+  constructor(private translate: TranslateService, private advertisementService: AdvertisementService, private usersService: UsersService) {
   }
 
   ngOnInit() {
@@ -56,9 +69,24 @@ export class NoticeboardComponent implements OnInit {
       return " { " + str.join(', ') + " } ";
   }
 
-  searchUsersByName(alphabet: string){
+  getUsersWithName(alphabet: string){
     this.options['firstname'] = alphabet;
     this.getUsers(encodeURIComponent(this.serialize(this.options)));
+  }
+
+  getUsersWithPage(position: number){
+    this.options['position'] = position;
+    this.getUsers(encodeURIComponent(this.serialize(this.options)));
+  }
+
+  getSearchedUsersWithName(alphabet: string){
+    this.searchOptions['firstname'] = alphabet;
+    this.getSearchedUsers(encodeURIComponent(this.serialize(this.searchOptions)));
+  }
+
+  getSearchedUsersWithPage(position: number){
+    this.searchOptions['position'] = position;
+    this.getSearchedUsers(encodeURIComponent(this.serialize(this.searchOptions)));
   }
 
   showAllUsers(){
@@ -66,14 +94,48 @@ export class NoticeboardComponent implements OnInit {
     this.getUsers(encodeURIComponent(this.serialize(this.options)));
   }
 
+  showAllSearchedUsers(){
+    this.searchOptions.position = 0;
+    this.getSearchedUsers(encodeURIComponent(this.serialize(this.searchOptions)));
+  }
+
   goNext(){
-    this.options.position +=1;
-    this.getUsers(encodeURIComponent(this.serialize(this.options)));
+    if (this.options.position < this.totalUserPages) {
+        this.options.position++;
+        this.getUsers(encodeURIComponent(this.serialize(this.options)));
+    }
   }
 
   goBack(){
-    this.options.position -=1;
-    this.getUsers(encodeURIComponent(this.serialize(this.options)));
+    if (this.options.position > 1) {
+      this.options.position--;
+      this.getUsers(encodeURIComponent(this.serialize(this.options)));
+    }
+  }
+
+  goSearchNext(){
+    if (this.searchOptions.position < this.totalSearchedUserPages) {
+        this.searchOptions.position++;
+        this.getSearchedUsers(encodeURIComponent(this.serialize(this.searchOptions)));
+    }
+  }
+
+  goSearchBack(){
+    if (this.searchOptions.position > 1) {
+      this.searchOptions.position--;
+      this.getSearchedUsers(encodeURIComponent(this.serialize(this.searchOptions)));
+    }
+  }
+
+  getPages(start: number, total: number){
+    let pages: number[] = [];
+    
+    for(let i = 0; i <= 8; i++){
+      pages[i] = start + (i+1);
+    }
+    pages[9] = total;
+
+    return pages;
   }
 
   openTab(name:string) {
@@ -88,33 +150,32 @@ export class NoticeboardComponent implements OnInit {
   }
   
   searchUsers(){
-    debugger;
     if(this._userFirstname){
-      this.options['firstname'] = this._userFirstname;
+      this.searchOptions['firstname'] = this._userFirstname;
     }
 
     if(this._userSurname){
-      this.options['lastname'] = this._userSurname;
+      this.searchOptions['lastname'] = this._userSurname;
     }
 
     if(this._userDob){
       let dateComponent = this._userDob.split('-');
       let validDOB = dateComponent[2]+'-'+dateComponent[1]+'-'+dateComponent[0];
-      this.options['birth_date'] = validDOB;
+      this.searchOptions['birth_date'] = validDOB;
     }
     
     if(this._userDod){
       let dateComponent = this._userDod.split('-');
       let validDOD = dateComponent[2]+'-'+dateComponent[1]+'-'+dateComponent[0];
-      this.options['death_date'] = validDOD;
+      this.searchOptions['death_date'] = validDOD;
     }
 
-    this.showSearchForm = false;
-    this.getUsers(encodeURIComponent(this.serialize(this.options)));
+    this._showform = false;
+    this.getSearchedUsers(encodeURIComponent(this.serialize(this.searchOptions)));
   }
 
   backToSearch(){
-    this.showSearchForm = false;
+    this._showform = false;
   }
 
   getAdvertisements(): void {
@@ -126,7 +187,23 @@ export class NoticeboardComponent implements OnInit {
     this.usersService.getWithMethodAndOptions('browsing', param)
       .subscribe(users => {
         this.users = users;
+        if(users.length > 0){
+          this.totalUsers = parseInt(users[0].ilosc);
+          this.totalUserPages = Math.ceil(this.totalUsers / this.options.limit);
+          this.userPages = this.getPages(this.options.position, this.totalUserPages);
+        }
       });
-	  //.slice(1, 5)
+  }
+
+  getSearchedUsers(param: string): void {
+    this.usersService.getWithMethodAndOptions('browsing', param)
+      .subscribe(users => {
+        this.searchedUsers = users;
+        if(users.length > 0){
+          this.totalSearchedUsers = parseInt(users[0].ilosc);
+          this.totalSearchedUserPages = Math.ceil(this.totalSearchedUsers / this.searchOptions.limit);
+          this.userSearchedPages = this.getPages(this.searchOptions.position, this.totalSearchedUserPages);
+        }
+      });
   }
 }

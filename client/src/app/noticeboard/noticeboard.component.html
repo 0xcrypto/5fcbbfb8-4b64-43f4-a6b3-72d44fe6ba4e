@@ -1,11 +1,11 @@
 <div id="content" class="notice-bg">
     <div class="tabs-container">
         <div class="tab-bar">
-            <a (click)="openTab('graveyard-noticeboard')" [ngClass]="{'active': (activeTab == 'graveyard-noticeboard')}" translate>noticeboard.tab_bar.graveyard_noticeboard</a>
-            <a (click)="openTab('book-of-dead')" [ngClass]="{'active': (activeTab == 'book-of-dead')}" translate>noticeboard.tab_bar.book_of_dead</a>
-            <a (click)="openTab('search')" [ngClass]="{'active': (activeTab == 'search')}" translate>noticeboard.tab_bar.search</a>
-            <a (click)="openTab('graveyard-burial')" [ngClass]="{'active': (activeTab == 'graveyard-burial')}" translate>noticeboard.tab_bar.graveyard_burial</a>
-            <a (click)="openTab('reservation')" [ngClass]="{'active': (activeTab == 'reservation')}" translate>noticeboard.tab_bar.reservation</a>
+            <a (click)="openTab('graveyard-noticeboard')" [ngClass]="{'active': (activeTab == 'graveyard-noticeboard')}" translate>graveyard.noticeboard.tabs.graveyard_noticeboard.title</a>
+            <a (click)="openTab('book-of-dead')" [ngClass]="{'active': (activeTab == 'book-of-dead')}" translate>graveyard.noticeboard.tabs.book_of_dead.title</a>
+            <a (click)="openTab('search')" [ngClass]="{'active': (activeTab == 'search')}" translate>graveyard.noticeboard.tabs.search.title</a>
+            <a (click)="openTab('graveyard-burial')" [ngClass]="{'active': (activeTab == 'graveyard-burial')}" translate>graveyard.noticeboard.tabs.graveyard_burial.title</a>
+            <a (click)="openTab('reservation')" [ngClass]="{'active': (activeTab == 'reservation')}" translate>graveyard.noticeboard.tabs.reservation.title</a>
         </div>
         <div class="tabs">
             <div id="graveyard-noticeboard"  
@@ -17,10 +17,10 @@
             </div>
             <div class="options-col">
                 <div class="option">
-                    <button>_Go_to_Graveyard_</button>
+                    <button translate>graveyard.noticeboard.tabs.graveyard_noticeboard.go_to_graveyard</button>
                 </div>
                 <div class="option">
-                    <button>_Choose_graveyard_</button>
+                    <button translate>graveyard.noticeboard.tabs.graveyard_noticeboard.choose_graveyard</button>
                     <select>
                         <option>Municipal</option>
                         <option>Municipal</option>
@@ -28,14 +28,14 @@
                     </select>
                 </div>
                 <div class="option">
-                    <button>_Special_grave_</button>
+                    <button translate>graveyard.noticeboard.tabs.graveyard_noticeboard.special_grave</button>
                 </div>
                 <div class="option">
-                    <button>_Grave_number_</button>
+                    <button translate>graveyard.noticeboard.tabs.graveyard_noticeboard.grave_number</button>
                     <input type="text"/>
                 </div>
                 <div class="option">
-                    <button>_Go_Back_to_main_gate</button>
+                    <button translate>graveyard.noticeboard.tabs.graveyard_noticeboard.go_back_to_main_gate</button>
                 </div>
             </div>
             <div class="advertisement-col">
@@ -51,19 +51,19 @@
                     <thead>
                         <tr>
                             <td colspan="5">
-                                <span class="label left-item">_Show_: </span>
+                                <span class="label left-item" translate>graveyard.noticeboard.tabs.book_of_dead.show</span>
                                 <span class="page" *ngFor="let page of alphabetPages">
-                                    <a href="javascript:void(0);" (click)="searchUsersByName(page)">{{page}}</a>
+                                    <a (click)="getUsersWithName(page)">{{page}}</a>
                                 </span>
-                                <a href="javascript:void(0);" class="page right-item" (click)="showAllUsers();">_Show All_</a>
+                                <a class="page right-item" (click)="showAllUsers();" translate>graveyard.noticeboard.tabs.book_of_dead.show_all</a>
                             </td>
                         </tr>
                         <tr>
                             <th class="x">*</th>
-                            <th class="xxx">_Surname/First Name_</th>
-                            <th class="xx">_Date of Birth_</th>
-                            <th class="xx">_Passed Away_</th>
-                            <th class="xx">_Burial_</th>
+                            <th class="xxx" translate>graveyard.noticeboard.tabs.book_of_dead.surname_firstname</th>
+                            <th class="xx" translate>graveyard.noticeboard.tabs.book_of_dead.dob</th>
+                            <th class="xx" translate>graveyard.noticeboard.tabs.book_of_dead.passed_away</th>
+                            <th class="xx" translate>graveyard.noticeboard.tabs.book_of_dead.burial</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -83,15 +83,22 @@
                                 <span class="left-item">
                                     <a href="javascript:void(0);" (click)="goBack()">
                                         <i class="fa fa-backward"></i>
-                                        _Previous_
+                                        <span translate>graveyard.noticeboard.tabs.book_of_dead.previous</span>
                                     </a>
                                 </span>
                             </td>
-                            <td colspan="2"></td>
+                            <td colspan="2">
+                                <div *ngFor="let page of userPages;">
+                                    <span class="page">
+                                        <a href="javascript:void(0);" (click)="getUsersWithPage(page)">{{page}}</a>
+                                        <i class="page-seperator">::</i>
+                                    </span>
+                                </div>
+                            </td>
                             <td>
                                 <span class="right-item">
                                     <a href="javascript:void(0);" (click)="goNext()">
-                                        _Next_
+                                        <span translate>graveyard.noticeboard.tabs.book_of_dead.next</span>
                                         <i class="fa fa-forward"></i>
                                     </a>
                                 </span>
@@ -101,64 +108,66 @@
                 </table>
             </div>
             <div id="search" [style.display]="(activeTab == 'search') ? 'block' : 'none'">
-                <div class="search-form" *ngIf="showSearchForm">
-                    <h4>_Find a Person_</h4>
-                    <p>_Enter any one field (Partial accepted)_</p>
+                <div class="search-form" *ngIf="_showform">
+                    <h4 translate>graveyard.noticeboard.tabs.search.form.find_a_person</h4>
+                    <p translate>graveyard.noticeboard.tabs.search.form.enter_any_one_field</p>
                     <form>
                         <label>
-                            <span>_First Name_</span>
+                            <span translate>graveyard.noticeboard.tabs.search.form.first_name</span>
                             <input type="text" [(ngModel)]="_userFirstname" name="_userFirstname"/>
                         </label>
                         <label>
-                            <span>_Surname/Last Name_</span>
+                            <span translate>graveyard.noticeboard.tabs.search.form.surname_lastname</span>
                             <input type="text" [(ngModel)]="_userSurname" name="_userSurname"/>
                         </label>
                         <label>
-                            <span>_Date of Birth_
+                            <span>
+                                <span translate>graveyard.noticeboard.tabs.search.form.dob</span>
                                 <span class="info">[dd-mm-yyyy]</span>
                             </span>
                             <input type="date" [(ngModel)]="_userDob" name="_userDob"/>
                         </label>
                         <label>
-                            <span>_Date of Death_
+                            <span>
+                                <span translate>graveyard.noticeboard.tabs.search.form.dod</span>
                                 <span class="info">[dd-mm-yyyy]</span>
                             </span>
                             <input type="date" [(ngModel)]="_userDod" name="_userDod"/>
                         </label>
                         <label>
                             <button class="align-right" (click)="searchUsers()">
-                                _Search_
-                                <i class="fa fa-forward"></i>
+                                <span translate>graveyard.noticeboard.tabs.search.form.search</span>
+                                <i class="fa fa-forward">&nbsp;</i>
                             </button>
                         </label>
                     </form>
                 </div>
-                <div class="search-result"  *ngIf="!showSearchForm">
+                <div class="search-result"  *ngIf="!_showform">
                     <table>
                         <thead>
-                            <tr *ngIf="!showSearchForm">
+                            <tr *ngIf="!_showform">
                                 <td colspan="5">
                                     <a (click)="backToSearch();" class="button left-item" >
-                                        <i class="fa fa-backward"></i>
-                                        _Back to search_
+                                        <i class="fa fa-backward">&nbsp;</i>
+                                        <span translate>graveyard.noticeboard.tabs.search.list.back_to_search</span>
                                     </a>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="5">
-                                    <span class="label left-item">_Show_: </span>
+                                    <span class="label left-item" translate>graveyard.noticeboard.tabs.search.list.show </span>
                                     <span class="page" *ngFor="let page of alphabetPages">
-                                        <a href="javascript:void(0);" (click)="searchUsersByName(page)">{{page}}</a>
+                                        <a href="javascript:void(0);" (click)="getSearchedUsersWithName(page)">{{page}}</a>
                                     </span>
-                                    <a href="javascript:void(0);" class="page right-item" (click)="showAllUsers();">_Show All_</a>
+                                    <a href="javascript:void(0);" class="page right-item" (click)="showAllSearchedUsers();" translate>graveyard.noticeboard.tabs.search.list.show_all</a>
                                 </td>
                             </tr>
                             <tr>
                                 <th class="x">*</th>
-                                <th class="xxx">_Surname/First Name_</th>
-                                <th class="xx">_Date of Birth_</th>
-                                <th class="xx">_Passed Away_</th>
-                                <th class="xx">_Burial_</th>
+                                <th class="xxx" translate>graveyard.noticeboard.tabs.search.list.surname_firstname</th>
+                                <th class="xx" translate>graveyard.noticeboard.tabs.search.list.dob</th>
+                                <th class="xx" translate>graveyard.noticeboard.tabs.search.list.passed_away</th>
+                                <th class="xx" translate>graveyard.noticeboard.tabs.search.list.burial</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -174,31 +183,32 @@
                             <tr>
                                 <td colspan="2">
                                     <span class="left-item">
-                                        <a href="javascript:void(0);" (click)="goBack()">
-                                            <i class="fa fa-backward"></i>
-                                            _Previous_
+                                        <a href="javascript:void(0);" (click)="goSearchBack()">
+                                            <i class="fa fa-backward">&nbsp;</i>
+                                            <span translate>graveyard.noticeboard.tabs.search.list.previous</span>
                                         </a>
                                     </span>
                                 </td>
                                 <td colspan="2"></td>
                                 <td>
                                     <span class="right-item">
-                                        <a href="javascript:void(0);" (click)="goNext()">
-                                            _Next_
-                                            <i class="fa fa-forward"></i>
+                                        <a href="javascript:void(0);" (click)="goSearchNext()">
+                                            <span translate>graveyard.noticeboard.tabs.search.list.next</span>
+                                            <i class="fa fa-forward">&nbsp;</i>
                                         </a>
                                     </span>
                                 </td>
                             </tr>
                         </tfoot>
                     </table>
+                    <span>{{totalSearchedUserPages}}</span>
                 </div>
             </div>
             <div id="graveyard-burial"  [style.display]="(activeTab == 'graveyard-burial') ? 'block' : 'none'">
-            <p>Graveyard Burial</p>
+            <p translate>graveyard.noticeboard.tabs.graveyard_burial.title</p>
             </div>
             <div id="reservation"  [style.display]="(activeTab == 'reservation') ? 'block' : 'none'">
-                <p>Reservation</p>
+                <p translate>graveyard.noticeboard.tabs.reservation.title</p>
             </div>
         </div>
     </div>

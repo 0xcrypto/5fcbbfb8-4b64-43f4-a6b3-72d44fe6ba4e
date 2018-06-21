@@ -14,7 +14,7 @@ export class User {
   znicze: any[];
   kwiatki: any[];
   grave_id: number;
-  ilosc: number;
+  ilosc: string;
   koniec: number;
   other: any[];
   place_id: number;
