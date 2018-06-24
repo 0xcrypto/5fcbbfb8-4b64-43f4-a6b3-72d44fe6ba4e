@@ -27,6 +27,7 @@
                     "go_back_to_main_gate" : "Go Back to main gate"
                 },
                 "book_of_dead" : {
+                    "loading_data":"Loading Data...",
                     "title": "Book of Dead",
                     "show": "Show :",
                     "show_all": "Show All",
@@ -49,6 +50,7 @@
                         "search": "Search"
                     },
                     "list": {
+                        "searching_data":"Searching Data...",
                         "back_to_search": "Back to search",
                         "show": "Show :",
                         "show_all": "Show All",

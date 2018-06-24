@@ -17,6 +17,7 @@ import { StaticpageComponent } from './staticpage/staticpage.component';
 import { ForumComponent } from './forum/forum.component';
 import { HeaderComponent } from './header/header.component';
 import { PricingComponent } from './pricing/pricing.component';
+import { LogoComponent } from './logo/logo.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -34,7 +35,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     StaticpageComponent,
     ForumComponent,
     HeaderComponent,
-    PricingComponent
+    PricingComponent,
+    LogoComponent
   ],
   imports: [
     BrowserModule,

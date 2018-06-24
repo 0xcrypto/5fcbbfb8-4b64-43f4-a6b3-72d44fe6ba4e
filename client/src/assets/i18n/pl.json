@@ -50,6 +50,7 @@
                         "search": "Szukaj"
                     },
                     "list": {
+                        "searching_data":"Searching data",
                         "back_to_search": "Powrót do wyszukiwania",
                         "show": "Pokazać",
                         "show_all": "Pokaż wszystko",

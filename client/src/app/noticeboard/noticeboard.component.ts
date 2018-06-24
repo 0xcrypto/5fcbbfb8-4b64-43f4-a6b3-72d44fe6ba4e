@@ -33,6 +33,8 @@ export class NoticeboardComponent implements OnInit {
   _userDob:string = null;
   _userDod:string = null;
 
+  loadingUserData:boolean = false;
+  loadingSearchUserData:boolean = false;
   alphabetPages: any[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
   advertisements: Advertisement[] = [];
   users: User[] = [];
@@ -75,6 +77,7 @@ export class NoticeboardComponent implements OnInit {
   }
 
   getUsersWithPage(position: number){
+    debugger;
     this.options['position'] = position;
     this.getUsers(encodeURIComponent(this.serialize(this.options)));
   }
@@ -129,12 +132,21 @@ export class NoticeboardComponent implements OnInit {
 
   getPages(start: number, total: number){
     let pages: number[] = [];
-    
-    for(let i = 0; i <= 8; i++){
-      pages[i] = start + (i+1);
+    debugger;
+    if(start >= (total - 5)){
+      start = (total - 5);
+      for(let i = start, j=1; i <= total; i++, j++){
+        pages[j-1] = i;
+      }
     }
-    pages[9] = total;
+    else{
+      for(let i = 0; i <= 3; i++){
+        pages[i] = start + (i+1);
+      }
+      pages[4] = total;
+    }
 
+    debugger;
     return pages;
   }
 
@@ -184,8 +196,10 @@ export class NoticeboardComponent implements OnInit {
   }
 
   getUsers(param: string): void {
+    this.loadingUserData = true;
     this.usersService.getWithMethodAndOptions('browsing', param)
       .subscribe(users => {
+        this.loadingUserData = false;
         this.users = users;
         if(users.length > 0){
           this.totalUsers = parseInt(users[0].ilosc);
@@ -196,8 +210,10 @@ export class NoticeboardComponent implements OnInit {
   }
 
   getSearchedUsers(param: string): void {
+    this.loadingSearchUserData = true;
     this.usersService.getWithMethodAndOptions('browsing', param)
       .subscribe(users => {
+        this.loadingSearchUserData = false;
         this.searchedUsers = users;
         if(users.length > 0){
           this.totalSearchedUsers = parseInt(users[0].ilosc);
