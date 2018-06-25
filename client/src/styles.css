@@ -156,16 +156,17 @@ body #content{
 	height: 600px;
     width: 1024px;
     display: block;
-    /*overflow: hidden;*/
+    overflow: hidden;
     position: relative;
     color: #fff;
     margin: 10px auto;
 }
 body #content.notice-bg{
+    overflow: inherit;
     background-image: url(./assets/images/noticeboard.png);
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
-    background-position: center -100px;
+    background-position: center -190px;
 }
 body #content .scroll-content{
     width: 530px;
@@ -413,12 +414,12 @@ form > label button {
     cursor: pointer;
 }
 .tabs-container{
-    width: 560px;
+    width: 690px;
     margin: 50px auto;
     height: 400px;
 }
 .tab-bar{
-    width: 650px;
+    width: 690px;
     margin: 0 auto;
 }
 .tab-bar a{
@@ -442,7 +443,7 @@ form > label button {
     color: #333;
 }
 .tabs{
-    width: 555px;
+    width: 680px;
     padding: 10px;
     height: 355px;
 }
@@ -554,6 +555,17 @@ form > label button {
     width: 180px;
     margin: 0 auto;
 }
+.popular-grave-col .tile p{
+    text-align: center;
+    white-space: inherit;
+    margin-bottom: 20px;
+    color: #848484;
+}
+.popular-grave-col .tile p.name{
+    color: #a2a2a2;
+    font-weight: bold;
+    font-size: 13px;
+}
 .popular-grave-col .tile a,
 .advertisement-col .tile a{
 	padding: 0 10px;
@@ -573,6 +585,17 @@ form > label button {
     margin: 5px auto;
     border: 1px solid #b2973d;
 }
+.popular-grave-col .tile span{
+    display: inline-block;
+    width: 45%;
+    float: left;
+    font-size: 10px;
+    text-align: center;
+}
+.popular-grave-col .tile label{
+    display: block;
+    color: #848484;
+}
 .page-seperator{
     color: #848484;
     font-size: 10px;
@@ -586,6 +609,11 @@ table, tr, td, th{
 }
 table tr td.text-center {
     text-align: center;
+}
+table tr:hover td{
+    background: #202020;
+    color: #947F1D;
+    cursor: pointer;
 }
 table tr td.x {
     width: 5%;
@@ -622,6 +650,9 @@ table .page{
     color: #fff;
     padding: 0 4px;
     margin: 0;
+}
+table .page:hover{
+    color: #947F1D;
 }
 table a{
     color: #fff;

@@ -6,6 +6,7 @@ import { AdvertisementService } from '../services/advertisement.service';
 import { UsersService } from '../services/users.service';
 import { User } from '../classes/user';
 import { Options } from 'selenium-webdriver/firefox';
+import { AppGlobals } from '../app.globals';
 
 export interface UserOptions {
   position: number;
@@ -21,6 +22,7 @@ export class NoticeboardComponent implements OnInit {
   isHiddenTab:boolean = true;
   _showform:boolean = true;
   activeTab:string = null;
+  currentLang:string = null;
   totalUsers: number = 0;
   totalSearchedUsers: number = 0;
   totalUserPages: number = 0;
@@ -39,7 +41,7 @@ export class NoticeboardComponent implements OnInit {
   advertisements: Advertisement[] = [];
   users: User[] = [];
   searchedUsers: User[] = [];
-  
+  tileUsers: User[] = [];
   options: UserOptions = {
     position: 0,
     limit: 10
@@ -49,12 +51,14 @@ export class NoticeboardComponent implements OnInit {
     limit: 10
   };
   
-  constructor(private translate: TranslateService, private advertisementService: AdvertisementService, private usersService: UsersService) {
+  constructor(private translate: TranslateService, private advertisementService: AdvertisementService, private usersService: UsersService, private _global: AppGlobals) {
   }
 
   ngOnInit() {
     this.getAdvertisements();
     this.activeTab = 'graveyard-noticeboard';
+    this.currentLang = this._global.getLanguage();
+    this.getTileUsers(encodeURIComponent(this.serialize(this.options)));
   }
 
   serialize(object: any){
@@ -77,7 +81,6 @@ export class NoticeboardComponent implements OnInit {
   }
 
   getUsersWithPage(position: number){
-    debugger;
     this.options['position'] = position;
     this.getUsers(encodeURIComponent(this.serialize(this.options)));
   }
@@ -132,7 +135,6 @@ export class NoticeboardComponent implements OnInit {
 
   getPages(start: number, total: number){
     let pages: number[] = [];
-    debugger;
     if(start >= (total - 5)){
       start = (total - 5);
       for(let i = start, j=1; i <= total; i++, j++){
@@ -146,7 +148,6 @@ export class NoticeboardComponent implements OnInit {
       pages[4] = total;
     }
 
-    debugger;
     return pages;
   }
 
@@ -187,12 +188,28 @@ export class NoticeboardComponent implements OnInit {
   }
 
   backToSearch(){
-    this._showform = false;
+    this._showform = true;
   }
 
   getAdvertisements(): void {
     this.advertisementService.getAll()
       .subscribe(advertisements => this.advertisements = advertisements);
+  }
+  updateUserProperties(users: User[]){
+    if(this.currentLang == 'en' ){
+      for(let i=0; i<=users.length-1;i++){
+        if(users[i].place_name == 'cmentarz'){
+          users[i].place_name = 'Graveyard';
+        }
+        else if(users[i].place_name == 'katakumby'){
+          users[i].place_name = 'Catacombs';
+        }
+        else if(users[i].place_name == 'inne - specjalne'){
+          users[i].place_name = 'Special';
+        }
+      }
+    }
+    return users;
   }
 
   getUsers(param: string): void {
@@ -202,10 +219,18 @@ export class NoticeboardComponent implements OnInit {
         this.loadingUserData = false;
         this.users = users;
         if(users.length > 0){
+          users = this.updateUserProperties(users);
           this.totalUsers = parseInt(users[0].ilosc);
           this.totalUserPages = Math.ceil(this.totalUsers / this.options.limit);
           this.userPages = this.getPages(this.options.position, this.totalUserPages);
         }
+      });
+  }
+
+  getTileUsers(param: string): void {
+    this.usersService.getWithMethodAndOptions('browsing', param)
+      .subscribe(users => {
+        this.tileUsers = users.slice(0,3);
       });
   }
 
@@ -216,6 +241,7 @@ export class NoticeboardComponent implements OnInit {
         this.loadingSearchUserData = false;
         this.searchedUsers = users;
         if(users.length > 0){
+          users = this.updateUserProperties(users);
           this.totalSearchedUsers = parseInt(users[0].ilosc);
           this.totalSearchedUserPages = Math.ceil(this.totalSearchedUsers / this.searchOptions.limit);
           this.userSearchedPages = this.getPages(this.searchOptions.position, this.totalSearchedUserPages);

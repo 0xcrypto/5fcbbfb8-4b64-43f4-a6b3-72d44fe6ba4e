@@ -12,9 +12,14 @@
             <div id="graveyard-noticeboard"  
             [style.display]="(activeTab == 'graveyard-noticeboard') ? 'block' : 'none'">
             <div class="popular-grave-col">
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
+                    <div class="tile" *ngFor="let user of tileUsers" >
+                        <p class="name">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</p>
+                        <p>Will be sadly missed</p>
+                        <p>
+                            <span><label>Born</label>{{user.date_birth}}</span>
+                            <span><label>Passed Away</label>{{user.date_death}}</span>
+                        </p>
+                    </div>
             </div>
             <div class="options-col">
                 <div class="option">
@@ -48,7 +53,7 @@
             </div>
             </div>
             <div id="book-of-dead" [style.display]="(activeTab == 'book-of-dead') ? 'block' : 'none'">
-                <div *ngIf="loadingUserData" translate>graveyard.noticeboard.tabs.book_of_dead.list.loading_data</div>
+                <div *ngIf="loadingUserData" translate>graveyard.noticeboard.tabs.book_of_dead.loading_data</div>
                 <table *ngIf="!loadingUserData">
                     <thead>
                         <tr>
@@ -73,9 +78,9 @@
                             <tr *ngFor="let user of users; let i = index">
                                 <td class="x text-center">{{ i +1 }}</td>
                                 <td class="xxx">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</td>
-                                <td class="xx">{{user.date_birth}}</td>
-                                <td class="xx">{{user.date_death}}</td>
-                                <td class="xx"></td>
+                                <td class="xx text-center">{{user.date_birth}}</td>
+                                <td class="xx text-center">{{user.date_death}}</td>
+                                <td class="xx text-center">{{user.place_name}}</td>
                             </tr>
                         <!--</ng-scrollbar>-->
                     </tbody>
@@ -148,10 +153,10 @@
                         <thead>
                             <tr *ngIf="!_showform">
                                 <td colspan="5">
-                                    <button class="page left-item" (click)="backToSearch();">
-                                        <i class="fa fa-backward"></i>
-                                        <span translate>&nbsp;&nbsp;graveyard.noticeboard.tabs.search.list.back_to_search</span>
-                                    </button>
+                                    <button class="page left-item" (click)="backToSearch();"><i class="fa fa-backward"></i><span translate>&nbsp;&nbsp;graveyard.noticeboard.tabs.search.list.back_to_search</span></button>
+                                        
+                                        
+                                    <!--</button>-->
                                 </td>
                             </tr>
                             <tr>
@@ -175,9 +180,9 @@
                             <tr *ngFor="let user of users; let i = index">
                                 <td class="x">{{ i +1 }}</td>
                                 <td class="xxx">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</td>
-                                <td class="xx">{{user.date_birth}}</td>
-                                <td class="xx">{{user.date_death}}</td>
-                                <td class="xx"></td>
+                                <td class="xx text-center">{{user.date_birth}}</td>
+                                <td class="xx text-center">{{user.date_death}}</td>
+                                <td class="xx text-center">{{user.place_name}}</td>
                             </tr>
                         </tbody>
                         <tfoot>
