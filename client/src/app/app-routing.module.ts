@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'contactus', component: ContactusComponent },
   { path: 'forum', component: ForumComponent },
   { path: 'pricing', component: PricingComponent },
-  { path: 'staticpage/:id', component: StaticpageComponent }
+  { path: 'staticpage/:id', component: StaticpageComponent },
 ];
 
 @NgModule({

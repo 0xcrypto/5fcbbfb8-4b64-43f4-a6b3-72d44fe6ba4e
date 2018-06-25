@@ -1,4 +1,4 @@
-<div id="content" class="notice-bg">
+<div *ngIf="!showLoadingScreen" id="content" class="notice-bg">
     <app-logo></app-logo>
     <div class="tabs-container">
         <div class="tab-bar">
@@ -75,7 +75,7 @@
                     </thead>
                     <tbody>
                         <!--<ng-scrollbar>-->
-                            <tr *ngFor="let user of users; let i = index">
+                            <tr *ngFor="let user of users; let i = index"  (click)="loadingGrave(user)">
                                 <td class="x text-center">{{ i +1 }}</td>
                                 <td class="xxx">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</td>
                                 <td class="xx text-center">{{user.date_birth}}</td>
@@ -222,4 +222,43 @@
             </div>
         </div>
     </div>
+</div>
+<div *ngIf="showLoadingScreen" id="content" class="loading-bg">
+    <app-logo></app-logo>
+    <ul id="loading-options">
+        <li>
+            <label translate>graveyard.loading_screen.day</label>
+            <button class="day"></button>
+        </li>
+        <li>
+            <label translate>graveyard.loading_screen.night</label>
+            <button class="night"></button>
+        </li>
+        <li class="seperator"></li>
+        <li>
+            <label translate>graveyard.loading_screen.blue_sky</label>
+            <button class="blue-sky"></button>
+        </li>
+        <li>
+            <label translate>graveyard.loading_screen.rain</label>
+            <button class="rain"></button>
+        </li>
+        <li>
+            <label translate>graveyard.loading_screen.thunder_strom</label>
+            <button class="thunder-strom"></button>
+        </li>
+        <li>
+            <label translate>graveyard.loading_screen.snow</label>
+            <button class="snow"></button>
+        </li>
+        <li class="seperator"></li>
+        <li>
+            <label translate>graveyard.loading_screen.random</label>
+            <button class="random"></button>
+        </li>
+        <li>
+            <label>&nbsp;</label>
+            <button class="ok"></button>
+        </li>
+    </ul>
 </div>

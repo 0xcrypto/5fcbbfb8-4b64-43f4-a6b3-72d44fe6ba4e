@@ -19,8 +19,8 @@
     height: 75px;
     width: 75px;
     z-index: 9;
-    top: -25px;
-    left: -25px;
+    top: 20px;
+    left: 50px;
     background-image: url(./assets/images/vg-logo.png);
     background-position: center;
     opacity: 1;
@@ -33,7 +33,7 @@
     height: 200px;
     width: 100px;
     z-index: 9;
-    top: 10px;
+    top: -40px;
     left: -85px;
     background-image: url(./assets/images/vg-left-logo.png);
     background-position: center;
@@ -44,7 +44,7 @@
     height: 200px;
     width: 100px;
     z-index: 9;
-    top: 10px;
+    top: -40px;
     right: -85px;
     background-image: url(./assets/images/vg-right-logo.png);
     background-position: center;
@@ -167,6 +167,16 @@ body #content.notice-bg{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center -190px;
+}
+body #content.loading-bg{
+    overflow: inherit;
+    background-image: url(./assets/images/wall.png);
+    background-repeat: repeat;
+    background-size: 25%;
+    -webkit-animation: backgroundScroll infinite linear 1;
+    -webkit-animation-fill-mode: forwards;
+    animation: backgroundScroll infinite linear 1;
+    animation-fill-mode: forwards;
 }
 body #content .scroll-content{
     width: 530px;
@@ -672,4 +682,110 @@ table tbody{
     width: 100%;
     height: 500px;
     overflow: hidden;
+}
+#loading-options{
+    border: none;
+    border-top: 3px solid #ccc;
+    border-bottom: 3px solid #ccc;
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 150px;
+    position: absolute;
+    top: 150px;
+    left: 0;
+    right: 0;
+    list-style-type: none;
+}
+#loading-options li{
+    height: 100px;
+    width: 100px;
+    float: left;
+    margin: 20px 5px;
+}
+#loading-options li label{
+    margin-bottom: 5px;
+    display: block;
+    font-size: 12px;
+    color: #ababab;
+    height: 20px;
+}
+#loading-options li:hover label{
+    color: #fff;
+}
+#loading-options li button{
+    display: block;
+    height: 50px;
+    width: 50px;
+    margin: 3px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    border-radius: 5px;
+    background-position: -1px -2px;
+    background-size: 51px 55px !important;
+}
+#loading-options li:hover button{
+    box-shadow: 0 0 20px 0 #fff;
+}
+#loading-options li button.day{
+    background-image: url(./assets/images/day.png);
+}
+#loading-options li:hover button.day{
+    background-image: url(./assets/images/day-active.png);
+}
+#loading-options li button.night{
+    background-image: url(./assets/images/night.png);
+}
+#loading-options li:hover button.night{
+    background-image: url(./assets/images/night-active.png);
+}
+#loading-options li button.blue-sky{
+    background-image: url(./assets/images/blue-sky.png);
+}
+#loading-options li:hover button.blue-sky{
+    background-image: url(./assets/images/blue-sky-active.png);
+}
+#loading-options li button.rain{
+    background-image: url(./assets/images/rain.png);
+}
+#loading-options li:hover button.rain{
+    background-image: url(./assets/images/rain-active.png);
+}
+#loading-options li button.thunder-strom{
+    background-image: url(./assets/images/thunder-strom.png);
+}
+#loading-options li:hover button.thunder-strom{
+    background-image: url(./assets/images/thunder-strom-active.png);
+}
+#loading-options li button.snow{
+    background-image: url(./assets/images/snow.png);
+}
+#loading-options li:hover button.snow{
+    background-image: url(./assets/images/snow-active.png);
+}
+#loading-options li button.random{
+    background-image: url(./assets/images/random.png);
+}
+#loading-options li:hover button.random{
+    background-image: url(./assets/images/random-active.png);
+}
+#loading-options li button.ok{
+    background-image: url(./assets/images/ok.png);
+}
+#loading-options li:hover button.ok{
+    background-image: url(./assets/images/ok-active.png);
+}
+#loading-options li.seperator{
+    width: 2px;
+    background: #ccc;
+    margin: 20px 40px 20px 0;
+    display: inline-block;
+    height: 100px;
+}
+@keyframes backgroundScroll {
+    from {background-position: 0 0;}
+    to {background-position: -100px 0px;}
+}
+@-webkit-keyframes backgroundScroll {
+    from {background-position: 0 0;}
+    to {background-position: -100px 0px;}
 }

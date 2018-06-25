@@ -18,6 +18,7 @@ import { ForumComponent } from './forum/forum.component';
 import { HeaderComponent } from './header/header.component';
 import { PricingComponent } from './pricing/pricing.component';
 import { LogoComponent } from './logo/logo.component';
+import { GraveLoadingComponent } from './grave-loading/grave-loading.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -36,7 +37,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ForumComponent,
     HeaderComponent,
     PricingComponent,
-    LogoComponent
+    LogoComponent,
+    GraveLoadingComponent
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,7 @@ import { Advertisement } from '../classes/advertisement';
 import { AdvertisementService } from '../services/advertisement.service';
 import { UsersService } from '../services/users.service';
 import { User } from '../classes/user';
-import { Options } from 'selenium-webdriver/firefox';
+import {Router} from '@angular/router';
 import { AppGlobals } from '../app.globals';
 
 export interface UserOptions {
@@ -19,6 +19,8 @@ export interface UserOptions {
   styleUrls: ['./noticeboard.component.css']
 })
 export class NoticeboardComponent implements OnInit {
+  showLoadingScreen:boolean = false;
+  router:Router = null;
   isHiddenTab:boolean = true;
   _showform:boolean = true;
   activeTab:string = null;
@@ -51,7 +53,8 @@ export class NoticeboardComponent implements OnInit {
     limit: 10
   };
   
-  constructor(private translate: TranslateService, private advertisementService: AdvertisementService, private usersService: UsersService, private _global: AppGlobals) {
+  constructor(private _router: Router, private translate: TranslateService, private advertisementService: AdvertisementService, private usersService: UsersService, private _global: AppGlobals) {
+    this.router = _router;
   }
 
   ngOnInit() {
@@ -73,6 +76,11 @@ export class NoticeboardComponent implements OnInit {
           }
         }
       return " { " + str.join(', ') + " } ";
+  }
+
+  loadingGrave(grave:User){
+    debugger;
+    this.showLoadingScreen = true;
   }
 
   getUsersWithName(alphabet: string){

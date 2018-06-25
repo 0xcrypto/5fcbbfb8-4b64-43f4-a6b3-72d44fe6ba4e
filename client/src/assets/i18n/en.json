@@ -68,7 +68,16 @@
                 "reservation" : {
                     "title": "Reservation"
                 }
-            }        
-        }
+            }
+        },
+        "loading_screen" : {
+            "day": "Day",
+            "night": "Night",
+            "blue_sky": "Blue Sky",
+            "rain": "Rain",
+            "thunder_strom": "Thunderstrom",
+            "snow": "Snow",
+            "random": "Random"
+        }  
     }
 }
