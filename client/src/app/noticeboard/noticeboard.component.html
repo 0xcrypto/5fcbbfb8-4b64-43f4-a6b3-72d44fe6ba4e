@@ -12,14 +12,14 @@
             <div id="graveyard-noticeboard"  
             [style.display]="(activeTab == 'graveyard-noticeboard') ? 'block' : 'none'">
             <div class="popular-grave-col">
-                    <div class="tile" *ngFor="let user of tileUsers" >
-                        <p class="name">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</p>
-                        <p>Will be sadly missed</p>
-                        <p>
-                            <span><label>Born</label>{{user.date_birth}}</span>
-                            <span><label>Passed Away</label>{{user.date_death}}</span>
-                        </p>
-                    </div>
+                <div class="tile" *ngFor="let user of tileUsers" >
+                    <p class="name">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</p>
+                    <p>Will be sadly missed</p>
+                    <p>
+                        <span><label>Born</label>{{user.date_birth}}</span>
+                        <span><label>Passed Away</label>{{user.date_death}}</span>
+                    </p>
+                </div>
             </div>
             <div class="options-col">
                 <div class="option">
@@ -258,7 +258,7 @@
         </li>
         <li>
             <label>&nbsp;</label>
-            <button class="ok"></button>
+            <button class="ok" (click)="showGraveyard();"></button>
         </li>
     </ul>
 </div>

@@ -8,6 +8,7 @@ import { ContactusComponent }      from './contactus/contactus.component';
 import { StaticpageComponent }    from './staticpage/staticpage.component';
 import { ForumComponent }    from './forum/forum.component';
 import { PricingComponent }    from './pricing/pricing.component';
+import { GraveyardComponent }    from './graveyard/graveyard.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'forum', component: ForumComponent },
   { path: 'pricing', component: PricingComponent },
   { path: 'staticpage/:id', component: StaticpageComponent },
+  { path: 'graveyard/:position/:time/:season', component: GraveyardComponent },
 ];
 
 @NgModule({

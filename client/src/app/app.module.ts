@@ -18,7 +18,7 @@ import { ForumComponent } from './forum/forum.component';
 import { HeaderComponent } from './header/header.component';
 import { PricingComponent } from './pricing/pricing.component';
 import { LogoComponent } from './logo/logo.component';
-import { GraveLoadingComponent } from './grave-loading/grave-loading.component';
+import { GraveyardComponent } from './graveyard/graveyard.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -38,7 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HeaderComponent,
     PricingComponent,
     LogoComponent,
-    GraveLoadingComponent
+    GraveyardComponent
   ],
   imports: [
     BrowserModule,

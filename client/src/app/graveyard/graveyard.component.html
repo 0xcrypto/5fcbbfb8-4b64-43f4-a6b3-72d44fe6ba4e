@@ -1,0 +1,14 @@
+<div id="content" class="graveyard">
+    <div class="graveyard-sky-container" [ngStyle]="{'background-image': time == 1 ? daySkyImage : nightSkyImage}">
+
+    </div>
+    <div class="graveyard-container" [ngStyle]="{'background-image': graveyardImage}">
+        <div class="grave" *ngFor="let user of graves" >
+            <p class="name">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</p>
+            <p>
+                <span><label>Born</label>{{user.date_birth}}</span>
+                <span><label>Passed Away</label>{{user.date_death}}</span>
+            </p>
+        </div>
+    </div>
+</div>

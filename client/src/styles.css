@@ -781,6 +781,19 @@ table tbody{
     display: inline-block;
     height: 100px;
 }
+.graveyard-sky-container{
+    height: 350px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.graveyard-container{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
 @keyframes backgroundScroll {
     from {background-position: 0 0;}
     to {background-position: -100px 0px;}

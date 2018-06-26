@@ -44,6 +44,7 @@ export class NoticeboardComponent implements OnInit {
   users: User[] = [];
   searchedUsers: User[] = [];
   tileUsers: User[] = [];
+  selectedGrave: User = null;
   options: UserOptions = {
     position: 0,
     limit: 10
@@ -79,8 +80,12 @@ export class NoticeboardComponent implements OnInit {
   }
 
   loadingGrave(grave:User){
-    debugger;
+    this.selectedGrave = grave;
     this.showLoadingScreen = true;
+  }
+
+  showGraveyard(){
+    this.router.navigateByUrl('/graveyard/10/1/1');
   }
 
   getUsersWithName(alphabet: string){
