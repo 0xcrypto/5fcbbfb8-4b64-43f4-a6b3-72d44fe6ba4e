@@ -18,4 +18,5 @@ export class User {
   koniec: number;
   other: any[];
   place_id: number;
+  position: number;
 }

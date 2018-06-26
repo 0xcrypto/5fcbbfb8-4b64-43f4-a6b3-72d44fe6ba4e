@@ -661,8 +661,11 @@ table .page{
     padding: 0 4px;
     margin: 0;
 }
-table .page:hover{
+table .page:hover, table .page .active{
     color: #947F1D;
+}
+table .page.disabled{
+    color: #2d2d2d;
 }
 table a{
     color: #fff;
