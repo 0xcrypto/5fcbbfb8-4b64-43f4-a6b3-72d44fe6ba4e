@@ -60,7 +60,7 @@
                             <td colspan="5">
                                 <span class="label left-item" translate>graveyard.noticeboard.tabs.book_of_dead.show</span>
                                 <button class="page" *ngFor="let alphabet of alphabetPages" (click)="getGraveWithFirstname(alphabet)">
-                                    <span [ngClass]="{'active': (alphabet == selectedSearchAlphabet)}">{{alphabet}}</span>                                 
+                                    <span [ngClass]="{'active': (alphabet == selectedDeadAlphabet)}">{{alphabet}}</span>                                 
                                 </button>
                                 <button class="page right-item" (click)="showAllGraves();" translate>graveyard.noticeboard.tabs.book_of_dead.show_all</button>
                             </td>
@@ -154,9 +154,6 @@
                             <tr *ngIf="!isSearchFormVisible">
                                 <td colspan="5">
                                     <button class="page left-item" (click)="backToSearch();"><i class="fa fa-backward"></i><span translate>&nbsp;&nbsp;graveyard.noticeboard.tabs.search.list.back_to_search</span></button>
-                                        
-                                        
-                                    <!--</button>-->
                                 </td>
                             </tr>
                             <tr>
@@ -228,33 +225,33 @@
     <ul id="loading-options">
         <li>
             <label translate>graveyard.loading_screen.day</label>
-            <button class="day"></button>
+            <button class="day" (click)="setSceneTime(1);" [ngClass]="{'active': (selectedSceneTime == 1) }"><span></span></button>
         </li>
         <li>
             <label translate>graveyard.loading_screen.night</label>
-            <button class="night"></button>
+            <button class="night" (click)="setSceneTime(2);" [ngClass]="{'active': (selectedSceneTime == 2) }"><span></span></button>
         </li>
         <li class="seperator"></li>
         <li>
             <label translate>graveyard.loading_screen.blue_sky</label>
-            <button class="blue-sky"></button>
+            <button class="blue-sky" (click)="setSceneSeason(1);" [ngClass]="{'active': (selectedSceneSeason == 1) }"><span></span></button>
         </li>
         <li>
             <label translate>graveyard.loading_screen.rain</label>
-            <button class="rain"></button>
+            <button class="rain" (click)="setSceneSeason(2);" [ngClass]="{'active': (selectedSceneSeason == 2) }"><span></span></button>
         </li>
         <li>
             <label translate>graveyard.loading_screen.thunder_strom</label>
-            <button class="thunder-strom"></button>
+            <button class="thunder-strom" (click)="setSceneSeason(3);" [ngClass]="{'active': (selectedSceneSeason == 3) }"><span></span></button>
         </li>
         <li>
             <label translate>graveyard.loading_screen.snow</label>
-            <button class="snow"></button>
+            <button class="snow" (click)="setSceneSeason(4);" [ngClass]="{'active': (selectedSceneSeason == 4) }"><span></span></button>
         </li>
         <li class="seperator"></li>
         <li>
             <label translate>graveyard.loading_screen.random</label>
-            <button class="random"></button>
+            <button class="random" (click)="randomSceneSelection();" [ngClass]="{'active': isRandomSceneSelected }"><span></span></button>
         </li>
         <li>
             <label>&nbsp;</label>

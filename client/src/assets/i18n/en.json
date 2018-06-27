@@ -78,6 +78,9 @@
             "thunder_strom": "Thunderstrom",
             "snow": "Snow",
             "random": "Random"
-        }  
+        },
+        "next_grave": "Next Grave",
+        "previous_grave": "Previous Grave",
+        "back_to_search_result": "Back to search results"
     }
 }

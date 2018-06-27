@@ -78,6 +78,9 @@
             "thunder_strom": "Burza z piorunami",
             "snow": "Śnieg",
             "random": "Losowy"
-        } 
+        },
+        "next_grave": "Następny Grave",
+        "previous_grave": "Poprzednie Grave",
+        "back_to_search_result": "Powrót do wyników wyszukiwania"
     }
 }

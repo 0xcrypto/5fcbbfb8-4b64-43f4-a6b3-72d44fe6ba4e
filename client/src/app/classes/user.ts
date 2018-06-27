@@ -19,4 +19,5 @@ export class User {
   other: any[];
   place_id: number;
   position: number;
+  graveUrl: string;
 }

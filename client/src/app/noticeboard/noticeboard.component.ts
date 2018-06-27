@@ -24,18 +24,21 @@ export class NoticeboardComponent implements OnInit {
   isNavigateNextDeadDisabled:boolean = false;
   isNavigatePreviousSearchedDeadDisabled:boolean = false;
   isNavigateNextDeadSearchedDisabled:boolean = false;
+  isRandomSceneSelected:boolean = false;
   selectedTab:string = null;
+  selectedDeadPosition: number = 0;
   totalDeads: number = 0;
   totalSearchedDeads: number = 0;
   totalPagesInDeadlist: number = 0;
   totalPagesInSearchedDead: number = 0;
   loadingData:boolean = false;
   searchingData:boolean = false;
-  selectedDead: User = null;
   selectedDeadPage:number = 1;
   selectedDeadAlphabet:string = null;
   selectedSearchPage:number = 1;
   selectedSearchAlphabet:string = null;
+  selectedSceneTime:number = 0;
+  selectedSceneSeason:number = 0;
   datalimit = 10;
 
   deadlistPages: number[] = [];
@@ -80,13 +83,30 @@ export class NoticeboardComponent implements OnInit {
     this.getPrioritizedGraves(this._global.serializeAndURIEncode(this.options));
   }
 
-  loadingGrave(grave:User){
-    this.selectedDead = grave;
+  loadingGrave(user:User){
+    this.selectedDeadPosition = user.position;
     this.isGraveLoadingScreenVisible = true;
   }
 
+  setSceneTime(time:number){
+    this.isRandomSceneSelected = false;
+    this.selectedSceneTime = time;
+  }
+
+  setSceneSeason(season:number){
+    this.isRandomSceneSelected = false;
+    this.selectedSceneSeason = season;
+  }
+
+  randomSceneSelection(){
+    this.isRandomSceneSelected = true;
+    this.selectedSceneTime = this._global.getRandomNumber(1,2);
+    this.selectedSceneSeason = this._global.getRandomNumber(1,4);
+  }
+
   showGraveyard(){
-    this.router.navigateByUrl('/graveyard/10/1/1');
+    let scene = this.selectedSceneTime+"_"+this.selectedSceneSeason;
+    this.router.navigateByUrl('/graveyard/'+this.selectedDeadPosition+'/'+scene);
   }
 
   getGraveWithFirstname(alphabet: string){
@@ -129,41 +149,70 @@ export class NoticeboardComponent implements OnInit {
 
   searchGraveWithFirstname(alphabet: string){
     this.selectedSearchPage = 1;
+    this.selectedSearchAlphabet = alphabet;
     this.searchOptions['position'] = 0;
-    this.searchOptions['firstname'] = alphabet;
-    this.searchGraves(encodeURIComponent(this._global.serialize(this.searchOptions)));
+    this.searchOptions['firstname'] = this.selectedSearchAlphabet;
+    this.searchGraves(this._global.serializeAndURIEncode(this.searchOptions));
   }
 
   searchGraveWithPageNumber(pageNumber: number){
-    this.selectedSearchPage = pageNumber - 1;
-    this.searchOptions['position'] = 0;
-    this.searchGraves(encodeURIComponent(this._global.serialize(this.searchOptions)));
+    this.selectedSearchPage = pageNumber;
+    this.searchOptions['position'] = this.selectedSearchPage - 1;
+    this.searchGraves(this._global.serializeAndURIEncode(this.searchOptions));
   }
 
   searchAllGraves(){
     this.selectedSearchPage = 1;
-    this.searchOptions['position'] = 0;
-    this.searchGraves(encodeURIComponent(this._global.serialize(this.searchOptions)));
+    this.searchOptions['position'] = this.selectedSearchPage - 1;
+    this.searchGraves(this._global.serializeAndURIEncode(this.searchOptions));
   }
 
   searchNextPageGraves(){
-    if (this.selectedSearchPage + 1 < this.totalPagesInSearchedDead) {
-        this.selectedSearchPage++;
-        this.searchOptions['position'] = this.selectedSearchPage - 1;
-        this.searchGraves(encodeURIComponent(this._global.serialize(this.searchOptions)));
-    }
+    if(this.isNavigateNextDeadSearchedDisabled)
+      return;
+
+    this.selectedSearchPage++;
+    this.searchOptions['position'] = this.selectedSearchPage - 1;
+    this.searchGraves(this._global.serializeAndURIEncode(this.searchOptions));
   }
 
   searchPreviousPageGraves(){
-    if (this.selectedSearchPage > 1) {
-      this.selectedSearchPage--;
-      this.searchOptions['position'] = this.selectedSearchPage - 1;
-      this.searchGraves(encodeURIComponent(this._global.serialize(this.searchOptions)));
+    if(this.isNavigatePreviousSearchedDeadDisabled)
+      return;
+    
+    this.selectedSearchPage--;
+    this.searchOptions['position'] = this.selectedSearchPage - 1;
+    this.searchGraves(this._global.serializeAndURIEncode(this.searchOptions));
+  }
+  
+  submitSearch(){debugger;
+    if(this.firstname){
+      this.searchOptions['firstname'] = this.firstname;
     }
+
+    if(this.surname){
+      this.searchOptions['lastname'] = this.surname;
+    }
+
+    if(this.dob){
+      let dateComponent = this.dob.split('-');
+      let validDOB = dateComponent[2]+'-'+dateComponent[1]+'-'+dateComponent[0];
+      this.searchOptions['birth_date'] = validDOB;
+    }
+    
+    if(this.dod){
+      let dateComponent = this.dod.split('-');
+      let validDOD = dateComponent[2]+'-'+dateComponent[1]+'-'+dateComponent[0];
+      this.searchOptions['death_date'] = validDOD;
+    }
+
+    this.selectedSearchPage = 1;
+    this.searchOptions['position'] = this.selectedSearchPage - 1;
+    this.isSearchFormVisible = false;
+    this.searchGraves(this._global.serializeAndURIEncode(this.searchOptions));
   }
 
-  getPages(start: number, total: number){
-    debugger;
+  getPagination(start: number, total: number){
     let pages: number[] = [];
     if(start >= (total - 5)){
       start = (total - 5);
@@ -192,31 +241,6 @@ export class NoticeboardComponent implements OnInit {
       this.getAdvertisements();
     }
   }
-  
-  submitSearch(){
-    if(this.firstname){
-      this.searchOptions['firstname'] = this.firstname;
-    }
-
-    if(this.surname){
-      this.searchOptions['lastname'] = this.surname;
-    }
-
-    if(this.dob){
-      let dateComponent = this.dob.split('-');
-      let validDOB = dateComponent[2]+'-'+dateComponent[1]+'-'+dateComponent[0];
-      this.searchOptions['birth_date'] = validDOB;
-    }
-    
-    if(this.dod){
-      let dateComponent = this.dod.split('-');
-      let validDOD = dateComponent[2]+'-'+dateComponent[1]+'-'+dateComponent[0];
-      this.searchOptions['death_date'] = validDOD;
-    }
-
-    this.isSearchFormVisible = false;
-    this.searchGraves(encodeURIComponent(this._global.serialize(this.searchOptions)));
-  }
 
   backToSearch(){
     this.isSearchFormVisible = true;
@@ -227,9 +251,9 @@ export class NoticeboardComponent implements OnInit {
       .subscribe(advertisements => this.advertisements = advertisements);
   }
 
-  updateDeadObject(users: User[]){
+  updateDeadObject(users: User[], type:string){
     if(this.currentLang == 'en' ){
-      let start = ((this.selectedDeadPage - 1) * this.datalimit);
+      let start = (type=="deadlist") ? ((this.selectedDeadPage - 1) * this.datalimit) : ((this.selectedSearchPage - 1) * this.datalimit);
       
       for(let i=0; i<=users.length-1;i++){
         users[i]['position'] = start + (i+1);
@@ -254,11 +278,10 @@ export class NoticeboardComponent implements OnInit {
         this.loadingData = false;
         this.users = users;
         if(users.length > 0){
-          users = this.updateDeadObject(users);
+          users = this.updateDeadObject(users, 'deadlist');
           this.totalDeads = parseInt(users[0].ilosc);
           this.totalPagesInDeadlist = Math.ceil(this.totalDeads / this.datalimit);
-          debugger;
-          this.deadlistPages = this.getPages(this.selectedDeadPage, this.totalPagesInDeadlist);
+          this.deadlistPages = this.getPagination(this.selectedDeadPage, this.totalPagesInDeadlist);
         }
 
         if(this.selectedDeadPage == 1){
@@ -291,10 +314,10 @@ export class NoticeboardComponent implements OnInit {
         this.searchingData = false;
         this.searchedUsers = users;
         if(users.length > 0){
-          users = this.updateDeadObject(users);
+          users = this.updateDeadObject(users, 'searchlist');
           this.totalSearchedDeads = parseInt(users[0].ilosc);
           this.totalPagesInSearchedDead = Math.ceil(this.totalSearchedDeads / this.datalimit);
-          this.searchedDeadPages = this.getPages(this.selectedSearchPage, this.totalPagesInSearchedDead);
+          this.searchedDeadPages = this.getPagination(this.selectedSearchPage, this.totalPagesInSearchedDead);
         }
 
         if(this.selectedSearchPage == 1){

@@ -172,11 +172,9 @@ body #content.loading-bg{
     overflow: inherit;
     background-image: url(./assets/images/wall.png);
     background-repeat: repeat;
-    background-size: 25%;
-    -webkit-animation: backgroundScroll infinite linear 1;
-    -webkit-animation-fill-mode: forwards;
-    animation: backgroundScroll infinite linear 1;
-    animation-fill-mode: forwards;
+    background-size: 24%;
+    -webkit-animation: backgroundScroll 5s linear infinite;
+    animation: backgroundScroll 5s linear infinite;
 }
 body #content .scroll-content{
     width: 530px;
@@ -697,6 +695,7 @@ table tbody{
     left: 0;
     right: 0;
     list-style-type: none;
+    overflow: hidden;
 }
 #loading-options li{
     height: 100px;
@@ -725,6 +724,21 @@ table tbody{
     border-radius: 5px;
     background-position: -1px -2px;
     background-size: 51px 55px !important;
+    position: relative;
+}
+#loading-options li button span{
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    background: #fffe03;
+    transform: rotate(45deg);
+    top: 92px;
+    left: 15px;
+    display: none;
+}
+#loading-options li button.active span, 
+#loading-options li button:hover span{
+    display: block;
 }
 #loading-options li:hover button{
     box-shadow: 0 0 20px 0 #fff;
@@ -732,49 +746,49 @@ table tbody{
 #loading-options li button.day{
     background-image: url(./assets/images/day.png);
 }
-#loading-options li:hover button.day{
+#loading-options li:hover button.day, #loading-options li button.day.active{
     background-image: url(./assets/images/day-active.png);
 }
 #loading-options li button.night{
     background-image: url(./assets/images/night.png);
 }
-#loading-options li:hover button.night{
+#loading-options li:hover button.night, #loading-options li button.night.active{
     background-image: url(./assets/images/night-active.png);
 }
 #loading-options li button.blue-sky{
     background-image: url(./assets/images/blue-sky.png);
 }
-#loading-options li:hover button.blue-sky{
+#loading-options li:hover button.blue-sky, #loading-options li button.blue-sky.active{
     background-image: url(./assets/images/blue-sky-active.png);
 }
 #loading-options li button.rain{
     background-image: url(./assets/images/rain.png);
 }
-#loading-options li:hover button.rain{
+#loading-options li:hover button.rain, #loading-options li button.rain.active{
     background-image: url(./assets/images/rain-active.png);
 }
 #loading-options li button.thunder-strom{
     background-image: url(./assets/images/thunder-strom.png);
 }
-#loading-options li:hover button.thunder-strom{
+#loading-options li:hover button.thunder-strom, #loading-options li button.thunder-strom.active{
     background-image: url(./assets/images/thunder-strom-active.png);
 }
 #loading-options li button.snow{
     background-image: url(./assets/images/snow.png);
 }
-#loading-options li:hover button.snow{
+#loading-options li:hover button.snow, #loading-options li button.snow.active{
     background-image: url(./assets/images/snow-active.png);
 }
 #loading-options li button.random{
     background-image: url(./assets/images/random.png);
 }
-#loading-options li:hover button.random{
+#loading-options li:hover button.random, #loading-options li button.random.active{
     background-image: url(./assets/images/random-active.png);
 }
 #loading-options li button.ok{
     background-image: url(./assets/images/ok.png);
 }
-#loading-options li:hover button.ok{
+#loading-options li:hover button.ok, #loading-options li button.ok.active{
     background-image: url(./assets/images/ok-active.png);
 }
 #loading-options li.seperator{
@@ -784,18 +798,135 @@ table tbody{
     display: inline-block;
     height: 100px;
 }
+body #content.graveyard > div.abc{
+    margin-left:0; 
+    height: 600px;
+    transition: margin-left 1s linear;
+    position: relative;
+    background-position: bottom center;
+    background-size: contain;
+}
+.graveyard .sub-header{
+    background-image: url(./assets/images/header.jpg);
+    height: 35px;
+    background-position: center -15px;
+    position: absolute;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.graveyard .sub-header .btn-left{
+    border: 1px solid #908F8C;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 0 12px 12px 0;
+    height: 23px;
+    margin: 3px -2px;
+    border-left: none;
+    color: #FFF;
+    line-height: 18px;
+    width: 150px;
+    font-size: 11px;
+    position: absolute;
+    left: 0;
+    z-index: 10;
+}
+.graveyard .sub-header button i.right-icon{
+    float: right;
+    font-size: 13px;
+    margin: 3px 0;
+}
+.graveyard .sub-header button i.left-icon{
+    float: left;
+    font-size: 13px;
+    margin: 3px 0;
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+}
+.graveyard .sub-header .btn-right{
+    border: 1px solid #908F8C;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 12px 0 0 12px;
+    height: 23px;
+    margin: 3px -2px;
+    border-right: none;
+    color: #FFF;
+    line-height: 18px;
+    width: 150px;
+    font-size: 11px;
+    position: absolute;
+    right: 0;
+    z-index: 10;
+}
+.graveyard .sub-header .btn-middle{
+    border: 1px solid #908F8C;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 0 0 12px 12px;
+    height: 23px;
+    border-right: none;
+    color: #FFF;
+    line-height: 18px;
+    width: 250px;
+    font-size: 11px;
+    position: absolute;
+    left: 50%;
+    top: -4px;
+    margin-left: -120px;
+    z-index: 10;
+}
 .graveyard-sky-container{
     height: 350px;
     width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
+    position: absolute;
 }
 .graveyard-container{
     position: absolute;
     height: 100%;
     width: 100%;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-position: center 110px;
+}
+.graveyard-container > ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.graveyard-container > ul li{
+    float: left;
+    width: 500px;
+    height: 600px;
+}
+.graveyard-container > ul li .grave{
+    width: 600px;
+    height: 600px;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 65%;
+    margin: 0 auto;
+    position: absolute;
+}
+.graveyard-container > ul li .grave > div {
+    color: #a2a2a2;
+    width: 200px;
+    margin: 370px auto;
+    font-size: 13px;
+}
+.graveyard-container > ul li .grave > div p.name{
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center;
+}
+.graveyard-container > ul li .grave > div span{
+    display: inline-block;
+    width: 45%;
+    font-size: 10px;
+    text-align: center;
+}
+.graveyard-container > ul li .grave > div label{
+    display: block;
+    color: #848484;
 }
 @keyframes backgroundScroll {
     from {background-position: 0 0;}

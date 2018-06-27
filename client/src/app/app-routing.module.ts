@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'forum', component: ForumComponent },
   { path: 'pricing', component: PricingComponent },
   { path: 'staticpage/:id', component: StaticpageComponent },
-  { path: 'graveyard/:position/:time/:season', component: GraveyardComponent },
+  { path: 'graveyard/:position/:scene', component: GraveyardComponent },
 ];
 
 @NgModule({
