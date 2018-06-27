@@ -24,7 +24,8 @@
                     "choose_graveyard": "Choose graveyard",
                     "special_grave": "Special grave",
                     "grave_number": "Grave number",
-                    "go_back_to_main_gate" : "Go Back to main gate"
+                    "go_back_to_main_gate" : "Go Back to main gate",
+                    "will_be_sadly_missed" : "Will be sadly missed"
                 },
                 "book_of_dead" : {
                     "loading_data":"Loading Data...",

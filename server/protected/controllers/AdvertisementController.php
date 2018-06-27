@@ -6,7 +6,7 @@ class AdvertisementController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	public $layout='//layouts/contentMain';
 
 	/**
 	 * @return array action filters
@@ -15,7 +15,7 @@ class AdvertisementController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
+			//'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -70,8 +70,9 @@ class AdvertisementController extends Controller
 		if(isset($_POST['Advertisement']))
 		{
 			$model->attributes=$_POST['Advertisement'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			if($model->save(false)){
+				$this->redirect(array('admin'));
+			}	
 		}
 
 		$this->render('create',array(
@@ -94,8 +95,9 @@ class AdvertisementController extends Controller
 		if(isset($_POST['Advertisement']))
 		{
 			$model->attributes=$_POST['Advertisement'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			if($model->save(false)){
+				$this->redirect(array('admin'));
+			}
 		}
 
 		$this->render('update',array(

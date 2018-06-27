@@ -14,8 +14,7 @@ export interface Options {
 
 @Component({
   selector: 'app-noticeboard',
-  templateUrl: './noticeboard.component.html',
-  styleUrls: ['./noticeboard.component.css']
+  templateUrl: './noticeboard.component.html'
 })
 export class NoticeboardComponent implements OnInit {
   isGraveLoadingScreenVisible:boolean = false;
@@ -39,7 +38,7 @@ export class NoticeboardComponent implements OnInit {
   selectedSearchAlphabet:string = null;
   selectedSceneTime:number = 0;
   selectedSceneSeason:number = 0;
-  datalimit = 10;
+  datalimit = 15;
 
   deadlistPages: number[] = [];
   searchedDeadPages: number[] = [];
@@ -80,12 +79,17 @@ export class NoticeboardComponent implements OnInit {
 
     this.getAdvertisements();
     this.options['position'] = 0;
-    this.getPrioritizedGraves(this._global.serializeAndURIEncode(this.options));
+    this.options['death_date'] = 'zmarli';
+
+    this.getVisibleGraves();
   }
 
   loadingGrave(user:User){
-    this.selectedDeadPosition = user.position;
-    this.isGraveLoadingScreenVisible = true;
+    if(user.place_name == 'cmentarz' || user.place_name == 'Graveyard')
+    {
+      this.selectedDeadPosition = (user.position - 1);
+      this.isGraveLoadingScreenVisible = true;
+    }
   }
 
   setSceneTime(time:number){
@@ -107,6 +111,11 @@ export class NoticeboardComponent implements OnInit {
   showGraveyard(){
     let scene = this.selectedSceneTime+"_"+this.selectedSceneSeason;
     this.router.navigateByUrl('/graveyard/'+this.selectedDeadPosition+'/'+scene);
+  }
+
+  gotoGraveyard(){
+    let scene = this._global.getRandomNumber(1,2)+"_"+this._global.getRandomNumber(1,4);
+    this.router.navigateByUrl('/graveyard/0/'+scene);
   }
 
   getGraveWithFirstname(alphabet: string){
@@ -185,7 +194,7 @@ export class NoticeboardComponent implements OnInit {
     this.searchGraves(this._global.serializeAndURIEncode(this.searchOptions));
   }
   
-  submitSearch(){debugger;
+  submitSearch(){
     if(this.firstname){
       this.searchOptions['firstname'] = this.firstname;
     }
@@ -300,9 +309,11 @@ export class NoticeboardComponent implements OnInit {
       });
   }
 
-  getPrioritizedGraves(param: string): void {
-    this.usersService.getWithMethodAndOptions('browsing', param)
+  getVisibleGraves(): void {
+    this.options['visibility'] = 1;
+    this.usersService.getWithMethodAndOptions('browsing', this._global.serializeAndURIEncode(this.options))
       .subscribe(users => {
+        delete this.options['visibility'];
         this.prioritizeGraves = users.slice(0,3);
       });
   }

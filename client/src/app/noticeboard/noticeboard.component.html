@@ -14,7 +14,7 @@
             <div class="popular-grave-col">
                 <div class="tile" *ngFor="let user of prioritizeGraves" >
                     <p class="name">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</p>
-                    <p>Will be sadly missed</p>
+                    <p translate>graveyard.noticeboard.tabs.graveyard_noticeboard.will_be_sadly_missed</p>
                     <p>
                         <span><label>Born</label>{{user.date_birth}}</span>
                         <span><label>Passed Away</label>{{user.date_death}}</span>
@@ -23,7 +23,7 @@
             </div>
             <div class="options-col">
                 <div class="option">
-                    <button translate>graveyard.noticeboard.tabs.graveyard_noticeboard.go_to_graveyard</button>
+                    <button (click)="gotoGraveyard();" translate>graveyard.noticeboard.tabs.graveyard_noticeboard.go_to_graveyard</button>
                 </div>
                 <div class="option">
                     <button translate>graveyard.noticeboard.tabs.graveyard_noticeboard.choose_graveyard</button>
@@ -41,7 +41,7 @@
                     <input type="text"/>
                 </div>
                 <div class="option">
-                    <button translate>graveyard.noticeboard.tabs.graveyard_noticeboard.go_back_to_main_gate</button>
+                    <button routerLink="/home" translate>graveyard.noticeboard.tabs.graveyard_noticeboard.go_back_to_main_gate</button>
                 </div>
             </div>
             <div class="advertisement-col">
@@ -53,7 +53,7 @@
             </div>
             </div>
             <div id="book-of-dead" [style.display]="(selectedTab == 'book-of-dead') ? 'block' : 'none'">
-                <div *ngIf="loadingData" translate>graveyard.noticeboard.tabs.book_of_dead.loading_data</div>
+                <div *ngIf="loadingData" class="info" translate>graveyard.noticeboard.tabs.book_of_dead.loading_data</div>
                 <table *ngIf="!loadingData">
                     <thead>
                         <tr>
@@ -147,7 +147,7 @@
                         </label>
                     </form>
                 </div>
-                <div *ngIf="searchingData" translate>graveyard.noticeboard.tabs.search.list.searching_data</div>
+                <div *ngIf="searchingData" class="info" translate>graveyard.noticeboard.tabs.search.list.searching_data</div>
                 <div *ngIf="!searchingData && !isSearchFormVisible" class="search-result" >
                     <table>
                         <thead>

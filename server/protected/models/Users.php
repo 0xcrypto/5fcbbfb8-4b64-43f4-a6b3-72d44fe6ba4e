@@ -89,6 +89,7 @@ class Users extends CActiveRecord
 			array('c_birth, c_death, language', 'length', 'max'=>2),
 			array('uniq_id', 'length', 'max'=>128),
 			array('pay_method, amount', 'length', 'max'=>16),
+			array('visibility', 'length', 'max'=>3),
 			array('name1, ex_wife1, childrens_names, date_birth, date_death, other_professions, functions, live_history, hobby', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -114,6 +115,7 @@ class Users extends CActiveRecord
 	{
 		return array(
 			'user_id' => 'User',
+			'visibility' => 'Visibility',
 			'sex_id' => 'Sex',
 			'skin_id' => 'Skin',
 			'buyer_id' => 'Buyer',
@@ -194,6 +196,7 @@ class Users extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('user_id',$this->user_id);
+		$criteria->compare('visibility',$this->visibility);
 		$criteria->compare('sex_id',$this->sex_id);
 		$criteria->compare('skin_id',$this->skin_id);
 		$criteria->compare('buyer_id',$this->buyer_id);

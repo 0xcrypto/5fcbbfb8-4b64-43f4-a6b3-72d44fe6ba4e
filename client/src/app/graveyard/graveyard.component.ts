@@ -13,8 +13,7 @@ export interface UserOptions {
 
 @Component({
   selector: 'app-graveyard',
-  templateUrl: './graveyard.component.html',
-  styleUrls: ['./graveyard.component.css']
+  templateUrl: './graveyard.component.html'
 })
 export class GraveyardComponent implements OnInit {
   graves: User[] = [];
@@ -22,8 +21,12 @@ export class GraveyardComponent implements OnInit {
   skyImage: string = null;
   graveyardImage: string = null;
   graveyardStartPosition: number = null;
+  isRainfallScene:boolean = false;
+  isSnowfallScene:boolean = false;
+  isThunderstromScene:boolean = false;
   router:Router = null;
   totalGraves: number = 0;
+  graveSize: number = 512;
   options: UserOptions = {
     limit: 10
   };
@@ -35,6 +38,16 @@ export class GraveyardComponent implements OnInit {
   ngOnInit() {
     let position = +this.route.snapshot.paramMap.get('position');
     let scene = this.route.snapshot.paramMap.get('scene');
+    let season = scene.split('_')[1];
+    if(Number(season) == 2 || Number(season) == 3){
+      this.isRainfallScene = true;
+    }
+    if(Number(season) == 4){
+      this.isSnowfallScene = true;
+    }
+    if(Number(season) == 3){
+      this.isThunderstromScene = true;
+    }
     this.skyImage = 'url(./assets/images/sky/'+this._global.getSkyImage(scene)+')';
     this.graveyardImage = 'url(./assets/images/graveyard-backgrounds/'+this._global.getGraveyardImage(scene)+')';
     this.options['position'] = position;
@@ -46,13 +59,16 @@ export class GraveyardComponent implements OnInit {
   }
 
   nextGrave(){
-    if(this.graveyardStartPosition >= 500)
-      this.graveyardStartPosition -= 500;
+    if(this.graveyardStartPosition >= this.graveSize)
+      this.graveyardStartPosition -= this.graveSize;
   }
 
   previousGrave(){
-    if(this.graveyardStartPosition <= ((this.totalGraves - 2) * 500 ))
-      this.graveyardStartPosition += 500;
+    debugger;
+    if(this.graveyardStartPosition == ((this.totalGraves - 2) * this.graveSize ))
+      return;
+
+    this.graveyardStartPosition += this.graveSize;
   }
 
   getGrave(param: string): void {
@@ -60,7 +76,7 @@ export class GraveyardComponent implements OnInit {
       .subscribe(graves => {
         this.graves = graves;
         this.totalGraves = graves.length;
-        this.graveyardStartPosition = ((this.totalGraves - 2) * 500 );
+        this.graveyardStartPosition = ((this.totalGraves - 2) * this.graveSize );
         for(let i=0; i<=graves.length-1;i++){
           graves[i].graveUrl = 'url(./assets/images/graves/grob1_'+graves[i].grave_image+'.png)';
         }

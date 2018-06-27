@@ -28,7 +28,7 @@ class UsersController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete'),
+				'actions'=>array('index','view','create','update','admin','delete', 'SetVisibility'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -43,6 +43,29 @@ class UsersController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionSetVisibility(){
+		$visibility = $_POST['visibility'];
+		$user_id = $_POST['id'];
+		if($visibility == 1 && Users::model()->countByAttributes(array('visibility'=> 1)) == 3){
+			echo "VISBILITY_EXISTS";exit;
+		}
+		else{
+			$user = Users::model()->findByAttributes(array('user_id'=>$user_id));
+			$user->visibility = $visibility;
+			if($user->save(false)){
+				if($visibility == 1){
+					echo "SUCCESS-1";exit;
+				}
+				else{
+					echo "SUCCESS-0";exit;
+				}
+			}
+			else{
+				echo "ERROR";exit;
+			}
+		}
 	}
 
 	/**

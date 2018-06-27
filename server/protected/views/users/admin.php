@@ -1,3 +1,28 @@
+<script>
+	function setVisibility(select){
+		var option = $(select).val(),
+			user_id = $(select).prev().val();
+
+		$.post( '<?php echo Yii::app()->createUrl('Users/SetVisibility')?>', 
+			{
+				'id': user_id,
+				'visibility': option
+			}, function(result) {
+			if(result == 'SUCCESS-1'){
+				alert('This user is now visibile on home page');
+			}
+			else if(result == 'SUCCESS-0'){
+				alert('This user is now not visibile on home page');
+			}
+			else if(result == 'VISBILITY_EXISTS'){
+				alert('Visibility is already set for 3 users, Please update visibility of one of them before setting visiblity of this user.')
+			}
+			else{
+				alert('Problem in updating visibility, Please try again later');
+			}
+		});
+	}
+</script>
 <div class="container-fluid">
 	<header class="section-header">
 		<div class="tbl">
@@ -16,13 +41,42 @@
 				'filter'=>$model,
 				'itemsCssClass' => 'table table-bordered table-hover',
 				'columns'=>array(
-					'user_id',
-					'sex_id',
-					'skin_id',
+					array(
+						'header'=>'User ID',
+						'type'=>'raw',
+						'value'=>function ($data){ 
+							return $data->user_id;
+						}
+					), 
+					array(
+						'header'=>'Firstname',
+						'type'=>'raw',
+						'value'=>function ($data){ 
+							return $data->name1;
+						}
+					), 
+					array(
+						'header'=>'Surname',
+						'type'=>'raw',
+						'value'=>function ($data){ 
+							return $data->surname;
+						}
+					), 
+					array(
+						'header'=>'Visibility',
+						'type'=>'raw',
+						'value'=>function ($data){ 
+							return "<input type='hidden' value='$data->user_id'>".
+							CHtml::dropDownList('visibility', null, array(0=>'No', 1=>'Yes'), 
+							array('onChange'=>'setVisibility(this)', 'options' => array($data->visibility=>array('selected'=>true))));
+						}
+					), 
+					/*'name1',
+					'surname',
 					'buyer_id',
 					'grave_id',
 					'country_id',
-					/*
+					
 					'country_d_id',
 					'profession_id',
 					'religion_id',

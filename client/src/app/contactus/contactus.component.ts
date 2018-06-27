@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-contactus',
-  templateUrl: './contactus.component.html',
-  styleUrls: ['./contactus.component.css']
+  templateUrl: './contactus.component.html'
 })
 export class ContactusComponent implements OnInit {
 

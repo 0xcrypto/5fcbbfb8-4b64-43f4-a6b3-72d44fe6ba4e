@@ -1,11 +1,3 @@
-<?php
-/* @var $this AdvertisementController */
-/* @var $model Advertisement */
-/* @var $form CActiveForm */
-?>
-
-<div class="form">
-
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'advertisement-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
@@ -14,39 +6,43 @@
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
 )); ?>
-
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
-	<?php echo $form->errorSummary($model); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'image'); ?>
-		<?php echo $form->textField($model,'image',array('size'=>60,'maxlength'=>200)); ?>
-		<?php echo $form->error($model,'image'); ?>
+	<div class="form-group row">
+		<?php echo $form->labelEx($model,'image', array('class'=>'col-sm-2 form-control-label')); ?>
+		<div class="col-sm-10">
+			<p class="form-control-static">
+				<?php echo $form->textField($model,'image',array('value'=>$model->image, 'class'=>'form-control')); ?>
+			</p>
+		</div>
 	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'url'); ?>
-		<?php echo $form->textField($model,'url',array('size'=>60,'maxlength'=>200)); ?>
-		<?php echo $form->error($model,'url'); ?>
+	<div class="form-group row">
+		<?php echo $form->labelEx($model,'url', array('class'=>'col-sm-2 form-control-label')); ?>
+		<div class="col-sm-10">
+			<p class="form-control-static">
+				<?php echo $form->textField($model,'url',array('value'=>$model->url, 'class'=>'form-control')); ?>
+			</p>
+		</div>
 	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'text'); ?>
-		<?php echo $form->textField($model,'text',array('size'=>60,'maxlength'=>500)); ?>
-		<?php echo $form->error($model,'text'); ?>
+	<div class="form-group row">
+		<?php echo $form->labelEx($model,'text', array('class'=>'col-sm-2 form-control-label')); ?>
+		<div class="col-sm-10">
+			<p class="form-control-static">
+				<?php echo $form->textArea($model,'text',array('value'=>$model->text, 'class'=>'form-control')); ?>
+			</p>
+		</div>
 	</div>
-
+	<!--
 	<div class="row">
-		<?php echo $form->labelEx($model,'priority'); ?>
-		<?php echo $form->textField($model,'priority'); ?>
-		<?php echo $form->error($model,'priority'); ?>
+		<?php //echo $form->labelEx($model,'priority'); ?>
+		<?php //echo $form->textField($model,'priority'); ?>
 	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	-->
+	<div class="form-group row">
+		<label class='col-sm-2 form-control-label'></label>
+		<div class="col-sm-10">
+			<p class="form-control-static">
+				<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class'=>'btn btn-inline', 'onclick'=>'return validate();', 'onsubmit'=>'return validate()')); ?>
+			</p>
+		</div>
 	</div>
 
 <?php $this->endWidget(); ?>
-
-</div><!-- form -->

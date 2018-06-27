@@ -28,7 +28,6 @@ class Advertisement extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('image, url, text, priority', 'required'),
 			array('priority', 'numerical', 'integerOnly'=>true),
 			array('image, url', 'length', 'max'=>200),
 			array('text', 'length', 'max'=>500),
@@ -56,8 +55,8 @@ class Advertisement extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'image' => 'Image',
-			'url' => 'Url',
+			'image' => 'Image URL',
+			'url' => 'URL',
 			'text' => 'Text',
 			'priority' => 'Priority',
 		);

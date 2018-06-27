@@ -413,6 +413,7 @@
 				WHERE ( u.is_deleted=0 OR u.is_deleted=1 )" ;
 
 				if(isset($options['firstname'])) $query.=" and u.name1 like '%".$options['firstname']."%'";
+				if(isset($options['visibility'])) $query.=" and u.visibility = ".$options['visibility'];
 				if(isset($options['lastname'])) $query.=" and u.surname like '%".$options['lastname']."%'";
 				if(isset($options['lastname_start'])) $query.=" and u.surname like '".$options['lastname_start']."%'";
 				if(isset($options['birth_date'])) $query.=" and u.date_birth like '".$options['birth_date']."%'";

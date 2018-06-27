@@ -9,7 +9,6 @@ import { StaticPageService } from '../services/staticpage.service';
 @Component({
   selector: 'app-staticpage',
   templateUrl: './staticpage.component.html',
-  styleUrls: ['./staticpage.component.css'],
   providers: [AppGlobals]
 })
 export class StaticpageComponent implements OnInit {

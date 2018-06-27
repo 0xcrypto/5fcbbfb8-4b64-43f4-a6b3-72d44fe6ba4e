@@ -7,7 +7,7 @@
                     <ul>
                         <li routerLink="/home" translate>header.menu.main_gate</li>
                         <li routerLink="/noticeboard" translate>header.menu.graveyard_noticeboard</li>
-                        <li translate>header.menu.graveyard</li>
+                        <li (click)="gotoGraveyard();" translate>header.menu.graveyard</li>
                         <li translate>header.menu.catacomb</li>
                         <li translate>header.menu.pet_graveyard</li>
                     </ul>
@@ -42,7 +42,7 @@
             </ul>
         </div>
     </div>
-    <div>
-        <div id="vg-logo"></div>
-    </div>
+    <div id="vg-logo"></div>
+    <div id="vg-left-logo"></div>
+    <div id="vg-right-logo"></div>
 </header>

@@ -8,7 +8,6 @@ import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
   providers: [AppGlobals]
 })
 export class HeaderComponent implements OnInit {
@@ -26,5 +25,10 @@ export class HeaderComponent implements OnInit {
   openRuote(component:string, routeLink:string){
     this.currentComponentText = component;
     this.router.navigate([routeLink]);
+  }
+  
+  gotoGraveyard(){
+    let scene = this._global.getRandomNumber(1,2)+"_"+this._global.getRandomNumber(1,4);
+    this.router.navigateByUrl('/graveyard/0/'+scene);
   }
 }

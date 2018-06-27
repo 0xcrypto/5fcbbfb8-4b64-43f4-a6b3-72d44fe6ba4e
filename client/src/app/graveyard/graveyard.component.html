@@ -6,21 +6,22 @@
         <button (click)="previousGrave()" class="btn-right" translate><i class="fa fa-play-circle left-icon"></i>graveyard.previous_grave</button>
     </div>
     <div class="graveyard-sky-container" [ngStyle]="{'background-image': skyImage}"></div>
-    <div class="abc" [ngStyle]="{'margin-left': '-'+graveyardStartPosition+'px', 'width': (500 * totalGraves)+'px', 'background-image': graveyardImage}">
-        <div class="graveyard-container" [ngStyle]="{}">
-            <ul >
-                <li *ngFor="let grave of graves" >
-                    <div  class="grave" [ngStyle]="{'background-image': grave.graveUrl}" >
-                        <div>
-                            <p class="name">{{[].constructor.isArray(grave.name1) ? grave.name1[0] : grave.name1}} {{grave.surname}}</p>
-                            <p>
-                                <span><label>Born</label>{{grave.date_birth}}</span>
-                                <span><label>Passed Away</label>{{grave.date_death}}</span>
-                            </p>
-                        </div>
+    <div class="graveyard-container" [ngStyle]="{'margin-left': '-'+graveyardStartPosition+'px', 'width': (graveSize * totalGraves)+'px', 'background-image': graveyardImage}">
+        <div *ngIf="isRainfallScene" class="rainfall">&nbsp;</div>
+        <div *ngIf="isSnowfallScene" class="snowfall">&nbsp;</div>
+        <div *ngIf="isThunderstromScene" class="thunderstrom">&nbsp;</div>
+        <ul>
+            <li *ngFor="let grave of graves">
+                <div  class="grave" [ngStyle]="{'background-image': grave.graveUrl, 'width': graveSize+'px'}" >
+                    <div>
+                        <p class="name">{{[].constructor.isArray(grave.name1) ? grave.name1[0] : grave.name1}} {{grave.surname}}</p>
+                        <p>
+                            <span><label>Born</label>{{grave.date_birth}}</span>
+                            <span><label>Passed Away</label>{{grave.date_death}}</span>
+                        </p>
                     </div>
-                </li>
-            </ul>
-        </div>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>

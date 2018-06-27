@@ -1,21 +1,15 @@
-<?php
-/* @var $this AdvertisementController */
-/* @var $model Advertisement */
-
-$this->breadcrumbs=array(
-	'Advertisements'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
-);
-
-$this->menu=array(
-	array('label'=>'List Advertisement', 'url'=>array('index')),
-	array('label'=>'Create Advertisement', 'url'=>array('create')),
-	array('label'=>'View Advertisement', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Advertisement', 'url'=>array('admin')),
-);
-?>
-
-<h1>Update Advertisement <?php echo $model->id; ?></h1>
-
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<div class="container-fluid">
+	<header class="section-header">
+		<div class="tbl">
+			<div class="tbl-row">
+				<div class="tbl-cell">
+					<h2>Update Advertisement</h2>
+					<div class="subtitle"></div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div class="box-typical box-typical-padding">
+		<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	</div>
+</div>

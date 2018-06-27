@@ -18,9 +18,9 @@
     position: absolute;
     height: 75px;
     width: 75px;
-    z-index: 9;
-    top: 20px;
-    left: 50px;
+    z-index: 9;    
+    top: 15px;
+    left: 70px;
     background-image: url(./assets/images/vg-logo.png);
     background-position: center;
     opacity: 1;
@@ -33,8 +33,8 @@
     height: 200px;
     width: 100px;
     z-index: 9;
-    top: -40px;
-    left: -85px;
+    top: 60px;
+    left: 30px;
     background-image: url(./assets/images/vg-left-logo.png);
     background-position: center;
     background-size: 100%;
@@ -44,8 +44,8 @@
     height: 200px;
     width: 100px;
     z-index: 9;
-    top: -40px;
-    right: -85px;
+    top: 60px;
+    right: 30px;
     background-image: url(./assets/images/vg-right-logo.png);
     background-position: center;
     background-size: 100%;
@@ -60,6 +60,11 @@ body header{
     background-repeat: repeat-x;
     background-image: url(./assets/images/header.jpg);
     background-position: center top;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 3;
 }
 body header > div {
     width: 1024px;
@@ -159,14 +164,18 @@ body #content{
     overflow: hidden;
     position: relative;
     color: #fff;
-    margin: 10px auto;
+    margin: 0 auto;
+    border: 3px solid #545151;
+    box-shadow: 0 0 70px 0 #a5a5a5;
+    border-top: none;
+    border-bottom: none;
 }
 body #content.notice-bg{
     overflow: inherit;
     background-image: url(./assets/images/noticeboard.png);
-    background-size: cover;
+    background-size: 110%;
     background-repeat: no-repeat;
-    background-position: center -190px;
+    background-position: center -180px;
 }
 body #content.loading-bg{
     overflow: inherit;
@@ -208,7 +217,7 @@ body #content .top-board{
     height: 55px;
     width: 225px;
     display: block;
-    top: 0;
+    top: 49px;
     left: 50%;
     overflow: hidden;
     position: absolute;
@@ -341,8 +350,8 @@ body #content .notice-wall{
     background-position: 280px 250px;
 }
 body #content.goto-notice-wall .notice-wall{
-    background-size: 100%;
-    background-position: -15px 140px;
+    background-size: 130%;
+    background-position: -178px 85px;
     -webkit-transform: scale(2.0);
     transform: scale(2.0);
 }
@@ -354,16 +363,17 @@ body #content .main-gate{
     left: 355px;
 }
 body footer{
-    position: absolute;
-    bottom: -10px;
-    height: 80px;
+
+    height: 90px;
     background-image: url(./assets/images/bg-bottom.jpg);
-    background-repeat: repeat-x;
+    background-repeat: repeat;
     width: 100%;
     margin: 0;
     padding: 0;
-    left: 0;
-    z-index: 999;
+    border: 1px solid #000;
+    background-color: #000;
+    border-left: none;
+    border-right: none;
 }
 body footer ul{
     width: 1024px;
@@ -425,10 +435,12 @@ form > label button {
     width: 690px;
     margin: 50px auto;
     height: 400px;
+    padding-top: 10px;
 }
 .tab-bar{
     width: 690px;
-    margin: 0 auto;
+    margin: 21px auto;
+    margin-left: -38px;
 }
 .tab-bar a{
     background: #333;
@@ -470,13 +482,13 @@ form > label button {
 }
 .popular-grave-col{
     width: 40%;
-    margin-left: -90px;
+    margin-left: -120px;
     height: 100%;
     display: inline-block;
     float: left;
 }
 .options-col{
-    width: 245px;
+    width: 345px;
     height: 100%;
     display: inline-block;
     float: left;
@@ -532,13 +544,13 @@ form > label button {
     width: 38px;
     height: 35px;
     position: absolute;
-    right: 10px;
+    right: 60px;
     top: 0;
     background-repeat: no-repeat;
 }
 .advertisement-col{
     width: 40%;
-    margin-right: -80px;
+    margin-right: -120px;
     height: 100%;
     display: inline-block;
     float: right;
@@ -608,6 +620,13 @@ form > label button {
     color: #848484;
     font-size: 10px;
     margin: 0 3px;
+}
+.info{
+    color: #BFBFBF;
+    font-size: 12px;
+}
+table{
+    width: 100%;
 }
 table, tr, td, th{
     border-collapse: collapse;
@@ -798,14 +817,6 @@ table tbody{
     display: inline-block;
     height: 100px;
 }
-body #content.graveyard > div.abc{
-    margin-left:0; 
-    height: 600px;
-    transition: margin-left 1s linear;
-    position: relative;
-    background-position: bottom center;
-    background-size: contain;
-}
 .graveyard .sub-header{
     background-image: url(./assets/images/header.jpg);
     height: 35px;
@@ -815,6 +826,7 @@ body #content.graveyard > div.abc{
     margin: 0;
     padding: 0;
     width: 100%;
+    top: 50px;
 }
 .graveyard .sub-header .btn-left{
     border: 1px solid #908F8C;
@@ -875,23 +887,26 @@ body #content.graveyard > div.abc{
     z-index: 10;
 }
 .graveyard-sky-container{
-    height: 350px;
+    height: 600px;
     width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
     position: absolute;
 }
-.graveyard-container{
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-position: center 110px;
+body #content.graveyard .graveyard-container{
+    margin-left:0; 
+    height: 600px;
+    transition: margin-left 1s linear;
+    position: relative;
+    background-position: bottom center;
+    background-size: contain;
 }
 .graveyard-container > ul{
     list-style-type: none;
     padding: 0;
     margin: 0;
+    position: absolute;
+    top: 0;
 }
 .graveyard-container > ul li{
     float: left;
@@ -899,7 +914,6 @@ body #content.graveyard > div.abc{
     height: 600px;
 }
 .graveyard-container > ul li .grave{
-    width: 600px;
     height: 600px;
     background-repeat: no-repeat;
     background-position: center bottom;
@@ -910,7 +924,7 @@ body #content.graveyard > div.abc{
 .graveyard-container > ul li .grave > div {
     color: #a2a2a2;
     width: 200px;
-    margin: 370px auto;
+    margin: 450px auto;
     font-size: 13px;
 }
 .graveyard-container > ul li .grave > div p.name{
@@ -927,6 +941,27 @@ body #content.graveyard > div.abc{
 .graveyard-container > ul li .grave > div label{
     display: block;
     color: #848484;
+}
+.rainfall{
+    background-image: url(./assets/images/rain.gif);
+    background-repeat: repeat;
+    height: 600px;
+    background-size: contain;
+    width: 100%;
+}
+.snowfall{
+    background-image: url(./assets/images/snow.gif);
+    background-repeat: repeat;
+    height: 600px;
+    background-size: contain;
+    width: 100%;
+}
+.thunderstrom{
+    background-image: url(./assets/images/thunderstrom.gif);
+    background-repeat: repeat;
+    height: 600px;
+    background-size: contain;
+    width: 100%;
 }
 @keyframes backgroundScroll {
     from {background-position: 0 0;}

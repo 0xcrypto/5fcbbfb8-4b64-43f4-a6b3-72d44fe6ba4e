@@ -25,7 +25,8 @@
                     "choose_graveyard": "Wybierz cmentarz",
                     "special_grave": "Specjalny grób",
                     "grave_number": "Liczba poważna",
-                    "go_back_to_main_gate" : "Wróć do głównej bramy"
+                    "go_back_to_main_gate" : "Wróć do głównej bramy",
+                    "will_be_sadly_missed" : "Będą niestety brakowało"
                 },
                 "book_of_dead" : {
                     "title": "Księga zmarłych",

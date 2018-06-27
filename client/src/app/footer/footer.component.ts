@@ -7,7 +7,6 @@ import { FooterMenuService } from '../services/footer-menu.service';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css'],
   providers: [AppGlobals]
 })
 export class FooterComponent implements OnInit {
