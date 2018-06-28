@@ -79,6 +79,7 @@ export class NoticeboardComponent implements OnInit {
 
     this.getAdvertisements();
     this.options['position'] = 0;
+    this.options['order'] = 'user_id';
     this.options['death_date'] = 'zmarli';
 
     this.getVisibleGraves();
@@ -242,12 +243,16 @@ export class NoticeboardComponent implements OnInit {
   openTab(name:string) {
     this.selectedTab = name;
     if(name == 'book-of-dead'){
+
       this.selectedDeadPage = 1;
       this.options['position'] = this.selectedDeadPage - 1;
       this.getGraves(this._global.serializeAndURIEncode(this.options));
     }
     else if(name == 'graveyard-noticeboard'){
       this.getAdvertisements();
+    }
+    else if (name == 'graveyard-noticeboard'){
+      this.getVisibleGraves();
     }
   }
 

@@ -2,7 +2,7 @@
     <div>
         <div>
             <ul>
-                <li><span translate>header.menu.you_are_at</span><span></span></li>
+                <li><span translate>header.menu.you_are_at</span><span  [innerHTML]="currentRoute"></span></li>
                 <li><span translate>header.menu.go_to</span>:
                     <ul>
                         <li routerLink="/home" translate>header.menu.main_gate</li>
@@ -33,7 +33,8 @@
                     <i class="fa fa-forward"></i>
                 </li>
                 <li class="inline"><i class="fas fa-volume-up"></i></li>
-                <li class="inline"><span translate>header.menu.select_language</span>
+                <!--header.menu.select_language-->
+                <li class="inline medium"><span [innerHTML]="selectedLanguage"></span>
                     <ul>
                         <li (click)="changeLanguage('en')">English</li>
                         <li (click)="changeLanguage('pl')">Polish</li>

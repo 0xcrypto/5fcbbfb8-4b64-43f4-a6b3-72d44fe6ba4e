@@ -6723,3 +6723,685 @@ REQUEST_URI=/virtualgrave/server/api/users/browsing/%20%7B%20%22limit%22%3A%2010
 in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (466)
 in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (39)
 in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/28 06:32:46 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.visibility' in 'where clause'. The SQL statement executed was: select count(user_id) as total from (SELECT 
+                        u.user_id,
+						u.name1,
+                        u.surname,
+						u.date_death,						
+						u.date_birth,
+                        pl.name_pl as place_name,
+						ge.name_pl as gender_name,
+						u.graveyard_id,
+						u.gender,
+						grave_image,
+						'' as multigrave,
+						'' as znicze,
+						'' as kwiatki, 
+						u.grave_id,
+						null as ilosc,
+						0 as koniec, 
+						'other',
+						u.place_id
+                FROM 
+						Users u left join gender ge on u.gender=ge.gender_id
+								left join place pl on u.place_id=pl.place_id 
+								left join graves gr on u.grave_id=gr.grave_id
+								left join graveyards gy on u.graveyard_id=gy.graveyard_id
+								left join countries c1 on u.country_id=c1.country_id
+								left join countries c2 on u.country_d_id=c2.country_id
+								left join religion r on u.religion_id=r.religion_id
+								left join profession pr on u.profession_id=pr.profession_id
+								left join sex s on u.sex_id=s.sex_id
+				WHERE ( u.is_deleted=0 OR u.is_deleted=1 ) and u.visibility = 1 and u.date_death!='0000-00-00' and u.date_death is not null) t.
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (455)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (39)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/28 06:32:46 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.visibility' in 'where clause'. The SQL statement executed was: select count(user_id) as total from (SELECT 
+                        u.user_id,
+						u.name1,
+                        u.surname,
+						u.date_death,						
+						u.date_birth,
+                        pl.name_pl as place_name,
+						ge.name_pl as gender_name,
+						u.graveyard_id,
+						u.gender,
+						grave_image,
+						'' as multigrave,
+						'' as znicze,
+						'' as kwiatki, 
+						u.grave_id,
+						null as ilosc,
+						0 as koniec, 
+						'other',
+						u.place_id
+                FROM 
+						Users u left join gender ge on u.gender=ge.gender_id
+								left join place pl on u.place_id=pl.place_id 
+								left join graves gr on u.grave_id=gr.grave_id
+								left join graveyards gy on u.graveyard_id=gy.graveyard_id
+								left join countries c1 on u.country_id=c1.country_id
+								left join countries c2 on u.country_d_id=c2.country_id
+								left join religion r on u.religion_id=r.religion_id
+								left join profession pr on u.profession_id=pr.profession_id
+								left join sex s on u.sex_id=s.sex_id
+				WHERE ( u.is_deleted=0 OR u.is_deleted=1 ) and u.visibility = 1 and u.date_death!='0000-00-00' and u.date_death is not null) t' in C:\wamp64\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp64\www\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(455): CDbCommand->queryRow()
+#2 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(39): ApiController->getBookofDead(Array)
+#3 C:\wamp64\www\yii\framework\web\actions\CInlineAction.php(49): ApiController->actionList()
+#4 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp64\www\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\wamp64\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('list')
+#8 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/list/method...')
+#9 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#10 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/virtualgrave/server/api/users/browsing/%20%7B%20%22limit%22%3A%2015%2C%20%22position%22%3A%200%2C%20%22death_date%22%3A%20%22zmarli%22%2C%20%22visibility%22%3A%201%20%7D%20
+HTTP_REFERER=http://localhost/virtualgrave/client/dist/
+---
+2018/06/28 06:32:52 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.visibility' in 'where clause'. The SQL statement executed was: select count(user_id) as total from (SELECT 
+                        u.user_id,
+						u.name1,
+                        u.surname,
+						u.date_death,						
+						u.date_birth,
+                        pl.name_pl as place_name,
+						ge.name_pl as gender_name,
+						u.graveyard_id,
+						u.gender,
+						grave_image,
+						'' as multigrave,
+						'' as znicze,
+						'' as kwiatki, 
+						u.grave_id,
+						null as ilosc,
+						0 as koniec, 
+						'other',
+						u.place_id
+                FROM 
+						Users u left join gender ge on u.gender=ge.gender_id
+								left join place pl on u.place_id=pl.place_id 
+								left join graves gr on u.grave_id=gr.grave_id
+								left join graveyards gy on u.graveyard_id=gy.graveyard_id
+								left join countries c1 on u.country_id=c1.country_id
+								left join countries c2 on u.country_d_id=c2.country_id
+								left join religion r on u.religion_id=r.religion_id
+								left join profession pr on u.profession_id=pr.profession_id
+								left join sex s on u.sex_id=s.sex_id
+				WHERE ( u.is_deleted=0 OR u.is_deleted=1 ) and u.visibility = 1 and u.date_death!='0000-00-00' and u.date_death is not null) t.
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (455)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (39)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/28 06:32:52 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.visibility' in 'where clause'. The SQL statement executed was: select count(user_id) as total from (SELECT 
+                        u.user_id,
+						u.name1,
+                        u.surname,
+						u.date_death,						
+						u.date_birth,
+                        pl.name_pl as place_name,
+						ge.name_pl as gender_name,
+						u.graveyard_id,
+						u.gender,
+						grave_image,
+						'' as multigrave,
+						'' as znicze,
+						'' as kwiatki, 
+						u.grave_id,
+						null as ilosc,
+						0 as koniec, 
+						'other',
+						u.place_id
+                FROM 
+						Users u left join gender ge on u.gender=ge.gender_id
+								left join place pl on u.place_id=pl.place_id 
+								left join graves gr on u.grave_id=gr.grave_id
+								left join graveyards gy on u.graveyard_id=gy.graveyard_id
+								left join countries c1 on u.country_id=c1.country_id
+								left join countries c2 on u.country_d_id=c2.country_id
+								left join religion r on u.religion_id=r.religion_id
+								left join profession pr on u.profession_id=pr.profession_id
+								left join sex s on u.sex_id=s.sex_id
+				WHERE ( u.is_deleted=0 OR u.is_deleted=1 ) and u.visibility = 1 and u.date_death!='0000-00-00' and u.date_death is not null) t' in C:\wamp64\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp64\www\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(455): CDbCommand->queryRow()
+#2 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(39): ApiController->getBookofDead(Array)
+#3 C:\wamp64\www\yii\framework\web\actions\CInlineAction.php(49): ApiController->actionList()
+#4 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp64\www\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\wamp64\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('list')
+#8 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/list/method...')
+#9 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#10 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/virtualgrave/server/api/users/browsing/%20%7B%20%22limit%22%3A%2015%2C%20%22position%22%3A%200%2C%20%22death_date%22%3A%20%22zmarli%22%2C%20%22visibility%22%3A%201%20%7D%20
+HTTP_REFERER=http://localhost/virtualgrave/client/dist/
+---
+2018/06/28 06:32:55 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.visibility' in 'where clause'. The SQL statement executed was: select count(user_id) as total from (SELECT 
+                        u.user_id,
+						u.name1,
+                        u.surname,
+						u.date_death,						
+						u.date_birth,
+                        pl.name_pl as place_name,
+						ge.name_pl as gender_name,
+						u.graveyard_id,
+						u.gender,
+						grave_image,
+						'' as multigrave,
+						'' as znicze,
+						'' as kwiatki, 
+						u.grave_id,
+						null as ilosc,
+						0 as koniec, 
+						'other',
+						u.place_id
+                FROM 
+						Users u left join gender ge on u.gender=ge.gender_id
+								left join place pl on u.place_id=pl.place_id 
+								left join graves gr on u.grave_id=gr.grave_id
+								left join graveyards gy on u.graveyard_id=gy.graveyard_id
+								left join countries c1 on u.country_id=c1.country_id
+								left join countries c2 on u.country_d_id=c2.country_id
+								left join religion r on u.religion_id=r.religion_id
+								left join profession pr on u.profession_id=pr.profession_id
+								left join sex s on u.sex_id=s.sex_id
+				WHERE ( u.is_deleted=0 OR u.is_deleted=1 ) and u.visibility = 1 and u.date_death!='0000-00-00' and u.date_death is not null) t.
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (455)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (39)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/28 06:32:55 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.visibility' in 'where clause'. The SQL statement executed was: select count(user_id) as total from (SELECT 
+                        u.user_id,
+						u.name1,
+                        u.surname,
+						u.date_death,						
+						u.date_birth,
+                        pl.name_pl as place_name,
+						ge.name_pl as gender_name,
+						u.graveyard_id,
+						u.gender,
+						grave_image,
+						'' as multigrave,
+						'' as znicze,
+						'' as kwiatki, 
+						u.grave_id,
+						null as ilosc,
+						0 as koniec, 
+						'other',
+						u.place_id
+                FROM 
+						Users u left join gender ge on u.gender=ge.gender_id
+								left join place pl on u.place_id=pl.place_id 
+								left join graves gr on u.grave_id=gr.grave_id
+								left join graveyards gy on u.graveyard_id=gy.graveyard_id
+								left join countries c1 on u.country_id=c1.country_id
+								left join countries c2 on u.country_d_id=c2.country_id
+								left join religion r on u.religion_id=r.religion_id
+								left join profession pr on u.profession_id=pr.profession_id
+								left join sex s on u.sex_id=s.sex_id
+				WHERE ( u.is_deleted=0 OR u.is_deleted=1 ) and u.visibility = 1 and u.date_death!='0000-00-00' and u.date_death is not null) t' in C:\wamp64\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp64\www\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(455): CDbCommand->queryRow()
+#2 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(39): ApiController->getBookofDead(Array)
+#3 C:\wamp64\www\yii\framework\web\actions\CInlineAction.php(49): ApiController->actionList()
+#4 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp64\www\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\wamp64\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('list')
+#8 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/list/method...')
+#9 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#10 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/virtualgrave/server/api/users/browsing/%20%7B%20%22limit%22%3A%2015%2C%20%22position%22%3A%200%2C%20%22death_date%22%3A%20%22zmarli%22%2C%20%22visibility%22%3A%201%20%7D%20
+HTTP_REFERER=http://localhost/virtualgrave/client/dist/
+---
+2018/06/28 06:33:14 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.visibility' in 'where clause'. The SQL statement executed was: select count(user_id) as total from (SELECT 
+                        u.user_id,
+						u.name1,
+                        u.surname,
+						u.date_death,						
+						u.date_birth,
+                        pl.name_pl as place_name,
+						ge.name_pl as gender_name,
+						u.graveyard_id,
+						u.gender,
+						grave_image,
+						'' as multigrave,
+						'' as znicze,
+						'' as kwiatki, 
+						u.grave_id,
+						null as ilosc,
+						0 as koniec, 
+						'other',
+						u.place_id
+                FROM 
+						Users u left join gender ge on u.gender=ge.gender_id
+								left join place pl on u.place_id=pl.place_id 
+								left join graves gr on u.grave_id=gr.grave_id
+								left join graveyards gy on u.graveyard_id=gy.graveyard_id
+								left join countries c1 on u.country_id=c1.country_id
+								left join countries c2 on u.country_d_id=c2.country_id
+								left join religion r on u.religion_id=r.religion_id
+								left join profession pr on u.profession_id=pr.profession_id
+								left join sex s on u.sex_id=s.sex_id
+				WHERE ( u.is_deleted=0 OR u.is_deleted=1 ) and u.visibility = 1 and u.date_death!='0000-00-00' and u.date_death is not null) t.
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (455)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (39)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/28 06:33:14 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.visibility' in 'where clause'. The SQL statement executed was: select count(user_id) as total from (SELECT 
+                        u.user_id,
+						u.name1,
+                        u.surname,
+						u.date_death,						
+						u.date_birth,
+                        pl.name_pl as place_name,
+						ge.name_pl as gender_name,
+						u.graveyard_id,
+						u.gender,
+						grave_image,
+						'' as multigrave,
+						'' as znicze,
+						'' as kwiatki, 
+						u.grave_id,
+						null as ilosc,
+						0 as koniec, 
+						'other',
+						u.place_id
+                FROM 
+						Users u left join gender ge on u.gender=ge.gender_id
+								left join place pl on u.place_id=pl.place_id 
+								left join graves gr on u.grave_id=gr.grave_id
+								left join graveyards gy on u.graveyard_id=gy.graveyard_id
+								left join countries c1 on u.country_id=c1.country_id
+								left join countries c2 on u.country_d_id=c2.country_id
+								left join religion r on u.religion_id=r.religion_id
+								left join profession pr on u.profession_id=pr.profession_id
+								left join sex s on u.sex_id=s.sex_id
+				WHERE ( u.is_deleted=0 OR u.is_deleted=1 ) and u.visibility = 1 and u.date_death!='0000-00-00' and u.date_death is not null) t' in C:\wamp64\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp64\www\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(455): CDbCommand->queryRow()
+#2 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(39): ApiController->getBookofDead(Array)
+#3 C:\wamp64\www\yii\framework\web\actions\CInlineAction.php(49): ApiController->actionList()
+#4 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp64\www\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\wamp64\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('list')
+#8 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/list/method...')
+#9 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#10 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/virtualgrave/server/api/users/browsing/%20%7B%20%22limit%22%3A%2015%2C%20%22position%22%3A%200%2C%20%22death_date%22%3A%20%22zmarli%22%2C%20%22visibility%22%3A%201%20%7D%20
+HTTP_REFERER=http://localhost/virtualgrave/client/dist/
+---
+2018/06/28 06:33:25 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.visibility' in 'where clause'. The SQL statement executed was: select count(user_id) as total from (SELECT 
+                        u.user_id,
+						u.name1,
+                        u.surname,
+						u.date_death,						
+						u.date_birth,
+                        pl.name_pl as place_name,
+						ge.name_pl as gender_name,
+						u.graveyard_id,
+						u.gender,
+						grave_image,
+						'' as multigrave,
+						'' as znicze,
+						'' as kwiatki, 
+						u.grave_id,
+						null as ilosc,
+						0 as koniec, 
+						'other',
+						u.place_id
+                FROM 
+						Users u left join gender ge on u.gender=ge.gender_id
+								left join place pl on u.place_id=pl.place_id 
+								left join graves gr on u.grave_id=gr.grave_id
+								left join graveyards gy on u.graveyard_id=gy.graveyard_id
+								left join countries c1 on u.country_id=c1.country_id
+								left join countries c2 on u.country_d_id=c2.country_id
+								left join religion r on u.religion_id=r.religion_id
+								left join profession pr on u.profession_id=pr.profession_id
+								left join sex s on u.sex_id=s.sex_id
+				WHERE ( u.is_deleted=0 OR u.is_deleted=1 ) and u.visibility = 1 and u.date_death!='0000-00-00' and u.date_death is not null) t.
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (455)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (39)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/28 06:33:25 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.visibility' in 'where clause'. The SQL statement executed was: select count(user_id) as total from (SELECT 
+                        u.user_id,
+						u.name1,
+                        u.surname,
+						u.date_death,						
+						u.date_birth,
+                        pl.name_pl as place_name,
+						ge.name_pl as gender_name,
+						u.graveyard_id,
+						u.gender,
+						grave_image,
+						'' as multigrave,
+						'' as znicze,
+						'' as kwiatki, 
+						u.grave_id,
+						null as ilosc,
+						0 as koniec, 
+						'other',
+						u.place_id
+                FROM 
+						Users u left join gender ge on u.gender=ge.gender_id
+								left join place pl on u.place_id=pl.place_id 
+								left join graves gr on u.grave_id=gr.grave_id
+								left join graveyards gy on u.graveyard_id=gy.graveyard_id
+								left join countries c1 on u.country_id=c1.country_id
+								left join countries c2 on u.country_d_id=c2.country_id
+								left join religion r on u.religion_id=r.religion_id
+								left join profession pr on u.profession_id=pr.profession_id
+								left join sex s on u.sex_id=s.sex_id
+				WHERE ( u.is_deleted=0 OR u.is_deleted=1 ) and u.visibility = 1 and u.date_death!='0000-00-00' and u.date_death is not null) t' in C:\wamp64\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp64\www\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(455): CDbCommand->queryRow()
+#2 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(39): ApiController->getBookofDead(Array)
+#3 C:\wamp64\www\yii\framework\web\actions\CInlineAction.php(49): ApiController->actionList()
+#4 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp64\www\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\wamp64\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('list')
+#8 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/list/method...')
+#9 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#10 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/virtualgrave/server/api/users/browsing/%20%7B%20%22limit%22%3A%2015%2C%20%22position%22%3A%200%2C%20%22death_date%22%3A%20%22zmarli%22%2C%20%22visibility%22%3A%201%20%7D%20
+---
+2018/06/28 06:44:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('img')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('img')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/img/avatar...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/site/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/site/login
+---
+2018/06/28 06:44:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "js".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('js')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('js')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/js/app.js')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/site/js/app.js
+HTTP_REFERER=http://localhost/virtualgrave/server/site/login
+---
+2018/06/28 06:44:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "js".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('js')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('js')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/js/app.js')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/site/js/app.js
+HTTP_REFERER=http://localhost/virtualgrave/server/site/login
+---
+2018/06/28 06:44:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "img/favicon.ico".' in C:\wamp64\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('img/favicon.ico')
+#1 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#2 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/img/favicon.ico
+HTTP_REFERER=http://localhost/virtualgrave/server/site/login
+---
+2018/06/28 06:44:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "img/favicon.png".' in C:\wamp64\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('img/favicon.png')
+#1 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#2 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/img/favicon.png
+HTTP_REFERER=http://localhost/virtualgrave/server/site/login
+---
+2018/06/28 06:44:44 [warning] [application] Failed to set unsafe attribute "rememberMe" of "UsersAuth".
+in C:\wamp64\www\virtualgrave\server\protected\controllers\SiteController.php (94)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/28 06:44:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('img')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('img')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('Users/img/avata...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/Users/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/Users/admin
+---
+2018/06/28 06:46:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('img')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('img')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('Advertisement/i...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/Advertisement/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/Advertisement/admin
+---
+2018/06/28 06:46:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('img')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('img')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('Advertisement/i...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/Advertisement/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/Advertisement/Update?id=1
+---
+2018/06/28 06:46:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('img')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('img')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('advertisement/i...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/advertisement/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/advertisement/admin
+---
+2018/06/28 06:46:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('img')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('img')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('Advertisement/i...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/Advertisement/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/Advertisement/Update?id=2
+---
+2018/06/28 06:46:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('img')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('img')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('advertisement/i...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/advertisement/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/advertisement/admin
+---
+2018/06/28 06:46:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('img')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('img')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('Advertisement/i...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/Advertisement/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/Advertisement/create
+---
+2018/06/28 06:47:36 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1364 Field 'priority' doesn't have a default value. The SQL statement executed was: INSERT INTO `advertisement` (`image`, `url`, `text`) VALUES (:yp0, :yp1, :yp2).
+in C:\wamp64\www\virtualgrave\server\protected\controllers\AdvertisementController.php (73)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/28 06:47:36 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[HY000]: General error: 1364 Field 'priority' doesn't have a default value. The SQL statement executed was: INSERT INTO `advertisement` (`image`, `url`, `text`) VALUES (:yp0, :yp1, :yp2)' in C:\wamp64\www\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp64\www\yii\framework\db\ar\CActiveRecord.php(1080): CDbCommand->execute()
+#1 C:\wamp64\www\yii\framework\db\ar\CActiveRecord.php(809): CActiveRecord->insert(NULL)
+#2 C:\wamp64\www\virtualgrave\server\protected\controllers\AdvertisementController.php(73): CActiveRecord->save(false)
+#3 C:\wamp64\www\yii\framework\web\actions\CInlineAction.php(49): AdvertisementController->actionCreate()
+#4 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp64\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp64\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp64\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp64\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp64\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp64\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp64\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#13 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('Advertisement/c...')
+#14 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#15 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/virtualgrave/server/index.php/Advertisement/create
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/Advertisement/create
+---
+2018/06/28 06:48:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('img')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('img')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('advertisement/i...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/advertisement/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/advertisement/admin
+---
+2018/06/28 08:52:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('img')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('img')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/img/avatar...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/site/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/site/login
+---
+2018/06/28 08:52:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "js".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('js')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('js')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/js/app.js')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/site/js/app.js
+HTTP_REFERER=http://localhost/virtualgrave/server/site/login
+---
+2018/06/28 08:52:46 [warning] [application] Failed to set unsafe attribute "rememberMe" of "UsersAuth".
+in C:\wamp64\www\virtualgrave\server\protected\controllers\SiteController.php (94)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/28 08:52:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('img')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('img')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('Users/img/avata...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/Users/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/Users/admin
+---
+2018/06/28 09:25:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "js".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('js')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('js')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/js/app.js')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/site/js/app.js
+HTTP_REFERER=http://localhost/virtualgrave/server/site/login
+---
+2018/06/28 09:25:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('img')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('img')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/img/avatar...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/site/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/site/login
+---
+2018/06/28 09:25:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "js".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('js')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('js')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/js/app.js')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/site/js/app.js
+HTTP_REFERER=http://localhost/virtualgrave/server/site/login
+---
+2018/06/28 09:25:59 [warning] [application] Failed to set unsafe attribute "rememberMe" of "UsersAuth".
+in C:\wamp64\www\virtualgrave\server\protected\controllers\SiteController.php (94)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/06/28 09:26:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('img')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('img')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('Users/img/avata...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/Users/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/Users/admin
+---
+2018/06/28 09:26:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('img')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('img')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('StaticPage/img/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/StaticPage/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/StaticPage/admin
+---
+2018/06/28 09:26:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in C:\wamp64\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(270): CController->missingAction('img')
+#1 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('img')
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('StaticPage/img/...')
+#3 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/virtualgrave/server/index.php/StaticPage/img/avatar-sign.png
+HTTP_REFERER=http://localhost/virtualgrave/server/index.php/StaticPage/Update?id=1
+---
+2018/06/28 09:26:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "assets/28306d67/contents.css".' in C:\wamp64\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('assets/28306d67...')
+#1 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#2 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/assets/28306d67/contents.css
+---
+2018/06/28 09:26:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "assets/28306d67/contents.css".' in C:\wamp64\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('assets/28306d67...')
+#1 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#2 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/virtualgrave/server/assets/28306d67/contents.css
+---

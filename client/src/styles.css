@@ -118,6 +118,9 @@ body header ul > li.inline {
     display: inline-block;
     margin-right: 3px;
 }
+body header ul > li.inline.medium {
+    width: 70px;
+}
 body header ul ul {
     display: none;
     list-style-type: none;
@@ -191,9 +194,8 @@ body #content .scroll-content{
     overflow-y: auto;
     overflow-x: hidden;
     height: 350px;
-    margin-top: 70px;
-    padding: 10px;
-    padding-left: 20px;
+    margin-top: 50px;
+    padding: 80px 0 0 0;
 }
 body #content .scroll-content h4{
     color: #848484;

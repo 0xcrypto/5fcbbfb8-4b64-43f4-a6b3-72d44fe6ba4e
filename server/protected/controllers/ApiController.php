@@ -348,7 +348,7 @@
 
 		private function getBookofDead($options = NULL){
 			$excludedGraves = null;
-			$order = null;
+			$order = isset($options['order']) ? $options['order'] : null;
 			if(isset($options['excludedGraves']) && count($options['excludedGraves'])>0)
 			{
 				$excludedGraves = $options['excludedGraves'];

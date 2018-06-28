@@ -25,7 +25,6 @@ export class StaticpageComponent implements OnInit {
 
 
   getStaticPage(): void {
-    this.page = null;
     const id = +this.route.snapshot.paramMap.get('id');
     this.staticpageService.get(id)
       .subscribe(staticpage => this.page = staticpage);

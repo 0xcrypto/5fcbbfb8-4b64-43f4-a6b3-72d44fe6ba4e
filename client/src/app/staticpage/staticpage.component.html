@@ -1,10 +1,10 @@
 <div id="content" class="notice-bg">
   <div class="scroll-content">
       <ng-scrollbar>
-          <!--<div *ngIf="page">-->
+          <div *ngIf="page">
               <h4 [innerHTML]="language == 'en' && page.heading_en || page.heading_pl"></h4>
               <p [innerHTML]="language == 'en' && page.body_en || page.body_pl "></p>
-          <!--</div>-->
+          </div>
       </ng-scrollbar>
   </div>
 </div>

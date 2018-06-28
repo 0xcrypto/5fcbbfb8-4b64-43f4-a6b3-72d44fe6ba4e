@@ -51,6 +51,7 @@ export class GraveyardComponent implements OnInit {
     this.skyImage = 'url(./assets/images/sky/'+this._global.getSkyImage(scene)+')';
     this.graveyardImage = 'url(./assets/images/graveyard-backgrounds/'+this._global.getGraveyardImage(scene)+')';
     this.options['position'] = position;
+    this.options['order'] = 'user_id';
     this.getGrave(this._global.serializeAndURIEncode(this.options));
   }
 
@@ -64,7 +65,6 @@ export class GraveyardComponent implements OnInit {
   }
 
   previousGrave(){
-    debugger;
     if(this.graveyardStartPosition == ((this.totalGraves - 2) * this.graveSize ))
       return;
 
@@ -74,10 +74,11 @@ export class GraveyardComponent implements OnInit {
   getGrave(param: string): void {
     this.usersService.getWithMethodAndOptions('browsing', param)
       .subscribe(graves => {
-        this.graves = graves;
+        this.graves = graves.reverse();
         this.totalGraves = graves.length;
         this.graveyardStartPosition = ((this.totalGraves - 2) * this.graveSize );
         for(let i=0; i<=graves.length-1;i++){
+          //graves[i].graveUrl = 'url(./assets/images/graves/grob'+graves[i].grave_id+'_'+graves[i].grave_image+'.png)';
           graves[i].graveUrl = 'url(./assets/images/graves/grob1_'+graves[i].grave_image+'.png)';
         }
       });
