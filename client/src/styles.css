@@ -118,6 +118,10 @@ body header ul > li.inline {
     display: inline-block;
     margin-right: 3px;
 }
+body header ul > li.inline .sound-control {
+    display: inline-block;
+    margin-right: 3px;
+}
 body header ul > li.inline.medium {
     width: 70px;
 }

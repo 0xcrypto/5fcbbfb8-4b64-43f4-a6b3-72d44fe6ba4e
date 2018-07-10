@@ -1,0 +1,4 @@
+<i class="fa fa-backward sound-control" (click)="playPrevious();"></i>
+<i class="fa fa-stop sound-control" *ngIf="isPlaying" (click)="pause();"></i>
+<i class="fa fa-play sound-control" *ngIf="!isPlaying" (click)="play();"></i>
+<i class="fa fa-forward sound-control" (click)="playNext();"></i>

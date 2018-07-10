@@ -19,6 +19,7 @@ import { HeaderComponent } from './header/header.component';
 import { PricingComponent } from './pricing/pricing.component';
 import { LogoComponent } from './logo/logo.component';
 import { GraveyardComponent } from './graveyard/graveyard.component';
+import { SoundComponent } from './sound/sound.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -38,7 +39,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     HeaderComponent,
     PricingComponent,
     LogoComponent,
-    GraveyardComponent
+    GraveyardComponent,
+    SoundComponent
   ],
   imports: [
     BrowserModule,
