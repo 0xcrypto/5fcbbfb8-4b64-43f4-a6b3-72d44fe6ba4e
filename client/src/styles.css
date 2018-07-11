@@ -95,7 +95,7 @@ body header ul {
     width: 250px;
     margin: 0 auto;
 }
-body header ul > li {
+body header ul  li {
     border: 1px solid #999;
     height: 15px;
     font-size: 13px;
@@ -108,21 +108,18 @@ body header ul > li {
     font-size: 11px;
     line-height: 14px;
 }
-body header ul > li > i {
+body header ul li > i {
     display: inline-block !important;
     width: 10px;
     height: 10px;
     margin-right: 5px;
 }
-body header ul > li.inline {
+body header ul li.inline {
     display: inline-block;
     margin-right: 3px;
+    margin-bottom: -1px;
 }
-body header ul > li.inline .sound-control {
-    display: inline-block;
-    margin-right: 3px;
-}
-body header ul > li.inline.medium {
+body header ul li.inline.medium {
     width: 70px;
 }
 body header ul ul {

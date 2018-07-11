@@ -9,6 +9,7 @@ export class SoundComponent implements OnInit {
   currentAudioIndex = 0;
   player:any = null;
   isPlaying:boolean = false;
+  isMute:boolean = false;
   
   constructor() { 
 
@@ -46,4 +47,13 @@ export class SoundComponent implements OnInit {
       this.play();
   }
 
+  mute(){
+    this.isMute = true;
+    this.player.muted = true;
+  }
+  
+  unmute(){
+    this.isMute = false;
+    this.player.muted = false;
+  }
 }
