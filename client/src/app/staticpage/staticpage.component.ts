@@ -4,7 +4,10 @@ import { Location } from '@angular/common';
 
 import { AppGlobals } from '../app.globals';
 import { StaticPage } from '../classes/staticpage';
-import { StaticPageService } from '../services/staticpage.service';
+import { DataService } from '../services/data.service';
+
+export interface Options {
+};
 
 @Component({
   selector: 'app-staticpage',
@@ -14,8 +17,9 @@ import { StaticPageService } from '../services/staticpage.service';
 export class StaticpageComponent implements OnInit {
   page: StaticPage = null;
   language: string = null;
+  options: Options = null;
 
-  constructor(private route: ActivatedRoute, private staticpageService: StaticPageService,
+  constructor(private route: ActivatedRoute, private dataService: DataService,
     private location: Location, private _global: AppGlobals) { }
 
   ngOnInit() {
@@ -26,7 +30,10 @@ export class StaticpageComponent implements OnInit {
 
   getStaticPage(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.staticpageService.get(id)
-      .subscribe(staticpage => this.page = staticpage);
+    this.options = this._global.refreshObject(this.options, ['id='+id]);
+    this.dataService.getWithMethodAndOptions('STATIC_PAGE_DETAILS', this._global.serializeAndURIEncode(this.options))
+      .subscribe(staticpage => {
+        this.page = staticpage;
+    });
   }
 }

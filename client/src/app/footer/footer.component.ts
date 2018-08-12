@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AppGlobals } from '../app.globals';
-import { FooterMenu } from '../classes/footermenu';
-import { FooterMenuService } from '../services/footer-menu.service';
+import { DataService } from '../services/data.service';
+
+export interface Options {
+};
 
 @Component({
   selector: 'app-footer',
@@ -10,10 +12,11 @@ import { FooterMenuService } from '../services/footer-menu.service';
   providers: [AppGlobals]
 })
 export class FooterComponent implements OnInit {
-  menus: FooterMenu[] = [];
+  menus: any[] = [];
   language: string = null;
+  options: Options = null;
 
-  constructor(private footermenuService: FooterMenuService, private _global: AppGlobals) {
+  constructor(private dataService: DataService, private _global: AppGlobals) {
   }
 
   ngOnInit() {
@@ -22,8 +25,11 @@ export class FooterComponent implements OnInit {
   }
 
   getMenus(): void {
-    this.footermenuService.getAll()
-      .subscribe(result => this.menus = result);
+    this.options = this._global.refreshObject(this.options, []);
+    this.dataService.getAllWithMethodAndOptions('FOOTER_MENUS', this._global.serializeAndURIEncode(this.options))
+      .subscribe(result => {
+        this.menus = result;
+      });
   }
 
 }

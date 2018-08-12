@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { Advertisement } from '../classes/advertisement';
-import { AdvertisementService } from '../services/advertisement.service';
-import { UsersService } from '../services/users.service';
+import { DataService } from '../services/data.service';
 import { User } from '../classes/user';
 import { Router } from '@angular/router';
 import { AppGlobals } from '../app.globals';
@@ -66,8 +65,7 @@ export class NoticeboardComponent implements OnInit {
   
   constructor(private _router: Router, 
     private translate: TranslateService, 
-    private advertisementService: AdvertisementService, 
-    private usersService: UsersService, 
+    private dataService: DataService, 
     private _global: AppGlobals) {
     this.router = _router;
   }
@@ -75,12 +73,11 @@ export class NoticeboardComponent implements OnInit {
   ngOnInit() {
     this.selectedTab = 'graveyard-noticeboard';
     this.currentLang = this._global.getLanguage();
-    this.options.limit = this.datalimit;
 
     this.getAdvertisements();
-    this.options['position'] = 0;
-    this.options['order'] = 'user_id';
-    this.options['death_date'] = 'zmarli';
+    //this.options['position'] = 0;
+    //this.options['order'] = 'user_id';
+    //this.options['death_date'] = 'zmarli';
 
     this.getVisibleGraves();
   }
@@ -122,20 +119,21 @@ export class NoticeboardComponent implements OnInit {
   getGraveWithFirstname(alphabet: string){
     this.selectedDeadPage = 1;
     this.selectedDeadAlphabet = alphabet;
-    this.options['position'] = 0;
-    this.options['firstname'] = this.selectedDeadAlphabet;
+    this.options = this._global.refreshObject(this.options, ['limit=15', 'position=0', 'order=user_id', 'firstname='+this.selectedDeadAlphabet, 'death_date=zmarli']);
     this.getGraves(this._global.serializeAndURIEncode(this.options));
   }
 
   getGraveWithPageNumber(pageNumber: number){
     this.selectedDeadPage = pageNumber;
-    this.options['position'] = this.selectedDeadPage - 1;
+    this.options = this._global.refreshObject(this.options, ['limit=15', 'position='+ (this.selectedDeadPage - 1),
+     'order=user_id', 'firstname='+this.selectedDeadAlphabet, 'death_date=zmarli']);
     this.getGraves(this._global.serializeAndURIEncode(this.options));
   }
 
   showAllGraves(){
     this.selectedDeadPage = 1;
-    this.options['position'] = this.selectedDeadPage - 1;
+    this.options = this._global.refreshObject(this.options, ['limit=15', 'position='+ (this.selectedDeadPage - 1),
+     'order=user_id', 'death_date=zmarli']);
     this.getGraves(this._global.serializeAndURIEncode(this.options));
   }
 
@@ -144,7 +142,8 @@ export class NoticeboardComponent implements OnInit {
       return;
     
       this.selectedDeadPage++;
-      this.options['position'] = this.selectedDeadPage - 1;
+      this.options = this._global.refreshObject(this.options, ['limit=15', 'position='+ (this.selectedDeadPage - 1),
+      'order=user_id', 'death_date=zmarli']);
       this.getGraves(this._global.serializeAndURIEncode(this.options));
   }
 
@@ -153,27 +152,30 @@ export class NoticeboardComponent implements OnInit {
       return;
 
       this.selectedDeadPage--;
-      this.options['position'] = this.selectedDeadPage - 1;
+      this.options = this._global.refreshObject(this.options, ['limit=15', 'position='+ (this.selectedDeadPage - 1),
+      'order=user_id', 'death_date=zmarli']);
       this.getGraves(this._global.serializeAndURIEncode(this.options));
   }
 
   searchGraveWithFirstname(alphabet: string){
     this.selectedSearchPage = 1;
     this.selectedSearchAlphabet = alphabet;
-    this.searchOptions['position'] = 0;
-    this.searchOptions['firstname'] = this.selectedSearchAlphabet;
+    this.searchOptions = this._global.refreshObject(this.searchOptions, ['limit=15', 'position=0',
+      'order=user_id', 'death_date=zmarli', 'firstname='+this.selectedSearchAlphabet]);
     this.searchGraves(this._global.serializeAndURIEncode(this.searchOptions));
   }
 
   searchGraveWithPageNumber(pageNumber: number){
     this.selectedSearchPage = pageNumber;
-    this.searchOptions['position'] = this.selectedSearchPage - 1;
+    this.searchOptions = this._global.refreshObject(this.searchOptions, ['limit=15', 'position='+(this.selectedSearchPage - 1),
+      'order=user_id', 'death_date=zmarli']);
     this.searchGraves(this._global.serializeAndURIEncode(this.searchOptions));
   }
 
   searchAllGraves(){
     this.selectedSearchPage = 1;
-    this.searchOptions['position'] = this.selectedSearchPage - 1;
+    this.searchOptions = this._global.refreshObject(this.searchOptions, ['limit=15', 'position='+(this.selectedSearchPage - 1),
+      'order=user_id', 'death_date=zmarli']);
     this.searchGraves(this._global.serializeAndURIEncode(this.searchOptions));
   }
 
@@ -182,7 +184,8 @@ export class NoticeboardComponent implements OnInit {
       return;
 
     this.selectedSearchPage++;
-    this.searchOptions['position'] = this.selectedSearchPage - 1;
+    this.searchOptions = this._global.refreshObject(this.searchOptions, ['limit=15', 'position='+(this.selectedSearchPage - 1),
+      'order=user_id', 'death_date=zmarli']);
     this.searchGraves(this._global.serializeAndURIEncode(this.searchOptions));
   }
 
@@ -191,34 +194,37 @@ export class NoticeboardComponent implements OnInit {
       return;
     
     this.selectedSearchPage--;
-    this.searchOptions['position'] = this.selectedSearchPage - 1;
+    this.searchOptions = this._global.refreshObject(this.searchOptions, ['limit=15', 'position='+(this.selectedSearchPage - 1),
+      'order=user_id', 'death_date=zmarli']);
     this.searchGraves(this._global.serializeAndURIEncode(this.searchOptions));
   }
   
   submitSearch(){
+    var parameters = ['limit=15', 'order=user_id', 'death_date=zmarli']
     if(this.firstname){
-      this.searchOptions['firstname'] = this.firstname;
+      parameters.push('firstname='+this.firstname);
     }
 
     if(this.surname){
-      this.searchOptions['lastname'] = this.surname;
+      parameters.push('lastname='+this.surname);
     }
 
     if(this.dob){
       let dateComponent = this.dob.split('-');
       let validDOB = dateComponent[2]+'-'+dateComponent[1]+'-'+dateComponent[0];
-      this.searchOptions['birth_date'] = validDOB;
+      parameters.push('birth_date='+validDOB);
     }
     
     if(this.dod){
       let dateComponent = this.dod.split('-');
       let validDOD = dateComponent[2]+'-'+dateComponent[1]+'-'+dateComponent[0];
-      this.searchOptions['death_date'] = validDOD;
+      parameters.push('death_date='+validDOD);
     }
 
     this.selectedSearchPage = 1;
-    this.searchOptions['position'] = this.selectedSearchPage - 1;
     this.isSearchFormVisible = false;
+    parameters.push('position='+(this.selectedSearchPage - 1));
+    this.searchOptions = this._global.refreshObject(this.searchOptions, parameters);
     this.searchGraves(this._global.serializeAndURIEncode(this.searchOptions));
   }
 
@@ -244,7 +250,8 @@ export class NoticeboardComponent implements OnInit {
     this.selectedTab = name;
     if(name == 'book-of-dead'){
       this.selectedDeadPage = 1;
-      this.options['position'] = this.selectedDeadPage - 1;
+      this.options = this._global.refreshObject(this.options, ['limit=15', 'position='+ (this.selectedDeadPage - 1),
+      'order=user_id', 'death_date=zmarli']);
       this.getGraves(this._global.serializeAndURIEncode(this.options));
     }
     else if(name == 'graveyard-noticeboard'){
@@ -260,7 +267,8 @@ export class NoticeboardComponent implements OnInit {
   }
 
   getAdvertisements(): void {
-    this.advertisementService.getAll()
+    this.options = this._global.refreshObject(this.options, ['limit=3']);
+    this.dataService.getAllWithMethodAndOptions('ADVERTISEMENTS', this._global.serializeAndURIEncode(this.options))
       .subscribe(advertisements => this.advertisements = advertisements);
   }
 
@@ -286,7 +294,7 @@ export class NoticeboardComponent implements OnInit {
 
   getGraves(param: string): void {
     this.loadingData = true;
-    this.usersService.getWithMethodAndOptions('browsing', param)
+    this.dataService.getAllWithMethodAndOptions('GRAVES', param)
       .subscribe(users => {
         this.loadingData = false;
         this.users = users;
@@ -314,8 +322,8 @@ export class NoticeboardComponent implements OnInit {
   }
 
   getVisibleGraves(): void {
-    this.options['visibility'] = 1;
-    this.usersService.getWithMethodAndOptions('browsing', this._global.serializeAndURIEncode(this.options))
+    this.options = this._global.refreshObject(this.options, ['limit=3', 'position=0', 'order=user_id', 'death_date=zmarli', 'visibility=1']);
+    this.dataService.getAllWithMethodAndOptions('GRAVES', this._global.serializeAndURIEncode(this.options))
       .subscribe(users => {
         delete this.options['visibility'];
         this.prioritizeGraves = users.slice(0,3);
@@ -324,7 +332,7 @@ export class NoticeboardComponent implements OnInit {
 
   searchGraves(param: string): void {
     this.searchingData = true;
-    this.usersService.getWithMethodAndOptions('browsing', param)
+    this.dataService.getAllWithMethodAndOptions('GRAVES', param)
       .subscribe(users => {
         this.searchingData = false;
         this.searchedUsers = users;

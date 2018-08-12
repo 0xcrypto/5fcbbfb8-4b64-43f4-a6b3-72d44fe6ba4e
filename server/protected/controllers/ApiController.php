@@ -24,6 +24,8 @@
 		public function actionList()
 		{
 			$options = null;
+			$method = null;
+
 			if(isset($_GET['method'])){
 				$method = $_GET['method'];
 			}
@@ -34,31 +36,34 @@
 			
 			switch($_GET['model'])
 			{
-				case 'users':
-					if($method == 'browsing'){
-						$models = $this->getBookofDead($options);
+				case 'data':
+					if($method == 'GRAVES'){
+						$models = $this->getGraves($options);
 					}
-					else if($method == 'grave_data'){
-						$models = $this->getGraveData($options);
+					else if($method == 'GRAVE_DETAILS'){
+						$models = $this->getGraveDetails($options);
 					}
-					else if($method == 'grave_user_photo'){
+					else if($method == 'GRAVE_USER_PHOTO'){
 						$models = $this->getGraveUserPhoto($options);
 					}
-					else if($method == 'grave_lights'){
+					else if($method == 'GRAVE_CANDLES'){
 						$models = $this->getGraveLights($options);
 					}
-					else if($method == 'grave_comments'){
+					else if($method == 'GRAVE_COMMENTS'){
 						$models = $this->getGraveComments($options);
+					}
+					else if($method == 'ADVERTISEMENTS'){
+						$models = Advertisement::model()->findAll();
+					}
+					else if($method == 'STATIC_PAGES'){
+						$models = StaticPage::model()->findAll();
+					}
+					else if($method == 'FOOTER_MENUS'){
+						$models = FooterMenu::model()->findAll();
 					}
 					else{
 						$models = Users::model()->findAll();
 					}
-					break;
-				case 'advertisement':
-					$models = Advertisement::model()->findAll();
-					break;
-				case 'staticpage':
-					$models = StaticPage::model()->findAll();
 					break;
 				case 'footermenu':
 					$models = FooterMenu::model()->findAll();
@@ -96,17 +101,21 @@
 			if(!isset($_GET['id']))
 				$this->_sendResponse(500, 'Error: Parameter <b>id</b> is missing' );
 
+			if(isset($_GET['method'])){
+				$method = $_GET['method'];
+			}
+
+			if(isset($_GET['options'])){
+				$options = (array)json_decode($_GET['options']);
+			}
+			
 			switch($_GET['model'])
 			{
 				// Find respective model    
-				case 'users':
-					$model = Users::model()->findByPk($_GET['id']);
-					break;
-				case 'advertisement':
-					$model = Advertisement::model()->findByPk($_GET['id']);
-					break;
-				case 'staticpage':
-					$model = StaticPage::model()->findByPk($_GET['id']);
+				case 'data':
+					if($method == 'STATIC_PAGE_DETAILS'){
+						$model = StaticPage::model()->findByPk($options['id']);
+					}
 					break;
 				default:
 					$this->_sendResponse(501, sprintf(
@@ -127,12 +136,6 @@
 				// Get an instance of the respective model
 				case 'users':
 					$model = new Users;                    
-					break;
-				case 'advertisement':
-					$model = new Advertisement;
-					break;
-				case 'staticpage':
-					$model = new StaticPage;
 					break;
 				default:
 					$this->_sendResponse(501, 
@@ -181,13 +184,6 @@
 				case 'users':
 					$model = Users::model()->findByPk($_GET['id']);                    
 					break;
-				case 'advertisement':
-					$models = Advertisement::model()->findByPk($_GET['id']);
-					break;
-				case 'staticpage':
-					$models = StaticPage::model()->findByPk($_GET['id']);
-					break;
-				
 				default:
 					$this->_sendResponse(501, 
 						sprintf( 'Error: Mode <b>update</b> is not implemented for model <b>%s</b>',
@@ -227,12 +223,6 @@
 				// Load the respective model
 				case 'users':
 					$model = Users::model()->findByPk($_GET['id']);                    
-					break;
-				case 'advertisement':
-					$model = Advertisement::model()->findByPk($_GET['id']);                    
-					break;
-				case 'staticpage':
-					$model = StaticPage::model()->findByPk($_GET['id']);                    
 					break;
 				default:
 					$this->_sendResponse(501, 
@@ -358,7 +348,7 @@
 			}
 		}
 
-		private function getBookofDead($options = NULL){
+		private function getGraves($options = NULL){
 			$excludedGraves = null;
 			$order = isset($options['order']) ? $options['order'] : null;
 			if(isset($options['excludedGraves']) && count($options['excludedGraves'])>0)
@@ -562,7 +552,7 @@
 			return ($data); 
 		}
 
-		private function getGraveData($options = NULL){
+		private function getGraveDetails($options = NULL){
 			$query = 'SELECT g.id_kind, g.number,
 				IF((SELECT COUNT(uu.user_id) FROM Users uu WHERE ( uu.is_deleted=0 OR uu.is_deleted=1 ) AND uu.user_id<u.user_id )=0,0,1) AS koniec,
 				u.user_id, u.buyer_id, u.place_id,

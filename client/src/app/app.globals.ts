@@ -102,4 +102,16 @@ export class AppGlobals {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
   }
+
+  refreshObject(object:any, values:any[]):any{
+    object = {};
+    for(var i in values){
+      var data = values[i].split('='),
+        key = data[0],
+        value = data[1];
+      
+      object[key] = value;
+    }
+    return object;
+  }
 }

@@ -4,9 +4,10 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { User } from '../classes/user';
-import { UsersService } from '../services/users.service';
+import { DataService } from '../services/data.service';
 import { AppGlobals } from '../app.globals';
 import { debug } from 'util';
+import { _iterableDiffersFactory } from '@angular/core/src/application_module';
 
 export interface UserOptions {
   limit: number;
@@ -39,7 +40,7 @@ export class GraveyardComponent implements OnInit {
     limit: 10
   };
 
-  constructor(private route: ActivatedRoute, private usersService: UsersService, private _global: AppGlobals, private _router: Router) { 
+  constructor(private route: ActivatedRoute, private dataService: DataService, private _global: AppGlobals, private _router: Router) { 
     this.router = _router;
   }
 
@@ -58,8 +59,8 @@ export class GraveyardComponent implements OnInit {
     }
     this.skyImage = 'url(./assets/images/sky/'+this._global.getSkyImage(scene)+')';
     this.graveyardImage = 'url(./assets/images/graveyard-backgrounds/'+this._global.getGraveyardImage(scene)+')';
-    this.options = this.refreshObject(this.options, ['limit=10', 'position='+position, 'order=user_id']);
-    this.usersService.getWithMethodAndOptions('browsing', this._global.serializeAndURIEncode(this.options))
+    this.options = this._global.refreshObject(this.options, ['limit=10', 'position='+position, 'order=user_id']);
+    this.dataService.getAllWithMethodAndOptions('GRAVES', this._global.serializeAndURIEncode(this.options))
       .subscribe(graves => {
         this.graves = graves.reverse();
         this.totalGraves = graves.length;
@@ -98,54 +99,40 @@ export class GraveyardComponent implements OnInit {
     
     this.grave = null;
     this.graveUserImage = null;
-    this.options = this.refreshObject(this.options, ['limit=10', 'position=0', 'user_id='+grave.user_id]);
-    this.usersService.getWithMethodAndOptions('grave_data', this._global.serializeAndURIEncode(this.options))
+    this.options = this._global.refreshObject(this.options, ['limit=10', 'position=0', 'user_id='+grave.user_id]);
+    this.dataService.getAllWithMethodAndOptions('GRAVE_DETAILS', this._global.serializeAndURIEncode(this.options))
       .subscribe(graves => {
         this.grave = graves[0];
       }
     );
     
-    this.options = this.refreshObject(this.options, ['user_id='+grave.user_id]);
-    this.usersService.getWithMethodAndOptions('grave_user_photo', this._global.serializeAndURIEncode(this.options))
-      .subscribe(data => {
-        this.graveUserImage = './assets/images/zdjecia/large/'+data[0].file_name;
-      }
-    );
-
-    this.options = this.refreshObject(this.options, ['user_id='+grave.user_id]);
-    this.usersService.getWithMethodAndOptions('grave_comments', this._global.serializeAndURIEncode(this.options))
+    this.options = this._global.refreshObject(this.options, ['user_id='+grave.user_id]);
+    this.dataService.getAllWithMethodAndOptions('GRAVE_COMMENTS', this._global.serializeAndURIEncode(this.options))
       .subscribe(data => {
         this.comments = data;
       }
     );
 
-    this.options = this.refreshObject(this.options, ['object_name=znicz', 'user_id='+grave.user_id]);
-    this.usersService.getWithMethodAndOptions('grave_lights', this._global.serializeAndURIEncode(this.options))
+    this.options = this._global.refreshObject(this.options, ['user_id='+grave.user_id]);
+    this.dataService.getAllWithMethodAndOptions('GRAVE_USER_PHOTO', this._global.serializeAndURIEncode(this.options))
+      .subscribe(data => {
+        this.graveUserImage = './assets/images/zdjecia/large/'+data[0].file_name;
+      }
+    );
+
+    this.options = this._global.refreshObject(this.options, ['object_name=znicz', 'user_id='+grave.user_id]);
+    this.dataService.getAllWithMethodAndOptions('GRAVE_CANDLES', this._global.serializeAndURIEncode(this.options))
       .subscribe(data => {
         this.objects = data;
         for(var i=0; i<=this.objects.length-1; i++)
           this.objects[i]['object_url'] = './assets/images/znicze/'+this.objects[i].object_name+this.objects[i].object_id+'.swf';
       }
     );
-
-    
   }
   closeDetails(): void{
     this.isGraveDetailsOpen = false;
   }
   openTab(tabName:string):void{
     this.selectedGraveDetailTab = tabName;
-  }
-
-  refreshObject(object:any, values:any[]):any{
-    object = {};
-    for(var i in values){
-      var data = values[i].split('='),
-        key = data[0],
-        value = data[1];
-      
-      object[key] = value;
-    }
-    return object;
   }
 }
