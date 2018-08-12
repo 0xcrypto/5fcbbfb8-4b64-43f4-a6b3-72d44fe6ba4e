@@ -38,6 +38,18 @@
 					if($method == 'browsing'){
 						$models = $this->getBookofDead($options);
 					}
+					else if($method == 'grave_data'){
+						$models = $this->getGraveData($options);
+					}
+					else if($method == 'grave_user_photo'){
+						$models = $this->getGraveUserPhoto($options);
+					}
+					else if($method == 'grave_lights'){
+						$models = $this->getGraveLights($options);
+					}
+					else if($method == 'grave_comments'){
+						$models = $this->getGraveComments($options);
+					}
 					else{
 						$models = Users::model()->findAll();
 					}
@@ -523,6 +535,8 @@
 						$row2['surname']=explode("|",$row2['surname']);
 						///we collect flowers and candles for every deceased person in multigrain
 						$candles = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$row2['grave_id']." and (object_name like 'znicz%' or object_name like 'kamien%') and end_time>now() order by add_date desc limit 5")->queryAll();	
+						$row2['znicze'] = array();
+						$row2['kwiatki'] = array();
 						foreach($candles as $candle)
 							$row2['znicze'][]=$candle;
 							
@@ -534,16 +548,168 @@
 					}
 					
 					$candles = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$user_id." and (object_name like 'znicz%' or object_name like 'kamien%') and end_time>now() order by add_date desc limit 5")->queryAll();	
+					$row2['znicze'] = array();
 					foreach($candles as $candle)
 						$row['znicze'][]=$candle;
 						
 					$flowers = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$user_id." and object_name like 'kwiat%' and end_time>now() order by add_date desc limit 2")->queryAll();	
+					$row2['kwiatki'] = array();
 					foreach($flowers as $flower)
 						$row['kwiatki'][]=$flower;
+						
 					$data[] = $row; 
 				} 
+			return ($data); 
+		}
 
-				return ($data); 
+		private function getGraveData($options = NULL){
+			$query = 'SELECT g.id_kind, g.number,
+				IF((SELECT COUNT(uu.user_id) FROM Users uu WHERE ( uu.is_deleted=0 OR uu.is_deleted=1 ) AND uu.user_id<u.user_id )=0,0,1) AS koniec,
+				u.user_id, u.buyer_id, u.place_id,
+				pl.name_pl as place_name,
+						u.grave_id,
+						gr.name_pl as grave_name,
+						u.graveyard_id,
+						gy.name_pl as graveyard_name,
+						u.name1,
+						u.surname,
+						u.surname_other,
+						u.date_birth,
+						u.place_birth,
+						u.country_birth,
+						u.country_id,
+						c1.name_pl as birth_coutry_name,
+						u.date_death,
+						u.place_death,
+						u.country_death,
+						u.country_d_id,
+						c2.name_pl as death_coutry_name,
+						u.death_reason,
+						u.religion_name,
+						u.religion_id,
+						r.name_pl as religion_name,
+						u.gender,
+						ge.name_pl as gender_name,
+						u.father_name,
+						u.mother_name,
+						u.childrens_names,
+						u.ex_wife1,
+						u.other_professions,
+						u.profession_id,
+						pr.name_pl as profession_name,
+						u.hobby,
+						u.sex_id,
+						s.name_pl as sex_name,
+						u.grave_image,
+						null as biography,
+						u.hobbyids,
+						u.flash_data
+				FROM 
+				cyber_graves g, 
+				Users u left join gender ge on u.gender=ge.gender_id
+						left join place pl on u.place_id=pl.place_id 
+						left join graves gr on u.grave_id=gr.grave_id
+						left join graveyards gy on u.graveyard_id=gy.graveyard_id
+						left join countries c1 on u.country_id=c1.country_id
+						left join countries c2 on u.country_d_id=c2.country_id
+						left join religion r on u.religion_id=r.religion_id
+						left join profession pr on u.profession_id=pr.profession_id
+						left join sex s on u.sex_id=s.sex_id
+				WHERE u.grave_id=g.grave_id AND ( u.is_deleted=0 OR u.is_deleted=1 ) and u.user_id='.$options['user_id'] ;
+			
+			$result = Yii::app()->db->createCommand($query)->queryAll();
+			
+			$data = array(); 
+			foreach($result as $row)
+			{ 
+				$row['name1']=explode("|",$row['name1']);//u.name1
+				$row['father_name']=explode("|",$row['father_name']);//u.father_name
+				$row['mother_name']=explode("|",$row['mother_name']);//u.mother_name
+				$row['childrens_names']=explode("|",$row['childrens_names']);//u.childrens_names
+				$row['ex_wife1']=explode("|",$row['ex_wife1']);//u.ex_wife1
+				foreach($row['ex_wife1'] as $k=>$v)//u.ex_wife1
+					$row['ex_wife1'][$k]=explode("#",$v);
+				
+				$row['biografia']=array();//biografia
+				$row['reserve_grave_users_data']=array();//dane userow rezerwaujacych grob
+				
+				$bio_result = Yii::app()->db->createCommand("select title,body from biography where user_id=".$row['user_id']." order by order_num")->queryAll();
+				foreach($bio_result as $row2)
+				{
+					$row['biografia'][]=array("from"=>$row2['title'], "message"=>$row2['body']);
+				}
+				
+				$msg_result=Yii::app()->db->createCommand("select * from msg_users where user_id=".$row['user_id'])->queryAll();
+				foreach($msg_result as $row2)
+				{
+					$tmp1=explode("|",$row2['p1name']);
+					$tmp2=explode("|",$row2['p2name']);
+					$row['reserve_grave_users_data']=array(array($row2['plogin1'],$tmp1[0],$tmp1[1]), array($row2['plogin2'],$tmp2[0],$tmp2[1]));
+				}
+				
+				$date_birth=explode("-",$row['date_birth']);
+				if($date_birth[1]=='00' && $date_birth[2]=='00')
+					$row['date_birth']=$date_birth[0];
+				elseif($date_birth[1]!='00' && $date_birth[2]=='00')
+					$row['date_birth']=$date_birth[1].'-'.$date_birth[0];
+				else
+					$row['date_birth']=$date_birth[2].'-'.$date_birth[1].'-'.$date_birth[0];
+				
+				$date_death=explode("-",$row['date_death']);
+				if($date_death[1]=='00' && $date_death[2]=='00')
+					$row['date_death']=$date_death[0];
+				elseif($date_death[1]!='00' && $date_death[2]=='00')
+					$row['date_death']=$date_death[1].'-'.$date_death[0];
+				else
+					$row['date_death']=$date_death[2].'-'.$date_death[1].'-'.$date_death[0];
+				
+				$data[] = $row; 
+			} 
+			return ($data); 
+		}
+
+		private function getGraveUserPhoto($options = NULL){
+			$data = array(); 
+			$photo_result=Yii::app()->db->createCommand("select file_name,is_portrait from users_photos where user_id='".$options['user_id']."'")->queryAll();
+			foreach($photo_result as $row) { 
+				$data[] = $row; 
+			} 
+			return ($data); 
+		}
+
+		private function getGraveLights($options = NULL){
+			$query="select object_id,object_name,comment,end_time, '' AS a, uo_id from users_objects where 
+				user_id='".$options['user_id']."' and end_time>now()";	
+        
+			if($options['object_name']=='znicz')
+				$query.=" and (object_name like 'znicz%' or object_name like 'kamien%')";
+			elseif($options['object_name'] != '')
+				$query.=" and object_name like '".$options['object_name']."%'";
+			
+			$count_query="select count(*) as total from ($query) t";
+			$count_result = Yii::app()->db->createCommand($count_query)->queryRow()['total'];
+				
+			//$query.=" order by add_date desc limit " .($position*$limit).','.$limit;
+			$query.=" order by add_date desc ";
+			$result = Yii::app()->db->createCommand($query)->queryAll();
+			$data = array(); 
+			foreach ($result as $row) { 
+				$row['a']=$count_result;
+				$data[] = $row; 
+			} 
+			return ($data); 
+		}
+
+		private function getGraveComments($options = NULL){
+			$query="select * from users_comments where user_id='".$options['user_id']."' and validated>=0 order by add_date desc";
+			$count_result = Yii::app()->db->createCommand("select count(*) as total from ($query) t")->queryRow()['total'];
+			$result=Yii::app()->db->createCommand($query)->queryAll();
+			$data = array(); 
+			foreach ($result as $row) { 
+				$row['total'] = $count_result;
+				$data[] = $row; 
+			} 
+			return ($data); 
 		}
 	}
 ?>

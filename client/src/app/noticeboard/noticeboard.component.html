@@ -1,6 +1,6 @@
 <div *ngIf="!isGraveLoadingScreenVisible" id="content" class="notice-bg">
     <app-logo></app-logo>
-    <div class="tabs-container">
+    <div class="fill-tabs">
         <div class="tab-bar">
             <a (click)="openTab('graveyard-noticeboard')" [ngClass]="{'active': (selectedTab == 'graveyard-noticeboard')}" translate>graveyard.noticeboard.tabs.graveyard_noticeboard.title</a>
             <a (click)="openTab('book-of-dead')" [ngClass]="{'active': (selectedTab == 'book-of-dead')}" translate>graveyard.noticeboard.tabs.book_of_dead.title</a>
@@ -32,9 +32,6 @@
                         <option>Municipal</option>
                         <option>Municipal</option>
                     </select>
-                </div>
-                <div class="option">
-                    <button translate>graveyard.noticeboard.tabs.graveyard_noticeboard.special_grave</button>
                 </div>
                 <div class="option">
                     <button translate>graveyard.noticeboard.tabs.graveyard_noticeboard.grave_number</button>
@@ -174,7 +171,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let user of users">
+                            <tr *ngFor="let user of searchedUsers" (click)="loadingGrave(user)">
                                 <td class="x">{{ user.position }}</td>
                                 <td class="xxx">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</td>
                                 <td class="xx text-center">{{user.date_birth}}</td>

@@ -5,7 +5,7 @@
                 <li><span translate>header.menu.you_are_at</span><span  [innerHTML]="currentRoute"></span></li>
                 <li><span translate>header.menu.go_to</span>:
                     <ul>
-                        <li routerLink="/home" translate>header.menu.main_gate</li>
+                        <li routerLink="/home/1" translate>header.menu.main_gate</li>
                         <li routerLink="/noticeboard" translate>header.menu.graveyard_noticeboard</li>
                         <li (click)="gotoGraveyard();" translate>header.menu.graveyard</li>
                         <li translate>header.menu.catacomb</li>
@@ -25,7 +25,7 @@
             <ul>
                 <li class="inline" translate>header.menu.shop</li>
                 <li class="inline" translate>header.menu.login</li>
-                <li class="inline" routerLink="/home" translate>header.menu.exit</li>
+                <li class="inline" routerLink="/home/1" translate>header.menu.exit</li>
                 <div class="clear"></div>
                 <app-sound></app-sound>
                

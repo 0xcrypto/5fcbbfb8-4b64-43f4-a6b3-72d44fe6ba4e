@@ -254,17 +254,12 @@ body #content .gate-left{
    background-image: url(./assets/images/gate-left.png);
    background-repeat: no-repeat;
    background-size: contain;
-   transition: -webkit-transform 2s linear;
-   transition: transform 1s linear;
-   transition: transform 1s linear, -webkit-transform 2s linear;
+   transition: -webkit-transform 3s linear;
+   transition: transform 3s linear;
+   transition: transform 3s linear, -webkit-transform 3s linear;
    -webkit-transform: perspective(300) rotateY(0deg);
    -webkit-transform-origin: 0% 0%;
    display: inline-block;
-	   
-}
-body #content.goto-notice-wall .main-gate .gate-left{
-	-webkit-transform: perspective(300) rotateY(90deg);
-	-webkit-transform-origin: 0% 0%;
 }
 body #content .gate-right{
     width: 165px;
@@ -274,16 +269,20 @@ body #content .gate-right{
     background-image: url(./assets/images/gate-right.png);
     background-size: contain;
     background-repeat: no-repeat;
-    transition: -webkit-transform 2s linear;
-    transition: transform 1s linear;
-    transition: transform 1s linear, -webkit-transform 2s linear;
+    transition: -webkit-transform 3s linear;
+    transition: transform 3s linear;
+    transition: transform 3s linear, -webkit-transform 3s linear;
     -webkit-transform: perspective(300) rotateY(0deg);
     -webkit-transform-origin: 0% 0%;
     display: inline-block;
 }
-body #content.goto-notice-wall .main-gate .gate-right{
-	-webkit-transform: perspective(300) rotateY(-90deg);
-	-webkit-transform-origin: 100% 0%;
+body #content.return-to-maingate .main-gate .gate-left{
+	-webkit-transform: perspective(300) rotateY(0deg);
+	-webkit-transform-origin: 0% 0%;
+}
+body #content.return-to-maingate .main-gate .gate-right{
+	-webkit-transform: perspective(300) rotateY(0deg);
+	-webkit-transform-origin: 0% 0%;
 }
 body #content .gate-right:before{
 	content: "";
@@ -434,18 +433,18 @@ form > label button {
     border: none;
     cursor: pointer;
 }
-.tabs-container{
+.fill-tabs{
     width: 690px;
     margin: 50px auto;
     height: 400px;
     padding-top: 10px;
 }
-.tab-bar{
+.fill-tabs .tab-bar{
     width: 690px;
     margin: 21px auto;
     margin-left: -38px;
 }
-.tab-bar a{
+.fill-tabs .tab-bar a{
     background: #333;
     color: #a6a6a6;
     padding: 0 5px;
@@ -458,30 +457,130 @@ form > label button {
     display: inline-block;
     line-height: 18px;
 }
-.tab-bar a:focus{
+.fill-tabs .tab-bar a:focus{
     outline: none;
 }
-.tab-bar a.active{
+.fill-tabs .tab-bar a.active{
     background: #b2973d;
     color: #333;
 }
-.tabs{
+.fill-tabs .tabs{
     width: 680px;
     padding: 10px;
     height: 355px;
 }
-.tabs > div{
+.fill-tabs .tabs > div{
     color: #fff;
     height: 100%;
     padding: 10px;
 }
-.tabs > div h4{
+.fill-tabs .tabs > div h4{
     color: #848484;
     font-size: 12px;
 }
-.tabs > div p{
+.fill-tabs .tabs > div p{
     color: #515151;
     font-size: 11px;
+}
+.stroke-tabs {
+    display: none;
+    position: absolute;
+    width: 700px;
+    height: 300px;
+    top: 0;
+    left: 50%;
+    z-index: 9;
+    margin-left: -330px;
+    margin-top: 120px;
+}
+.stroke-tabs .close-btn {
+    position: absolute;
+    right: 0;
+    background: none;
+    height: 25px;
+    width: 25px;
+    color: #FFF;
+    font-size: 20px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+.stroke-tabs > div {
+    background: rgba(0,0,0,0.7);
+    border: 3px solid #333;
+    border-radius: 4px;
+    height: 400px;
+    margin-top: 28px;
+}
+.stroke-tabs .tab-bar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 5px;
+}
+.stroke-tabs .tab-bar li {
+    background: rgba(0,0,0,0.7);
+    border-top: 3px solid #333;
+    border-radius: 4px 4px 0 0;
+    float: left;
+    border-bottom: none;
+    padding: 5px 3px;
+    margin-right: 2px;
+    font-size: 12px;
+    cursor: pointer;
+    height: 15px;
+}
+.stroke-tabs .tab-bar li.active{
+    margin-top: -4px;
+    height: 20px;
+    border-top: 3px solid #b2973d;
+    border-bottom: 2px solid #151515;
+}
+.stroke-tabs .tabs > div {
+    display: none;
+    padding: 10px;
+}
+.stroke-tabs .tabs > div  .col-left,
+.stroke-tabs .tabs > div  .col-right{
+    display: inline-block;
+    padding-top: 30px;
+}
+.stroke-tabs .tabs > div  .col-right {
+    float: right;
+}
+.stroke-tabs .tabs > div  .user-image{
+    border: 1px solid #ccc;
+    width: 200px;
+    height: 300px;
+    margin: 0 30px;
+}
+.stroke-tabs .tabs > div .field-value{
+    color: #FFF;
+}
+.stroke-tabs .tabs > div.active,
+.stroke-tabs.open{
+    display: block;
+}
+.text-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.text-list li {
+    margin: 10px 5px;
+}
+.text-list li .message {
+    padding: 0;
+    margin: 0;
+    font-size: 10px;
+    color: #b7b7b7;
+}
+.text-list li .from {
+    padding: 0;
+    margin: 0;
+    float: right;
+    font-size: 10px;
+    font-weight: bold;
 }
 .popular-grave-col{
     width: 40%;
@@ -897,19 +996,18 @@ table tbody{
     position: absolute;
 }
 body #content.graveyard .graveyard-container{
-    margin-left:0; 
     height: 600px;
-    transition: margin-left 1s linear;
     position: relative;
-    background-position: bottom center;
-    background-size: contain;
 }
 .graveyard-container > ul{
+    transition: margin-left 1s linear;
     list-style-type: none;
     padding: 0;
     margin: 0;
     position: absolute;
     top: 0;
+    background-size: contain;
+    background-position: bottom;
 }
 .graveyard-container > ul li{
     float: left;
@@ -934,6 +1032,10 @@ body #content.graveyard .graveyard-container{
     font-weight: bold;
     font-size: 13px;
     text-align: center;
+    cursor: pointer;
+}
+.graveyard-container > ul li .grave > div p.name:hover{
+    color: #b2973d;
 }
 .graveyard-container > ul li .grave > div span{
     display: inline-block;

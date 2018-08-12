@@ -36,8 +36,8 @@ export class NoticeboardComponent implements OnInit {
   selectedDeadAlphabet:string = null;
   selectedSearchPage:number = 1;
   selectedSearchAlphabet:string = null;
-  selectedSceneTime:number = 0;
-  selectedSceneSeason:number = 0;
+  selectedSceneTime:number = 1;
+  selectedSceneSeason:number = 1;
   datalimit = 15;
 
   deadlistPages: number[] = [];
@@ -243,7 +243,6 @@ export class NoticeboardComponent implements OnInit {
   openTab(name:string) {
     this.selectedTab = name;
     if(name == 'book-of-dead'){
-
       this.selectedDeadPage = 1;
       this.options['position'] = this.selectedDeadPage - 1;
       this.getGraves(this._global.serializeAndURIEncode(this.options));

@@ -14,6 +14,7 @@ import { GraveyardComponent }    from './graveyard/graveyard.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'home/:isReturned', component: HomeComponent },
   { path: 'noticeboard', component: NoticeboardComponent },
   { path: 'contactus', component: ContactusComponent },
   { path: 'forum', component: ForumComponent },

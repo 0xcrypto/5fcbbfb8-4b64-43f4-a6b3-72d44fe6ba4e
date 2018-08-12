@@ -1,4 +1,4 @@
-<div id="content" class="graveyard">
+<div id="content" class="graveyard" *ngIf="!isGraveyardLoading">
     <app-logo></app-logo>
     <div class="sub-header">
         <button (click)="nextGrave()" class="btn-left" translate>graveyard.next_grave<i class="fa fa-play-circle right-icon"></i></button>
@@ -6,15 +6,15 @@
         <button (click)="previousGrave()" class="btn-right" translate><i class="fa fa-play-circle left-icon"></i>graveyard.previous_grave</button>
     </div>
     <div class="graveyard-sky-container" [ngStyle]="{'background-image': skyImage}"></div>
-    <div class="graveyard-container" [ngStyle]="{'margin-left': '-'+graveyardStartPosition+'px', 'width': (graveSize * totalGraves)+'px', 'background-image': graveyardImage}">
+    <div class="graveyard-container" >
         <div *ngIf="isRainfallScene" class="rainfall">&nbsp;</div>
         <div *ngIf="isSnowfallScene" class="snowfall">&nbsp;</div>
         <div *ngIf="isThunderstromScene" class="thunderstrom">&nbsp;</div>
-        <ul>
+        <ul [ngStyle]="{'margin-left': '-'+graveyardStartPosition+'px', 'width': (graveSize * totalGraves)+'px', 'background-image': graveyardImage}">
             <li *ngFor="let grave of graves">
                 <div  class="grave" [ngStyle]="{'background-image': grave.graveUrl, 'width': graveSize+'px'}" >
                     <div>
-                        <p class="name">{{[].constructor.isArray(grave.name1) ? grave.name1[0] : grave.name1}} {{grave.surname}}</p>
+                        <p class="name" (click)="showGraveDetails(grave);">{{[].constructor.isArray(grave.name1) ? grave.name1[0] : grave.name1}} {{grave.surname}}</p>
                         <p>
                             <span><label>Born</label>{{grave.date_birth}}</span>
                             <span><label>Passed Away</label>{{grave.date_death}}</span>
@@ -23,5 +23,86 @@
                 </div>
             </li>
         </ul>
+        <div class="stroke-tabs" [ngClass]="{'open': isGraveDetailsOpen }">
+            <button class="close-btn" (click)="closeDetails();"><i class="fas fa-times"></i></button>
+            <ul class="tab-bar">
+                <li (click)="openTab('tab1');" [ngClass]="{'active': (selectedGraveDetailTab == 'tab1')}">_Persoanl_Details_</li>
+                <li (click)="openTab('tab2');" [ngClass]="{'active': (selectedGraveDetailTab == 'tab2')}">_In_memoriam_</li>
+                <li (click)="openTab('tab3');" [ngClass]="{'active': (selectedGraveDetailTab == 'tab3')}">_Album_</li>
+                <li (click)="openTab('tab4');" [ngClass]="{'active': (selectedGraveDetailTab == 'tab4')}">_Remembrance_</li>
+                <li (click)="openTab('tab5');" [ngClass]="{'active': (selectedGraveDetailTab == 'tab5')}">_Candles_</li>
+            </ul>
+            <div class="tabs">
+                <div [ngClass]="{'active': (selectedGraveDetailTab == 'tab1')}">
+                    <div class="col-left">
+                        <img *ngIf="graveUserImage" [attr.src]="graveUserImage" class="user-image"/>
+                    </div>
+                    <div class="col-right" *ngIf="grave">
+                        <form>
+                            <label>
+                                <span translate>_GraveNumber_</span>
+                                <span class="field-value">{{grave.user_id}}</span>
+                            </label>
+                            <label>
+                                <span translate>_FirstName_</span>
+                                <span class="field-value">{{grave.name1}}</span>
+                            </label>
+                            <label>
+                                <span translate>_Surname_LastName_</span>
+                                <span class="field-value">{{grave.surname}}</span>
+                            </label>
+                            <label>
+                                <span translate>_Date_of_Birth_</span>
+                                <span class="field-value">{{grave.date_birth}}</span>
+                            </label>
+                            <label>
+                                <span translate>_Religion_</span>
+                                <span class="field-value">{{grave.religion_name}}</span>
+                            </label>
+                        </form>
+                    </div>
+                </div>
+                <div [ngClass]="{'active': (selectedGraveDetailTab == 'tab2')}">
+                    <div *ngIf="grave">
+                        <ul class="text-list" *ngFor="let bio of grave.biografia">
+                            <li>
+                                <p class="message">{{bio.message}}</p>
+                                <p class="from">{{bio.from}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div [ngClass]="{'active': (selectedGraveDetailTab == 'tab3')}">
+                </div>
+                <div [ngClass]="{'active': (selectedGraveDetailTab == 'tab4')}">
+                    <div *ngIf="grave">
+                        <ul class="text-list" *ngFor="let comment of comments">
+                            <li>
+                                <p class="message">{{comment.body}}</p>
+                                <p class="from">
+                                    <span>{{comment.nick}}</span>&nbsp;&nbsp;
+                                    <span>{{comment.add_date}}</span>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div [ngClass]="{'active': (selectedGraveDetailTab == 'tab5')}">
+                    <div *ngIf="grave">
+                        <ul class="text-list" *ngFor="let object of objects">
+                            <li>
+                                <embed [attr.src]="object.object_url" height="75" width="75"/>
+                                <p class="from">
+                                    <span class="message">{{object.comment}}</span>&nbsp;&nbsp;
+                                    <span class="message">_This_object_will_finish_out_in_ {{object.end_time}}</span>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    
 </div>
+<div id="content" class="loading-bg" *ngIf="isGraveyardLoading"></div>

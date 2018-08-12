@@ -20,4 +20,5 @@ export class User {
   place_id: number;
   position: number;
   graveUrl: string;
+  biografia: any[];
 }
