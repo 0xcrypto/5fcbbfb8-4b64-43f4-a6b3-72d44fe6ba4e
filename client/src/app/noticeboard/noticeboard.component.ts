@@ -125,9 +125,16 @@ export class NoticeboardComponent implements OnInit {
 
   getGraveWithPageNumber(pageNumber: number){
     this.selectedDeadPage = pageNumber;
-    this.options = this._global.refreshObject(this.options, ['limit=15', 'position='+ (this.selectedDeadPage - 1),
-     'order=user_id', 'firstname='+this.selectedDeadAlphabet, 'death_date=zmarli']);
-    this.getGraves(this._global.serializeAndURIEncode(this.options));
+    
+    var parameters = ['limit=15', 'position='+ (this.selectedDeadPage - 1),
+    'order=user_id', 'death_date=zmarli'];
+
+    if(this.selectedDeadAlphabet)
+      parameters.push('firstname='+this.selectedDeadAlphabet);
+
+    this.options = this._global.refreshObject(this.options, parameters);
+    
+      this.getGraves(this._global.serializeAndURIEncode(this.options));
   }
 
   showAllGraves(){
@@ -167,8 +174,13 @@ export class NoticeboardComponent implements OnInit {
 
   searchGraveWithPageNumber(pageNumber: number){
     this.selectedSearchPage = pageNumber;
-    this.searchOptions = this._global.refreshObject(this.searchOptions, ['limit=15', 'position='+(this.selectedSearchPage - 1),
-      'order=user_id', 'death_date=zmarli']);
+    var parameters = ['limit=15', 'position='+(this.selectedSearchPage - 1),
+    'order=user_id', 'death_date=zmarli'];
+
+    if(this.selectedSearchAlphabet)
+      parameters.push('firstname='+this.selectedSearchAlphabet);
+    
+    this.searchOptions = this._global.refreshObject(this.searchOptions, parameters);
     this.searchGraves(this._global.serializeAndURIEncode(this.searchOptions));
   }
 
@@ -264,6 +276,10 @@ export class NoticeboardComponent implements OnInit {
 
   backToSearch(){
     this.isSearchFormVisible = true;
+  }
+
+  catacombs(){
+    this.router.navigateByUrl('/catacombs');
   }
 
   getAdvertisements(): void {

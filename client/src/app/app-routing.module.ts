@@ -9,7 +9,7 @@ import { StaticpageComponent }    from './staticpage/staticpage.component';
 import { ForumComponent }    from './forum/forum.component';
 import { PricingComponent }    from './pricing/pricing.component';
 import { GraveyardComponent }    from './graveyard/graveyard.component';
-
+import { CatacombComponent }    from './catacomb/catacomb.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'pricing', component: PricingComponent },
   { path: 'staticpage/:id', component: StaticpageComponent },
   { path: 'graveyard/:position/:scene', component: GraveyardComponent },
+  { path: 'catacombs', component: CatacombComponent },
 ];
 
 @NgModule({

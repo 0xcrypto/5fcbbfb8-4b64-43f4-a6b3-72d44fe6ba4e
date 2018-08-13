@@ -20,6 +20,8 @@ import { PricingComponent } from './pricing/pricing.component';
 import { LogoComponent } from './logo/logo.component';
 import { GraveyardComponent } from './graveyard/graveyard.component';
 import { SoundComponent } from './sound/sound.component';
+import { ShopComponent } from './shop/shop.component';
+import { CatacombComponent } from './catacomb/catacomb.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -40,7 +42,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     PricingComponent,
     LogoComponent,
     GraveyardComponent,
-    SoundComponent
+    SoundComponent,
+    ShopComponent,
+    CatacombComponent
   ],
   imports: [
     BrowserModule,

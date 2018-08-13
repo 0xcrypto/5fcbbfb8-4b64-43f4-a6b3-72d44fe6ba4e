@@ -13,6 +13,19 @@
 .align-right{
     float: right;
 }
+.fixed-position{
+    position: fixed !important;
+}
+.tile {
+    display: inline-block;
+    margin: 5px;
+    padding: 0;
+}
+.tile img{
+    width: 75px;
+    height: 75px;
+    border: 1px solid #808080;
+}
 #vg-logo{
     cursor: pointer;
     position: absolute;
@@ -64,7 +77,7 @@ body header{
     left: 0;
     right: 0;
     top: 0;
-    z-index: 3;
+    z-index: 99;
 }
 body header > div {
     width: 1024px;
@@ -188,6 +201,12 @@ body #content.loading-bg{
     background-size: 24%;
     -webkit-animation: backgroundScroll 5s linear infinite;
     animation: backgroundScroll 5s linear infinite;
+}
+body #content.catacombs{
+    position: relative;
+}
+body #content.loading-bg.with-logo-cursor{
+    cursor: url(./assets/images/loading_cursor.gif);
 }
 body #content .scroll-content{
     width: 530px;
@@ -518,7 +537,7 @@ form > label button {
     padding: 0;
     padding-left: 5px;
 }
-.stroke-tabs .tab-bar li {
+.stroke-tabs .tab-bar li, .stroke-tabs .tab-bar span {
     background: rgba(0,0,0,0.7);
     border-top: 3px solid #333;
     border-radius: 4px 4px 0 0;
@@ -529,8 +548,9 @@ form > label button {
     font-size: 12px;
     cursor: pointer;
     height: 15px;
+    color: #fff;
 }
-.stroke-tabs .tab-bar li.active{
+.stroke-tabs .tab-bar li.active, .stroke-tabs .tab-bar span.active{
     margin-top: -4px;
     height: 20px;
     border-top: 3px solid #b2973d;
@@ -539,23 +559,6 @@ form > label button {
 .stroke-tabs .tabs > div {
     display: none;
     padding: 10px;
-}
-.stroke-tabs .tabs > div  .col-left,
-.stroke-tabs .tabs > div  .col-right{
-    display: inline-block;
-    padding-top: 30px;
-}
-.stroke-tabs .tabs > div  .col-right {
-    float: right;
-}
-.stroke-tabs .tabs > div  .user-image{
-    border: 1px solid #ccc;
-    width: 200px;
-    height: 300px;
-    margin: 0 30px;
-}
-.stroke-tabs .tabs > div .field-value{
-    color: #FFF;
 }
 .stroke-tabs .tabs > div.active,
 .stroke-tabs.open{
@@ -568,6 +571,8 @@ form > label button {
 }
 .text-list li {
     margin: 10px 5px;
+    border: 1px solid #333;
+    padding: 20px;
 }
 .text-list li .message {
     padding: 0;
@@ -919,18 +924,18 @@ table tbody{
     display: inline-block;
     height: 100px;
 }
-.graveyard .sub-header{
+.graveyard .sub-header, .catacombs .sub-header{
     background-image: url(./assets/images/header.jpg);
     height: 35px;
     background-position: center -15px;
     position: absolute;
-    z-index: 1;
+    z-index: 98;
     margin: 0;
     padding: 0;
     width: 100%;
     top: 50px;
 }
-.graveyard .sub-header .btn-left{
+.graveyard .sub-header .btn-left, .catacombs .sub-header .btn-left{
     border: 1px solid #908F8C;
     background: rgba(0, 0, 0, 0.7);
     border-radius: 0 12px 12px 0;
@@ -945,19 +950,19 @@ table tbody{
     left: 0;
     z-index: 10;
 }
-.graveyard .sub-header button i.right-icon{
+.graveyard .sub-header button i.right-icon, .catacombs .sub-header button i.right-icon{
     float: right;
     font-size: 13px;
     margin: 3px 0;
 }
-.graveyard .sub-header button i.left-icon{
+.graveyard .sub-header button i.left-icon, .catacombs .sub-header button i.left-icon{
     float: left;
     font-size: 13px;
     margin: 3px 0;
     transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
 }
-.graveyard .sub-header .btn-right{
+.graveyard .sub-header .btn-right, .catacombs .sub-header .btn-right{
     border: 1px solid #908F8C;
     background: rgba(0, 0, 0, 0.7);
     border-radius: 12px 0 0 12px;
@@ -972,7 +977,7 @@ table tbody{
     right: 0;
     z-index: 10;
 }
-.graveyard .sub-header .btn-middle{
+.graveyard .sub-header .btn-middle, .catacombs .sub-header .btn-middle{
     border: 1px solid #908F8C;
     background: rgba(0, 0, 0, 0.7);
     border-radius: 0 0 12px 12px;
@@ -995,7 +1000,7 @@ table tbody{
     background-size: cover;
     position: absolute;
 }
-body #content.graveyard .graveyard-container{
+body #content.graveyard .graveyard-container, body #content.graveyard .catacombs-container{
     height: 600px;
     position: relative;
 }
@@ -1053,6 +1058,7 @@ body #content.graveyard .graveyard-container{
     height: 600px;
     background-size: contain;
     width: 100%;
+    position: absolute;
 }
 .snowfall{
     background-image: url(./assets/images/snow.gif);
@@ -1060,6 +1066,7 @@ body #content.graveyard .graveyard-container{
     height: 600px;
     background-size: contain;
     width: 100%;
+    position: absolute;
 }
 .thunderstrom{
     background-image: url(./assets/images/thunderstrom.gif);
@@ -1067,6 +1074,221 @@ body #content.graveyard .graveyard-container{
     height: 600px;
     background-size: contain;
     width: 100%;
+    position: absolute;
+}
+.grave-detail .col-left,
+.catacomb-detail .col-left,
+.stroke-tabs .col-right{
+    display: inline-block;
+    padding-top: 30px;
+}
+.grave-detail .col-right,
+.catacomb-detail .col-right {
+    float: right;
+}
+.grave-detail .user-image,
+.catacomb-detail .user-image {
+    border: 1px solid #ccc;
+    width: 200px;
+    height: 300px;
+    margin: 0 30px;
+}
+.grave-detail .field-value,
+.catacomb-detail .field-value {
+    color: #FFF;
+}
+.catacombs .outer-wall{
+    position: absolute;
+    top: 55px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+    overflow: inherit;
+    background-image: url(./assets/images/cat-main.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center 30px;
+    -webkit-transition: all 3s linear;
+    transition: all 3s linear;
+}
+.catacombs .gate{
+    height: 500px;
+    position: absolute;
+    top: 175px;
+    left: 385px;
+    width: 300px;
+    z-index: 10;
+    background-size: contain;
+    background-image: url(./assets/images/cat-door.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    transition: -webkit-transform 3s linear;
+    transition: transform 3s linear;
+    transition: transform 3s linear, -webkit-transform 3s linear;
+    -webkit-transform: perspective(300) rotateY(0deg);
+    -webkit-transform-origin: 0% 0%;
+}
+.catacombs .gate:hover {
+    /*background-image: url(./assets/images/cat-door-light.png);*/
+}
+.catacombs .top-noticeboard{
+    background-size: 300px 90px;
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 80px;
+    position: absolute;
+    left: 385px;
+    top: 85px;
+    z-index: 10;
+}
+.catacombs .top-noticeboard.en{
+    background-image: url(./assets/images/cat-notice-en.png);
+}
+.catacombs .top-noticeboard.pl{
+    background-image: url(./assets/images/cat-notice-pl.png);
+}
+.catacombs .left-noticeboard{
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 100px;
+    position: absolute;
+    top: 285px;
+    left: 70px;
+    z-index: 10;
+}
+.catacombs .left-noticeboard.en{
+    background-image: url(./assets/images/cat-wall-notice-en.png);
+}
+.catacombs .left-noticeboard.pl{
+    background-image: url(./assets/images/cat-wall-notice-pl.png);
+}
+.catacombs.opening-gate .gate {
+    -webkit-transform: perspective(300) rotateY(50deg);
+    -webkit-transform-origin: 0% 0%;
+}
+.catacombs.moving-into-dane .outer-wall{
+    background-size: 400%;
+    background-position: center -400px;
+}
+.catacombs.moving-into-dane .dane-way{
+    background-size: 100%;
+    background-position: center bottom;
+}
+.catacombs.moving-into-dane .gate, 
+.catacombs.moving-into-dane .left-noticeboard, 
+.catacombs.moving-into-dane .top-noticeboard{
+    display: none;
+}
+.catacombs .dane-way{
+    background-image: url(./assets/images/cat-dane.png);
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 7;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    -webkit-transition: all 3s linear;
+    transition: all 3s linear;
+}
+.catacombs.reached-into-dane .dane-way,
+.catacombs.reached-into-dane .outer-wall{
+    display: none;
+}
+.catacombs .catacombs-container{
+    background-image: url(./assets/images/cat-wall-minor.jpg);
+    background-repeat: repeat-x;
+    height: 435px;
+}
+.catacombs .catacombs-container:after{
+    content: '';
+    display: block;
+    background-image: url(./assets/images/cat-bottom-wall.jpg);
+    height: 165px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-size: contain;
+    background-repeat: repeat;
+}
+
+.catacombs-container > ul{
+    transition: margin-left 1s linear;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 85px;
+    background-size: contain;
+    background-position: bottom
+}
+.catacombs-container > ul li{
+    float: left;
+    width: 512px;
+    height: 600px;
+}
+.catacombs-container > ul li .catacomb{
+    height: 600px;
+    background-repeat: no-repeat;
+    background-position: center 0;
+    background-size: 70%;
+    margin: 0 auto;
+    position: absolute;
+    z-index: 2;
+}
+.catacombs-container > ul li .catacomb > div {
+    color: #a2a2a2;
+    width: 400px;
+    margin: 150px auto;
+    font-size: 13px;
+    height: 200px;
+    position: relative;
+}
+.catacombs-container > ul li .catacomb > div .slab{
+    display: block;
+    background-image: url(./assets/images/cat-stand.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 400px;
+    height: 75px;
+    background-size: 100%;
+    background-position: center;
+    margin-top: 95px;
+}
+.catacombs-container > ul li .catacomb > div .candle-stand{
+    display: block;
+    background-image: url(./assets/images/cat-candle.png);
+    background-repeat: no-repeat;
+    height: 70px;
+    width: 50px;
+    background-size: contain;
+    position: absolute;
+    bottom: 15px;
+    left: 35px;
+    background-position: 0 20px;
+}
+.catacombs-container > ul li .catacomb > div p.name{
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center;
+    cursor: pointer;
+}
+.catacombs-container > ul li .catacomb > div p.name:hover{
+    color: #b2973d;
+}
+.catacombs-container > ul li .catacomb > div span{
+    display: inline-block;
+    width: 45%;
+    font-size: 10px;
+    text-align: center;
+}
+.catacombs-container > ul li .catacomb > div label{
+    display: block;
+    color: #848484;
 }
 @keyframes backgroundScroll {
     from {background-position: 0 0;}

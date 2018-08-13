@@ -26,7 +26,8 @@
                     "special_grave": "Specjalny grób",
                     "grave_number": "Liczba poważna",
                     "go_back_to_main_gate" : "Wróć do głównej bramy",
-                    "will_be_sadly_missed" : "Będą niestety brakowało"
+                    "will_be_sadly_missed" : "Będą niestety brakowało",
+                    "catacombs": "Catacombs"
                 },
                 "book_of_dead" : {
                     "title": "Księga zmarłych",
@@ -80,8 +81,59 @@
             "snow": "Śnieg",
             "random": "Losowy"
         },
+        "detail": {
+            "tab":{
+                "persoanl_details": "Dane osobowe",
+                "in_memoriam": "Ku pamięci",
+                "album": "Album",
+                "remembrance": "Pamięć",
+                "candles": "Świece"
+            },
+            "grave_number": "Ciężki numer",
+            "firstname": "Imię",
+            "surname": "Nazwisko",
+            "dob": "Data urodzenia",
+            "religion": "Religia",
+            "this_object_will_finish_out_in": "Ten obiekt zakończy się w"
+        },
         "next_grave": "Następny Grave",
         "previous_grave": "Poprzednie Grave",
         "back_to_search_result": "Powrót do wyników wyszukiwania"
+    },
+    "catacomb": {
+        "next_crypt": "Następna krypta",
+        "prev_crypt": "Poprzednia krypta",
+        "back_to_catacomb_main_gate": "Powrót do głównej bramy katakumb",
+        "detail": {
+            "tab":{
+                "persoanl_details": "Dane osobowe",
+                "in_memoriam": "Ku pamięci",
+                "album": "Album",
+                "remembrance": "Pamięć",
+                "candles": "Świece"
+            },
+            "grave_number": "Ciężki numer",
+            "firstname": "Imię",
+            "surname": "Nazwisko",
+            "dob": "Data urodzenia",
+            "religion": "Religia",
+            "this_object_will_finish_out_in": "Ten obiekt zakończy się w"
+        }
+    },
+    "shop": {
+        "tab": {
+            "candles": "Świece",
+            "funeral_flowers": "Kwiaty pogrzebowe",
+            "stones": "Kamienie",
+            "others": "Inni"
+        }
+    },
+    "contact_us":{
+        "title": "Skontaktuj się z nami",
+        "surname_and_firstname": "Nazwisko i imię",
+        "your_email": "Twój email",
+        "subject": "Przedmiot",
+        "message": "Wiadomość",
+        "send_message": "Wyślij wiadomość"
     }
 }

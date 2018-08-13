@@ -50,7 +50,8 @@ return array(
 				array('api/view', 'pattern'=>'api/<model:\w+>/<id:\d+>', 'verb'=>'GET'),
 				array('api/update', 'pattern'=>'api/<model:\w+>/<id:\d+>', 'verb'=>'PUT'),
 				array('api/delete', 'pattern'=>'api/<model:\w+>/<id:\d+>', 'verb'=>'DELETE'),
-				array('api/create', 'pattern'=>'api/<model:\w+>', 'verb'=>'POST'),
+				array('api/create', 'pattern'=>'api/<model:\w+>', 'verb'=>'POST'), 
+				array('api/create/method/<method>/options/<options>', 'pattern'=>'api/<model:\w+>/<method:\w+>/<options>', 'verb'=>'POST'),
 				// Other controllers
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',

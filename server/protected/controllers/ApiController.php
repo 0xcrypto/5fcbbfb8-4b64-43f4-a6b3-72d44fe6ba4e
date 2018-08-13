@@ -1,26 +1,22 @@
 <?php
 	class ApiController extends Controller
 	{
-		// Members
-		/**
-		 * Key which has to be in HTTP USERNAME and PASSWORD headers 
-		 */
 		Const APPLICATION_ID = 'ASCCPE';
+		const CONFIG = array(
+            'HOST_ADDRESS'=>'www.wirtualnycmentarz.pl'
+        );
+        const PAYMENT_CONFIG = array(
+            'ADMIN_EMAIL_FROM'  => "administracja@wirtualnycmentarz.pl",
+            'ADMIN_EMAIL_TO' => "admin_m@wirtualnycmentarz.pl"  
+        );
 
-		/**
-		 * Default response format
-		 * either 'json' or 'xml'
-		 */
 		private $format = 'json';
-		/**
-		 * @return array action filters
-		 */
+
 		public function filters()
 		{
 				return array();
 		}
 
-		// Actions
 		public function actionList()
 		{
 			$options = null;
@@ -51,6 +47,18 @@
 					}
 					else if($method == 'GRAVE_COMMENTS'){
 						$models = $this->getGraveComments($options);
+					}
+					else if($method == 'CANDLE_TILE_IMAGES'){
+						$models = $this->getCandleTileImages($options);
+					}
+					else if($method == 'FLOWER_TILE_IMAGES'){
+						$models = $this->getFlowerTileImages($options);
+					}
+					else if($method == 'STONE_TILE_IMAGES'){
+						$models = $this->getStoneTileImages($options);
+					}
+					else if($method == 'CARD_TILE_IMAGES'){
+						$models = $this->getCardTileImages($options);
 					}
 					else if($method == 'ADVERTISEMENTS'){
 						$models = Advertisement::model()->findAll();
@@ -131,47 +139,39 @@
 		}
 		public function actionCreate()
 		{
-			switch($_GET['model'])
-			{
-				// Get an instance of the respective model
-				case 'users':
-					$model = new Users;                    
-					break;
-				default:
-					$this->_sendResponse(501, 
-						sprintf('Mode <b>create</b> is not implemented for model <b>%s</b>',
-						$_GET['model']) );
-						Yii::app()->end();
+			$method = null;
+			$options = null;
+
+			if(isset($_POST['method'])){
+                $method = $_POST['method'];
+            }
+
+            if(isset($_POST['options'])){
+                $options = (array)json_decode($_POST['options']);
 			}
 			
-			// Try to assign POST values to attributes
-			foreach($_POST as $var=>$value) {
-				// Does the model have this attribute? If not raise an error
-				if($model->hasAttribute($var))
-					$model->$var = $value;
-				else
-					$this->_sendResponse(500, 
-						sprintf('Parameter <b>%s</b> is not allowed for model <b>%s</b>', $var,
-						$_GET['model']) );
+			switch($_GET['model'])
+			{
+				 case 'data':
+                    if($method == 'COMMENT'){
+                        $result = $this->addComment($options);
+                    }
+                    break;
+                default:
+                    $this->_sendResponse(501, 
+                        sprintf('Mode <b>create</b> is not implemented for model <b>%s</b>',
+                        $_GET['model']) );
+                        Yii::app()->end();
 			}
-			// Try to save the model
-			if($model->save())
-				$this->_sendResponse(200, CJSON::encode($model));
-			else {
-				// Errors occurred
-				$msg = "<h1>Error</h1>";
-				$msg .= sprintf("Couldn't create model <b>%s</b>", $_GET['model']);
-				$msg .= "<ul>";
-				foreach($model->errors as $attribute=>$attr_errors) {
-					$msg .= "<li>Attribute: $attribute</li>";
-					$msg .= "<ul>";
-					foreach($attr_errors as $attr_error)
-						$msg .= "<li>$attr_error</li>";
-					$msg .= "</ul>";
-				}
-				$msg .= "</ul>";
-				$this->_sendResponse(500, $msg );
-			}
+
+			if($result){
+                $this->_sendResponse(200, CJSON::encode($result));
+            }
+            else{
+                $msg = "<h1>Error</h1>";
+                $msg .= sprintf("Couldn't create model <b>%s</b>", $_GET['model']);
+                $this->_sendResponse(500, $msg );
+            }
 		}
 		public function actionUpdate()
 		{
@@ -328,8 +328,7 @@
 		}
 		
 		//$this->_checkAuth();
-		private function _checkAuth()
-		{
+		private function _checkAuth(){
 			// Check if we have the USERNAME and PASSWORD HTTP headers set?
 			if(!(isset($_SERVER['HTTP_X_USERNAME']) and isset($_SERVER['HTTP_X_PASSWORD']))) {
 				// Error: Unauthorized
@@ -701,5 +700,107 @@
 			} 
 			return ($data); 
 		}
+
+		private function getCandleTileImages($options = NULL){
+			$data = array(); 
+			$d = dir("../client/dist/assets/images/znicze/mini_znicze/");
+			while (false !== ($entry = $d->read())) {
+				if($entry=='.' || $entry=='..') continue;
+
+				$data[]=$entry;
+			}
+			$d->close();
+
+			return ($data); 
+		}
+
+		private function getFlowerTileImages($options = NULL){
+			$data = array(); 
+			$d = dir("../client/dist/assets/images/znicze/mini_kwiaty/");
+			while (false !== ($entry = $d->read())) {
+			if($entry=='.' || $entry=='..') continue;
+				$data[]=$entry;
+			}
+			$d->close();
+
+			return ($data); 
+		}
+
+		private function getStoneTileImages($options = NULL){
+			$data = array(); 
+			$d = dir("../client/dist/assets/images/znicze/mini_kamienie/");
+			while (false !== ($entry = $d->read())) {
+			if($entry=='.' || $entry=='..') continue;
+				$data[]=$entry;
+			}
+			$d->close();
+
+			return ($data); 
+		}
+
+		private function getCardTileImages($options = NULL){
+			$data = array(); 
+			$d = dir("../client/dist/assets/images/znicze/mini_kartki/");
+			while (false !== ($entry = $d->read())) {
+			if($entry=='.' || $entry=='..') continue;
+				$data[]=$entry;
+			}
+			$d->close();
+
+			return ($data); 
+		}
+
+		private function addComment($options = NULL){
+            $query="insert into users_comments (nick,body,user_id) values ('".$options['nick']."','".$options['body']."',".$options['user_id'].");";    
+            Yii::app()->db->createCommand("select count(user_id) as total from ($query) t")->execute();
+            
+            if (!empty($body) || !empty($nick)) {
+                try{
+                    //TO-DO = Comment out for live server
+                    //$this->sendEmail($options['nick'], $options['body'], $options['user_id'], 'person');
+                }
+                catch(Exception $e){
+                }
+            }
+            return true;
+        }
+
+        private function sendEmail($nick, $body, $id, $grave_type = 'person') {
+            $mail_to   = $this->PAYMENT_CONFIG['ADMIN_EMAIL_TO'];
+            $mail_from = $this->PAYMENT_CONFIG['ADMIN_EMAIL_FROM'];
+
+            $result = $this->MailContent('NEW_COMMENT', array('id'=>$id, 'nick'=>$nick, 'body'=>$body));
+            $message  = wordwrap($result['content'], 100);          
+            $headers  = 'MIME-Version: 1.0' . "\r\n";
+            $headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
+            $headers .= 'From: '.$mail_from. "\r\n";
+            @mail($mail_to, $result['subject'], $message, $headers);
+        }
+
+        private function MailContent($method, $parameters){
+            $result = array();
+            switch($method){
+                case 'NEW_COMMENT': 
+                            $content = "<strong>Informacja dla administratora</strong><br /><br />";
+                            $content .= "Dodano komentarz do grobu <br />";
+                            if ($grave_type == 'animal')
+                                $content .= "zwierz�cia ANIMAL_ID: ".$parameters['id']." <a href=\"http://www.wirtualnycmentarz.pl/index.php?id_a=".$parameters['id']."\" target=\"_blank\">http://".$this->CONFIG['HOST_ADDRESS']."/index.php?id_a=".$parameters['id']."</a>.";
+                            else
+                                $content .= "osoby PERSON_ID: ".$parameters['id']." <a href=\"http://www.wirtualnycmentarz.pl/index.php?id=".$parameters['id']."\" target=\"_blank\">http://".$this->CONFIG['HOST_ADDRESS']."/index.php?id=".$parameters['id']."</a>.";
+
+                                $content .= "<br><br>";
+                            $content .= "Podpis pod komentarzem: <strong>".$nick."</strong><br><br>";
+                            $content .= "Tre�� komentarza: <strong>".$body."</strong><br><br>";
+                            $subject = "Dodano komentarz - Informacja dla administratora";
+
+                            $result['content'] = $content;
+                            $result['subject'] = $subject;
+                    break;
+                default:
+                    break;
+            }
+            return $result;
+        }
+		
 	}
 ?>

@@ -1,0 +1,48 @@
+    <li class="inline" (click)="openShop();" translate>header.menu.shop</li>
+    <div class="stroke-tabs fixed-positioned" [ngClass]="{'open': isShopDialogOpen }">
+    <button class="close-btn" (click)="closeShop();"><i class="fas fa-times"></i></button>
+    <p class="tab-bar">
+        <span (click)="openTab('tab1');" [ngClass]="{'active': (selectedShopTab == 'tab1')}" translate>shop.tab.candles</span>
+        <span (click)="openTab('tab2');" [ngClass]="{'active': (selectedShopTab == 'tab2')}" translate>shop.tab.funeral_flowers</span>
+        <span (click)="openTab('tab3');" [ngClass]="{'active': (selectedShopTab == 'tab3')}" translate>shop.tab.stones</span>
+        <span (click)="openTab('tab4');" [ngClass]="{'active': (selectedShopTab == 'tab4')}" translate>shop.tab.others</span>
+    </p>
+    <div class="tabs">
+        <div [ngClass]="{'active': (selectedShopTab == 'tab1')}">
+            <div *ngIf="candles">
+                <ng-scrollbar>
+                    <p class="tile" *ngFor="let candle of candles">
+                        <img [attr.src]="candle"/>
+                    </p>
+                </ng-scrollbar>
+            </div>
+        </div>
+        <div [ngClass]="{'active': (selectedShopTab == 'tab2')}">
+            <div *ngIf="flowers">
+                <ng-scrollbar>
+                    <p class="tile" *ngFor="let flower of flowers">
+                        <img [attr.src]="flower"/>
+                    </p>
+                </ng-scrollbar>
+            </div>
+        </div>
+        <div [ngClass]="{'active': (selectedShopTab == 'tab3')}">
+            <div *ngIf="stones">
+                <ng-scrollbar>
+                    <p class="tile" *ngFor="let stone of stones">
+                        <img [attr.src]="stone"/>
+                    </p>
+                </ng-scrollbar>
+            </div>
+        </div>
+        <div [ngClass]="{'active': (selectedShopTab == 'tab4')}">
+            <div *ngIf="cards">
+                <ng-scrollbar>
+                    <p class="tile" *ngFor="let card of cards">
+                        <img [attr.src]="card"/>
+                    </p>
+                </ng-scrollbar>
+            </div>
+        </div>
+    </div>
+</div>

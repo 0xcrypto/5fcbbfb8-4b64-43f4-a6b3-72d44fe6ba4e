@@ -1,0 +1,118 @@
+<div id="content" class="loading-bg" *ngIf="isCatacombsLoading"></div>
+<div id="content" class="catacombs" *ngIf="!isCatacombsLoading" [ngClass]="{
+  'opening-gate': isOpeningGate,
+  'moving-into-dane': isMovingIntoDane, 
+  'reached-into-dane': isInDane}">
+  <div class="top-noticeboard" [ngClass]="{'en': (currentLang == 'en'), 'pl': (currentLang == 'pl')}"></div>
+  <div class="left-noticeboard" [ngClass]="{'en': (currentLang == 'en'), 'pl': (currentLang == 'pl')}"></div>
+  <div class="outer-wall"></div>
+  <div class="gate" (click)="openGate();"></div>
+  <div class="dane-way"></div>
+  
+  <div class="dane">
+    <app-logo></app-logo>
+    <div class="sub-header">
+        <button (click)="nextCrypt()" class="btn-left" translate>catacomb.next_crypt<i class="fa fa-play-circle right-icon"></i></button>
+        <button (click)="backToMainGate()" class="btn-middle" translate>catacomb.back_to_catacomb_main_gate</button>
+        <button (click)="previousCrypt()" class="btn-right" translate><i class="fa fa-play-circle left-icon"></i>catacomb.prev_crypt</button>
+    </div>
+    <div class="catacombs-container" [ngStyle]="{'width': (catacombSize * totalCatacombs)+'px'}">
+        <ul [ngStyle]="{'margin-left': '-'+catacombStartPosition+'px', 'width': (catacombSize * totalCatacombs)+'px'}">
+            <li *ngFor="let catacomb of catacombs">
+                <div  class="catacomb" [ngStyle]="{'background-image': catacomb.imageUrl, 'width': catacombSize+'px'}" >
+                    <div>
+                        <p class="name" (click)="showCatacombDetails(catacomb);">
+                          {{([].constructor.isArray(catacomb).name1) ? 
+                            catacomb.name1[0] : catacomb.name1}} {{catacomb.surname}}</p>
+                        <p>
+                            <span><label>Born</label>{{catacomb.date_birth}}</span>
+                            <span><label>Passed Away</label>{{catacomb.date_death}}</span>
+                        </p>
+                        <p class="slab"></p>
+                        <p class="candle-stand"></p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="stroke-tabs catacomb-detail" [ngClass]="{'open': isCatacombDetailsOpen }">
+            <button class="close-btn" (click)="closeDetails();"><i class="fas fa-times"></i></button>
+            <ul class="tab-bar">
+                <li (click)="openTab('tab1');" [ngClass]="{'active': (selectedCatacombDetailTab == 'tab1')}" translate>catacomb.detail.tab.persoanl_details</li>
+                <li (click)="openTab('tab2');" [ngClass]="{'active': (selectedCatacombDetailTab == 'tab2')}" translate>catacomb.detail.tab.in_memoriam</li>
+                <li (click)="openTab('tab3');" [ngClass]="{'active': (selectedCatacombDetailTab == 'tab3')}" translate>catacomb.detail.tab.album</li>
+                <li (click)="openTab('tab4');" [ngClass]="{'active': (selectedCatacombDetailTab == 'tab4')}" translate>catacomb.detail.tab.remembrance</li>
+                <li (click)="openTab('tab5');" [ngClass]="{'active': (selectedCatacombDetailTab == 'tab5')}" translate>catacomb.detail.tab.candles</li>
+            </ul>
+            <div class="tabs">
+                <div [ngClass]="{'active': (selectedCatacombDetailTab == 'tab1')}">
+                    <div class="col-left">
+                        <img *ngIf="catacombUserImage" [attr.src]="catacombUserImage" class="user-image"/>
+                    </div>
+                    <div class="col-right" *ngIf="catacomb">
+                        <form>
+                            <label>
+                                <span translate>catacomb.detail.grave_number</span>
+                                <span class="field-value">{{catacomb.user_id}}</span>
+                            </label>
+                            <label>
+                                <span translate>catacomb.detail.firstname</span>
+                                <span class="field-value">{{catacomb.name1}}</span>
+                            </label>
+                            <label>
+                                <span translate>catacomb.detail.surname</span>
+                                <span class="field-value">{{catacomb.surname}}</span>
+                            </label>
+                            <label>
+                                <span translate>catacomb.detail.dob</span>
+                                <span class="field-value">{{catacomb.date_birth}}</span>
+                            </label>
+                            <label>
+                                <span translate>catacomb.detail.religion</span>
+                                <span class="field-value">{{catacomb.religion_name}}</span>
+                            </label>
+                        </form>
+                    </div>
+                </div>
+                <div [ngClass]="{'active': (selectedCatacombDetailTab == 'tab2')}">
+                    <div *ngIf="catacomb">
+                        <ul class="text-list" *ngFor="let bio of catacomb.biografia">
+                            <li>
+                                <p class="message">{{bio.message}}</p>
+                                <p class="from">{{bio.from}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div [ngClass]="{'active': (selectedCatacombDetailTab == 'tab3')}">
+                </div>
+                <div [ngClass]="{'active': (selectedCatacombDetailTab == 'tab4')}">
+                    <div *ngIf="catacomb">
+                        <ul class="text-list" *ngFor="let comment of comments">
+                            <li>
+                                <p class="message">{{comment.body}}</p>
+                                <p class="from">
+                                    <span>{{comment.nick}}</span>&nbsp;&nbsp;
+                                    <span>{{comment.add_date}}</span>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div [ngClass]="{'active': (selectedCatacombDetailTab == 'tab5')}">
+                    <div *ngIf="catacomb">
+                        <ul class="text-list" *ngFor="let object of objects">
+                            <li>
+                                <!--object.object_url-->
+                                <p class="from">
+                                    <span class="message">{{object.comment}}</span>&nbsp;&nbsp;
+                                    <span class="message" translate>catacomb.detail.this_object_will_finish_out_in {{object.end_time}}</span>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
