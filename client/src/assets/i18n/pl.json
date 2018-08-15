@@ -87,7 +87,14 @@
                 "in_memoriam": "Ku pamięci",
                 "album": "Album",
                 "remembrance": "Pamięć",
-                "candles": "Świece"
+                "candles": "Świece",
+                "rememberance":{
+                    "add_entry_to_the_book_of_condolence": "Dodaj wpis do Księgi kondolencyjnej",
+                    "max_500_characters": "Maks. 500 znaków",
+                    "back": "Plecy",
+                    "signature": "Podpis",
+                    "add_entry": "Dodaj wpis"
+                }
             },
             "grave_number": "Ciężki numer",
             "firstname": "Imię",
@@ -110,7 +117,14 @@
                 "in_memoriam": "Ku pamięci",
                 "album": "Album",
                 "remembrance": "Pamięć",
-                "candles": "Świece"
+                "candles": "Świece",
+                "rememberance":{
+                    "add_entry_to_the_book_of_condolence": "Dodaj wpis do Księgi kondolencyjnej",
+                    "max_500_characters": "Maks. 500 znaków",
+                    "back": "Plecy",
+                    "signature": "Podpis",
+                    "add_entry": "Dodaj wpis"
+                }
             },
             "grave_number": "Ciężki numer",
             "firstname": "Imię",

@@ -87,7 +87,15 @@
                 "in_memoriam": "In Memoriam",
                 "album": "Album",
                 "remembrance": "Remembrance",
-                "candles": "Candles"
+                "candles": "Candles",
+                "rememberance":{
+                    "add_entry_to_the_book_of_condolence": "Add entry to the Book of condolence",
+                    "max_500_characters": "Max 500 characters",
+                    "back": "Back",
+                    "signature": "Signature",
+                    "add_entry": "Add entry",
+                    "no_entry": "No entry"
+                }
             },
             "grave_number": "Grave Number",
             "firstname": "First Name",
@@ -110,7 +118,15 @@
                 "in_memoriam": "In Memoriam",
                 "album": "Album",
                 "remembrance": "Remembrance",
-                "candles": "Candles"
+                "candles": "Candles",
+                "rememberance":{
+                    "add_entry_to_the_book_of_condolence": "Add entry to the Book of condolence",
+                    "max_500_characters": "Max 500 characters",
+                    "back": "Back",
+                    "signature": "Signature",
+                    "add_entry": "Add entry",
+                    "no_entry": "No entry"
+                }
             },
             "grave_number": "Grave Number",
             "firstname": "First Name",

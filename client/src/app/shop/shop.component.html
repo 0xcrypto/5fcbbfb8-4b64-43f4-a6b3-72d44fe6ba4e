@@ -9,39 +9,31 @@
     </p>
     <div class="tabs">
         <div [ngClass]="{'active': (selectedShopTab == 'tab1')}">
-            <div *ngIf="candles">
-                <ng-scrollbar>
-                    <p class="tile" *ngFor="let candle of candles">
-                        <img [attr.src]="candle"/>
-                    </p>
-                </ng-scrollbar>
+            <div *ngIf="candles" >
+                <p class="tile" *ngFor="let candle of candles">
+                    <img [attr.src]="candle"/>
+                </p>
             </div>
         </div>
         <div [ngClass]="{'active': (selectedShopTab == 'tab2')}">
             <div *ngIf="flowers">
-                <ng-scrollbar>
-                    <p class="tile" *ngFor="let flower of flowers">
-                        <img [attr.src]="flower"/>
-                    </p>
-                </ng-scrollbar>
+                <p class="tile" *ngFor="let flower of flowers">
+                    <img [attr.src]="flower"/>
+                </p>
             </div>
         </div>
         <div [ngClass]="{'active': (selectedShopTab == 'tab3')}">
             <div *ngIf="stones">
-                <ng-scrollbar>
-                    <p class="tile" *ngFor="let stone of stones">
-                        <img [attr.src]="stone"/>
-                    </p>
-                </ng-scrollbar>
+                <p class="tile" *ngFor="let stone of stones">
+                    <img [attr.src]="stone"/>
+                </p>
             </div>
         </div>
         <div [ngClass]="{'active': (selectedShopTab == 'tab4')}">
             <div *ngIf="cards">
-                <ng-scrollbar>
-                    <p class="tile" *ngFor="let card of cards">
-                        <img [attr.src]="card"/>
-                    </p>
-                </ng-scrollbar>
+                <p class="tile" *ngFor="let card of cards">
+                    <img [attr.src]="card"/>
+                </p>
             </div>
         </div>
     </div>

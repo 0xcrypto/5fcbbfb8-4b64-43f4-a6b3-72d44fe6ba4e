@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient }    from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ScrollbarModule } from 'ngx-scrollbar';
-
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -22,7 +20,7 @@ import { GraveyardComponent } from './graveyard/graveyard.component';
 import { SoundComponent } from './sound/sound.component';
 import { ShopComponent } from './shop/shop.component';
 import { CatacombComponent } from './catacomb/catacomb.component';
-
+import { NgSlimScrollModule, SLIMSCROLL_DEFAULTS } from 'ngx-slimscroll';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -51,7 +49,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    ScrollbarModule,
 	  TranslateModule.forRoot({
 		  loader: {
 		    provide: TranslateLoader,
@@ -60,7 +57,15 @@ export function HttpLoaderFactory(http: HttpClient) {
 		  }
   	})
   ],
-  providers: [],
+  providers: [ {
+    provide: SLIMSCROLL_DEFAULTS,
+    useValue: {
+      barBackground: "#FFF",
+      barOpacity: "1",
+      barBorderRadius: "3px",
+      alwaysVisible: true
+    }
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

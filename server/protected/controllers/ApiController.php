@@ -34,47 +34,44 @@
 			{
 				case 'data':
 					if($method == 'GRAVES'){
-						$models = $this->getGraves($options);
+						$results = $this->getGraves($options);
 					}
 					else if($method == 'GRAVE_DETAILS'){
-						$models = $this->getGraveDetails($options);
+						$results = $this->getGraveDetails($options);
 					}
 					else if($method == 'GRAVE_USER_PHOTO'){
-						$models = $this->getGraveUserPhoto($options);
+						$results = $this->getGraveUserPhoto($options);
 					}
 					else if($method == 'GRAVE_CANDLES'){
-						$models = $this->getGraveLights($options);
+						$results = $this->getGraveLights($options);
 					}
 					else if($method == 'GRAVE_COMMENTS'){
-						$models = $this->getGraveComments($options);
+						$results = $this->getGraveComments($options);
 					}
 					else if($method == 'CANDLE_TILE_IMAGES'){
-						$models = $this->getCandleTileImages($options);
+						$results = $this->getCandleTileImages($options);
 					}
 					else if($method == 'FLOWER_TILE_IMAGES'){
-						$models = $this->getFlowerTileImages($options);
+						$results = $this->getFlowerTileImages($options);
 					}
 					else if($method == 'STONE_TILE_IMAGES'){
-						$models = $this->getStoneTileImages($options);
+						$results = $this->getStoneTileImages($options);
 					}
 					else if($method == 'CARD_TILE_IMAGES'){
-						$models = $this->getCardTileImages($options);
+						$results = $this->getCardTileImages($options);
 					}
 					else if($method == 'ADVERTISEMENTS'){
-						$models = Advertisement::model()->findAll();
+						$results = Advertisement::model()->findAll();
 					}
 					else if($method == 'STATIC_PAGES'){
-						$models = StaticPage::model()->findAll();
+						$results = StaticPage::model()->findAll();
 					}
 					else if($method == 'FOOTER_MENUS'){
-						$models = FooterMenu::model()->findAll();
+						$results = FooterMenu::model()->findAll();
 					}
 					else{
-						$models = Users::model()->findAll();
+						$results = Users::model()->findAll();
 					}
-					break;
-				case 'footermenu':
-					$models = FooterMenu::model()->findAll();
 					break;
 				default:
 					// Model not implemented error
@@ -84,9 +81,10 @@
 					Yii::app()->end();
 			}
 
-			// Did we get some results?
+			$this->_sendResponse(200, CJSON::encode($results));
+
+			/*
 			if(empty($models)) {
-				// No
 				$this->_sendResponse(200, 
 						sprintf('No items where found for model <b>%s</b>', $_GET['model']) );
 			} else {
@@ -102,6 +100,7 @@
 				// Send the response
 				$this->_sendResponse(200, CJSON::encode($rows));
 			}
+			*/
 		}
 		public function actionView()
 		{
@@ -140,16 +139,13 @@
 		public function actionCreate()
 		{
 			$method = null;
-			$options = null;
 
-			if(isset($_POST['method'])){
-                $method = $_POST['method'];
+			$options = $_POST;
+
+			if(isset($options['method'])){
+                $method = $options['method'];
             }
 
-            if(isset($_POST['options'])){
-                $options = (array)json_decode($_POST['options']);
-			}
-			
 			switch($_GET['model'])
 			{
 				 case 'data':
@@ -752,7 +748,7 @@
 
 		private function addComment($options = NULL){
             $query="insert into users_comments (nick,body,user_id) values ('".$options['nick']."','".$options['body']."',".$options['user_id'].");";    
-            Yii::app()->db->createCommand("select count(user_id) as total from ($query) t")->execute();
+            Yii::app()->db->createCommand($query)->execute();
             
             if (!empty($body) || !empty($nick)) {
                 try{

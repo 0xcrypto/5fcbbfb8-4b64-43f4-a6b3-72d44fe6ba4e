@@ -201,6 +201,7 @@ body #content.loading-bg{
     background-size: 24%;
     -webkit-animation: backgroundScroll 5s linear infinite;
     animation: backgroundScroll 5s linear infinite;
+    position: relative;
 }
 body #content.catacombs{
     position: relative;
@@ -452,6 +453,13 @@ form > label button {
     border: none;
     cursor: pointer;
 }
+form .block-field{
+    display: block;
+    width: 100%;
+}
+form .text-right{
+    text-align: right;
+}
 .fill-tabs{
     width: 690px;
     margin: 50px auto;
@@ -559,6 +567,9 @@ form > label button {
 .stroke-tabs .tabs > div {
     display: none;
     padding: 10px;
+    height: 380px;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 .stroke-tabs .tabs > div.active,
 .stroke-tabs.open{
@@ -586,6 +597,11 @@ form > label button {
     float: right;
     font-size: 10px;
     font-weight: bold;
+}
+.text-list img {
+    width: 75px;
+    height: 75px;
+    float: left;
 }
 .popular-grave-col{
     width: 40%;
@@ -1105,12 +1121,17 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     bottom: 0;
     z-index: 9;
     overflow: inherit;
-    background-image: url(./assets/images/cat-main.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center 30px;
     -webkit-transition: all 3s linear;
     transition: all 3s linear;
+}
+.catacombs .outer-wall.en{
+    background-image: url(./assets/images/cat-main-en.png);
+}
+.catacombs .outer-wall.pl{
+    background-image: url(./assets/images/cat-main-pl.png);
 }
 .catacombs .gate{
     height: 500px;
@@ -1132,49 +1153,16 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
 .catacombs .gate:hover {
     /*background-image: url(./assets/images/cat-door-light.png);*/
 }
-.catacombs .top-noticeboard{
-    background-size: 300px 90px;
-    background-repeat: no-repeat;
-    width: 300px;
-    height: 80px;
-    position: absolute;
-    left: 385px;
-    top: 85px;
-    z-index: 10;
-}
-.catacombs .top-noticeboard.en{
-    background-image: url(./assets/images/cat-notice-en.png);
-}
-.catacombs .top-noticeboard.pl{
-    background-image: url(./assets/images/cat-notice-pl.png);
-}
-.catacombs .left-noticeboard{
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 200px;
-    height: 100px;
-    position: absolute;
-    top: 285px;
-    left: 70px;
-    z-index: 10;
-}
-.catacombs .left-noticeboard.en{
-    background-image: url(./assets/images/cat-wall-notice-en.png);
-}
-.catacombs .left-noticeboard.pl{
-    background-image: url(./assets/images/cat-wall-notice-pl.png);
-}
 .catacombs.opening-gate .gate {
     -webkit-transform: perspective(300) rotateY(50deg);
     -webkit-transform-origin: 0% 0%;
 }
 .catacombs.moving-into-dane .outer-wall{
-    background-size: 400%;
-    background-position: center -400px;
+    transform: scale(4.2);
 }
 .catacombs.moving-into-dane .dane-way{
-    background-size: 100%;
-    background-position: center bottom;
+    transform: scale(8.0);
+    background-position: center -150px;
 }
 .catacombs.moving-into-dane .gate, 
 .catacombs.moving-into-dane .left-noticeboard, 

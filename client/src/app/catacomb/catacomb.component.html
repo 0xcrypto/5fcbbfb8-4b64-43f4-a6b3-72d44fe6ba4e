@@ -1,11 +1,11 @@
-<div id="content" class="loading-bg" *ngIf="isCatacombsLoading"></div>
+<div id="content" class="loading-bg" *ngIf="isCatacombsLoading" >
+    <img src="./assets/images/logo.gif" id="logo-gif" [ngStyle]="{'height': '200px', 'width':'145px'}"/>
+</div>
 <div id="content" class="catacombs" *ngIf="!isCatacombsLoading" [ngClass]="{
   'opening-gate': isOpeningGate,
   'moving-into-dane': isMovingIntoDane, 
   'reached-into-dane': isInDane}">
-  <div class="top-noticeboard" [ngClass]="{'en': (currentLang == 'en'), 'pl': (currentLang == 'pl')}"></div>
-  <div class="left-noticeboard" [ngClass]="{'en': (currentLang == 'en'), 'pl': (currentLang == 'pl')}"></div>
-  <div class="outer-wall"></div>
+  <div class="outer-wall" [ngClass]="{'en': (currentLang == 'en'), 'pl': (currentLang == 'pl')}"></div>
   <div class="gate" (click)="openGate();"></div>
   <div class="dane-way"></div>
   
@@ -86,9 +86,37 @@
                 <div [ngClass]="{'active': (selectedCatacombDetailTab == 'tab3')}">
                 </div>
                 <div [ngClass]="{'active': (selectedCatacombDetailTab == 'tab4')}">
-                    <div *ngIf="catacomb">
-                        <ul class="text-list" *ngFor="let comment of comments">
-                            <li>
+                    <form [hidden]="!isRemeberanceFormOpen">
+                        <h4 translate>catacomb.detail.tab.rememberance.add_entry_to_the_book_of_condolence</h4>
+                        <label>
+                            <span translate>catacomb.detail.tab.rememberance.max_500_characters</span>
+                            <textarea [(ngModel)]="condolenceMessage" name="message" [ngStyle]="{'height': '100px'}" class="block-field" rows="20"></textarea>
+                        </label>
+                        <label class="text-right">
+                            <span translate>catacomb.detail.tab.rememberance.signature</span>
+                            <input [(ngModel)]="condolenceSignature" name="signature" type="text">
+                        </label>
+                        <label>
+                            <button (click)="closeRememberanceForm();" class="align-left">
+                                <i class="fa fa-backward"></i>
+                                <span translate>&nbsp;&nbsp;catacomb.detail.tab.rememberance.back</span>
+                            </button>
+                            <button class="align-right" (click)="addCondolence();">
+                                <span translate>catacomb.detail.tab.rememberance.add_entry&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                    <div *ngIf="catacomb"  [hidden]="isRemeberanceFormOpen">
+                        <form>
+                            <label [ngStyle]="{'height': '10px'}">
+                                <span *ngIf="(comments.lenght == 0)" translate>catacomb.detail.tab.rememberance.no_entry</span>
+                                <button (click)="openRememberanceForm();" class="align-right" translate>catacomb.detail.tab.rememberance.add_entry
+                                    <i class="fa fa-forward"></i></button>
+                            </label>
+                        </form>
+                        <ul class="text-list" >
+                            <li *ngFor="let comment of comments">
                                 <p class="message">{{comment.body}}</p>
                                 <p class="from">
                                     <span>{{comment.nick}}</span>&nbsp;&nbsp;
@@ -101,8 +129,8 @@
                 <div [ngClass]="{'active': (selectedCatacombDetailTab == 'tab5')}">
                     <div *ngIf="catacomb">
                         <ul class="text-list" *ngFor="let object of objects">
-                            <li>
-                                <!--object.object_url-->
+                            <li *ngFor="let object of objects">
+                                <img [attr.src]="object.object_url"/>
                                 <p class="from">
                                     <span class="message">{{object.comment}}</span>&nbsp;&nbsp;
                                     <span class="message" translate>catacomb.detail.this_object_will_finish_out_in {{object.end_time}}</span>

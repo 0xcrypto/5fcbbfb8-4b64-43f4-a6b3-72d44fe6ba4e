@@ -74,15 +74,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!--<ng-scrollbar>-->
-                            <tr *ngFor="let user of users"  (click)="loadingGrave(user)">
-                                <td class="x text-center">{{ user.position }}</td>
-                                <td class="xxx">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</td>
-                                <td class="xx text-center">{{user.date_birth}}</td>
-                                <td class="xx text-center">{{user.date_death}}</td>
-                                <td class="xx text-center">{{user.place_name}}</td>
-                            </tr>
-                        <!--</ng-scrollbar>-->
+                        <tr *ngFor="let user of users"  (click)="loadingGrave(user)">
+                            <td class="x text-center">{{ user.position }}</td>
+                            <td class="xxx">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</td>
+                            <td class="xx text-center">{{user.date_birth}}</td>
+                            <td class="xx text-center">{{user.date_death}}</td>
+                            <td class="xx text-center">{{user.place_name}}</td>
+                        </tr>
                     </tbody>
                     <tfoot>
                         <tr>

@@ -69,6 +69,13 @@ export class DataService {
 		  catchError(this.handleError<any>('add'))
 		);
 	}
+	
+	createWithMethodAndOptions(options: any): Observable<any> {
+		let data = this.jsonToURLEncoded(options);
+		return this.http.post<any>(this.apiURL, data, httpOptions).pipe(
+		  catchError(this.handleError<any>('createWithMethodAndOptions'))
+		);
+	}
 
 	delete (any: any | number): Observable<any> {
 		const id = typeof any === 'number' ? any : any.any_id;

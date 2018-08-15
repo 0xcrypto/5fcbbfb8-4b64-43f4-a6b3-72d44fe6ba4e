@@ -33,6 +33,10 @@ export class GraveyardComponent implements OnInit {
   isGraveDetailsOpen:boolean = false;
   isThunderstromScene:boolean = false;
   isGraveyardLoading:boolean = true;
+  isRemeberanceFormOpen:boolean = false;
+  condolenceMessage:string = null;
+  condolenceSignature:string = null;
+  selectedGraveId:number = 0;
   router:Router = null;
   totalGraves: number = 0;
   graveSize: number = 512;
@@ -72,6 +76,14 @@ export class GraveyardComponent implements OnInit {
         this.isGraveyardLoading = false;
       });
     this.selectedGraveDetailTab = 'tab1';
+
+
+    let context = this;
+    window.addEventListener("load",function(){
+      document.querySelector('#content.loading-bg').addEventListener("mousemove", context.mouseMove);
+      document.querySelector('#content.loading-bg').addEventListener("mouseup", context.mouseUp);
+      document.querySelector('#content.loading-bg').addEventListener("mousedown", context.mouseDown); 
+    });
   }
 
   backToSearchResults(){
@@ -93,7 +105,8 @@ export class GraveyardComponent implements OnInit {
   getGraves(param: string): void {
     
   }
-  showGraveDetails(grave:User): void{
+  showGraveDetails(grave:any): void{
+    this.selectedGraveId = grave.user_id;
     this.isGraveDetailsOpen = true;
     this.selectedGraveDetailTab = 'tab1';
     
@@ -124,8 +137,20 @@ export class GraveyardComponent implements OnInit {
     this.dataService.getAllWithMethodAndOptions('GRAVE_CANDLES', this._global.serializeAndURIEncode(this.options))
       .subscribe(data => {
         this.objects = data;
-        for(var i=0; i<=this.objects.length-1; i++)
-          this.objects[i]['object_url'] = './assets/images/znicze/'+this.objects[i].object_name+this.objects[i].object_id+'.swf';
+        for(var i=0; i<=this.objects.length-1; i++){
+          if(this.objects[i].object_name == 'kwiat'){
+            this.objects[i]['object_url'] = './assets/images/znicze/kwiat'+this.objects[i].object_id+'.png';
+          }
+          else if(this.objects[i].object_name == 'inne'){
+            this.objects[i]['object_url'] = './assets/images/znicze/inne'+this.objects[i].object_id+'.png';
+          }
+          else if(this.objects[i].object_name == 'kamien'){
+            this.objects[i]['object_url'] = './assets/images/znicze/kamien'+this.objects[i].object_id+'.png';
+          }
+          else if(this.objects[i].object_name == 'znicz'){
+            this.objects[i]['object_url'] = './assets/images/znicze/znicz'+this.objects[i].object_id+'.gif';
+          }
+        }
       }
     );
   }
@@ -134,5 +159,40 @@ export class GraveyardComponent implements OnInit {
   }
   openTab(tabName:string):void{
     this.selectedGraveDetailTab = tabName;
+  }
+  openRememberanceForm(){
+    this.isRemeberanceFormOpen = true;
+  }
+  closeRememberanceForm(){
+    this.isRemeberanceFormOpen = false;
+  }
+  addCondolence(){
+    this.options = this._global.refreshObject(this.options, ['nick='+this.condolenceSignature, 
+    'body='+this.condolenceMessage, 'user_id='+this.selectedGraveId, 'method=COMMENT']);
+    this.dataService.createWithMethodAndOptions(this.options)
+      .subscribe(result => {
+        this.options = this._global.refreshObject(this.options, ['user_id='+this.selectedGraveId]);
+        this.dataService.getAllWithMethodAndOptions('GRAVE_COMMENTS', this._global.serializeAndURIEncode(this.options))
+          .subscribe(comments => {
+            this.comments = comments;
+            this.isRemeberanceFormOpen = false;
+          }
+        );
+      });
+  }
+  mouseUp = (event: MouseEvent) => {
+    this.moveLogo(event);
+  }
+  mouseDown = (event: MouseEvent) => {
+    this.moveLogo(event);
+  }
+  mouseMove = (event: MouseEvent) => {
+    this.moveLogo(event);
+  }
+  moveLogo(event:MouseEvent){
+    var image = document.getElementById('logo-gif');
+    image.style.position = 'absolute';
+    image.style.top = event.clientY + 'px';
+    image.style.left = event.clientX + 'px';
   }
 }
