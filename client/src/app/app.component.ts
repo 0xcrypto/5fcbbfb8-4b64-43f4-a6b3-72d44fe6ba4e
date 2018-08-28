@@ -9,16 +9,17 @@ import { AppGlobals } from './app.globals';
   providers: [AppGlobals]
 })
 export class AppComponent {
-  
+  private CURRENT_LANGUAGE: string = null;
+
   constructor(private translate: TranslateService, private _global: AppGlobals) {
-    translate.addLangs(['en', 'pl']);
-    translate.setDefaultLang('en');
-    translate.use('en');
-    this._global.setLanguage('en');
+    translate.addLangs(this._global.LANGUAGES);
+    let lang = this._global.getLanguage();
+    translate.setDefaultLang(lang);
+    translate.use(lang);
   }
 
-  changeLang(lang: string) {
-    this.translate.use(lang);
+  changeLang(lang:string){
     this._global.setLanguage(lang);
+    this.translate.use(lang);
   }
 }

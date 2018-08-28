@@ -3,13 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent }   from './home/home.component';
 import { NoticeboardComponent }      from './noticeboard/noticeboard.component';
-import { FooterComponent }      from './footer/footer.component';
 import { ContactusComponent }      from './contactus/contactus.component';
 import { StaticpageComponent }    from './staticpage/staticpage.component';
 import { ForumComponent }    from './forum/forum.component';
 import { PricingComponent }    from './pricing/pricing.component';
 import { GraveyardComponent }    from './graveyard/graveyard.component';
 import { CatacombComponent }    from './catacomb/catacomb.component';
+import { AnimalNoticeboardComponent }    from './animal-noticeboard/animal-noticeboard.component';
+import { AnimalGraveyardComponent } from './animal-graveyard/animal-graveyard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -22,6 +23,8 @@ const routes: Routes = [
   { path: 'staticpage/:id', component: StaticpageComponent },
   { path: 'graveyard/:position/:scene', component: GraveyardComponent },
   { path: 'catacombs', component: CatacombComponent },
+  { path: 'animal-noticeboard', component: AnimalNoticeboardComponent },
+  { path: 'animal-graveyard/:position/:scene', component: AnimalGraveyardComponent },
 ];
 
 @NgModule({

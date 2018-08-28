@@ -151,5 +151,93 @@
         "subject": "Subject",
         "message": "Message",
         "send_message": "Send Message"
+    },
+    "animal_graveyard": {
+        "noticeboard" : {
+            "tabs" : {
+                "graveyard_noticeboard" : {
+                    "title": "Graveyard Noticeboard",
+                    "go_to_graveyard": "Go to Graveyard",
+                    "choose_graveyard": "Choose graveyard",
+                    "special_grave": "Special grave",
+                    "grave_number": "Grave number",
+                    "go_back_to_main_gate" : "Go Back to main gate",
+                    "will_be_sadly_missed" : "Will be sadly missed"
+                },
+                "book_of_dead" : {
+                    "loading_data":"Loading Data...",
+                    "title": "Book of Dead",
+                    "show": "Show :",
+                    "show_all": "Show All",
+                    "previous": "Previous",
+                    "next": "Next",
+                    "surname_firstname": "Surname/First Name",
+                    "dob": "Date of Birth",
+                    "passed_away": "Passed Away",
+                    "burial": "Burial"
+                },
+                "search" : {
+                    "title": "Search",
+                    "form": {
+                        "find_grave": "Find Grave",
+                        "enter_at_least_one_field": "Enter at least one field",
+                        "name": "Name",
+                        "dob": "Date of Birth",
+                        "passed_away": "Passed Away",
+                        "search": "Search"
+                    },
+                    "list": {
+                        "searching_data":"Searching Data...",
+                        "back_to_search": "Back to search",
+                        "show": "Show :",
+                        "show_all": "Show All",
+                        "previous": "Previous",
+                        "next": "Next",
+                        "surname_firstname": "Surname/First Name",
+                        "dob": "Date of Birth",
+                        "passed_away": "Passed Away",
+                        "burial": "Burial"
+                    }
+                },
+                "graveyard_burial" : {
+                    "title": "Graveyard Burial"
+                }
+            }
+        },
+        "loading_screen" : {
+            "day": "Day",
+            "night": "Night",
+            "blue_sky": "Blue Sky",
+            "rain": "Rain",
+            "thunder_strom": "Thunderstrom",
+            "snow": "Snow",
+            "random": "Random"
+        },
+        "detail": {
+            "tab":{
+                "persoanl_details": "Persoanl Details",
+                "in_memoriam": "In Memoriam",
+                "album": "Album",
+                "remembrance": "Remembrance",
+                "candles": "Candles",
+                "rememberance":{
+                    "add_entry_to_the_book_of_condolence": "Add entry to the Book of condolence",
+                    "max_500_characters": "Max 500 characters",
+                    "back": "Back",
+                    "signature": "Signature",
+                    "add_entry": "Add entry",
+                    "no_entry": "No entry"
+                }
+            },
+            "grave_number": "Grave Number",
+            "firstname": "First Name",
+            "surname": "Surname/Last Name",
+            "dob": "Date of Birth",
+            "religion": "Religion",
+            "this_object_will_finish_out_in": "This object will finish out in "
+        },
+        "next_grave": "Next Grave",
+        "previous_grave": "Previous Grave",
+        "back_to_search_result": "Back to search results"
     }
 }

@@ -9,24 +9,22 @@ import { AppGlobals } from '../app.globals';
 import { debug } from 'util';
 import { _iterableDiffersFactory } from '@angular/core/src/application_module';
 
-export interface UserOptions {
-  limit: number;
-};
+export interface UserOptions {};
 
 @Component({
-  selector: 'app-graveyard',
-  templateUrl: './graveyard.component.html'
+  selector: 'app-animal-graveyard',
+  templateUrl: './animal-graveyard.component.html'
 })
-export class GraveyardComponent implements OnInit {
-  graves: User[] = [];
+export class AnimalGraveyardComponent implements OnInit {
+  animals: any[] = [];
   comments: any[] = [];
   objects: any[] = [];
-  grave: User = null;
+  animal: any = null;
   position: number = 0;
   skyImage: string = null;
-  graveUserImage: string = null;
+  animalImage: string = null;
   graveyardImage: string = null;
-  selectedGraveDetailTab: string = null;
+  selectedAnimalDetailTab: string = null;
   graveyardStartPosition: number = null;
   isRainfallScene:boolean = false;
   isSnowfallScene:boolean = false;
@@ -36,9 +34,9 @@ export class GraveyardComponent implements OnInit {
   isRemeberanceFormOpen:boolean = false;
   condolenceMessage:string = null;
   condolenceSignature:string = null;
-  selectedGraveId:number = 0;
+  selectedAnimalId:number = 0;
   router:Router = null;
-  totalGraves: number = 0;
+  totalAnimals: number = 0;
   graveSize: number = 512;
   options: UserOptions = {
     limit: 10
@@ -62,20 +60,20 @@ export class GraveyardComponent implements OnInit {
       this.isThunderstromScene = true;
     }
     this.skyImage = 'url(./assets/images/sky/'+this._global.getSkyImage(scene)+')';
-    this.graveyardImage = 'url(./assets/images/graveyard-backgrounds/'+this._global.getGraveyardImage(scene)+')';
-    this.options = this._global.refreshObject(this.options, ['limit=10', 'position='+position, 'order=user_id']);
-    this.dataService.getAllWithMethodAndOptions('PERSONS', this._global.serializeAndURIEncode(this.options))
-      .subscribe(graves => {
-        this.graves = graves.reverse();
-        this.totalGraves = graves.length;
-        this.graveyardStartPosition = ((this.totalGraves - 2) * this.graveSize );
-        for(let i=0; i<=graves.length-1;i++){
-          //graves[i].graveUrl = 'url(./assets/images/graves/grob'+graves[i].grave_id+'_'+graves[i].grave_image+'.png)';
-          graves[i].graveUrl = 'url(./assets/images/graves/grob1_'+graves[i].grave_image+'.png)';
+    this.graveyardImage = 'url(./assets/images/graveyard-backgrounds/'+this._global.getAnimalGraveyardImage(scene)+')';
+    this.options = this._global.refreshObject(this.options, ['limit=10', 'position='+position, 'order=animal_id']);
+    this.dataService.getAllWithMethodAndOptions('ANIMALS', this._global.serializeAndURIEncode(this.options))
+      .subscribe(animals => {
+        this.animals = animals.reverse();
+        this.totalAnimals = animals.length;
+        this.graveyardStartPosition = ((this.totalAnimals - 2) * this.graveSize );
+        for(let i=0; i<=animals.length-1;i++){
+          //animals[i].graveUrl = 'url(./assets/images/animals/grob'+animals[i].grave_id+'_'+animals[i].grave_image+'.png)';
+          animals[i].graveUrl = 'url(./assets/images/graves/grob_zw1_'+animals[i].grave_image+'.png)';
         }
         this.isGraveyardLoading = false;
       });
-    this.selectedGraveDetailTab = 'tab1';
+    this.selectedAnimalDetailTab = 'tab1';
 
 
     let context = this;
@@ -87,7 +85,7 @@ export class GraveyardComponent implements OnInit {
   }
 
   backToSearchResults(){
-    this.router.navigateByUrl('/noticeboard');
+    this.router.navigateByUrl('/animal-noticeboard');
   }
 
   nextGrave(){
@@ -96,46 +94,43 @@ export class GraveyardComponent implements OnInit {
   }
 
   previousGrave(){
-    if(this.graveyardStartPosition == ((this.totalGraves - 2) * this.graveSize ))
+    if(this.graveyardStartPosition == ((this.totalAnimals - 2) * this.graveSize ))
       return;
 
     this.graveyardStartPosition += this.graveSize;
   }
 
-  getGraves(param: string): void {
-    
-  }
-  showGraveDetails(grave:any): void{
-    this.selectedGraveId = grave.user_id;
+  showGraveDetails(animal:any): void{
+    this.selectedAnimalId = animal.animal_id;
     this.isGraveDetailsOpen = true;
-    this.selectedGraveDetailTab = 'tab1';
+    this.selectedAnimalDetailTab = 'tab1';
     
-    this.grave = null;
-    this.graveUserImage = null;
-    this.options = this._global.refreshObject(this.options, ['limit=10', 'position=0', 'user_id='+grave.user_id]);
-    this.dataService.getAllWithMethodAndOptions('PERSON_DETAILS', this._global.serializeAndURIEncode(this.options))
-      .subscribe(graves => {
-        this.grave = graves[0];
+    this.animal = null;
+    this.animalImage = null;
+    this.options = this._global.refreshObject(this.options, ['id='+animal.animal_id]);
+    this.dataService.getAllWithMethodAndOptions('ANIMAL_DETAILS', this._global.serializeAndURIEncode(this.options))
+      .subscribe(animals => {
+        this.animal = animals[0];
       }
     );
     
-    this.options = this._global.refreshObject(this.options, ['user_id='+grave.user_id]);
-    this.dataService.getAllWithMethodAndOptions('PERSON_COMMENTS', this._global.serializeAndURIEncode(this.options))
+    this.options = this._global.refreshObject(this.options, ['id='+animal.animal_id]);
+    this.dataService.getAllWithMethodAndOptions('ANIMAL_COMMENTS', this._global.serializeAndURIEncode(this.options))
       .subscribe(data => {
         this.comments = data;
       }
     );
 
-    this.options = this._global.refreshObject(this.options, ['user_id='+grave.user_id]);
-    this.dataService.getAllWithMethodAndOptions('PERSON_PHOTOS', this._global.serializeAndURIEncode(this.options))
+    this.options = this._global.refreshObject(this.options, ['id='+animal.animal_id]);
+    this.dataService.getAllWithMethodAndOptions('ANIMAL_PHOTOS', this._global.serializeAndURIEncode(this.options))
       .subscribe(data => {
         if(data.length > 0 )
-          this.graveUserImage = './assets/images/zdjecia/large/'+data[0].file_name;
+          this.animalImage = './assets/images/zdjecia/large/'+data[0].file_name;
       }
     );
 
-    this.options = this._global.refreshObject(this.options, ['object_name=znicz', 'user_id='+grave.user_id]);
-    this.dataService.getAllWithMethodAndOptions('PERSON_OBJECTS', this._global.serializeAndURIEncode(this.options))
+    this.options = this._global.refreshObject(this.options, ['object_name=znicz', 'id='+animal.animal_id]);
+    this.dataService.getAllWithMethodAndOptions('ANIMAL_OBJECTS', this._global.serializeAndURIEncode(this.options))
       .subscribe(data => {
         this.objects = data;
         for(var i=0; i<=this.objects.length-1; i++){
@@ -159,7 +154,7 @@ export class GraveyardComponent implements OnInit {
     this.isGraveDetailsOpen = false;
   }
   openTab(tabName:string):void{
-    this.selectedGraveDetailTab = tabName;
+    this.selectedAnimalDetailTab = tabName;
   }
   openRememberanceForm(){
     this.isRemeberanceFormOpen = true;
@@ -169,11 +164,11 @@ export class GraveyardComponent implements OnInit {
   }
   addCondolence(){
     this.options = this._global.refreshObject(this.options, ['nick='+this.condolenceSignature, 
-    'body='+this.condolenceMessage, 'user_id='+this.selectedGraveId, 'method=PERSON_COMMENT']);
+    'body='+this.condolenceMessage, 'animal_id='+this.selectedAnimalId, 'method=ANIMAL_COMMENT']);
     this.dataService.createWithMethodAndOptions(this.options)
       .subscribe(result => {
-        this.options = this._global.refreshObject(this.options, ['user_id='+this.selectedGraveId]);
-        this.dataService.getAllWithMethodAndOptions('PERSON_COMMENTS', this._global.serializeAndURIEncode(this.options))
+        this.options = this._global.refreshObject(this.options, ['id='+this.selectedAnimalId]);
+        this.dataService.getAllWithMethodAndOptions('ANIMAL_COMMENTS', this._global.serializeAndURIEncode(this.options))
           .subscribe(comments => {
             this.comments = comments;
             this.isRemeberanceFormOpen = false;

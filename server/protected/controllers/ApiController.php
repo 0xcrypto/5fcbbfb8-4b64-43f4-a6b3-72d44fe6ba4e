@@ -33,66 +33,46 @@
 			switch($_GET['model'])
 			{
 				case 'data':
-					if($method == 'GRAVES'){
-						$results = $this->getGraves($options);
-					}
-					else if($method == 'GRAVE_DETAILS'){
-						$results = $this->getGraveDetails($options);
-					}
-					else if($method == 'GRAVE_USER_PHOTO'){
-						$results = $this->getGraveUserPhoto($options);
-					}
-					else if($method == 'GRAVE_CANDLES'){
-						$results = $this->getGraveLights($options);
-					}
-					else if($method == 'GRAVE_COMMENTS'){
-						$results = $this->getGraveComments($options);
-					}
-					else if($method == 'CANDLE_TILE_IMAGES'){
+					if($method == 'PERSONS')
+						$results = $this->getPersons($options);
+					else if($method == 'PERSON_DETAILS')
+						$results = $this->getPersonDetails($options);
+					else if($method == 'PERSON_PHOTOS')
+						$results = $this->getPersonPhotos($options);
+					else if($method == 'PERSON_OBJECTS')
+						$results = $this->getPersonObjects($options);
+					else if($method == 'PERSON_COMMENTS')
+						$results = $this->getPersonComments($options);
+					else if($method == 'ANIMAL_TYPES')
+						$results = $this->getAnimalTypes($options);
+					else if($method == 'ANIMALS')
+						$results = $this->getAnimals($options);
+					else if($method == 'ANIMAL_DETAILS')
+						$results = $this->getAnimalDetails($options);
+					else if($method == 'ANIMAL_COMMENTS')
+						$results = $this->getAnimalComments($options);
+					else if($method == 'ANIMAL_PHOTOS')
+						$results = $this->getAnimalPhotos($options);
+					else if($method == 'ANIMAL_OBJECTS')
+						$results = $this->getAnimalObjects($options);
+					else if($method == 'CANDLE_TILE_IMAGES')
 						$results = $this->getCandleTileImages($options);
-					}
-					else if($method == 'FLOWER_TILE_IMAGES'){
+					else if($method == 'FLOWER_TILE_IMAGES')
 						$results = $this->getFlowerTileImages($options);
-					}
-					else if($method == 'STONE_TILE_IMAGES'){
+					else if($method == 'STONE_TILE_IMAGES')
 						$results = $this->getStoneTileImages($options);
-					}
-					else if($method == 'CARD_TILE_IMAGES'){
+					else if($method == 'CARD_TILE_IMAGES')
 						$results = $this->getCardTileImages($options);
-					}
-					else if($method == 'ADVERTISEMENTS'){
-						$results = Advertisement::model()->findAll();
-					}
-					else if($method == 'STATIC_PAGES'){
-						$results = StaticPage::model()->findAll();
-					}
-					else if($method == 'FOOTER_MENUS'){
-						$results = FooterMenu::model()->findAll();
-					}
-					else if($method == 'PET_TYPES'){
-						$results = $this->getPetTypes($options);
-					}
-					else if($method == 'PET_GRAVES'){
-						$results = $this->getPetGraves($options);
-					}
-					else if($method == 'PET_GRAVE_DETAILS'){
-						$results = $this->getPetGraveData($options);
-					}
-					else if($method == 'PET_GRAVES_COMMENTS'){
-						$results = $this->getPetGraveComments($options);
-					}
-					else if($method == 'PET_GRAVE_PHOTO'){
-						$results = $this->getPetGravePhoto($options);
-					}
-					else if($method == 'PET_GRAVE_CANDLES'){
-						$results = $this->getPetGraveCandles($options);
-					}
-					else if($method == 'LOGIN'){
+					else if($method == 'LOGIN')
 						$results = $this->loginBuyerAndFetchGraves($options);
-					}
-					else{
-						$results = users::model()->findAll();
-					}
+						else if($method == 'ADVERTISEMENTS')
+						$results = Advertisement::model()->findAll();
+					else if($method == 'STATIC_PAGES')
+						$results = StaticPage::model()->findAll();
+					else if($method == 'FOOTER_MENUS')
+						$results = FooterMenu::model()->findAll();
+					else
+						$results = array();
 					break;
 				default:
 					// Model not implemented error
@@ -170,13 +150,13 @@
 			switch($_GET['model'])
 			{
 				 case 'data':
-                    if($method == 'COMMENT'){
-                        $result = $this->addComment($options);
-					}
-					else if($method == 'REGISTER'){
+                    if($method == 'PERSON_COMMENT')
+                        $result = $this->addPersonComment($options);
+				    else if($method == 'ANIMAL_COMMENT')
+                        $result = $this->addAnimalComment($options);
+					else if($method == 'REGISTER')
                         $result = $this->register($options);
-					}
-                    break;
+					break;
                 default:
                     $this->_sendResponse(501, 
                         sprintf('Mode <b>create</b> is not implemented for model <b>%s</b>',
@@ -346,8 +326,6 @@
 			);
 			return (isset($codes[$status])) ? $codes[$status] : '';
 		}
-		
-		//$this->_checkAuth();
 		private function _checkAuth(){
 			// Check if we have the USERNAME and PASSWORD HTTP headers set?
 			if(!(isset($_SERVER['HTTP_X_USERNAME']) and isset($_SERVER['HTTP_X_PASSWORD']))) {
@@ -367,9 +345,47 @@
 			}
 		}
 
-		private function getGraves($options = NULL){
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['order'] -> 'rand','surname', 'date_death', 'date_birth', 'user_id'
+
+			optional $options['excludedGraves']
+			optional $options['birth_date']
+			optional $options['death_date']
+			optional $options['firstname']
+			optional $options['visibility']
+			optional $options['lastname']
+			optional $options['lastname_start']
+			optional $options['birth_date_c']
+			optional $options['death_date_c']
+			optional $options['gender']
+			optional $options['religion_id']
+			optional $options['surname_other']
+			optional $options['exwife_surname']
+			optional $options['place_birth']
+			optional $options['place_death']
+			optional $options['death_reason'])
+			optional $options['hobby']
+			optional $options['parent_surname']
+			optional $options['country_birth']
+			optional $options['country_death']
+			optional $options['sex_id']
+			optional $options['religion_id']
+			optional $options['profession_id']
+			optional $options['graveyard_id']
+			optional $options['place_id']
+
+		***/
+
+		private function getPersons($options = NULL){
 			$excludedGraves = null;
+			$birth_date = null;
+			$death_date = null;
+            $position = isset($options['position']) ? $options['position'] : 0;
+			$limit = isset($options['limit']) ? $options['limit'] : 15;
 			$order = isset($options['order']) ? $options['order'] : null;
+			
 			if(isset($options['excludedGraves']) && count($options['excludedGraves'])>0)
 			{
 				$excludedGraves = $options['excludedGraves'];
@@ -377,7 +393,7 @@
 					$excludedGraves[$k]=intval($v);
 			} 
 
-			if(isset($options['birth_date']) && !empty($options['birth_date']))
+			if(isset($options['birth_date']))
 			{
 				//we're processing the date format
 				$tmp=explode("-", $options['birth_date']);
@@ -387,7 +403,7 @@
 					$birth_date=$tmp[2].'-'.$tmp[1];
 			}
 			
-			if(isset($options['death_date']) && !empty($options['death_date']))
+			if(isset($options['death_date']))
 			{
 				//we're processing the date format
 				$tmp=explode("-", $options['death_date']);
@@ -433,145 +449,148 @@
 								left join sex s on u.sex_id=s.sex_id
 				WHERE ( u.is_deleted=0 OR u.is_deleted=1 )" ;
 
-				if(isset($options['firstname'])) $query.=" and u.name1 like '%".$options['firstname']."%'";
-				if(isset($options['visibility'])) $query.=" and u.visibility = ".$options['visibility'];
-				if(isset($options['lastname'])) $query.=" and u.surname like '%".$options['lastname']."%'";
-				if(isset($options['lastname_start'])) $query.=" and u.surname like '".$options['lastname_start']."%'";
-				if(isset($options['birth_date'])) $query.=" and u.date_birth like '".$options['birth_date']."%'";
-				if(isset($options['death_date']) && $options['death_date']=='zmarli') $query.=" and u.date_death!='0000-00-00' and u.date_death is not null"; 
-				elseif(isset($options['death_date']) && $options['death_date']=='dzieci') $query.=" and PERIOD_DIFF(DATE_FORMAT(date_death,'%Y%m'),DATE_FORMAT(date_birth,'%Y%m'))/12<18"; 
-				elseif(isset($options['death_date'])) $query.=" and u.date_death like '".$options['death_date']."%'";
-				if(isset($options['birth_date_c']) && $options['birth_date_c']=='AC') $query.=" and (u.c_birth='AC' or u.c_birth is null or u.c_birth='')";
-				elseif(isset($options['birth_date_c'])) $query.=" and u.c_birth='".$options['birth_date_c']."'";
-				if(isset($options['death_date_c']) && $options['death_date_c']=='AC') $query.=" and (u.c_death='AC' or u.c_death is null or u.c_death='')";
-				elseif(isset($options['death_date_c'])) $query.=" and u.c_death='".$options['death_date_c']."'";
-				if(isset($options['gender'])) $query.=" and u.gender='".$options['gender']."'";
-				if(isset($options['religion_id'])) $query.=" and u.religion_id='".$options['religion_id']."'";
-				if(isset($options['surname_other'])) $query.=" and u.surname_other like '%".$options['surname_other']."%'";
-				if(isset($options['exwife_surname'])) $query.=" and u.exwife_surname like '%".$options['exwife_surname']."%'";
-				if(isset($options['place_birth'])) $query.=" and u.place_birth='".$options['place_birth']."'";
-				if(isset($options['place_death'])) $query.=" and u.place_death='".$options['place_death']."'";
-				if(isset($options['death_reason'])) $query.=" and u.death_reason='".$options['death_reason']."'";
-				if(isset($options['hobby'])) $query.=" and u.hobby='".$options['hobby']."'";
-				if(isset($options['parent_surname'])) $query.=" and (u.father_surname like '%".$options['parent_surname']."%' or u.mother_surname like '%".$parent_surname."%')";
-				if(isset($options['country_birth'])) $query.=" and u.country_birth='".$options['country_birth']."'";
-				if(isset($options['country_death'])) $query.=" and u.country_death='".$options['country_death']."'";
-				if(isset($options['sex_id'])) $query.=" and u.sex_id='".$options['sex_id']."'";
-				if(isset($options['religion_id'])) $query.=" and u.religion_id='".$options['religion_id']."'";
-				if(isset($options['profession_id'])) $query.=" and u.profession_id='".$options['profession_id']."'";
+			if(isset($options['firstname'])) $query.=" and u.name1 like '%".$options['firstname']."%'";
+			if(isset($options['visibility'])) $query.=" and u.visibility = ".$options['visibility'];
+			if(isset($options['lastname'])) $query.=" and u.surname like '%".$options['lastname']."%'";
+			if(isset($options['lastname_start'])) $query.=" and u.surname like '".$options['lastname_start']."%'";
+			if(isset($options['birth_date'])) $query.=" and u.date_birth like '".$options['birth_date']."%'";
+			if(isset($options['death_date']) && $options['death_date']=='zmarli') $query.=" and u.date_death!='0000-00-00' and u.date_death is not null"; 
+			elseif(isset($options['death_date']) && $options['death_date']=='dzieci') $query.=" and PERIOD_DIFF(DATE_FORMAT(date_death,'%Y%m'),DATE_FORMAT(date_birth,'%Y%m'))/12<18"; 
+			elseif(isset($options['death_date'])) $query.=" and u.date_death like '".$options['death_date']."%'";
+			if(isset($options['birth_date_c']) && $options['birth_date_c']=='AC') $query.=" and (u.c_birth='AC' or u.c_birth is null or u.c_birth='')";
+			elseif(isset($options['birth_date_c'])) $query.=" and u.c_birth='".$options['birth_date_c']."'";
+			if(isset($options['death_date_c']) && $options['death_date_c']=='AC') $query.=" and (u.c_death='AC' or u.c_death is null or u.c_death='')";
+			elseif(isset($options['death_date_c'])) $query.=" and u.c_death='".$options['death_date_c']."'";
+			if(isset($options['gender'])) $query.=" and u.gender='".$options['gender']."'";
+			if(isset($options['religion_id'])) $query.=" and u.religion_id='".$options['religion_id']."'";
+			if(isset($options['surname_other'])) $query.=" and u.surname_other like '%".$options['surname_other']."%'";
+			if(isset($options['exwife_surname'])) $query.=" and u.exwife_surname like '%".$options['exwife_surname']."%'";
+			if(isset($options['place_birth'])) $query.=" and u.place_birth='".$options['place_birth']."'";
+			if(isset($options['place_death'])) $query.=" and u.place_death='".$options['place_death']."'";
+			if(isset($options['death_reason'])) $query.=" and u.death_reason='".$options['death_reason']."'";
+			if(isset($options['hobby'])) $query.=" and u.hobby='".$options['hobby']."'";
+			if(isset($options['parent_surname'])) $query.=" and (u.father_surname like '%".$options['parent_surname']."%' or u.mother_surname like '%".$parent_surname."%')";
+			if(isset($options['country_birth'])) $query.=" and u.country_birth='".$options['country_birth']."'";
+			if(isset($options['country_death'])) $query.=" and u.country_death='".$options['country_death']."'";
+			if(isset($options['sex_id'])) $query.=" and u.sex_id='".$options['sex_id']."'";
+			if(isset($options['religion_id'])) $query.=" and u.religion_id='".$options['religion_id']."'";
+			if(isset($options['profession_id'])) $query.=" and u.profession_id='".$options['profession_id']."'";
 
-				// --------------military 12 - military cemetery, 69 - professional military
-				if(isset($options['graveyard_id']) && $options['graveyard_id'] == 12) 
-					$query.=" and (u.graveyard_id='".$options['graveyard_id']."' OR u.profession_id='69')";
-				// -------------- ten < 18
-				elseif(isset($options['graveyard_id']) && $options['graveyard_id'] == 13) 
-					$query.=" and (u.graveyard_id='".$options['graveyard_id']."' OR ( u.date_death!='0000-00-00' AND PERIOD_DIFF(DATE_FORMAT(date_death,'%Y%m'),DATE_FORMAT(date_birth,'%Y%m'))/12<10 ) OR ( u.date_death='0000-00-00' AND PERIOD_DIFF(DATE_FORMAT(NOW(),'%Y%m'),DATE_FORMAT(date_birth,'%Y%m'))/12<10))";
-				elseif(isset($options['graveyard_id'])) $query.=" and u.graveyard_id='".$options['graveyard_id']."'";
+			// --------------military 12 - military cemetery, 69 - professional military
+			if(isset($options['graveyard_id']) && $options['graveyard_id'] == 12) 
+				$query.=" and (u.graveyard_id='".$options['graveyard_id']."' OR u.profession_id='69')";
+			// -------------- ten < 18
+			elseif(isset($options['graveyard_id']) && $options['graveyard_id'] == 13) 
+				$query.=" and (u.graveyard_id='".$options['graveyard_id']."' OR ( u.date_death!='0000-00-00' AND PERIOD_DIFF(DATE_FORMAT(date_death,'%Y%m'),DATE_FORMAT(date_birth,'%Y%m'))/12<10 ) OR ( u.date_death='0000-00-00' AND PERIOD_DIFF(DATE_FORMAT(NOW(),'%Y%m'),DATE_FORMAT(date_birth,'%Y%m'))/12<10))";
+			elseif(isset($options['graveyard_id'])) $query.=" and u.graveyard_id='".$options['graveyard_id']."'";
 
-				// if($place_id=='1') $query.=" and (u.place_id='".$place_id)."' or u.place_id>=10)";
-				if(isset($options['place_id'])) $query.=" and u.place_id='".$options['place_id']."'";
-				if($excludedGraves && count($excludedGraves)>0) $query.=" and u.user_id not in (".implode(",",$excludedGraves).")";
+			// if($place_id=='1') $query.=" and (u.place_id='".$place_id)."' or u.place_id>=10)";
+			if(isset($options['place_id'])) $query.=" and u.place_id='".$options['place_id']."'";
+			if($excludedGraves && count($excludedGraves)>0) $query.=" and u.user_id not in (".implode(",",$excludedGraves).")";
 
 
-				$count_result = Yii::app()->db->createCommand("select count(user_id) as total from ($query) t")->queryRow();
+			$count_result = Yii::app()->db->createCommand("select count(user_id) as total from ($query) t")->queryRow();
+			
+			$end = "0 as koniec";
+
+			if(in_array($order,array('rand','surname', 'date_death', 'date_birth', 'user_id')))
+			{
+				$order = $order == 'rand'?'rand()':$order;
+				if($order!='rand()') $end = "IF((SELECT COUNT(uu.user_id) FROM ($query) uu WHERE uu.$order < u.$order ) >0,0,1) AS koniec";
+			}
+			else
+				$order="rand()";
+			
+			$query.=' ORDER BY '.$order.' DESC LIMIT ' .($position * $limit).','.$limit;
+			$result = Yii::app()->db->createCommand(str_replace("0 as koniec",$end,$query))->queryAll();							
 				
-				$end = "0 as koniec";
-
-				if(in_array($order,array('rand','surname', 'date_death', 'date_birth', 'user_id')))
-				{
-					$order = $order == 'rand'?'rand()':$order;
-					if($order!='rand()') $end = "IF((SELECT COUNT(uu.user_id) FROM ($query) uu WHERE uu.$order < u.$order ) >0,0,1) AS koniec";
-				}
+			$data = array(); 
+			$i = 0; 
+			foreach ($result as $row)
+			{ 
+				$row['name1']=explode("|",$row['name1']);
+				$row['other']=explode("|",$row['other']);
+				$row['multigrave']=array();//multigrave
+				$row['znicze']=array();//znicze -> candles
+				$row['kwiatki']=array();//kwiatki -> flowers
+				$row['ilosc']=$count_result['total'];// number of all graves
+				
+				$date_birth=explode("-",$row['date_birth']);
+				if($date_birth[1]=='00' && $date_birth[2]=='00')
+					$row['date_birth']=$date_birth[0];
+				elseif($date_birth[1]!='00' && $date_birth[2]=='00')
+					$row['date_birth']=$date_birth[1].'-'.$date_birth[0];
 				else
-					$order="rand()";
+					$row['date_birth']=$date_birth[2].'-'.$date_birth[1].'-'.$date_birth[0];
 				
-				$query.=' ORDER BY '.$order.' DESC LIMIT ' .($options['position'] * $options['limit']).','.$options['limit'];
-				$result = Yii::app()->db->createCommand(str_replace("0 as koniec",$end,$query))->queryAll();							
+				$date_death=explode("-",$row['date_death']);
+				if($date_death[1]=='00' && $date_death[2]=='00')
+					$row['date_death']=$date_death[0];
+				elseif($date_death[1]!='00' && $date_death[2]=='00')
+					$row['date_death']=$date_death[1].'-'.$date_death[0];
+				else
+					$row['date_death']=$date_death[2].'-'.$date_death[1].'-'.$date_death[0];
+					
+				if($order=='rand()')
+					$row['koniec']= ($count_result['total'] == 1 ) ? true : false; // is it the last grave?
 				
-				$data = array(); 
-				$i = 0; 
-				$pozostaloGrobow=$count_result['total'];
+				$user_id=$row['user_id'];
 				
-				
-				foreach ($result as $row)
-				{ 
-					$row['name1']=explode("|",$row['name1']);
-					$row['other']=explode("|",$row['other']);
-					$row['multigrave']=array();//multigrave
-					$row['znicze']=array();//znicze
-					$row['kwiatki']=array();//kwiatki
-					$row['ilosc']=$count_result['total'];//ilosc wszystkich grobow
-					
-					$date_birth=explode("-",$row['date_birth']);
-					if($date_birth[1]=='00' && $date_birth[2]=='00')
-						$row['date_birth']=$date_birth[0];
-					elseif($date_birth[1]!='00' && $date_birth[2]=='00')
-						$row['date_birth']=$date_birth[1].'-'.$date_birth[0];
-					else
-						$row['date_birth']=$date_birth[2].'-'.$date_birth[1].'-'.$date_birth[0];
-					
-					$date_death=explode("-",$row['date_death']);
-					if($date_death[1]=='00' && $date_death[2]=='00')
-						$row['date_death']=$date_death[0];
-					elseif($date_death[1]!='00' && $date_death[2]=='00')
-						$row['date_death']=$date_death[1].'-'.$date_death[0];
-					else
-						$row['date_death']=$date_death[2].'-'.$date_death[1].'-'.$date_death[0];
-						
-					if($order=='rand()')
-						$row['koniec']=$pozostaloGrobow-->=1?0:1;//czy jest to juz ostatni grob
-					
-					$user_id=$row['user_id'];
-					
-					$sql="select mg2.grave_id,
-								mg2.grave_image,
-								mg2.family_name,
-								u.name1,
-								u.surname,
-								u.date_death,						
-								u.date_birth,
-								u.grave_image,
-								'' AS znicze,
-								'' AS kwiatki,
-								u.gender
-							from multi_graves mg, multi_graves mg2, users u 
-							where mg2.grave_id=u.user_id and mg.multigrave_id=mg2.multigrave_id and mg.grave_id=".$user_id."";
-					$result2 = Yii::app()->db->createCommand($sql)->queryAll();	
-					foreach($result2 as $row2)
-					{	//we overwrite initial data for family graves the name of the tomb
-						$row['name1']=$row2['family_name'];
-						$row['grave_image']=$row2['grave_image'];
-						$row2['surname']=explode("|",$row2['surname']);
-						///we collect flowers and candles for every deceased person in multigrain
-						$candles = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$row2['grave_id']." and (object_name like 'znicz%' or object_name like 'kamien%') and end_time>now() order by add_date desc limit 5")->queryAll();	
-						$row2['znicze'] = array();
-						$row2['kwiatki'] = array();
-						foreach($candles as $candle)
-							$row2['znicze'][]=$candle;
-							
-						$flowers = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$row2['grave_id']." and object_name like 'kwiat%' and end_time>now() order by add_date desc limit 2")->queryAll();	
-						foreach($flowers as $flower)
-							$row2['kwiatki'][]=$flower;
-							
-						$row['multigrave'][]=$row2;
-					}
-					
-					$candles = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$user_id." and (object_name like 'znicz%' or object_name like 'kamien%') and end_time>now() order by add_date desc limit 5")->queryAll();	
+				$sql="select mg2.grave_id,
+							mg2.grave_image,
+							mg2.family_name,
+							u.name1,
+							u.surname,
+							u.date_death,						
+							u.date_birth,
+							u.grave_image,
+							'' AS znicze,
+							'' AS kwiatki,
+							u.gender
+						from multi_graves mg, multi_graves mg2, users u 
+						where mg2.grave_id=u.user_id and mg.multigrave_id=mg2.multigrave_id and mg.grave_id=".$user_id."";
+				$result2 = Yii::app()->db->createCommand($sql)->queryAll();	
+				foreach($result2 as $row2)
+				{	//we overwrite initial data for family graves the name of the tomb
+					$row['name1']=$row2['family_name'];
+					$row['grave_image']=$row2['grave_image'];
+					$row2['surname']=explode("|",$row2['surname']);
+					///we collect flowers and candles for every deceased person in multigrain
+					$candles = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$row2['grave_id']." and (object_name like 'znicz%' or object_name like 'kamien%') and end_time>now() order by add_date desc limit 5")->queryAll();	
 					$row2['znicze'] = array();
-					foreach($candles as $candle)
-						$row['znicze'][]=$candle;
-						
-					$flowers = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$user_id." and object_name like 'kwiat%' and end_time>now() order by add_date desc limit 2")->queryAll();	
 					$row2['kwiatki'] = array();
-					foreach($flowers as $flower)
-						$row['kwiatki'][]=$flower;
+					foreach($candles as $candle)
+						$row2['znicze'][]=$candle;
 						
-					$data[] = $row; 
-				} 
+					$flowers = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$row2['grave_id']." and object_name like 'kwiat%' and end_time>now() order by add_date desc limit 2")->queryAll();	
+					foreach($flowers as $flower)
+						$row2['kwiatki'][]=$flower;
+						
+					$row['multigrave'][]=$row2;
+				}
+				
+				$candles = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$user_id." and (object_name like 'znicz%' or object_name like 'kamien%') and end_time>now() order by add_date desc limit 5")->queryAll();	
+				$row2['znicze'] = array();
+				foreach($candles as $candle)
+					$row['znicze'][]=$candle;
+					
+				$flowers = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$user_id." and object_name like 'kwiat%' and end_time>now() order by add_date desc limit 2")->queryAll();	
+				$row2['kwiatki'] = array();
+				foreach($flowers as $flower)
+					$row['kwiatki'][]=$flower;
+					
+				$data[] = $row; 
+			} 
 			return ($data); 
 		}
 
-		private function getGraveDetails($options = NULL){
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['user_id']
+		***/
+
+		private function getPersonDetails($options = NULL){
 			$query = 'SELECT g.id_kind, g.number,
 				IF((SELECT COUNT(uu.user_id) FROM users uu WHERE ( uu.is_deleted=0 OR uu.is_deleted=1 ) AND uu.user_id<u.user_id )=0,0,1) AS koniec,
 				u.user_id, u.buyer_id, u.place_id,
@@ -631,16 +650,16 @@
 			$data = array(); 
 			foreach($result as $row)
 			{ 
-				$row['name1']=explode("|",$row['name1']);//u.name1
-				$row['father_name']=explode("|",$row['father_name']);//u.father_name
-				$row['mother_name']=explode("|",$row['mother_name']);//u.mother_name
-				$row['childrens_names']=explode("|",$row['childrens_names']);//u.childrens_names
-				$row['ex_wife1']=explode("|",$row['ex_wife1']);//u.ex_wife1
-				foreach($row['ex_wife1'] as $k=>$v)//u.ex_wife1
+				$row['name1']=explode("|",$row['name1']);
+				$row['father_name']=explode("|",$row['father_name']);
+				$row['mother_name']=explode("|",$row['mother_name']);
+				$row['childrens_names']=explode("|",$row['childrens_names']);
+				$row['ex_wife1']=explode("|",$row['ex_wife1']);
+				foreach($row['ex_wife1'] as $k=>$v)
 					$row['ex_wife1'][$k]=explode("#",$v);
 				
-				$row['biografia']=array();//biografia
-				$row['reserve_grave_users_data']=array();//dane userow rezerwaujacych grob
+				$row['biografia']=array();
+				$row['reserve_grave_users_data']=array();
 				
 				$bio_result = Yii::app()->db->createCommand("select title,body from biography where user_id=".$row['user_id']." order by order_num")->queryAll();
 				foreach($bio_result as $row2)
@@ -677,7 +696,13 @@
 			return ($data); 
 		}
 
-		private function getGraveUserPhoto($options = NULL){
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['user_id']
+		***/
+
+		private function getPersonPhotos($options = NULL){
 			$data = array(); 
 			$photo_result=Yii::app()->db->createCommand("select file_name,is_portrait from users_photos where user_id='".$options['user_id']."'")->queryAll();
 			foreach($photo_result as $row) { 
@@ -686,8 +711,15 @@
 			return ($data); 
 		}
 
-		private function getGraveLights($options = NULL){
-			$query="select object_id,object_name,comment,end_time, '' AS a, uo_id from users_objects where 
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['object_name']
+			$options['user_id']
+		***/
+
+		private function getPersonObjects($options = NULL){
+			$query="select object_id,object_name,comment,end_time, '' AS total, uo_id from users_objects where 
 				user_id='".$options['user_id']."' and end_time>now()";	
         
 			if($options['object_name']=='znicz')
@@ -703,13 +735,19 @@
 			$result = Yii::app()->db->createCommand($query)->queryAll();
 			$data = array(); 
 			foreach ($result as $row) { 
-				$row['a']=$count_result;
+				$row['total']=$count_result;
 				$data[] = $row; 
 			} 
 			return ($data); 
 		}
 
-		private function getGraveComments($options = NULL){
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['user_id']
+		***/
+
+		private function getPersonComments($options = NULL){
 			$query="select * from users_comments where user_id='".$options['user_id']."' and validated>=0 order by add_date desc";
 			$count_result = Yii::app()->db->createCommand("select count(*) as total from ($query) t")->queryRow()['total'];
 			$result=Yii::app()->db->createCommand($query)->queryAll();
@@ -770,71 +808,101 @@
 			return ($data); 
 		}
 
-		private function addComment($options = NULL){
-            $query="insert into users_comments (nick,body,user_id) values ('".$options['nick']."','".$options['body']."',".$options['user_id'].");";    
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['body']
+			$options['nick']
+			$options['user_id']
+		***/
+
+		private function addPersonComment($options = NULL){
+			$query="insert into users_comments (nick,body,user_id) values 
+			('".$options['nick']."','".$options['body']."',".$options['user_id'].");";    
             Yii::app()->db->createCommand($query)->execute();
-            
-            if (!empty($body) || !empty($nick)) {
-                try{
-                    //TO-DO = Comment out for live server
-                    //$this->sendEmail($options['nick'], $options['body'], $options['user_id'], 'person');
-                }
-                catch(Exception $e){
-                }
-            }
-            return true;
-        }
+			$data = array();
 
-        private function sendEmail($nick, $body, $id, $grave_type = 'person') {
-            $mail_to   = $this->PAYMENT_CONFIG['ADMIN_EMAIL_TO'];
-            $mail_from = $this->PAYMENT_CONFIG['ADMIN_EMAIL_FROM'];
+			$data['status'] = 'USER_COMMENT_ADDED';
+			$data['comment_id'] = Yii::app()->db->getLastInsertID();
 
-            $result = $this->MailContent('NEW_COMMENT', array('id'=>$id, 'nick'=>$nick, 'body'=>$body));
-            $message  = wordwrap($result['content'], 100);          
-            $headers  = 'MIME-Version: 1.0' . "\r\n";
-            $headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
-            $headers .= 'From: '.$mail_from. "\r\n";
-            @mail($mail_to, $result['subject'], $message, $headers);
-        }
+            try{
+				
+				$mail_to   = $this->PAYMENT_CONFIG['ADMIN_EMAIL_TO'];
+				$mail_from = $this->PAYMENT_CONFIG['ADMIN_EMAIL_FROM'];
 
-        private function MailContent($method, $parameters){
-            $result = array();
-            switch($method){
-                case 'NEW_COMMENT': 
-						$content = "<strong>Informacja dla administratora</strong><br /><br />";
-						$content .= "Dodano komentarz do grobu <br />";
-						if ($grave_type == 'animal')
-							$content .= "zwierz�cia ANIMAL_ID: ".$parameters['id']." <a href=\"http://www.wirtualnycmentarz.pl/index.php?id_a=".$parameters['id']."\" target=\"_blank\">http://".$this->CONFIG['HOST_ADDRESS']."/index.php?id_a=".$parameters['id']."</a>.";
-						else
-							$content .= "osoby PERSON_ID: ".$parameters['id']." <a href=\"http://www.wirtualnycmentarz.pl/index.php?id=".$parameters['id']."\" target=\"_blank\">http://".$this->CONFIG['HOST_ADDRESS']."/index.php?id=".$parameters['id']."</a>.";
+				$result = $this->MailContent('NEW_COMMENT', array('id'=>$options['user_id'], 
+				'nick'=>$options['nick'], 'body'=>$options['body'], 'grave_type'=>'person'));
+				$message  = wordwrap($result['message'], 100);          
+				$headers  = 'MIME-Version: 1.0' . "\r\n";
+				$headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
+				$headers .= 'From: '.$mail_from. "\r\n";
 
-						$content .= "<br><br>";
-						$content .= "Podpis pod komentarzem: <strong>".$parameters['nick']."</strong><br><br>";
-						$content .= "Tre�� komentarza: <strong>".$parameters['body']."</strong><br><br>";
-						$subject = "Dodano komentarz - Informacja dla administratora";
-
-						$result['content'] = $content;
-						$result['subject'] = $subject;
-					break;
-				case 'RESET_PASSWORD':
-						$content = "We received a request to reset the password for ";
-						$content .= "the account with the login ".$parameters['username']." at www.wirtualnycmentarz.pl. <br/><br/>";
-						$content .= "The new password is: ".$parameters['password']." <br/><br/>We check, <br/>Building the cemetery.";
-						
-						$result['content'] = $content;
-						$result['subject'] = $parameters['subject'];
-					break;
-                default:
-                    break;
-            }
-            return $result;
-        }
+				//TO-DO = Comment out for live server
+				//@mail($mail_to, $result['subject'], $message, $headers);
+			}
+			catch(Exception $e){}
+            return $data;
+		}
 		
-		private function getPetTypes($options = NULL){
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['body']
+			$options['nick']
+			$options['animal_id']
+		***/
+
+		private function addAnimalComment($options = NULL){
+			$data = array();
+		    $query = "SELECT animals.animal_id FROM animals WHERE animals.animal_id 
+			= '".$options['animal_id']."'";	
+			$animal = Yii::app()->db->createCommand($query)->queryRow();
+
+			if($animal){
+				$query = "insert into animals_comments (nick, body, animal_id) 	
+				values ('".$options['nick']."',
+				'".$options['body']."',
+				'".$options['animal_id']."')";	
+				Yii::app()->db->createCommand($query)->execute();
+
+				$data['status'] = 'ANIMAL_COMMENT_ADDED';
+				$data['comment_id'] = Yii::app()->db->getLastInsertID();
+			}
+			else{
+				$data['status']='ANIMAL_NOT_EXISTS';
+			}
+			try{
+				
+				$mail_to   = $this->PAYMENT_CONFIG['ADMIN_EMAIL_TO'];
+				$mail_from = $this->PAYMENT_CONFIG['ADMIN_EMAIL_FROM'];
+
+				$result = $this->MailContent('NEW_COMMENT', array('id'=>$options['animal_id'], 
+				'nick'=>$options['nick'], 'body'=>$options['body'], 'grave_type'=>'animal'));
+				$message  = wordwrap($result['message'], 100);          
+				$headers  = 'MIME-Version: 1.0' . "\r\n";
+				$headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
+				$headers .= 'From: '.$mail_from. "\r\n";
+
+				//TO-DO = Comment out for live server
+				//@mail($mail_to, $result['subject'], $message, $headers);
+			}
+			catch(Exception $e){}
+			
+			return $data;
+		}
+
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['order'] = 'al_id', 'name_pl', 'name_en'
+
+		***/
+		
+		private function getAnimalTypes($options = NULL){
             $query = "SELECT * FROM animals_list";
             $result = Yii::app()->db->createCommand($query)->queryAll();
 
-            if(!empty($options['order']) && in_array($options['order'],array('al_id', 'name_pl', 'name_en'))){
+            if(isset($options['order']) && in_array($options['order'],array('al_id', 'name_pl', 'name_en'))){
                 $query .= " ORDER BY ".$options['order'];
             }
             $count_query="SELECT count(*) as total FROM ($query) t";
@@ -849,21 +917,44 @@
             return $data;
         }
 
-        private function getPetGraves($options = NULL){
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			optional - $options['position']
+			optional - $options['limit']
+			optional - $options['order'] -> 'rand', 'animal_id', 'animal_id_desc', 'buyer_id', 
+			'al_id', 'gender_id', 'name', 'name2', 'name3', 'owner_name', 'date_birth', 'date_death'
+			optional - $options['date_birth']
+			optional - $options['date_death']
+			optional - $options['buyer_id']
+			optional - $options['al_id'] = primary key of animal table
+			optional - $options['gender_id']
+			optional - $options['name']
+			optional - $options['first_letter']
+			optional - $options['name2']
+			optional - $options['name3']
+			optional - $options['owner_name']
+			optional - $options['date_birth']
+			optional - $options['date_death']
+			optional - $options['animal_species']
+			optional - $options['grave_id']
+		***/
+
+        private function getAnimals($options = NULL){
             $date_birth = null;
             $date_death = null;
             $position = isset($options['position']) ? $options['position'] : 0;
 			$limit = isset($options['limit']) ? $options['limit'] : 15;
 			$data = array();
             
-            if (!empty($options['date_birth'])){
+            if (isset($options['date_birth'])){
                 $_dateb_y = substr($options['date_birth'], 6,9);
                 $_dateb_m = substr($options['date_birth'], 3,2);
                 $_dateb_d = substr($options['date_birth'], 0,2);
                 $date_birth = $_dateb_y.'-'.$_dateb_m.'-'.$_dateb_d;
             }
             
-            if (!empty($options['date_death'])){
+            if (isset($options['date_death'])){
                 $_dated_y = substr($options['date_death'], 6,9);
                 $_dated_m = substr($options['date_death'], 3,2);
                 $_dated_d = substr($options['date_death'], 0,2);
@@ -909,8 +1000,8 @@
             if (isset($options['name2'])) $query.=" and u.name2 like '%".$options['name2']."%'";
             if (isset($options['name3'])) $query.=" and u.name3 like '%".$options['name3']."%'";
             if (isset($options['owner_name'])) $query.=" and u.owner_name like '%".$options['owner_name']."%'";
-            if (isset($options['date_birth'])) $query.=" and u.date_birth like '".$options['date_birth']."%'";
-            if (isset($options['date_death'])) $query.=" and u.date_death like '".$options['date_death']."%'";
+            if (isset($options['date_birth'])) $query.=" and u.date_birth like '".$date_birth."%'";
+            if (isset($options['date_death'])) $query.=" and u.date_death like '".$date_death."%'";
             if (isset($options['animal_species'])) $query.=" and u.animalkind like '%".$options['animal_species']."%'";
             if (isset($options['grave_id'])) $query.=" and u.grave_id ='".$options['grave_id']."'";
 
@@ -929,10 +1020,8 @@
             foreach ($result as $row)
             { 
                 $row['total'] = $count_result;
-
                 $animal_id=$row['animal_id'];
 
-                echo "<pre>";print_r($row);echo "</pre>";exit;
                 $query="select object_id,object_name,comment from animals_objects where animal_id=".$animal_id." and object_name like 'kwiat%' and end_time>now() order by add_date desc";
                 $memoriam_result = Yii::app()->db->createCommand($query)->queryAll();
 				$memoriam = array();
@@ -949,7 +1038,13 @@
 					$objects[]=$object_row;
 				}
 
-                $row['objects'] = $objects; unset($objects);
+				$row['objects'] = $objects; unset($objects);
+				
+				$query="select * from animals_list where al_id=".$row['al_id'];
+                $animallist_result = Yii::app()->db->createCommand($query)->queryRow();
+				
+				$row['genus_en'] = $animallist_result['name_en'];
+				$row['genus_pl'] = $animallist_result['name_pl'];
 
                 if ($counter < $count_result - ($position*$limit))  
                     $row['d'] = "0"; else $row['d'] = "1";
@@ -962,7 +1057,14 @@
             return $data;
 		}
 
-		private function getPetGraveData($options = NULL){
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['id'] = animal_id
+
+		***/
+
+		private function getAnimalDetails($options = NULL){
 			$query = "SELECT 
 						u.animal_id,
 						u.buyer_id,
@@ -991,14 +1093,29 @@
 
             $result = Yii::app()->db->createCommand($query)->queryAll();
 			$data = array();
-			foreach($result as $row)
+			foreach($result as $row){
+				$query="select * from animals_list where al_id=".$row['al_id'];
+                $animallist_result = Yii::app()->db->createCommand($query)->queryRow();
+				
+				$row['genus_en'] = $animallist_result['name_en'];
+				$row['genus_pl'] = $animallist_result['name_pl'];
+				
 				$data[] = $row;
+			}
 			
 			return $data;
 		}
+		
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['id'] = animal_id
 
-        private function getPetGraveComments($options = NULL){
-            $query = "SELECT * FROM animals_comments WHERE animal_id='".$options['animal_id']."' AND validated>=0 ORDER BY add_date DESC";
+		***/
+
+        private function getAnimalComments($options = NULL){
+            $query = "SELECT * FROM animals_comments WHERE animal_id='".$options['id']."' 
+			AND validated>=0 ORDER BY add_date DESC";
             $result = Yii::app()->db->createCommand($query)->queryAll();
 
             $count_query="SELECT count(*) as total FROM ($query) t";
@@ -1011,10 +1128,18 @@
             }
 
             return $data;
-        }
+		}
+		
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['id'] = animal_id
 
-		private function getPetGravePhoto($options = NULL){
-			$query = "select file_name,is_portrait from animals_photos where animal_id='".$options['id']."'";		
+		***/
+
+		private function getAnimalPhotos($options = NULL){
+			$query = "select file_name,is_portrait from animals_photos where 
+			animal_id='".$options['id']."'";		
 
 			$result = Yii::app()->db->createCommand($query)->queryAll();
 			$data = array();
@@ -1024,10 +1149,20 @@
 			return $data;
 		}
 
-		private function getPetGraveCandles($options = NULL){
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['id'] = animal_id
+			$options['object_name'] = kamien->stone, 
+				znicz->candle, kwiat->stone, inne->others
+
+		***/
+
+		private function getAnimalObjects($options = NULL){
 			$data = array();
 
-			$query = "SELECT object_id,object_name,comment,end_time,'' AS total, ao_id FROM animals_objects 
+			$query = "SELECT object_id, object_name, comment, end_time,'' 
+			AS total, ao_id FROM animals_objects 
 				WHERE animal_id='".$options['id']."' AND end_time>now()";	
         
 	        if($options['object_name']=='znicz')
@@ -1048,6 +1183,13 @@
 
 			return $data;
 		}
+
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['password']
+			$options['username']
+		***/
 
 		private function loginBuyerAndFetchGraves($options = NULL){
 			$password = $options['password'];
@@ -1087,23 +1229,26 @@
         	return $data;
 		}
 
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['username']
+		***/
+
 		private function resetPassword($options = NULL){
 			$sql="select email from buyers where login='".$options['username']."'";	
         	$buyer = Yii::app()->db->createCommand($query)->queryRow();
-        	
-			//generate new password
 			$new_password = substr(md5(uniqid(rand(), true)),0,8);
 			
-			$result = $this->MailContent('RESET_PASSWORD', array(
-				'username'=>$options['username'],
-				'password'=>$new_password,
-				'subject' =>'Resetowanie hasla w wirtualnym cmentarzu'
-			));
+			$result = $this->MailContent('RESET_PASSWORD', array('username'=>$options['username'],
+			 'password'=>$new_password ));
 
 			$headers  = 'MIME-Version: 1.0' . "\r\n";
             $headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
-            $headers .= 'From: admin_m@wirtualnycmentarz.pl' . "\r\n";
-			@mail($buyer['email'], $result['subject'], $result['message'], $headers);
+			$headers .= 'From: admin_m@wirtualnycmentarz.pl' . "\r\n";
+			
+			//TO-DO = Comment out for live server
+			//@mail($buyer['email'], $result['subject'], $result['message'], $headers);
 			
 			$query="update buyers set pass=md5('$new_password') where login='".$options['username']."'";
 			Yii::app()->db->createCommand($query)->execute();
@@ -1113,8 +1258,20 @@
 			return $data;
 		}
 		
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['current_language']
+			$options['firstname']
+			$options['lastname']
+			$options['email']
+			$options['phone']
+			$options['username']
+			$options['password']
+		***/
+
 		private function register($options = NULL){
-			$current_language = 'en';
+			$current_language = isset($options['current_language']) ? $options['current_language'] : 'en';
 			$buyer = null;
 			$query="select * from buyers where email='".$options['email']."' or login='".$options['username']."'";	
 			$buyer = Yii::app()->db->createCommand($query)->queryRow();
@@ -1144,9 +1301,21 @@
             return $data;
 		}
 		
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['buyer_id']
+			$options['current_language']
+			$options['firstname']
+			$options['lastname']
+			$options['description']
+			$options['amount']
+			$options['pay_method']
+		***/
+		
 		private function payment($options = NULL){
 			$session_id=md5(uniqid(rand(), true));
-			$current_language = 'en';
+			$current_language = isset($options['current_language']) ? $options['current_language'] : 'en';
 			$data = array();
 
 			$query = "insert into payments(session_id, paymenttime, firstname, lastname, 
@@ -1159,61 +1328,257 @@
 			if($result){
 				$data['status'] = 'PAYMENT_SUCCESS';
 				$data['payment_id'] = array($order_id, $session_id);
+				$data['order_id'] = Yii::app()->db->getLastInsertID();
 			}
 			else{
-				$data['status'] = 'PROBLEM_IN_PAYMENT';
+				$data['status'] = 'PAYMENT_FAIL';
 			}
-			$order_id = Yii::app()->db->getLastInsertID();
 			
 			return $data;
 		}
 		
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['buyer_id']
+			$options['id'] = user_id or animal_id;
+			$options['amount']
+			$options['account_number']
+			$options['address_data']
+			$options['description']
+		***/
+		
 		private function emailTransfer($options = NULL){
-			$buyer_login = null;
-			$buyer_email = null;
-			$buyer_name = null;
-			$buyer_surname = null;
 
-			$query = "SELECT buyers.* FROM buyers WHERE buyer_id=".$options['id'];	
-			$buyer = Yii::app()->db->createCommand($query)->queryRow();
-			
-			$username = $buyer["login"];
-			$email = $buyer["email"];
-			$name = $buyer["name"];
-			$surname = $buyer["surname"];
-
-			$pay_description = $options['description'];
-	
-			include 'payments/payments_config.php';			// data for transfer and admin's email
-			include("payments/EmailsTransfer_info.php");	// texts of emails and titles
-	
-			if (!empty($buyer_email) && !empty($payments_admin_email)) {
+			$data = array();
+			try{
+				$query = "SELECT buyers.* FROM buyers WHERE buyer_id=".$options['buyer_id'];	
+				$buyer = Yii::app()->db->createCommand($query)->queryRow();
 				
-				// ========================= email do usera ==============================
-				$sendto   = trim($buyer_email); // insert trim ($ buyer_email); and change $ payments_admin_email
-				$sendfrom = trim($payments_admin_email_from);
-				$adminmail = trim($payments_admin_email);
-	
-				$message  = wordwrap(trim($user_text), 100);			
+				$buyer_id = $buyer["buyer_id"];
+				$username = $buyer["login"];
+				$email = $buyer["email"];
+				$name = $buyer["name"];
+				$surname = $buyer["surname"];
+				$sendto   = trim($email);
+				$sendfrom = trim($this->PAYMENT_CONFIG['ADMIN_EMAIL_FROM']);
+				$adminmail = trim($this->PAYMENT_CONFIG['ADMIN_EMAIL_TO']);
+
+				$result = $this.MailContent('PAYMENT_USER_MAIL', array('amount'=>$options['amount'], 
+				'account_number'=>$options['account_number'], 'address_data'=>$options['address_data'], 
+				'id'=>$options['id']));
+
+				$message  = wordwrap(trim($result['message']), 100);			
 				$headers  = 'MIME-Version: 1.0' . "\r\n";
 				$headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
 				$headers .= 'From: '.$sendfrom. "\r\n";
 				$headers .= 'Bcc: '.$adminmail. "\r\n";
-				@mail($sendto, $user_subject, $message, $headers);
-	
-				// ========================= email do admina =============================
-				$sendto   = trim($payments_admin_email);
-				$sendfrom = trim($payments_admin_email_from);
-		
-				$message  = wordwrap(trim($admin_text), 100);			
+				
+				//TO-DO = Comment out for live server
+				//@mail($sendto, $result['subject'], $message, $headers);
+
+				$sendto   = trim($this->PAYMENT_CONFIG['ADMIN_EMAIL_TO']);
+				$sendfrom = trim($this->PAYMENT_CONFIG['ADMIN_EMAIL_FROM']);
+				$result = $this.MailContent('PAYMENT_ADMIN_MAIL', 
+				array('login'=>$username, 'buyer_id'=>$buyer_id, 'name'=>$name,
+				'surname'=>$surname, 'amount'=>$options['amount'], 'id'=>$options['id'], 
+				'pay_description'=>$options['description']));
+
+				$message  = wordwrap(trim($result['message']), 100);			
 				$headers  = 'MIME-Version: 1.0' . "\r\n";
 				$headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
 				$headers .= 'From: '.$sendfrom. "\r\n";
-				@mail($sendto, $admin_subject, $message, $headers);
-				return true;
-			} else {
-				return false;			
+
+				//TO-DO = Comment out for live server
+				//@mail($sendto, $result['subject'], $message, $headers);
+
+				$data['status'] = 'PAYMENT_MAIL_SUCCESS';
+			} catch(Exception $e){
+				$data['status'] = 'PAYMENT_MAIL_FAIL';
 			}
+			
+			return $data;
 		}
+		
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['payment_method']
+			$options['animal_id']
+			$options['buyer_id']
+			$options['payment_id']
+			$options['temp']
+			$options['current_language']
+			$options['valid_upto']
+			$options['comment']
+			$options['object_name']
+		***/
+
+		private function addPetGraveObject($options = NULL){
+			$payment_method = isset($options['payment_method']) ? $options['payment_method'] : -1; 
+			$payment_id = isset($options['payment_id']) ? $options['payment_id'] : 0;
+			$temp = isset($options['temp']) ? $options['temp'] : 0;
+			$current_language = isset($options['current_language']) ? $options['current_language'] : 'en';
+			$valid_upto = $options['valid_upto'];
+			$data = array();
+
+			$query = "SELECT count(ao_id) as total FROM animals_objects WHERE 
+				animal_id='".$options['animal_id']."' AND object_name='".$options['object_name']."' AND 
+				comment='".$options['comment']."' AND DATE_ADD(add_date,INTERVAL 1 MINUTE)>now() ";
+
+			$count_result = Yii::app()->db->createCommand($query)->queryRow()['total'];
+			if($count_result > 0){
+				$data['status'] = 'ANIMAL_OBJECT_ALREADY_EXISTS';
+			}
+			else{
+				$query = "SELECT animals.animal_id as animal_id FROM animals WHERE animals.animal_id = '".$options['animal_id']."'";
+				$count_result = Yii::app()->db->createCommand($query)->queryRow()['animal_id'];
+				if($count_result){
+					if($valid_upto == 100000) // if this is to be forever
+						$valid_upto = '2970-01-01';
+					else
+					{
+						$valid_upto = mktime(0, 0, 0, date("m"), date("d") + $valid_upto,   date("Y"));
+						$valid_upto = date("Y-m-d",$valid_upto);
+					}
+			
+					// they were free to insert animals_objects
+					if($temp == 0)
+						$table = "animals_objects";
+					elseif($temp == 1)
+						$table = "animals_objects_temp";
+				
+					$query = "INSERT INTO $table (object_id, animal_id, buyer_id, end_time, 
+					comment, object_name, pay_method, paymentid, language) values 
+					('".$options['object_id']."', '".$options['animal_id']."', '".$options['buyer_id']."',
+					'".$valid_upto."', '".$options['comment']."', '".$options['object_name']."', 
+					'".$payment_method."', '".$payment_id."', '".$current_language."')";
+					
+					Yii::app()->db->createCommand($query)->execute();
+					
+					$data['status']= "ANIMAL_OBJECT_ADD_SUCCESS";
+					$data['object_id'] = Yii::app()->db->getLastInsertID();
+
+					$sendfrom = trim($this->PAYMENT_CONFIG['ADMIN_EMAIL_FROM']);
+					$sendto = trim($this->PAYMENT_CONFIG['ADMIN_EMAIL_TO']);
+					$result = $this->MailContent('NEW_OBJECT', 
+					array('id'=>$options['animal_id'], 'object_name'=>$options['object_name'], 
+					'valid_upto'=>$valid_upto, 'comment'=>$options['comment']));
+            
+					$message  = wordwrap(trim($result['message']), 100);			
+					$headers  = 'MIME-Version: 1.0' . "\r\n";
+					$headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
+					$headers .= 'From: '.$sendfrom. "\r\n";
+
+					//TO-DO = Comment out for live server
+					//@mail($sendto, $result['subject'], $message, $headers);
+				}
+				else{
+					$data['status'] = 'ANIMAL_NOT_EXISTS';
+				}
+			}
+
+			return $data;
+		}
+
+        private function MailContent($method, $parameters){
+			$result = array();
+			$content = null;
+
+            switch($method){
+                case 'NEW_COMMENT': 
+						$result['subject'] = "Dodano komentarz - Informacja dla administratora";
+						$content = "<strong>Informacja dla administratora</strong><br /><br />";
+						$content .= "Dodano komentarz do grobu <br />";
+						if ($parameters['grave_type'] == 'animal')
+							$content .= "zwierz�cia ANIMAL_ID: ".$parameters['id']." <a href=\"http://www.wirtualnycmentarz.pl/index.php?id_a=".$parameters['id']."\" target=\"_blank\">http://".$this->CONFIG['HOST_ADDRESS']."/index.php?id_a=".$parameters['id']."</a>.";
+						else if($parameters['grave_type'] == 'animal')
+							$content .= "osoby PERSON_ID: ".$parameters['id']." <a href=\"http://www.wirtualnycmentarz.pl/index.php?id=".$parameters['id']."\" target=\"_blank\">http://".$this->CONFIG['HOST_ADDRESS']."/index.php?id=".$parameters['id']."</a>.";
+
+						$content .= "<br><br>";
+						$content .= "Podpis pod komentarzem: <strong>".$parameters['nick']."</strong><br><br>";
+						$content .= "Tre�� komentarza: <strong>".$parameters['body']."</strong><br><br>";
+						
+						$result['message'] = $content;
+					break;
+				case 'RESET_PASSWORD':
+						$result['subject'] = "Resetowanie hasla w wirtualnym cmentarzu";
+
+						$content = "We received a request to reset the password for ";
+						$content .= "the account with the login ".$parameters['username']." at www.wirtualnycmentarz.pl. <br/><br/>";
+						$content .= "The new password is: ".$parameters['password']." <br/><br/>We check, <br/>Building the cemetery.";
+						$result['message'] = $content;
+					break;
+				case 'PAYMENT_USER_MAIL':
+						$result['subject'] =  "Wirtualnycmentarz.pl - Informacja o p�atno�ci przelewem";
+						$content  = "Dokona�e� zakupu us�ugi w naszym serwisie.<br />";
+						$content  .= "Wybra�e� metod� p�atno�ci: <strong>przelew</strong><br />";
+						$content  .= "<br />";
+						$content  .= "Data zam�wienia us�ugi: <strong>".date("j-n-Y")."</strong>.<br />";
+						$content  .= "Prosz� dokonac przelewu kwoty: <strong>".$parameters['amount']."</strong> z�.<br />";
+						$content  .= "<br />";
+						$content  .= "Czas oczekiwania na przelew to 3 dni.<br />";
+						$content  .= "Po up�ywie tego okresu dane zarejestrowane  w systemie z tej operacji zostana usuni�te. W przypadku pyta� prosz� o kontakt z administratorem.<br />";
+						$content  .= "<hr>";
+						$content  .= "Prosz� dokona� przelewu na konto:<br />";
+						$content  .= "<strong>".$parameters['account_number']."</strong><br /><br />";
+						$content  .= "Dane w�a�ciciela konta:<br />";
+						$content  .= "<strong>".$parameters['address_data']."</strong><br />";
+						$content  .= "W tytule wp�aty prosimy poda�:<br /><br />";
+						$content  .= "<strong>ID ".$parameters['id']."</strong><br>";
+						$content  .= "<hr>";
+						$content  .= "";
+						$content  .= "Dzi�kujemy za wsp�prac�<br>";
+						$content  .= "Administracja Wirtualnego Cmentarza";
+						$result['message'] = $content;
+				case 'PAYMENT_ADMIN_MAIL':
+						$result['subject']  = "Wirtualnycmentarz.pl - Informacja dla administratora o p�atno�ci przelewem";
+
+						// ==== tresc listu =======
+						$content  = "U�ytkownik ".$parameters['login']." (ID ".$parameters['buyer_id']."), <strong>".$parameters['name']." ".$parameters['surname']."</strong> ";
+						$content .= "wybra� p�atno�� przelewem.<br />";
+						$content .= "<br />";
+						$content .= "Kwota do zap�aty: <strong>".$parameters['amount']." z�</strong>.<br />";
+						$content .= "Data zam�wienia: <strong>".date("j-n-Y")."</strong>.<br />";
+						$content .= "Po up�ywie 3 dni zam�wienie powinno by� anulowane.<br />";
+						$content .= "<hr>";
+						$content .= "Dane obiektu:<br />";
+						
+						//id = user_id or animal_id
+						$content .= "<strong>ID pochowanej osoby: ".$parameters['id']."</strong><br>";
+
+						if (isset($parameters['pay_description'])) 
+							$content .= "<strong>Tytu� p�atno�ci: ".$parameters['pay_description']."</strong><br>";
+
+						$content .= "<strong></strong><br>";
+						$content .= "<hr>";
+						$content .= "";
+						
+						$result['message'] = $content;
+				
+				case 'NEW_OBJECT':
+						$host_address = "www.wirtualnycmentarz.pl";
+
+						$content = "<strong>Informacja dla administratora</strong><br /><br />";
+						$content .= "Dodano obiekt do grobu <br />";
+						if ($parameters['grave_type'] == 'animal') {
+							$content .= "zwierz�cia ANIMAL_ID: ".$parameters['id']." <a href=\"http://www.wirtualnycmentarz.pl/index.php?id_a=".$parameters['id']."\" target=\"_blank\">http://".$host_address."/index.php?id_a=".$parameters['id']."</a>.";
+						} else {
+							$content .= "osoby PERSON_ID: ".$parameters['id']." <a href=\"http://www.wirtualnycmentarz.pl/index.php?id=".$parameters['id']."\" target=\"_blank\">http://".$host_address."/index.php?id=".$parameters['id']."</a>.";
+						}
+						$content .= "<br><br>";
+						$content .= "Rodzaj obiektu: <strong>".$parameters['object_name']."</strong><br><br>";
+						$content .= "Termin: <strong>".$parameters['valid_upto']."</strong><br><br>";
+						$content .= "Tre�� podpisu: <strong>".$parameters['comment']."</strong><br><br>";
+						
+						$subject = "Dodano obiekt (".$parameters['object_name'].") - Informacja dla administratora";
+						
+						$result['message'] = $content;
+						$result['subject'] = $subject;
+				default:
+                    break;
+            }
+            return $result;
+        }
 	}
 ?>

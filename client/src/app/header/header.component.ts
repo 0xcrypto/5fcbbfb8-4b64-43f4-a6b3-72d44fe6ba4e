@@ -21,22 +21,23 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.selectedLanguage = this.getSelectedLanguage('en');
-    /*this.route.fragment.subscribe((fragment: string) => {
-      console.log("My hash fragment is here => ", fragment)
-    })
-    this.setCurrentRoute();
-    */
+    this.selectedLanguage = this.getSelectedLanguage();
   }
 
   changeLanguage(lang:string){
     let app = new AppComponent(this.translate, this._global);
     app.changeLang(lang);
-    this.selectedLanguage = this.getSelectedLanguage(lang);
+    this.selectedLanguage = this.getSelectedLanguage();
   }
 
-  getSelectedLanguage(lang:string){
-    return (lang == 'en') ? 'English' : (lang == 'pl') ? 'Polish' : '';
+  getSelectedLanguage(){
+    var language = this._global.getLanguage();
+    if(language == this._global.LANGUAGES[0])
+      return 'English';
+    else if(language == this._global.LANGUAGES[1])
+      return 'Polish';
+    else
+      return null;
   }
 
   openRuote(component:string, routeLink:string){

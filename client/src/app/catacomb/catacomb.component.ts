@@ -54,7 +54,7 @@ export class CatacombComponent implements OnInit {
     this.selectedCatacombDetailTab = 'tab1';
 
     this.options = this._global.refreshObject(this.options, ['limit=20', 'position=0', 'place_id='+this.catacombsPlaceId, 'order=user_id']);
-    this.dataService.getAllWithMethodAndOptions('GRAVES', this._global.serializeAndURIEncode(this.options))
+    this.dataService.getAllWithMethodAndOptions('PERSONS', this._global.serializeAndURIEncode(this.options))
       .subscribe(catacombs => {
         this.catacombs = catacombs;
         this.totalCatacombs = catacombs.length;
@@ -109,21 +109,21 @@ export class CatacombComponent implements OnInit {
     this.catacomb = null;
     this.catacombUserImage = null;
     this.options = this._global.refreshObject(this.options, ['limit=10', 'position=0', 'user_id='+catacomb.user_id]);
-    this.dataService.getAllWithMethodAndOptions('GRAVE_DETAILS', this._global.serializeAndURIEncode(this.options))
+    this.dataService.getAllWithMethodAndOptions('PERSON_DETAILS', this._global.serializeAndURIEncode(this.options))
       .subscribe(catacombs => {
         this.catacomb = catacombs[0];
       }
     );
     
     this.options = this._global.refreshObject(this.options, ['user_id='+catacomb.user_id]);
-    this.dataService.getAllWithMethodAndOptions('GRAVE_COMMENTS', this._global.serializeAndURIEncode(this.options))
+    this.dataService.getAllWithMethodAndOptions('PERSON_COMMENTS', this._global.serializeAndURIEncode(this.options))
       .subscribe(data => {
         this.comments = data;
       }
     );
 
     this.options = this._global.refreshObject(this.options, ['user_id='+catacomb.user_id]);
-    this.dataService.getAllWithMethodAndOptions('GRAVE_USER_PHOTO', this._global.serializeAndURIEncode(this.options))
+    this.dataService.getAllWithMethodAndOptions('PERSON_PHOTOS', this._global.serializeAndURIEncode(this.options))
       .subscribe(data => {
         if(data && data.length > 0){
           this.catacombUserImage = './assets/images/zdjecia/large/'+data[0].file_name;
@@ -132,7 +132,7 @@ export class CatacombComponent implements OnInit {
     );
 
     this.options = this._global.refreshObject(this.options, ['object_name=znicz', 'user_id='+catacomb.user_id]);
-    this.dataService.getAllWithMethodAndOptions('GRAVE_CANDLES', this._global.serializeAndURIEncode(this.options))
+    this.dataService.getAllWithMethodAndOptions('PERSON_OBJECTS', this._global.serializeAndURIEncode(this.options))
       .subscribe(data => {
         this.objects = data;
         for(var i=0; i<=this.objects.length-1; i++){
@@ -170,7 +170,7 @@ export class CatacombComponent implements OnInit {
     this.dataService.createWithMethodAndOptions(this.options)
       .subscribe(result => {
         this.options = this._global.refreshObject(this.options, ['user_id='+this.selectedCatacombId]);
-        this.dataService.getAllWithMethodAndOptions('GRAVE_COMMENTS', this._global.serializeAndURIEncode(this.options))
+        this.dataService.getAllWithMethodAndOptions('PERSON_COMMENTS', this._global.serializeAndURIEncode(this.options))
           .subscribe(comments => {
             this.comments = comments;
             this.isRemeberanceFormOpen = false;

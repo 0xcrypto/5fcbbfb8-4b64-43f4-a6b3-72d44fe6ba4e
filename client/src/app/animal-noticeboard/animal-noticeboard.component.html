@@ -1,0 +1,248 @@
+<div *ngIf="!isAnimalLoadingScreenVisible" id="content" class="notice-bg">
+  <app-logo></app-logo>
+  <div class="fill-tabs">
+      <div class="tab-bar">
+          <a (click)="openTab('graveyard-noticeboard')" [ngClass]="{'active': (selectedTab == 'graveyard-noticeboard')}" translate>animal_graveyard.noticeboard.tabs.graveyard_noticeboard.title</a>
+          <a (click)="openTab('book-of-dead')" [ngClass]="{'active': (selectedTab == 'book-of-dead')}" translate>animal_graveyard.noticeboard.tabs.book_of_dead.title</a>
+          <a (click)="openTab('search')" [ngClass]="{'active': (selectedTab == 'search')}" translate>animal_graveyard.noticeboard.tabs.search.title</a>
+          <a (click)="openTab('graveyard-burial')" [ngClass]="{'active': (selectedTab == 'graveyard-burial')}" translate>animal_graveyard.noticeboard.tabs.graveyard_burial.title</a>
+      </div>
+      <div class="tabs">
+          <div id="graveyard-noticeboard"  
+          [style.display]="(selectedTab == 'graveyard-noticeboard') ? 'block' : 'none'">
+          <div class="popular-grave-col">
+              <div class="tile" *ngFor="let animal of prioritizedAnimals" >
+                <p translate>animal_graveyard.noticeboard.tabs.graveyard_noticeboard.will_be_sadly_missed</p>
+                <p class="name">{{animal.name}}</p>
+                  <p>
+                      <span><label><i class="fas fas-select-all"></i></label>{{animal.date_birth}}</span>
+                      <span><label><i class="fa fa-plus"></i></label>{{animal.date_death}}</span>
+                  </p>
+              </div>
+          </div>
+          <div class="options-col">
+              <div class="option">
+                  <button (click)="gotoGraveyard();" translate>animal_graveyard.noticeboard.tabs.graveyard_noticeboard.go_to_graveyard</button>
+              </div>
+              <div class="option">
+                  <button translate>animal_graveyard.noticeboard.tabs.graveyard_noticeboard.choose_graveyard</button>
+                  <select>
+                      <option>Municipal</option>
+                      <option>Municipal</option>
+                      <option>Municipal</option>
+                  </select>
+              </div>
+              <div class="option">
+                  <button translate>animal_graveyard.noticeboard.tabs.graveyard_noticeboard.grave_number</button>
+                  <input type="text"/>
+              </div>
+              <div class="option">
+                  <button routerLink="/home" translate>animal_graveyard.noticeboard.tabs.graveyard_noticeboard.go_back_to_main_gate</button>
+              </div>
+          </div>
+          <div class="advertisement-col">
+              <div *ngFor="let advertisement of advertisements" class="tile">
+                  <img *ngIf="advertisement.image" [attr.src]="advertisement.image" />
+                  <p *ngIf="advertisement.text">{{advertisement.text}}</p>
+                  <a *ngIf="advertisement.url" [attr.href]="advertisement.url" target="_blank">{{advertisement.url}}</a>
+              </div>
+          </div>
+          </div>
+          <div id="book-of-dead" [style.display]="(selectedTab == 'book-of-dead') ? 'block' : 'none'">
+              <div *ngIf="loadingData" class="info" translate>animal_graveyard.noticeboard.tabs.book_of_dead.loading_data</div>
+              <table *ngIf="!loadingData">
+                  <thead>
+                      <tr>
+                          <td colspan="5">
+                              <span class="label left-item" translate>animal_graveyard.noticeboard.tabs.book_of_dead.show</span>
+                              <button class="page" *ngFor="let alphabet of alphabetPages" (click)="getAnimalWithFirstname(alphabet)">
+                                  <span [ngClass]="{'active': (alphabet == selectedDeadAlphabet)}">{{alphabet}}</span>                                 
+                              </button>
+                              <button class="page right-item" (click)="showAllAnimals();" translate>animal_graveyard.noticeboard.tabs.book_of_dead.show_all</button>
+                          </td>
+                      </tr>
+                      <tr>
+                          <th class="x">*</th>
+                          <th class="xxx" translate>animal_graveyard.noticeboard.tabs.book_of_dead.surname_firstname</th>
+                          <th class="xx" translate>animal_graveyard.noticeboard.tabs.book_of_dead.dob</th>
+                          <th class="xx" translate>animal_graveyard.noticeboard.tabs.book_of_dead.passed_away</th>
+                          <th class="xx" translate>animal_graveyard.noticeboard.tabs.book_of_dead.burial</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let animal of animals"  (click)="loadingAnimal(animal)">
+                          <td class="x text-center">{{ animal.position }}</td>
+                          <td class="xxx">{{animal.name}}</td>
+                          <td class="xx text-center">{{animal.date_birth}}</td>
+                          <td class="xx text-center">{{animal.date_death}}</td>
+                          <td class="xx text-center">{{(_global.getLanguage() == _global.LANGUAGES[0]) ? animal.genus_en : animal.genus_pl}}</td>
+                      </tr>
+                  </tbody>
+                  <tfoot>
+                      <tr>
+                          <td colspan="2">
+                              <span class="left-item">
+                                  <button class="page" (click)="getPreviousPageAnimals()" [ngClass]="{'disabled': isNavigatePreviousAnimalDisabled }">
+                                      <i class="fa fa-backward"></i>
+                                      <span translate>&nbsp;&nbsp;animal_graveyard.noticeboard.tabs.book_of_dead.previous</span>
+                                  </button>
+                              </span>
+                          </td>
+                          <td colspan="2">
+                              <button *ngFor="let page of animalListPages;" class="page" (click)="getAnimalsWithPageNumber(page)">
+                                  <span [ngClass]="{'active': (page == selectedAnimalPage)}">{{page}}</span>
+                                  <span class="page-seperator">::</span>
+                              </button>
+                          </td>
+                          <td>
+                              <span class="right-item">
+                                  <button class="page" (click)="getNextPageAnimals()" [ngClass]="{'disabled': isNavigateNextAnimalDisabled }">
+                                      <span translate>animal_graveyard.noticeboard.tabs.book_of_dead.next&nbsp;&nbsp;</span>
+                                      <i class="fa fa-forward"></i>
+                                  </button>
+                              </span>
+                          </td>
+                      </tr>
+                  </tfoot>
+              </table>
+          </div>
+          <div id="search" [style.display]="(selectedTab == 'search') ? 'block' : 'none'">
+              <div class="search-form" *ngIf="isSearchFormVisible">
+                  <h4 translate>animal_graveyard.noticeboard.tabs.search.form.find_grave</h4>
+                  <p translate>animal_graveyard.noticeboard.tabs.search.form.enter_at_least_one_field</p>
+                  <form>
+                      <label>
+                          <span translate>animal_graveyard.noticeboard.tabs.search.form.name</span>
+                          <input type="text" [(ngModel)]="name" name="name"/>
+                      </label>
+                      <label>
+                          <span>
+                              <span translate>animal_graveyard.noticeboard.tabs.search.form.dob</span>
+                              <span class="info">[dd-mm-yyyy]</span>
+                          </span>
+                          <input type="date" [(ngModel)]="dob" name="dob"/>
+                      </label>
+                      <label>
+                          <span>
+                              <span translate>animal_graveyard.noticeboard.tabs.search.form.passed_away</span>
+                              <span class="info">[dd-mm-yyyy]</span>
+                          </span>
+                          <input type="date" [(ngModel)]="dod" name="dod"/>
+                      </label>
+                      <label>
+                          <button class="align-right" (click)="submitSearch()">
+                              <span translate>animal_graveyard.noticeboard.tabs.search.form.search&nbsp;&nbsp;</span>
+                              <i class="fa fa-forward"></i>
+                          </button>
+                      </label>
+                  </form>
+              </div>
+              <div *ngIf="searchingData" class="info" translate>animal_graveyard.noticeboard.tabs.search.list.searching_data</div>
+              <div *ngIf="!searchingData && !isSearchFormVisible" class="search-result" >
+                  <table>
+                      <thead>
+                          <tr *ngIf="!isSearchFormVisible">
+                              <td colspan="5">
+                                  <button class="page left-item" (click)="backToSearch();"><i class="fa fa-backward"></i><span translate>&nbsp;&nbsp;animal_graveyard.noticeboard.tabs.search.list.back_to_search</span></button>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td colspan="5">
+                                  <span class="label left-item" translate>animal_graveyard.noticeboard.tabs.search.list.show </span>
+                                  <button span class="page" *ngFor="let alphabet of alphabetPages" (click)="searchAnimalsWithFirstname(alphabet)">
+                                     {{alphabet}}
+                                  </button>
+                                  <button class="page right-item" (click)="searchAllAnimals();" translate>animal_graveyard.noticeboard.tabs.search.list.show_all</button>
+                              </td>
+                          </tr>
+                          <tr>
+                              <th class="x">*</th>
+                              <th class="xxx" translate>animal_graveyard.noticeboard.tabs.search.list.surname_firstname</th>
+                              <th class="xx" translate>animal_graveyard.noticeboard.tabs.search.list.dob</th>
+                              <th class="xx" translate>animal_graveyard.noticeboard.tabs.search.list.passed_away</th>
+                              <th class="xx" translate>animal_graveyard.noticeboard.tabs.search.list.burial</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let animal of searchedAnimals" (click)="loadingAnimal(animal)">
+                              <td class="x">{{ animal.position }}</td>
+                              <td class="xxx">{{ animal.name }}</td>
+                              <td class="xx text-center">{{animal.date_birth}}</td>
+                              <td class="xx text-center">{{animal.date_death}}</td>
+                              <td class="xx text-center">{{(_global.getLanguage() == _global.LANGUAGES[0]) ? animal.genus_en : animal.genus_pl}}</td>
+                          </tr>
+                      </tbody>
+                      <tfoot>
+                          <tr>
+                              <td colspan="2">
+                                  <span class="left-item">
+                                      <button class="page" (click)="searchPreviousPageAnimals()" [ngClass]="{'disabled': isNavigatePreviousSearchedAnimalDisabled }">
+                                          <i class="fa fa-backward"></i>
+                                          <span translate>&nbsp;&nbsp;animal_graveyard.noticeboard.tabs.search.list.previous</span>
+                                      </button >
+                                  </span>
+                              </td>
+                              <td colspan="2">
+                                  <button *ngFor="let page of searchedAnimalPages;" class="page" (click)="searchAnimalsWithPageNumber(page)">
+                                      <span [ngClass]="{'active': (page == selectedSearchedAnimalPage)}">{{page}}</span>
+                                      <span class="page-seperator">::</span>
+                                  </button>
+                              </td>
+                              <td>
+                                  <span class="right-item">
+                                      <button class="page" (click)="searchNextPageAnimals()" [ngClass]="{'disabled': isNavigateNextSearchedAnimalDisabled }">
+                                          <span translate>animal_graveyard.noticeboard.tabs.search.list.next&nbsp;&nbsp;</span>
+                                          <i class="fa fa-forward"></i>
+                                      </button>
+                                  </span>
+                              </td>
+                          </tr>
+                      </tfoot>
+                  </table>
+              </div>
+          </div>
+          <div id="graveyard-burial"  [style.display]="(selectedTab == 'graveyard-burial') ? 'block' : 'none'">
+          <p translate>animal_graveyard.noticeboard.tabs.graveyard_burial.title</p>
+          </div>
+      </div>
+  </div>
+</div>
+<div *ngIf="isAnimalLoadingScreenVisible" id="content" class="loading-bg">
+  <app-logo></app-logo>
+  <ul id="loading-options">
+      <li>
+          <label translate>animal_graveyard.loading_screen.day</label>
+          <button class="day" (click)="setSceneTime(1);" [ngClass]="{'active': (selectedSceneTime == 1) }"><span></span></button>
+      </li>
+      <li>
+          <label translate>animal_graveyard.loading_screen.night</label>
+          <button class="night" (click)="setSceneTime(2);" [ngClass]="{'active': (selectedSceneTime == 2) }"><span></span></button>
+      </li>
+      <li class="seperator"></li>
+      <li>
+          <label translate>animal_graveyard.loading_screen.blue_sky</label>
+          <button class="blue-sky" (click)="setSceneSeason(1);" [ngClass]="{'active': (selectedSceneSeason == 1) }"><span></span></button>
+      </li>
+      <li>
+          <label translate>animal_graveyard.loading_screen.rain</label>
+          <button class="rain" (click)="setSceneSeason(2);" [ngClass]="{'active': (selectedSceneSeason == 2) }"><span></span></button>
+      </li>
+      <li>
+          <label translate>animal_graveyard.loading_screen.thunder_strom</label>
+          <button class="thunder-strom" (click)="setSceneSeason(3);" [ngClass]="{'active': (selectedSceneSeason == 3) }"><span></span></button>
+      </li>
+      <li>
+          <label translate>animal_graveyard.loading_screen.snow</label>
+          <button class="snow" (click)="setSceneSeason(4);" [ngClass]="{'active': (selectedSceneSeason == 4) }"><span></span></button>
+      </li>
+      <li class="seperator"></li>
+      <li>
+          <label translate>animal_graveyard.loading_screen.random</label>
+          <button class="random" (click)="randomSceneSelection();" [ngClass]="{'active': isRandomSceneSelected }"><span></span></button>
+      </li>
+      <li>
+          <label>&nbsp;</label>
+          <button class="ok" (click)="showGraveyard();"></button>
+      </li>
+  </ul>
+</div>

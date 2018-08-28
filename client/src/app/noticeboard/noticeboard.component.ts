@@ -56,12 +56,8 @@ export class NoticeboardComponent implements OnInit {
   dob:string = null;
   dod:string = null;
 
-  options: Options = {
-    limit: this.datalimit
-  };
-  searchOptions: Options = {
-    limit: this.datalimit
-  };
+  options: Options = null;
+  searchOptions: Options = null;
   
   constructor(private _router: Router, 
     private translate: TranslateService, 
@@ -240,24 +236,6 @@ export class NoticeboardComponent implements OnInit {
     this.searchGraves(this._global.serializeAndURIEncode(this.searchOptions));
   }
 
-  getPagination(start: number, total: number){
-    let pages: number[] = [];
-    if(start >= (total - 5)){
-      start = (total - 5);
-      for(let i = start, j=1; i <= total; i++, j++){
-        pages[j-1] = i;
-      }
-    }
-    else{
-      for(let i = 0; i <= 3; i++){
-        pages[i] = start + i;
-      }
-      pages[4] = total;
-    }
-
-    return pages;
-  }
-
   openTab(name:string) {
     this.selectedTab = name;
     if(name == 'book-of-dead'){
@@ -310,7 +288,7 @@ export class NoticeboardComponent implements OnInit {
 
   getGraves(param: string): void {
     this.loadingData = true;
-    this.dataService.getAllWithMethodAndOptions('GRAVES', param)
+    this.dataService.getAllWithMethodAndOptions('PERSONS', param)
       .subscribe(users => {
         this.loadingData = false;
         this.users = users;
@@ -318,7 +296,7 @@ export class NoticeboardComponent implements OnInit {
           users = this.updateDeadObject(users, 'deadlist');
           this.totalDeads = parseInt(users[0].ilosc);
           this.totalPagesInDeadlist = Math.ceil(this.totalDeads / this.datalimit);
-          this.deadlistPages = this.getPagination(this.selectedDeadPage, this.totalPagesInDeadlist);
+          this.deadlistPages = this._global.getPagination(this.selectedDeadPage, this.totalPagesInDeadlist);
         }
 
         if(this.selectedDeadPage == 1){
@@ -339,7 +317,7 @@ export class NoticeboardComponent implements OnInit {
 
   getVisibleGraves(): void {
     this.options = this._global.refreshObject(this.options, ['limit=3', 'position=0', 'order=user_id', 'death_date=zmarli', 'visibility=1']);
-    this.dataService.getAllWithMethodAndOptions('GRAVES', this._global.serializeAndURIEncode(this.options))
+    this.dataService.getAllWithMethodAndOptions('PERSONS', this._global.serializeAndURIEncode(this.options))
       .subscribe(users => {
         delete this.options['visibility'];
         this.prioritizeGraves = users.slice(0,3);
@@ -348,7 +326,7 @@ export class NoticeboardComponent implements OnInit {
 
   searchGraves(param: string): void {
     this.searchingData = true;
-    this.dataService.getAllWithMethodAndOptions('GRAVES', param)
+    this.dataService.getAllWithMethodAndOptions('PERSONS', param)
       .subscribe(users => {
         this.searchingData = false;
         this.searchedUsers = users;
@@ -356,7 +334,7 @@ export class NoticeboardComponent implements OnInit {
           users = this.updateDeadObject(users, 'searchlist');
           this.totalSearchedDeads = parseInt(users[0].ilosc);
           this.totalPagesInSearchedDead = Math.ceil(this.totalSearchedDeads / this.datalimit);
-          this.searchedDeadPages = this.getPagination(this.selectedSearchPage, this.totalPagesInSearchedDead);
+          this.searchedDeadPages = this._global.getPagination(this.selectedSearchPage, this.totalPagesInSearchedDead);
         }
 
         if(this.selectedSearchPage == 1){

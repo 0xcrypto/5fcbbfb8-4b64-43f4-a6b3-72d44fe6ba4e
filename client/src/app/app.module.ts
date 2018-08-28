@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { WebStorageModule } from 'ngx-store';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient }    from '@angular/common/http';
@@ -21,6 +22,8 @@ import { SoundComponent } from './sound/sound.component';
 import { ShopComponent } from './shop/shop.component';
 import { CatacombComponent } from './catacomb/catacomb.component';
 import { NgSlimScrollModule, SLIMSCROLL_DEFAULTS } from 'ngx-slimscroll';
+import { AnimalNoticeboardComponent } from './animal-noticeboard/animal-noticeboard.component';
+import { AnimalGraveyardComponent } from './animal-graveyard/animal-graveyard.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -42,13 +45,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     GraveyardComponent,
     SoundComponent,
     ShopComponent,
-    CatacombComponent
+    CatacombComponent,
+    AnimalNoticeboardComponent,
+    AnimalGraveyardComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    WebStorageModule,
 	  TranslateModule.forRoot({
 		  loader: {
 		    provide: TranslateLoader,

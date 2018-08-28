@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { CookieStorage, LocalStorage, SessionStorage, LocalStorageService } from 'ngx-store';
+
 
 interface GraveyardImages {
   scene: string;
@@ -18,7 +20,9 @@ interface GraveyardImages {
 
 @Injectable()
 export class AppGlobals {
-  private language: string = 'en';
+  private DEFAULT_LANGUAGE: string = 'en';
+  private LANGUAGE_KEY: string = '_lang';
+  public LANGUAGES:string[] = ['en', 'pl'];
   private images: GraveyardImages[] = [{
     scene: '1_1',
     sky: 'niebo3.jpg',
@@ -51,14 +55,58 @@ export class AppGlobals {
     scene: '2_4',
     sky: 'rnniebo3.jpg',
     graveyard: 'tlo8s.png'
-  }, ]
+  }, ];
+
+  private animal_images: GraveyardImages[] = [{
+    scene: '1_1',
+    sky: 'niebo3.jpg',
+    graveyard: 'tlo17.png'
+  }, {
+    scene: '1_2',
+    sky: 'rniebo3.jpg',
+    graveyard: 'tlo17r.png'
+  }, {
+    scene: '1_3',
+    sky: 'rniebo2.jpg',
+    graveyard: 'tlo17r.png'
+  }, {
+    scene: '1_4',
+    sky: 'rniebo0.jpg',
+    graveyard: 'tlo17s.png'
+  }, {
+    scene: '2_1',
+    sky: 'nniebo2.jpg',
+    graveyard: 'tlo17.png'
+  }, {
+    scene: '2_2',
+    sky: 'rnniebo2.jpg',
+    graveyard: 'tlo17r.png'
+  }, {
+    scene: '2_3',
+    sky: 'rnniebo3.jpg',
+    graveyard: 'tlo17r.png'
+  }, {
+    scene: '2_4',
+    sky: 'rnniebo3.jpg',
+    graveyard: 'tlo17s.png'
+  }, ];
+
+  constructor(private localStorageService: LocalStorageService) {
+  }
+
 
   setLanguage(language:string) {
-    this.language = language;
+    this.localStorageService.set(this.LANGUAGE_KEY, language);
   }
 
   getLanguage(): string {
-    return this.language;
+    let lang = this.localStorageService.get(this.LANGUAGE_KEY);
+    if(lang)
+      return lang;
+    else{
+      this.localStorageService.set(this.LANGUAGE_KEY, this.DEFAULT_LANGUAGE);
+      return this.DEFAULT_LANGUAGE;
+    }
   }
 
   serialize(object: any){
@@ -97,6 +145,15 @@ export class AppGlobals {
     return null;
   }
 
+  getAnimalGraveyardImage(id:string){
+    for (let key in this.images) {  
+      if(this.animal_images[key].scene == id){
+        return this.animal_images[key].graveyard;
+      }
+    }
+    return null;
+  }
+
   getRandomNumber(min:number, max:number) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -114,4 +171,23 @@ export class AppGlobals {
     }
     return object;
   }
+
+  getPagination(start: number, total: number){
+    let pages: number[] = [];
+    if(start >= (total - 5)){
+      start = (total - 5);
+      for(let i = start, j=1; i <= total; i++, j++){
+        pages[j-1] = i;
+      }
+    }
+    else{
+      for(let i = 0; i <= 3; i++){
+        pages[i] = start + i;
+      }
+      pages[4] = total;
+    }
+
+    return pages;
+  }
+
 }
