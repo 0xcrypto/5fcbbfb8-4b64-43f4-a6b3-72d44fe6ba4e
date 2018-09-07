@@ -22,9 +22,9 @@ const routes: Routes = [
   { path: 'pricing', component: PricingComponent },
   { path: 'staticpage/:id', component: StaticpageComponent },
   { path: 'graveyard/:position/:scene', component: GraveyardComponent },
-  { path: 'catacombs', component: CatacombComponent },
-  { path: 'animal-noticeboard', component: AnimalNoticeboardComponent },
-  { path: 'animal-graveyard/:position/:scene', component: AnimalGraveyardComponent },
+  { path: 'catacomb', component: CatacombComponent },
+  { path: 'pet-noticeboard', component: AnimalNoticeboardComponent },
+  { path: 'pet-graveyard/:position/:scene', component: AnimalGraveyardComponent },
 ];
 
 @NgModule({

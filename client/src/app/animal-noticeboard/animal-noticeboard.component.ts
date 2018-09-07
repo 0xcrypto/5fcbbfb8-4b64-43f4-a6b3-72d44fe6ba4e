@@ -93,12 +93,12 @@ export class AnimalNoticeboardComponent implements OnInit {
 
   showGraveyard(){
     let scene = this.selectedSceneTime+"_"+this.selectedSceneSeason;
-    this.router.navigateByUrl('/animal-graveyard/'+this.selectedAnimalPosition+'/'+scene);
+    this.router.navigateByUrl('/pet-graveyard/'+this.selectedAnimalPosition+'/'+scene);
   }
 
   gotoGraveyard(){
     let scene = this._global.getRandomNumber(1,2)+"_"+this._global.getRandomNumber(1,4);
-    this.router.navigateByUrl('/animal-graveyard/0/'+scene);
+    this.router.navigateByUrl('/pet-graveyard/0/'+scene);
   }
 
   getAnimalWithFirstname(alphabet: string){

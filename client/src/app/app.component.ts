@@ -12,8 +12,8 @@ export class AppComponent {
   private CURRENT_LANGUAGE: string = null;
 
   constructor(private translate: TranslateService, private _global: AppGlobals) {
-    translate.addLangs(this._global.LANGUAGES);
-    let lang = this._global.getLanguage();
+    translate.addLangs(_global.LANGUAGES);
+    let lang = _global.getLanguage();
     translate.setDefaultLang(lang);
     translate.use(lang);
   }

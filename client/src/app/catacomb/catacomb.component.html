@@ -19,8 +19,11 @@
     <div class="catacombs-container" [ngStyle]="{'width': (catacombSize * totalCatacombs)+'px'}">
         <ul [ngStyle]="{'margin-left': '-'+catacombStartPosition+'px', 'width': (catacombSize * totalCatacombs)+'px'}">
             <li *ngFor="let catacomb of catacombs">
-                <div  class="catacomb" [ngStyle]="{'background-image': catacomb.imageUrl, 'width': catacombSize+'px'}" >
-                    <div>
+                <div  class="catacomb" [ngStyle]="{ 'width': catacombSize+'px' }" >
+                    <div class="style" [ngStyle]="{ 'background-image': catacomb.imageUrl }"></div>
+                    <p class="slab"></p>
+                    <p class="candle-stand"></p>
+                    <div class="detail">
                         <p class="name" (click)="showCatacombDetails(catacomb);">
                           {{([].constructor.isArray(catacomb).name1) ? 
                             catacomb.name1[0] : catacomb.name1}} {{catacomb.surname}}</p>
@@ -28,8 +31,6 @@
                             <span><label>Born</label>{{catacomb.date_birth}}</span>
                             <span><label>Passed Away</label>{{catacomb.date_death}}</span>
                         </p>
-                        <p class="slab"></p>
-                        <p class="candle-stand"></p>
                     </div>
                 </div>
             </li>

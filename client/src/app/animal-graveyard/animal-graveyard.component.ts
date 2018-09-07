@@ -78,14 +78,19 @@ export class AnimalGraveyardComponent implements OnInit {
 
     let context = this;
     window.addEventListener("load",function(){
-      document.querySelector('#content.loading-bg').addEventListener("mousemove", context.mouseMove);
-      document.querySelector('#content.loading-bg').addEventListener("mouseup", context.mouseUp);
-      document.querySelector('#content.loading-bg').addEventListener("mousedown", context.mouseDown); 
+      let loadingBackground = document.querySelector('#content.loading-bg');
+
+      if(!loadingBackground)
+        return;
+
+      loadingBackground.addEventListener("mousemove", context.mouseMove);
+      loadingBackground.addEventListener("mouseup", context.mouseUp);
+      loadingBackground.addEventListener("mousedown", context.mouseDown); 
     });
   }
 
   backToSearchResults(){
-    this.router.navigateByUrl('/animal-noticeboard');
+    this.router.navigateByUrl('/pet-noticeboard');
   }
 
   nextGrave(){

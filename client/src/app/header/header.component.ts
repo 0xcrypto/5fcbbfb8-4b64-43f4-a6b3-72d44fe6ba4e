@@ -15,7 +15,6 @@ export class HeaderComponent implements OnInit {
   currentComponentText:string = null;
   selectedLanguage:string = null;
   currentRoute:string = null;
-  router:Router = null;
 
   constructor(private translate: TranslateService, private _global: AppGlobals, private _router: Router, private route: ActivatedRoute) {
   }
@@ -42,24 +41,24 @@ export class HeaderComponent implements OnInit {
 
   openRuote(component:string, routeLink:string){
     this.currentComponentText = component;
-    this.router.navigate([routeLink]);
+    this._router.navigate([routeLink]);
   }
   
   gotoGraveyard(){
     let scene = this._global.getRandomNumber(1,2)+"_"+this._global.getRandomNumber(1,4);
-    this.router.navigateByUrl('/graveyard/0/'+scene);
+    this._router.navigateByUrl('/graveyard/0/'+scene);
   }
 
   setCurrentRoute(){
     let key = null;
     debugger;
-    if(this.router.url.indexOf('/home') > -1){
+    if(this._router.url.indexOf('/home') > -1){
       key = 'header.menu.main_gate';
     }
-    else if(this.router.url.indexOf('/noticeboard') > -1){
+    else if(this._router.url.indexOf('/noticeboard') > -1){
       key = 'header.menu.graveyard_noticeboard';
     }
-    else if(this.router.url.indexOf('/graveyard') > -1){
+    else if(this._router.url.indexOf('/graveyard') > -1){
       key = 'header.menu.graveyard';
     }
 

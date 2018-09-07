@@ -10,7 +10,7 @@
   </div>
   <div class="graveyard-sky-container" [ngStyle]="{'background-image': skyImage}"></div>
   <div class="graveyard-container" >
-      <ul [ngStyle]="{'margin-left': '-'+graveyardStartPosition+'px', 'width': (graveSize * totalGraves)+'px', 'background-image': graveyardImage}">
+      <ul [ngStyle]="{'margin-left': '-'+graveyardStartPosition+'px', 'width': (graveSize * totalAnimals)+'px', 'background-image': graveyardImage}">
           <div *ngIf="isRainfallScene" class="rainfall">&nbsp;</div>
           <div *ngIf="isSnowfallScene" class="snowfall">&nbsp;</div>
           <div *ngIf="isThunderstromScene" class="thunderstrom">&nbsp;</div>

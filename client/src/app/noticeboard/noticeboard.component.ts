@@ -256,8 +256,8 @@ export class NoticeboardComponent implements OnInit {
     this.isSearchFormVisible = true;
   }
 
-  catacombs(){
-    this.router.navigateByUrl('/catacombs');
+  goToCatacomb(){
+    this.router.navigateByUrl('/catacomb');
   }
 
   getAdvertisements(): void {
