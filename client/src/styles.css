@@ -7,6 +7,12 @@
 .clear{
     clear: both;
 }
+.show{
+    display: block;
+}
+.hide{
+    display: none;
+}
 .text-center {
     text-align: center;
 }
@@ -203,10 +209,15 @@ body #content.loading-bg{
     animation: backgroundScroll 5s linear infinite;
     position: relative;
 }
+body #content.loading-bg-black{
+    overflow: inherit;
+    background-color: #000;
+    position: relative;
+}
 body #content.catacombs{
     position: relative;
 }
-body #content.loading-bg.with-logo-cursor{
+body #content.loading-bg.with-logo-cursor, body #content.loading-bg-black.with-logo-cursor{
     cursor: url(./assets/images/loading_cursor.gif);
 }
 body #content .scroll-content{

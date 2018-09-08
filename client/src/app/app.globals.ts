@@ -22,6 +22,8 @@ interface GraveyardImages {
 export class AppGlobals {
   private DEFAULT_LANGUAGE: string = 'en';
   private LANGUAGE_KEY: string = '_lang';
+  public GRAVEYARD_SEARCH_OPTIONS_KEY = 'GraveyardSearchOptions';
+  public GRAVEYARD_RETURN_TAB = 'GraveyardReturnTab';
   public LANGUAGES:string[] = ['en', 'pl'];
   private images: GraveyardImages[] = [{
     scene: '1_1',
@@ -104,7 +106,6 @@ export class AppGlobals {
     'assets/images/cat-main-en.png',
     'assets/images/cat-main-pl.png',
     'assets/images/cat-stand.png',
-    'assets/images/cat-wall.jpg',
     'assets/images/cat-wall-minor.jpg',
     'assets/images/day.png',
     'assets/images/day-active.png',

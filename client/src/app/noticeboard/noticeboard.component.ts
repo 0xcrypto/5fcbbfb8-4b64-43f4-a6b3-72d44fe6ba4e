@@ -6,6 +6,7 @@ import { DataService } from '../services/data.service';
 import { User } from '../classes/user';
 import { Router } from '@angular/router';
 import { AppGlobals } from '../app.globals';
+import { CookieStorage, LocalStorage, SessionStorage, LocalStorageService } from 'ngx-store';
 
 export interface Options {
   limit:number;
@@ -62,7 +63,8 @@ export class NoticeboardComponent implements OnInit {
   constructor(private _router: Router, 
     private translate: TranslateService, 
     private dataService: DataService, 
-    private _global: AppGlobals) {
+    private _global: AppGlobals,
+    private localStorageService: LocalStorageService) {
     this.router = _router;
   }
 
@@ -71,14 +73,22 @@ export class NoticeboardComponent implements OnInit {
     this.currentLang = this._global.getLanguage();
 
     this.getAdvertisements();
-    //this.options['position'] = 0;
-    //this.options['order'] = 'user_id';
-    //this.options['death_date'] = 'zmarli';
-
     this.getVisibleGraves();
+
+    if(this.localStorageService.get(this._global.GRAVEYARD_RETURN_TAB))
+      this.selectedTab = this.localStorageService.get(this._global.GRAVEYARD_RETURN_TAB)
+
+    if(this.selectedTab == 'search' && this.localStorageService.get(this._global.GRAVEYARD_SEARCH_OPTIONS_KEY)){
+      let parameters = this.localStorageService.get(this._global.GRAVEYARD_SEARCH_OPTIONS_KEY).split('|');
+      this.loadSearchData(parameters);
+    }
   }
 
-  loadingGrave(user:User){
+  loadingGrave(user:User, returnTab:string){
+    if(returnTab){
+      this.localStorageService.set(this._global.GRAVEYARD_RETURN_TAB, returnTab);
+    }
+
     if(user.place_name == 'cmentarz' || user.place_name == 'Graveyard')
     {
       this.selectedDeadPosition = (user.position - 1);
@@ -208,7 +218,8 @@ export class NoticeboardComponent implements OnInit {
   }
   
   submitSearch(){
-    var parameters = ['limit=15', 'order=user_id', 'death_date=zmarli']
+    //, 'death_date=zmarli'
+    var parameters = ['limit=15', 'order=user_id']
     if(this.firstname){
       parameters.push('firstname='+this.firstname);
     }
@@ -229,9 +240,14 @@ export class NoticeboardComponent implements OnInit {
       parameters.push('death_date='+validDOD);
     }
 
+    this.loadSearchData(parameters);
+  }
+
+  loadSearchData(parameters:string[]){
     this.selectedSearchPage = 1;
     this.isSearchFormVisible = false;
     parameters.push('position='+(this.selectedSearchPage - 1));
+    this.localStorageService.set(this._global.GRAVEYARD_SEARCH_OPTIONS_KEY, parameters.join('|'));
     this.searchOptions = this._global.refreshObject(this.searchOptions, parameters);
     this.searchGraves(this._global.serializeAndURIEncode(this.searchOptions));
   }
@@ -246,10 +262,11 @@ export class NoticeboardComponent implements OnInit {
     }
     else if(name == 'graveyard-noticeboard'){
       this.getAdvertisements();
-    }
-    else if (name == 'graveyard-noticeboard'){
       this.getVisibleGraves();
     }
+
+    this.localStorageService.set(this._global.GRAVEYARD_SEARCH_OPTIONS_KEY, null);
+    this.isSearchFormVisible = true;
   }
 
   backToSearch(){

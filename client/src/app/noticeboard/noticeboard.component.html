@@ -74,7 +74,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let user of users"  (click)="loadingGrave(user)">
+                        <tr *ngFor="let user of users"  (click)="loadingGrave(user, 'book-of-dead')">
                             <td class="x text-center">{{ user.position }}</td>
                             <td class="xxx">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</td>
                             <td class="xx text-center">{{user.date_birth}}</td>
@@ -138,7 +138,7 @@
                             <input type="date" [(ngModel)]="dod" name="dod"/>
                         </label>
                         <label>
-                            <button class="align-right" (click)="submitSearch()">
+                            <button type="button" class="align-right" (click)="submitSearch()">
                                 <span translate>graveyard.noticeboard.tabs.search.form.search&nbsp;&nbsp;</span>
                                 <i class="fa fa-forward"></i>
                             </button>
@@ -172,7 +172,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let user of searchedUsers" (click)="loadingGrave(user)">
+                            <tr *ngFor="let user of searchedUsers" (click)="loadingGrave(user, 'search')">
                                 <td class="x">{{ user.position }}</td>
                                 <td class="xxx">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</td>
                                 <td class="xx text-center">{{user.date_birth}}</td>

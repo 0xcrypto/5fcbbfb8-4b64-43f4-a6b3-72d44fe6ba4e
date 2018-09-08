@@ -503,7 +503,7 @@
 			
 			$query.=' ORDER BY '.$order.' DESC LIMIT ' .($position * $limit).','.$limit;
 			$result = Yii::app()->db->createCommand(str_replace("0 as koniec",$end,$query))->queryAll();							
-				
+			
 			$data = array(); 
 			$i = 0; 
 			foreach ($result as $row)

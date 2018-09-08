@@ -10,15 +10,17 @@ import { AppGlobals } from '../app.globals';
 export class HomeComponent implements OnInit {
   isGateOpen:boolean=false;
   isReturnedToMainGate:boolean = false;
-  isImageLoadingCompleted:boolean = false;
+  isImageLoadingScreenVisible:boolean = false;
   router:Router = null;
 
   constructor(private _router: Router, private route: ActivatedRoute, private _global: AppGlobals) {
     this.router = _router;
-    this.loadImages();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    window['component'] = this;
+    this.loadImages();
+  }
   
   ngAfterViewInit(){
     this.backToMainGate();
@@ -39,17 +41,19 @@ export class HomeComponent implements OnInit {
   }
 
   loadImages(){
-    var images = new Array(), total = this._global.IMAGES.length, loadedTotalImages = 0;
+    this.isImageLoadingScreenVisible = true;
+    var images = new Array();
+    
     for (let i = 0; i < this._global.IMAGES.length; i++) {
-      images[i] = new Image();
-      images[i].src = this._global.IMAGES[i];
-      images[i].onload = function (){
-        loadedTotalImages++;
-        if(loadedTotalImages == total){debugger;
-          this.isImageLoadingCompleted = true;
-        }
-      }
+      var image = document.createElement('img');
+      image.src = this._global.IMAGES[i];
+      document.querySelector('#images-loading').appendChild(image);
     }
+
+    setTimeout(function(){
+      window['component'].isImageLoadingScreenVisible = false;
+      document.querySelector('#images-loading').innerHTML = '';
+    }, 5000);
   }
 }
 
