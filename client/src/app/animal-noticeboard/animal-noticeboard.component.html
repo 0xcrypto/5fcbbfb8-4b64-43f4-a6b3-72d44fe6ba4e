@@ -70,7 +70,7 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr *ngFor="let animal of animals"  (click)="loadingAnimal(animal)">
+                      <tr *ngFor="let animal of animals"  (click)="loadingAnimal(animal, 'book-of-dead')">
                           <td class="x text-center">{{ animal.position }}</td>
                           <td class="xxx">{{animal.name}}</td>
                           <td class="xx text-center">{{animal.date_birth}}</td>
@@ -164,7 +164,7 @@
                           </tr>
                       </thead>
                       <tbody>
-                          <tr *ngFor="let animal of searchedAnimals" (click)="loadingAnimal(animal)">
+                          <tr *ngFor="let animal of searchedAnimals" (click)="loadingAnimal(animal, 'search')">
                               <td class="x">{{ animal.position }}</td>
                               <td class="xxx">{{ animal.name }}</td>
                               <td class="xx text-center">{{animal.date_birth}}</td>

@@ -68,8 +68,8 @@ export class GraveyardComponent implements OnInit {
     }
     this.skyImage = 'url(./assets/images/sky/'+this._global.getSkyImage(scene)+')';
     this.graveyardImage = 'url(./assets/images/graveyard-backgrounds/'+this._global.getGraveyardImage(scene)+')';
-    if(this.localStorageService.get(this._global.GRAVEYARD_SEARCH_OPTIONS_KEY)){
-      let searchOptions = this.localStorageService.get(this._global.GRAVEYARD_SEARCH_OPTIONS_KEY).split('|');
+    if(this.localStorageService.get(this._global.GRAVEYARD_OPTIONS_KEY)){
+      let searchOptions = this.localStorageService.get(this._global.GRAVEYARD_OPTIONS_KEY).split('|');
       this.options = this._global.refreshObject(this.options, searchOptions);
     }
     else{

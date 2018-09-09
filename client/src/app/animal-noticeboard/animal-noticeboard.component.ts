@@ -5,6 +5,7 @@ import { Advertisement } from '../classes/advertisement';
 import { DataService } from '../services/data.service';
 import { Router } from '@angular/router';
 import { AppGlobals } from '../app.globals';
+import { CookieStorage, LocalStorage, SessionStorage, LocalStorageService } from 'ngx-store';
 
 export interface Options {};
 
@@ -58,7 +59,8 @@ export class AnimalNoticeboardComponent implements OnInit {
   constructor(private _router: Router, 
     private translate: TranslateService, 
     private dataService: DataService, 
-    private _global: AppGlobals) {
+    private _global: AppGlobals,
+    private localStorageService: LocalStorageService) {
     this.router = _router;
   }
 
@@ -68,11 +70,29 @@ export class AnimalNoticeboardComponent implements OnInit {
 
     this.getAdvertisements();
     this.getVisibleAnimals();
+    
+    if(this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_RETURN_TAB) &&
+        this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY)){
+
+      this.selectedTab = this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_RETURN_TAB);
+      let parameters = this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY).split('|');
+      
+      if(parameters && this.selectedTab == 'book-of-dead'){
+        this.loadData(parameters);
+      }
+      else if(parameters && this.selectedTab == 'search'){
+        this.loadSearchData(parameters);
+      }
+    }
   }
 
-  loadingAnimal(animal:any){
-      this.selectedAnimalPosition = (animal.position - 1);
-      this.isAnimalLoadingScreenVisible = true;
+  loadingAnimal(animal:any, returnTab:string){
+    if(returnTab){
+      this.localStorageService.set(this._global.ANIMAL_GRAVEYARD_RETURN_TAB, returnTab);
+    }
+
+    this.selectedAnimalPosition = (animal.position - 1);
+    this.isAnimalLoadingScreenVisible = true;
   }
 
   setSceneTime(time:number){
@@ -213,25 +233,36 @@ export class AnimalNoticeboardComponent implements OnInit {
       parameters.push('death_date='+validDOD);
     }
 
+    this.loadSearchData(parameters);
+  }
+
+  loadSearchData(parameters:string[]){
     this.selectedSearchedAnimalPage = 1;
     this.isSearchFormVisible = false;
     parameters.push('position='+(this.selectedSearchedAnimalPage - 1));
+    this.localStorageService.set(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY, parameters.join('|'));
     this.searchOptions = this._global.refreshObject(this.searchOptions, parameters);
     this.searchAnimals(this._global.serializeAndURIEncode(this.searchOptions));
   }
-
   openTab(name:string) {
     this.selectedTab = name;
-    if(name == 'book-of-dead'){
+
+    if(this.selectedTab == 'book-of-dead'){
       this.selectedAnimalPage = 1;
-      this.options = this._global.refreshObject(this.options, ['position='+ (this.selectedAnimalPage - 1),
-      'order=animal_id']);
-      this.getAnimals(this._global.serializeAndURIEncode(this.options));
+      let parameters = ['position='+ (this.selectedAnimalPage - 1), 'order=animal_id'];
+      this.loadData(parameters);
     }
-    else if(name == 'graveyard-noticeboard')
+    
+    if(this.selectedTab == 'graveyard-noticeboard'){
       this.getAdvertisements();
-    else if (name == 'graveyard-noticeboard')
       this.getVisibleAnimals();
+    }
+  }
+
+  loadData(parameters:string[]){
+    this.options = this._global.refreshObject(this.options, parameters);
+    this.localStorageService.set(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY, parameters.join('|'));
+    this.getAnimals(this._global.serializeAndURIEncode(this.options));
   }
 
   backToSearch(){

@@ -1037,27 +1037,28 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     padding: 0;
     margin: 0;
     position: absolute;
-    top: 0;
+    height: 515px;
+    top: 85px;
     background-size: contain;
     background-position: bottom;
 }
 .graveyard-container > ul li{
     float: left;
-    width: 500px;
-    height: 600px;
+    width: 512px;
+    height: 515px;
 }
 .graveyard-container > ul li .grave{
-    height: 600px;
+    height: 100%;
     background-repeat: no-repeat;
     background-position: center bottom;
-    background-size: 65%;
+    background-size: contain;
     margin: 0 auto;
     position: absolute;
 }
 .graveyard-container > ul li .grave > div {
     color: #a2a2a2;
     width: 200px;
-    margin: 450px auto;
+    margin: 320px auto auto;
     font-size: 13px;
     background: rgba(0, 0, 0, 0.6);
     border: 1px solid #a2a2a2;

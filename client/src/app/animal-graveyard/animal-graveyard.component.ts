@@ -8,6 +8,7 @@ import { DataService } from '../services/data.service';
 import { AppGlobals } from '../app.globals';
 import { debug } from 'util';
 import { _iterableDiffersFactory } from '@angular/core/src/application_module';
+import { CookieStorage, LocalStorage, SessionStorage, LocalStorageService } from 'ngx-store';
 
 export interface UserOptions {};
 
@@ -42,7 +43,11 @@ export class AnimalGraveyardComponent implements OnInit {
     limit: 10
   };
 
-  constructor(private route: ActivatedRoute, private dataService: DataService, private _global: AppGlobals, private _router: Router) { 
+  constructor(private route: ActivatedRoute, 
+    private dataService: DataService, 
+    private _global: AppGlobals, 
+    private _router: Router,
+    private localStorageService: LocalStorageService) { 
     this.router = _router;
   }
 
@@ -61,7 +66,13 @@ export class AnimalGraveyardComponent implements OnInit {
     }
     this.skyImage = 'url(./assets/images/sky/'+this._global.getSkyImage(scene)+')';
     this.graveyardImage = 'url(./assets/images/graveyard-backgrounds/'+this._global.getAnimalGraveyardImage(scene)+')';
-    this.options = this._global.refreshObject(this.options, ['limit=10', 'position='+position, 'order=animal_id']);
+    if(this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY)){
+      let searchOptions = this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY).split('|');
+      this.options = this._global.refreshObject(this.options, searchOptions);
+    }
+    else{
+      this.options = this._global.refreshObject(this.options, ['limit=10', 'position='+position, 'order=animal_id']);
+    }
     this.dataService.getAllWithMethodAndOptions('ANIMALS', this._global.serializeAndURIEncode(this.options))
       .subscribe(animals => {
         this.animals = animals.reverse();

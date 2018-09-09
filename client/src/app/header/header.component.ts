@@ -49,6 +49,11 @@ export class HeaderComponent implements OnInit {
     this._router.navigateByUrl('/graveyard/0/'+scene);
   }
 
+  gotoPetGraveyard(){
+    let scene = this._global.getRandomNumber(1,2)+"_"+this._global.getRandomNumber(1,4);
+    this._router.navigateByUrl('/pet-graveyard/0/'+scene);
+  }
+
   setCurrentRoute(){
     let key = null;
     debugger;

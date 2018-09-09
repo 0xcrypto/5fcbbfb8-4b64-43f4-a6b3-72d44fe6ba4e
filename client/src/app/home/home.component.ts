@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {Router} from '@angular/router';
 import { AppGlobals } from '../app.globals';
+import { CookieStorage, LocalStorage, SessionStorage, LocalStorageService } from 'ngx-store';
 
 @Component({
   selector: 'app-home',
@@ -13,13 +14,18 @@ export class HomeComponent implements OnInit {
   isImageLoadingScreenVisible:boolean = false;
   router:Router = null;
 
-  constructor(private _router: Router, private route: ActivatedRoute, private _global: AppGlobals) {
+  constructor(private _router: Router, 
+    private route: ActivatedRoute, 
+    private _global: AppGlobals,
+    private localStorage:LocalStorageService) {
     this.router = _router;
   }
 
   ngOnInit() {
-    window['component'] = this;
-    this.loadImages();
+    if(!this.localStorage.get(this._global.APP_IMAGES_LOADED_KEY)){
+      window['component'] = this;
+      this.loadImages();
+    }
   }
   
   ngAfterViewInit(){
@@ -52,6 +58,7 @@ export class HomeComponent implements OnInit {
 
     setTimeout(function(){
       window['component'].isImageLoadingScreenVisible = false;
+      window['component'].localStorage.set(window['component']._global.APP_IMAGES_LOADED_KEY, "YES");
       document.querySelector('#images-loading').innerHTML = '';
     }, 5000);
   }

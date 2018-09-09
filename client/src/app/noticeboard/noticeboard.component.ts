@@ -74,18 +74,25 @@ export class NoticeboardComponent implements OnInit {
 
     this.getAdvertisements();
     this.getVisibleGraves();
-
-    if(this.localStorageService.get(this._global.GRAVEYARD_RETURN_TAB))
-      this.selectedTab = this.localStorageService.get(this._global.GRAVEYARD_RETURN_TAB)
-
-    if(this.selectedTab == 'search' && this.localStorageService.get(this._global.GRAVEYARD_SEARCH_OPTIONS_KEY)){
-      let parameters = this.localStorageService.get(this._global.GRAVEYARD_SEARCH_OPTIONS_KEY).split('|');
-      this.loadSearchData(parameters);
+    
+    if(this.localStorageService.get(this._global.GRAVEYARD_RETURN_TAB) &&
+        this.localStorageService.get(this._global.GRAVEYARD_OPTIONS_KEY)){
+      
+      this.selectedTab = this.localStorageService.get(this._global.GRAVEYARD_RETURN_TAB);
+      let parameters = this.localStorageService.get(this._global.GRAVEYARD_OPTIONS_KEY).split('|');
+      if(parameters && this.selectedTab == 'book-of-dead'){
+        this.loadData(parameters);
+      }
+      else if(parameters && this.selectedTab == 'search'){
+        this.isSearchFormVisible = true;
+        this.loadSearchData(parameters);
+      }
     }
   }
 
   loadingGrave(user:User, returnTab:string){
     if(returnTab){
+      //Set return tab to be selected when return
       this.localStorageService.set(this._global.GRAVEYARD_RETURN_TAB, returnTab);
     }
 
@@ -245,30 +252,33 @@ export class NoticeboardComponent implements OnInit {
 
   loadSearchData(parameters:string[]){
     this.selectedSearchPage = 1;
-    this.isSearchFormVisible = false;
     parameters.push('position='+(this.selectedSearchPage - 1));
-    this.localStorageService.set(this._global.GRAVEYARD_SEARCH_OPTIONS_KEY, parameters.join('|'));
+    this.localStorageService.set(this._global.GRAVEYARD_OPTIONS_KEY, parameters.join('|'));
     this.searchOptions = this._global.refreshObject(this.searchOptions, parameters);
     this.searchGraves(this._global.serializeAndURIEncode(this.searchOptions));
   }
 
   openTab(name:string) {
     this.selectedTab = name;
-    if(name == 'book-of-dead'){
-      this.selectedDeadPage = 1;
-      this.options = this._global.refreshObject(this.options, ['limit=15', 'position='+ (this.selectedDeadPage - 1),
-      'order=user_id', 'death_date=zmarli']);
-      this.getGraves(this._global.serializeAndURIEncode(this.options));
-    }
-    else if(name == 'graveyard-noticeboard'){
+    if(this.selectedTab == 'graveyard-noticeboard'){
       this.getAdvertisements();
       this.getVisibleGraves();
     }
 
-    this.localStorageService.set(this._global.GRAVEYARD_SEARCH_OPTIONS_KEY, null);
-    this.isSearchFormVisible = true;
+    if(this.selectedTab == 'book-of-dead'){
+      this.selectedDeadPage = 1;
+      let parameters = ['limit=15', 'position='+ (this.selectedDeadPage - 1),
+      'order=user_id', 'death_date=zmarli'];
+      this.loadData(parameters);
+    }
   }
 
+  loadData(parameters:string[]){
+    this.options = this._global.refreshObject(this.options, parameters);
+    this.localStorageService.set(this._global.GRAVEYARD_OPTIONS_KEY, parameters.join('|'));
+    this.getGraves(this._global.serializeAndURIEncode(this.options));
+  }
+  
   backToSearch(){
     this.isSearchFormVisible = true;
   }
@@ -342,6 +352,7 @@ export class NoticeboardComponent implements OnInit {
   }
 
   searchGraves(param: string): void {
+    this.isSearchFormVisible = false;
     this.searchingData = true;
     this.dataService.getAllWithMethodAndOptions('PERSONS', param)
       .subscribe(users => {

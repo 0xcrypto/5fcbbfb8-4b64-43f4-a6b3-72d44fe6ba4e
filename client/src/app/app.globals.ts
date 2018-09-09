@@ -22,8 +22,11 @@ interface GraveyardImages {
 export class AppGlobals {
   private DEFAULT_LANGUAGE: string = 'en';
   private LANGUAGE_KEY: string = '_lang';
-  public GRAVEYARD_SEARCH_OPTIONS_KEY = 'GraveyardSearchOptions';
+  public GRAVEYARD_OPTIONS_KEY = 'GraveyardOptions';
   public GRAVEYARD_RETURN_TAB = 'GraveyardReturnTab';
+  public ANIMAL_GRAVEYARD_OPTIONS_KEY = 'AnimalGraveyardOptions';
+  public ANIMAL_GRAVEYARD_RETURN_TAB = 'AnimalGraveyardReturnTab';
+  public APP_IMAGES_LOADED_KEY = 'AppImagesLoaded'
   public LANGUAGES:string[] = ['en', 'pl'];
   private images: GraveyardImages[] = [{
     scene: '1_1',
