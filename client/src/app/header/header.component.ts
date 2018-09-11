@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { AppGlobals } from '../app.globals';
 import { AppComponent } from '../app.component';
+import { DialogService } from '../services/dialog.service';
 
 @Component({
   selector: 'app-header',
@@ -15,8 +16,13 @@ export class HeaderComponent implements OnInit {
   currentComponentText:string = null;
   selectedLanguage:string = null;
   currentRoute:string = null;
+  isUserMgtDialogOpen:boolean = false;
 
-  constructor(private translate: TranslateService, private _global: AppGlobals, private _router: Router, private route: ActivatedRoute) {
+  constructor(private translate: TranslateService, 
+    private _global: AppGlobals, 
+    private _router: Router, 
+    private route: ActivatedRoute,
+    private _dialog:DialogService) {
   }
 
   ngOnInit() {
@@ -52,6 +58,10 @@ export class HeaderComponent implements OnInit {
   gotoPetGraveyard(){
     let scene = this._global.getRandomNumber(1,2)+"_"+this._global.getRandomNumber(1,4);
     this._router.navigateByUrl('/pet-graveyard/0/'+scene);
+  }
+
+  openUserMgtDialog(){
+    this._dialog.openDialog();
   }
 
   setCurrentRoute(){

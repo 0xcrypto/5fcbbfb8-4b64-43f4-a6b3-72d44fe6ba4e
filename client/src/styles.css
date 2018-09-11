@@ -1309,6 +1309,37 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     display: block;
     color: #848484;
 }
+.dialog {
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid #999;
+    border-radius: 5px;
+    margin: 0 auto;
+    width: 500px;
+    position: absolute;
+    z-index: 999;
+    top: 90px;
+    height: 300px;
+    left: 50%;
+    margin-left: -240px;
+}
+.dialog .close-btn{
+    position: absolute;
+    top: -30px;
+    right: -10px;
+    background: none;
+    color: #FFF;
+    font-size: 20px;
+    border: none;
+}
+.dialog-overlay {    
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 998;
+    background: rgba(0,0,0,0.3);
+}
 @keyframes backgroundScroll {
     from {background-position: 0 0;}
     to {background-position: -100px 0px;}

@@ -24,6 +24,7 @@ import { CatacombComponent } from './catacomb/catacomb.component';
 import { NgSlimScrollModule, SLIMSCROLL_DEFAULTS } from 'ngx-slimscroll';
 import { AnimalNoticeboardComponent } from './animal-noticeboard/animal-noticeboard.component';
 import { AnimalGraveyardComponent } from './animal-graveyard/animal-graveyard.component';
+import { UserMgtComponent } from './user-mgt/user-mgt.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -47,7 +48,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ShopComponent,
     CatacombComponent,
     AnimalNoticeboardComponent,
-    AnimalGraveyardComponent
+    AnimalGraveyardComponent,
+    UserMgtComponent,
   ],
   imports: [
     BrowserModule,

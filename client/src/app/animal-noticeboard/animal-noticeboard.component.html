@@ -1,4 +1,5 @@
 <div *ngIf="!isAnimalLoadingScreenVisible" id="content" class="notice-bg">
+  <app-user-mgt></app-user-mgt>
   <app-logo></app-logo>
   <div class="fill-tabs">
       <div class="tab-bar">
@@ -208,6 +209,7 @@
   </div>
 </div>
 <div *ngIf="isAnimalLoadingScreenVisible" id="content" class="loading-bg">
+  <app-user-mgt></app-user-mgt>
   <app-logo></app-logo>
   <ul id="loading-options">
       <li>
