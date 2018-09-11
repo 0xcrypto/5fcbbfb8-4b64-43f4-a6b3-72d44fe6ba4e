@@ -33,7 +33,9 @@
 			switch($_GET['model'])
 			{
 				case 'data':
-					if($method == 'PERSONS')
+					if($method == 'PERSON')
+						$results = $this->getPerson($options);
+					else if($method == 'PERSONS')
 						$results = $this->getPersons($options);
 					else if($method == 'PERSON_DETAILS')
 						$results = $this->getPersonDetails($options);
@@ -55,6 +57,8 @@
 						$results = $this->getAnimalPhotos($options);
 					else if($method == 'ANIMAL_OBJECTS')
 						$results = $this->getAnimalObjects($options);
+					else if($method == 'TOMBS')
+						$results = $this->getTombs($options);
 					else if($method == 'CANDLE_TILE_IMAGES')
 						$results = $this->getCandleTileImages($options);
 					else if($method == 'FLOWER_TILE_IMAGES')
@@ -1479,6 +1483,153 @@
 			}
 
 			return $data;
+		}
+		
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['id'] = user_id
+
+		***/
+
+		private function getPerson($options = NULL){
+			if(!isset($options['name']) && 
+				!isset($options['surname']) && 
+				!isset($options['date_birth']) && 
+				!isset($options['date_death']) && 
+				!isset($options['id']))
+				return -1;
+				
+			if(isset($options['id'])) {
+				$query="select * from users where user_id=".$options['id'];	
+				$person = Yii::app()->db->createCommand($query)->queryRow();
+				if($person) {
+					$person['name1']=explode("|",$person['name1']);
+					$person['ex_wife1']=explode("|",$person['ex_wife1']);
+					$person['childrens_names']=explode("|",$person['childrens_names']);
+				
+					return $person;
+				}
+				else
+					return -2;
+			}
+			
+			//current format: dd-mm-yyyy
+			$d1=explode('-',$options['date_birth']);
+			$d2=explode('-',$options['date_death']);
+
+			if ($d1[0] == "00") {
+				$d1[0]='01';//the first day
+			}
+			if ($d1[1] == "00") {
+				$d1[1]='01';//month of January
+			}
+			if ($d2[0] == "00") {
+				$d2[0]='01';//the first day
+			}
+			if ($d2[1] == "00") {
+				$d2[1]='01';//month of January
+			}
+
+			//current format: dd-mm-yyyy
+			$_dateb_y = substr($options['date_birth'], 6,9);
+			$_dateb_m = substr($options['date_birth'], 3,2);
+			$_dateb_d = substr($options['date_birth'], 0,2);
+			$date_birth = $_dateb_y.'-'.$_dateb_m.'-'.$_dateb_d;
+
+			$_dated_y = substr($options['date_death'], 6,9);
+			$_dated_m = substr($options['date_death'], 3,2);
+			$_dated_d = substr($options['date_death'], 0,2);
+			$date_death = $_dated_y.'-'.$_dated_m.'-'.$_dated_d;
+			
+			if (count($d1)!=3 || !checkdate($d1[1], $d1[0], $d1[2])) 
+				return -3;
+	
+			if($date_death!='0000-00-00' && $date_death!='00-00-0000' && $date_death!='' && $date_death!='-00-00')
+			{    
+				if (count($d2)!=3 || !checkdate($d2[1], $d2[0], $d2[2])) 
+					return -4;
+					
+				if(($this->dateToDays($d2[0], $d2[1], $d2[2]) - $this->dateToDays($d1[0], $d1[1], $d1[2])) < 0)
+					return -5;
+					
+				if(($this->dateToDays(date("d"), date("m"), date("Y")) - $this->dateToDays($d2[0], $d2[1], $d2[2])) < 0)
+					return -6;
+			}
+			
+			$query="select * from users where 1";
+			
+			if(isset($options['name'])) $query.=" and name1 like '%".$options['name']."%'";
+			if(isset($options['surname'])) $query.=" and surname like '%".$options['surname']."%'";
+			if(isset($options['date_birth'])) $query.=" and date_birth='".$options['date_birth']."'";
+			if(isset($options['date_death']) && $date_death!='0000-00-00') $query.=" and date_death='".$options['date_death']."'";	
+			
+			$person = Yii::app()->db->createCommand($query)->queryRow();
+
+			if($person) {
+				$person['name1']=explode("|",$person['name1']);
+				$person['ex_wife1']=explode("|",$person['ex_wife1']);
+				$person['childrens_names']=explode("|",$person['childrens_names']);
+				return $person;
+			}
+			else
+				return -7;
+		}
+		
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['id'] = buyer_id
+
+		***/
+
+		private function getTombs($options = NULL){
+			$data = array();
+			$query = "select mg2.grave_id,
+						u.name1,
+						u.surname,
+						mg2.multigrave_id,
+						DATE_FORMAT(u.date_death,'%d-%m-%Y') as date_death,
+						mg2.family_name,
+						mg2.grave_image,
+						mg2.places
+				from multi_graves mg2, uers u 
+				where mg2.grave_id=u.user_id and u.buyer_id=".$options['id']."";
+			//echo($sql);
+			$result = Yii::app()->db->createCommand($query)->queryAll();
+
+			$tmp = array();
+			foreach($result as $row) {
+				$tmp[$row['multigrave_id']][] = $row; 
+			} 
+
+			foreach($tmp as $v)
+				$data[]=$v;
+				
+			return $data; 
+		}
+
+
+		private function dateToDays($day, $month, $year)
+		{
+			$century = (int)substr($year, 0, 2);
+			$year = (int)substr($year, 2, 2);
+			if ($month > 2) {
+				$month -= 3;
+			} else {
+				$month += 9;
+				if ($year) {
+					$year--;
+				} else {
+					$year = 99;
+					$century --;
+				}
+			}
+	
+			return (floor((146097 * $century) / 4 ) +
+					floor((1461 * $year) / 4 ) +
+					floor((153 * $month + 2) / 5 ) +
+					$day + 1721119);
 		}
 
         private function MailContent($method, $parameters){
