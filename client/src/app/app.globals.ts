@@ -26,8 +26,11 @@ export class AppGlobals {
   public GRAVEYARD_RETURN_TAB = 'GraveyardReturnTab';
   public ANIMAL_GRAVEYARD_OPTIONS_KEY = 'AnimalGraveyardOptions';
   public ANIMAL_GRAVEYARD_RETURN_TAB = 'AnimalGraveyardReturnTab';
-  public APP_IMAGES_LOADED_KEY = 'AppImagesLoaded'
+  public APP_IMAGES_LOADED_KEY = 'AppImagesLoaded';
+  public USER_INFO_KEY = 'UserInfo';
+  public IS_GUEST_KEY = 'IsGuest';
   public LANGUAGES:string[] = ['en', 'pl'];
+
   private images: GraveyardImages[] = [{
     scene: '1_1',
     sky: 'niebo3.jpg',
@@ -61,7 +64,6 @@ export class AppGlobals {
     sky: 'rnniebo3.jpg',
     graveyard: 'tlo8s.png'
   }, ];
-
   private animal_images: GraveyardImages[] = [{
     scene: '1_1',
     sky: 'niebo3.jpg',
@@ -250,4 +252,23 @@ export class AppGlobals {
     return pages;
   }
 
+  getLoggedInUserDetail(){
+    let result = null;
+    if(this.localStorageService.get(this.USER_INFO_KEY)){
+      result = this.localStorageService.get(this.USER_INFO_KEY)
+    }
+    return result;
+  }
+
+  setLoggedInUserDetail(info:any){
+    this.localStorageService.set(this.USER_INFO_KEY, info);
+  }
+
+  logIn(){
+    this.localStorageService.set(this.IS_GUEST_KEY, false);
+  }
+
+  logOut(){
+    this.localStorageService.set(this.IS_GUEST_KEY, true);
+  }
 }

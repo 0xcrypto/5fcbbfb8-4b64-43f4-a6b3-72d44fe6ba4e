@@ -151,7 +151,6 @@
         "message": "Wiadomość",
         "send_message": "Wyślij wiadomość"
     },
-    
     "animal_graveyard": {
         "noticeboard" : {
             "tabs" : {
@@ -239,5 +238,38 @@
         "next_grave": "Następny Grave",
         "previous_grave": "Poprzednie Grave",
         "back_to_search_result": "Powrót do wyników wyszukiwania"
+    },
+    "login": {
+        "log_me_in": "Zaloguj się",
+        "email": "E-mail",
+        "Password": "Hasło",
+        "log_in": "Zaloguj Się",
+        "login_info": "Po zalogowaniu możesz edytować swój wpis lub kamień-kamień. Ci z was, którzy mają rezerwację do wspólnego grobu, mogą dodać dowolny wpis w dowolnym momencie po zalogowaniu. Ci z was, którzy mają rezerwację na Virtual - Graveyard, mogą edytować e-mail z grobu.",
+        "do_not_have_account_here": "Nie masz konta tutaj?",
+        "register": "Zarejestrować",
+        "i_have_forgotten_password": "zapomniałem hasła"
+    },
+    "register": {
+        "register": "Zarejestrować",
+        "firstname": "First Name",
+        "email": "E-mail",
+        "password": "E-mail",
+        "lastname": "Nazwisko",
+        "phone": "Telefon (opcjonalnie)",
+        "confirm_password": "Potwierdź hasło",
+        "short_info": "Przeczytałem i akceptuję te zasady i warunki",
+        "log_in": "Zaloguj Się",
+        "i_have_forgotten_password": "zapomniałem hasła",
+        "info": "Po zalogowaniu możesz edytować swój wpis lub kamień-kamień. Ci z was, którzy mają rezerwację do wspólnego grobu, mogą dodać dowolny wpis w dowolnym momencie po zalogowaniu. Ci z was, którzy mają rezerwację na Virtual - Graveyard, mogą edytować e-mail z grobu.",
+        "do_not_have_account_here": "Nie masz konta tutaj?"
+    },
+    "forgot_password": {
+        "password_reminder": "Przypomnienie hasła",
+        "enter_email": "Wprowadź swój adres e-mail",
+        "short_info": "Twoje hasło zostanie wysłane na ten adres e-mail",
+        "send_my_password": "Wyślij mi moje hasło",
+        "if_you_dont_have_account": "Jeśli nie masz konta, możesz się zarejestrować, klikając przycisk",
+        "register": "Zarejestrować",
+        "log_in": "Zaloguj Się"
     }
 }

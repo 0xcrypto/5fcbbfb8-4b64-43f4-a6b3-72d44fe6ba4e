@@ -15,11 +15,9 @@
             </ul>
         </div>
         <div>
-            <!--
-                <ul>
-                    <li class="text-center">Ankit Sharma</li>
-                </ul>
-            -->
+            <ul *ngIf="!_global.isGuest">
+                <li class="text-center">{{loggedInUserFullName}}</li>
+            </ul>
         </div>
         <div>
             <ul>

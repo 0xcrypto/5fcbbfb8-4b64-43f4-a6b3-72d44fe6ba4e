@@ -239,5 +239,38 @@
         "next_grave": "Next Grave",
         "previous_grave": "Previous Grave",
         "back_to_search_result": "Back to search results"
+    },
+    "login": {
+        "log_me_in": "Log me in",
+        "email": "Email",
+        "password": "Password",
+        "log_in": "Log-in",
+        "info": "When you are logged in you can edit your entry or grave-stone design. These of you who have reservation for communal grave can add any entry at any time after log-in. Those of you who have reservation on Virtual - Graveyard can edit e-mail form the grave.",
+        "do_not_have_account_here": "Do not have account here?",
+        "register": "Register",
+        "i_have_forgotten_password": "I've forgotten my password"
+    },
+    "register": {
+        "register": "Register",
+        "firstname": "First Name",
+        "email": "E-mail",
+        "password": "Password",
+        "lastname": "Last Name",
+        "phone": "Phone(Optional)",
+        "confirm_password": "Confirm Password",
+        "short_info": "I have read understand and agree to these rules and conditions",
+        "log_in": "Log-in",
+        "i_have_forgotten_password": "I've forgotten my password",
+        "info": "When you are logged in you can edit your entry or grave-stone design. These of you who have reservation for communal grave can add any entry at any time after log-in. Those of you who have reservation on Virtual - Graveyard can edit e-mail form the grave.",
+        "do_not_have_account_here": "Do not have account here?"
+    },
+    "forgot_password": {
+        "password_reminder": "Password Reminder",
+        "enter_email": "Enter your e-mail address",
+        "short_info": "Your password will be emailed to this address",
+        "send_my_password": "Send me my password",
+        "if_you_dont_have_account": "If you do not have an account, you may register by clicking the",
+        "register": "Register",
+        "log_in": "Log-in"
     }
 }

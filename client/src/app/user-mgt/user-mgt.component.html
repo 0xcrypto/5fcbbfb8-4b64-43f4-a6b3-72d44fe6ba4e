@@ -2,132 +2,112 @@
   <button class="close-btn" (click)="closeButtonClick();"><i class="fas fa-times"></i></button>
   <div *ngIf="(currentContent == 'login')">
       <div class="form">
-          <h4 translate>_Log me in_</h4>
+          <h4 translate>login.log_me_in</h4>
           <form>
               <label>
-                  <span translate>_Email_</span>
+                  <span translate>login.email</span>
                   <input type="text" [(ngModel)]="email" name="email"/>
               </label>
               <label>
-                  <span translate>_Password_</span>
+                  <span translate>login.password</span>
                   <input type="password" [(ngModel)]="password" name="password"/>
-                  <button type="button" class="align-right" (click)="login()">
-                      <span translate>_Log-in_&nbsp;&nbsp;</span>
-                      <i class="fa fa-forward"></i>
+                  <button type="button" class="grey-button" (click)="login()">
+                      <span translate>login.log_in</span>
                   </button>
               </label>
               <label>
-                  
+                  <p style="color:#f00;" *ngIf="loginFormError">{{loginFormError}}</p>
+              </label>
+              <label>
+                <p translate>login.info</p>
+              </label>
+              <label>
+                <button type="button" class="grey-button" (click)="openForgotPassword()">
+                    <span translate>login.i_have_forgotten_password</span>
+                </button>
+              </label>
+              <label>
+                <p translate>login.do_not_have_account_here
+                    <button type="button" class="grey-button" (click)="openRegister()">
+                        <span translate>login.register</span>
+                    </button>
+                </p>
               </label>
           </form>
-          <p translate>_When you are logged in you can edit your entry or grave-stone design.
-              These of you who have reservation for communal grave can add any entry at any
-              time after log-in. Those of you who have reservation on Virtual - Graveyard can edit 
-              e-mail form the grave._
-          </p>
-          <button type="button" class="align-right" (click)="openForgotPassword()">
-              <span translate>_I've forgotten my password_</span>
-          </button>
-          <p>_Do not have account here?_
-              <button type="button" class="align-right" (click)="openRegister()">
-                  <span translate>_Register_</span>
-              </button>
-          </p>
       </div>      
   </div>
   <div *ngIf="(currentContent == 'register')">
-      <div class="form">
-          <h4 translate>_Register_</h4>
+      <div class="form login-form">
+          <h4 translate>register.register</h4>
           <form>
-              <div class="col-left">
-                <label>
-                    <span translate>_First Name_</span>
-                    <input type="text" [(ngModel)]="firstname" name="firstname"/>
-                </label>
-                <label>
-                    <span translate>_E-mail_</span>
-                    <input type="text" [(ngModel)]="email" name="email"/>
-                </label>
-                <label>
-                    <span translate>_Password_</span>
-                    <input type="text" [(ngModel)]="password" name="password"/>
-                </label>
-              </div>
-              <div class="col-right">
-                  <label>
-                      <span translate>_Last Name_</span>
-                      <input type="text" [(ngModel)]="firstname" name="firstname"/>
-                  </label>
-                  <label>
-                      <span translate>_Phone(optional)_</span>
-                      <input type="text" [(ngModel)]="email" name="email"/>
-                  </label>
-                  <label>
-                      <span translate>_Confirm Password_</span>
-                      <input type="text" [(ngModel)]="password" name="password"/>
-                  </label>
-                </div>
-              <label>
-                  <input type="checkbox" [(ngModel)]="password" name="password"/>
-                  <span translate>_I have read understand and agree to these
-                    rules and conditions_</span>
-              </label>
-              <label>
-                  <button type="button" class="align-right" (click)="register()">
-                      <span translate>_Register_&nbsp;&nbsp;</span>
-                  </button>
-              </label>
-              <label>
-                  <button type="button" class="align-left" (click)="openLogin()">
-                      <span translate>_Log-in_&nbsp;&nbsp;</span>
-                  </button>
-              </label>
-              <label>
-                  <button type="button" class="align-right" (click)="openForgotPassword()">
-                      <span translate>_I've forgotten my password_</span>
-                  </button>
-              </label>
+            <label>
+                <span class="small" translate>register.firstname</span>
+                <input type="text" [(ngModel)]="firstname" name="firstname"/>
+                <span class="small" translate>register.lastname</span>
+                <input type="text" [(ngModel)]="lastname" name="lastname"/>
+            </label>
+            <label>
+                <span class="small" translate>register.email</span>
+                <input type="text" [(ngModel)]="email" name="email"/>
+                <span class="small" translate>register.phone</span>
+                <input type="text" [(ngModel)]="phone" name="phone"/>
+            </label>
+            <label>
+                <span class="small" translate>register.password</span>
+                <input type="password" [(ngModel)]="password" name="password"/>
+                <span class="small" translate>register.confirm_password</span>
+                <input type="password" [(ngModel)]="confirm_password" name="confirm_password"/>
+            </label>
+            <label>
+                <p translate><input type="checkbox" style="width:50px;" [(ngModel)]="terms_and_conditions" name="terms_and_conditions"/>
+                    register.short_info</p>
+            </label>
+            <label>
+                <button type="button" class="grey-button align-left" (click)="openLogin()">
+                    <span translate>register.log_in</span>
+                </button>
+                <button type="button" class="grey-button align-right" (click)="register()">
+                    <span translate>register.register</span>
+                </button>
+            </label>
+            <label>
+                <button type="button" class="grey-button align-left" (click)="openForgotPassword()">
+                    <span translate>register.i_have_forgotten_password</span>
+                </button>
+            </label>
           </form>
-          <p translate>
-              _When you are logged in you can edit your entry or grave-stone design.
-              These of you who have reservation for communal grave can add any entry at any
-              time after log-in. Those of you who have reservation on Virtual - Graveyard can edit 
-              e-mail form the grave._
-          </p>
-          <button type="button" class="align-right" (click)="openForgotPassword()">
-              <span translate>_I've forgotten my password_</span>
-          </button>
-          <p>_Do not have account here?_
-              <button type="button" class="align-right" (click)="openRegister()">
-                  <span translate>_Register_</span>
-              </button>
-          </p>
       </div>      
   </div>
   <div *ngIf="(currentContent == 'forgot-password')">
       <div class="form">
-          <h4 translate>_Password Reminder_</h4>
+          <h4 translate>forgot_password.password_reminder</h4>
           <form>
               <label>
-                  <span translate>_Enter your e-mail address_</span>
-                  <input type="text" [(ngModel)]="firstname" name="firstname"/>
+                  <span translate>forgot_password.enter_email</span>
+                  <input type="text" [(ngModel)]="email" name="email"/>
               </label>
               <label>
                   <span translate></span>
-                  <button type="button" class="align-right" (click)="forgotpassword()">
-                      <span translate>_Send me my password_</span>
+                  <button type="button" class="grey-button" (click)="forgotpassword()">
+                      <span translate>forgot_password.send_my_password</span>
                   </button>
               </label>
-              <p>_Your password will be emailed to this address_</p>
+              <label>
+                    <p translate>forgot_password.short_info</p>
+              </label>
+              <label>
+                <button type="button" class="grey-button" (click)="openLogin()">
+                    <span translate>forgot_password.log_in</span>
+                </button> 
+              </label>
+              <label>
+                <p translate>forgot_password.if_you_dont_have_account
+                    <button type="button" class="align-right grey-button" (click)="openRegister()">
+                        <span translate>forgot_password.register</span>
+                    </button>
+                </p>  
+              </label>
           </form>
-          <button type="button" class="align-right" (click)="openLogin()">
-              <span translate>_Log-in_</span>
-          </button>
-          <p>_If you do not have an account, you may register by clicking the
-              <button type="button" class="align-right" (click)="openRegister()">
-                  <span translate>_Register_</span>
-              </button>
-          </p>
       </div>      
   </div>
 </div>

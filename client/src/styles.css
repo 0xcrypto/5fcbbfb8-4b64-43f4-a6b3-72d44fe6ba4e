@@ -450,7 +450,12 @@ form > label > span{
     display: inline-block;
     line-height: 20px;
 }
-form > label input, form > label textarea{
+label > span.small {
+    width: 110px;
+    padding-left: 5px;
+}
+form > label input, form  label textarea,
+.form > label input, .form  label textarea {
     border-radius: 3px;
     border: none;
     height: 20px;
@@ -458,11 +463,15 @@ form > label input, form > label textarea{
     width: 150px;
     line-height: 20px;
 }
-form > label button {
+form > label button, .form  label button {
     background: none;
     color: #fff;
     border: none;
     cursor: pointer;
+}
+form > label .grey-button, .form  label .grey-button{
+    color: #a6a6a6;
+    font-weight: bold;
 }
 form .block-field{
     display: block;
@@ -512,11 +521,11 @@ form .text-right{
     height: 100%;
     padding: 10px;
 }
-.fill-tabs .tabs > div h4{
+.fill-tabs .tabs > div h4, .form h4 {
     color: #848484;
     font-size: 12px;
 }
-.fill-tabs .tabs > div p{
+.fill-tabs .tabs > div p, .form p {
     color: #515151;
     font-size: 11px;
 }
@@ -1310,16 +1319,16 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     color: #848484;
 }
 .dialog {
-    padding: 5px;
+    padding: 10px;
     background: rgba(0, 0, 0, 0.9);
     border: 2px solid #999;
     border-radius: 5px;
     margin: 0 auto;
-    width: 500px;
+    width: 550px;
     position: absolute;
     z-index: 999;
     top: 90px;
-    height: 300px;
+    min-height: 250px;
     left: 50%;
     margin-left: -240px;
 }

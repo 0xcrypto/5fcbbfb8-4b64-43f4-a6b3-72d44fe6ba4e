@@ -17,12 +17,17 @@ export class HeaderComponent implements OnInit {
   selectedLanguage:string = null;
   currentRoute:string = null;
   isUserMgtDialogOpen:boolean = false;
+  loggedInUserFullName:string = null;
 
   constructor(private translate: TranslateService, 
     private _global: AppGlobals, 
     private _router: Router, 
     private route: ActivatedRoute,
     private _dialog:DialogService) {
+      if(_global.getLoggedInUserDetail()){
+        let user = _global.getLoggedInUserDetail();
+        this.loggedInUserFullName = user['name'] + ' ' + user['surname'];
+      }
   }
 
   ngOnInit() {
