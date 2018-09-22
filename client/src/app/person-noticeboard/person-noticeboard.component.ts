@@ -14,9 +14,9 @@ export interface Options {
 
 @Component({
   selector: 'app-noticeboard',
-  templateUrl: './noticeboard.component.html'
+  templateUrl: './person-noticeboard.component.html'
 })
-export class NoticeboardComponent implements OnInit {
+export class PersonNoticeboardComponent implements OnInit {
   isGraveLoadingScreenVisible:boolean = false;
   isSearchFormVisible:boolean = true;
   isNavigatePreviousDeadDisabled:boolean = false;
@@ -79,6 +79,7 @@ export class NoticeboardComponent implements OnInit {
         this.localStorageService.get(this._global.GRAVEYARD_OPTIONS_KEY)){
       
       this.selectedTab = this.localStorageService.get(this._global.GRAVEYARD_RETURN_TAB);
+      this.localStorageService.set(this._global.GRAVEYARD_RETURN_TAB, null);
       let parameters = this.localStorageService.get(this._global.GRAVEYARD_OPTIONS_KEY).split('|');
       if(parameters && this.selectedTab == 'book-of-dead'){
         this.loadData(parameters);

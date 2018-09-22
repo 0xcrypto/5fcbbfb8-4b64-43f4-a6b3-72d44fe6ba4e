@@ -1,0 +1,101 @@
+<li class="text-center" (click)="openAccountDialog();" translate>header.menu.your_account</li>
+<div class="stroke-tabs fixed-positioned" [ngClass]="{'open': isAccountDialogOpen }">
+    <button class="close-btn" (click)="closeAccountDialog();"><i class="fas fa-times"></i></button>
+    <p class="tab-bar">
+        <span (click)="openTab('tab1');" [ngClass]="{'active': (selectedAccountTab == 'tab1')}" translate>account.tab.profile</span>
+        <span (click)="openTab('tab2');" [ngClass]="{'active': (selectedAccountTab == 'tab2')}" translate>account.tab.deceased</span>
+        <span (click)="openTab('tab3');" [ngClass]="{'active': (selectedAccountTab == 'tab3')}" translate>account.tab.graves</span>
+        <span (click)="openTab('tab4');" [ngClass]="{'active': (selectedAccountTab == 'tab4')}" translate>account.tab.pets</span>
+    </p>
+    <div class="tabs">
+        <div [ngClass]="{'active': (selectedAccountTab == 'tab1')}">
+                <div class="form profile-form">
+                    <h4 translate>account.content.profile.title</h4>
+                    <form>
+                        <label>
+                            <span translate>account.content.profile.firstname</span>
+                            <input type="text" [(ngModel)]="firstname" name="firstname"/>
+                            <span translate>&nbsp;account.content.profile.lastname</span>
+                            <input type="text" [(ngModel)]="lastname" name="lastname"/>
+                            <span translate>account.content.profile.email</span>
+                            <input type="text" [(ngModel)]="email" name="email"/>
+                            <span translate>&nbsp;account.content.profile.phone</span>
+                            <input type="text" [(ngModel)]="phone" name="phone"/>
+                        </label>
+                        <label>
+                            <h4 translate>account.content.profile.change_password</h4>
+                            <span translate>&nbsp;account.content.profile.new_password</span>
+                            <input type="password" [(ngModel)]="new_password" name="new_password"/>
+                            <span translate>&nbsp;account.content.profile.repeat_new_password</span>
+                            <input type="password" [(ngModel)]="confirm_password" name="confirm_password"/>
+                        </label>
+                        <label>
+                            <button type="button" class="align-right" (click)="saveProfile()">
+                                <span translate>account.content.profile.save&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                </div>  
+        </div>
+        <div [ngClass]="{'active': (selectedAccountTab == 'tab2')}">
+            <div *ngIf="loadingDeceadedData" class="info" translate>account.content.deceased.loading</div>
+            <h4 translate>account.content.deceased.title</h4>
+            <table *ngIf="!loadingDeceadedData">
+                <thead>
+                    <tr>
+                        <th class="x">*</th>
+                        <th class="xxx" translate>account.content.deceased.fullname</th>
+                        <th class="xx" translate>account.content.deceased.death_date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let deceased of deceaseds">
+                        <td class="xx text-center">{{deceased.date_death}}</td>
+                        <td class="xx text-center">{{deceased.place_name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div [ngClass]="{'active': (selectedAccountTab == 'tab3')}">
+            <div *ngIf="loadingGraveData" class="info" translate>account.content.graves.loading</div>
+            <h4 translate>account.content.graves.title</h4>
+            <table *ngIf="!loadingGraveData">
+                <thead>
+                    <tr>
+                        <th class="x">*</th>
+                        <th class="xxx" translate>account.content.graves.name_of_grave</th>
+                        <th class="xx" translate>account.content.graves.type</th>
+                        <th class="xx" translate>account.content.graves.space_available</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let grave of graves">
+                        <td class="xx text-center">{{deceased.date_death}}</td>
+                        <td class="xx text-center">{{deceased.place_name}}</td>
+                        <td class="xx text-center">{{deceased.place_name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div [ngClass]="{'active': (selectedAccountTab == 'tab4')}">
+            <div *ngIf="loadingPetsData" class="info" translate>account.content.pets.loading</div>
+            <h4 translate>account.content.pets.title</h4>
+            <table *ngIf="!loadingPetsData">
+                <thead>
+                    <tr>
+                        <th class="x">*</th>
+                        <th class="xxx" translate>account.content.pets.petname</th>
+                        <th class="xx" translate>account.content.pets.passed_away</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let deceased of deceaseds">
+                        <td class="xx text-center">{{deceased.date_death}}</td>
+                        <td class="xx text-center">{{deceased.place_name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

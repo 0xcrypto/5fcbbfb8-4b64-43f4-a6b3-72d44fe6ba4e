@@ -4,7 +4,7 @@ import { DataService } from '../services/data.service';
 import { Router } from '@angular/router';
 import { AppGlobals } from '../app.globals';
 import { CookieStorage, LocalStorage, SessionStorage, LocalStorageService } from 'ngx-store';
-
+import { UserService } from '../services/user.service';
 export interface Options {};
 
 @Component({
@@ -29,7 +29,9 @@ export class UserMgtComponent implements OnInit {
     private _router: Router, 
     private dataService: DataService, 
     private _global: AppGlobals,
-    private localStorageService: LocalStorageService) { 
+    private localStorageService: LocalStorageService,
+    private userService:UserService
+    ) { 
       this.router = _router;
   }
 
@@ -38,13 +40,6 @@ export class UserMgtComponent implements OnInit {
 
   closeButtonClick(){
     this._dialog.closeDialog();
-  }
-
-  updateLoggedInUser(){
-    this.isGuest = (this.localStorageService.get(this._global.IS_GUEST_KEY)) ? 
-      this.localStorageService.get(this._global.IS_GUEST_KEY) : true;
-    this.loggedInUser = (this.localStorageService.get(this._global.USER_INFO_KEY)) ? 
-      this.localStorageService.get(this._global.USER_INFO_KEY) : [];
   }
 
   openLogin(){
@@ -68,8 +63,7 @@ export class UserMgtComponent implements OnInit {
       if(result['status'] && result['status'] == "LOGIN_NOT_FOUND")
         this.loginFormError = 'Email & Password not exists in system';
       else{
-        this._global.logIn();
-        this._global.setLoggedInUserDetail(result['buyer']);
+        this.userService.logIn(result['buyer']);
         this._dialog.closeDialog();
       }
     });

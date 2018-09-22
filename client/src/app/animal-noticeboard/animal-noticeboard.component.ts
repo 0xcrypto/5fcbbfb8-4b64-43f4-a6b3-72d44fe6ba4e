@@ -75,6 +75,7 @@ export class AnimalNoticeboardComponent implements OnInit {
         this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY)){
 
       this.selectedTab = this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_RETURN_TAB);
+      this.localStorageService.set(this._global.GRAVEYARD_RETURN_TAB, null);
       let parameters = this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY).split('|');
       
       if(parameters && this.selectedTab == 'book-of-dead'){

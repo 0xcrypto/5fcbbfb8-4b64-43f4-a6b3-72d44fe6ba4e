@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CookieStorage, LocalStorage, SessionStorage, LocalStorageService } from 'ngx-store';
-
+import { UserService } from './services/user.service';
+import { User } from './classes/user';
 
 interface GraveyardImages {
   scene: string;
@@ -30,7 +31,6 @@ export class AppGlobals {
   public USER_INFO_KEY = 'UserInfo';
   public IS_GUEST_KEY = 'IsGuest';
   public LANGUAGES:string[] = ['en', 'pl'];
-
   private images: GraveyardImages[] = [{
     scene: '1_1',
     sky: 'niebo3.jpg',
@@ -155,8 +155,10 @@ export class AppGlobals {
   ];
   constructor(private localStorageService: LocalStorageService) {
   }
-
-
+  
+  ngInit(){
+    
+  }
   setLanguage(language:string) {
     this.localStorageService.set(this.LANGUAGE_KEY, language);
   }
@@ -236,39 +238,19 @@ export class AppGlobals {
 
   getPagination(start: number, total: number){
     let pages: number[] = [];
-    if(start >= (total - 5)){
-      start = (total - 5);
-      for(let i = start, j=1; i <= total; i++, j++){
-        pages[j-1] = i;
+    let max_pages:number = (total >= 5) ? 5 : total; 
+    
+    if((total - start) <= max_pages){
+      for(let i = start; i <= total; i++){
+        pages.push(i);
       }
-    }
-    else{
-      for(let i = 0; i <= 3; i++){
-        pages[i] = start + i;
+    }    
+    else if((total - start) > max_pages){
+      for(let i = start; i <= start + (max_pages - 1); i++){
+        pages.push(i);
       }
-      pages[4] = total;
     }
 
     return pages;
-  }
-
-  getLoggedInUserDetail(){
-    let result = null;
-    if(this.localStorageService.get(this.USER_INFO_KEY)){
-      result = this.localStorageService.get(this.USER_INFO_KEY)
-    }
-    return result;
-  }
-
-  setLoggedInUserDetail(info:any){
-    this.localStorageService.set(this.USER_INFO_KEY, info);
-  }
-
-  logIn(){
-    this.localStorageService.set(this.IS_GUEST_KEY, false);
-  }
-
-  logOut(){
-    this.localStorageService.set(this.IS_GUEST_KEY, true);
   }
 }

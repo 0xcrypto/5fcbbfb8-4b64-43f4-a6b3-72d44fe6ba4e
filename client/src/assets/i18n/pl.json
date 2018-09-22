@@ -11,7 +11,9 @@
             "pet_graveyard": "zwierząt Cmentarz",
             "shop": "Sklep",
             "login": "Zaloguj Się",
+            "logout": "Wyloguj",
             "exit": "Wyjście",
+            "your_account": "Twoje konto",
             "select_language": "Wybierz język"
         }
     },
@@ -242,24 +244,24 @@
     "login": {
         "log_me_in": "Zaloguj się",
         "email": "E-mail",
-        "Password": "Hasło",
+        "password": "Hasło",
         "log_in": "Zaloguj Się",
-        "login_info": "Po zalogowaniu możesz edytować swój wpis lub kamień-kamień. Ci z was, którzy mają rezerwację do wspólnego grobu, mogą dodać dowolny wpis w dowolnym momencie po zalogowaniu. Ci z was, którzy mają rezerwację na Virtual - Graveyard, mogą edytować e-mail z grobu.",
+        "info": "Po zalogowaniu możesz edytować swój wpis lub kamień-kamień. Ci z was, którzy mają rezerwację do wspólnego grobu, mogą dodać dowolny wpis w dowolnym momencie po zalogowaniu. Ci z was, którzy mają rezerwację na Virtual - Graveyard, mogą edytować e-mail z grobu.",
         "do_not_have_account_here": "Nie masz konta tutaj?",
         "register": "Zarejestrować",
-        "i_have_forgotten_password": "zapomniałem hasła"
+        "i_have_forgotten_password": "Zapomniałem hasła"
     },
     "register": {
         "register": "Zarejestrować",
-        "firstname": "First Name",
+        "firstname": "Imię",
         "email": "E-mail",
-        "password": "E-mail",
+        "password": "Hasło",
         "lastname": "Nazwisko",
         "phone": "Telefon (opcjonalnie)",
         "confirm_password": "Potwierdź hasło",
         "short_info": "Przeczytałem i akceptuję te zasady i warunki",
         "log_in": "Zaloguj Się",
-        "i_have_forgotten_password": "zapomniałem hasła",
+        "i_have_forgotten_password": "Zapomniałem hasła",
         "info": "Po zalogowaniu możesz edytować swój wpis lub kamień-kamień. Ci z was, którzy mają rezerwację do wspólnego grobu, mogą dodać dowolny wpis w dowolnym momencie po zalogowaniu. Ci z was, którzy mają rezerwację na Virtual - Graveyard, mogą edytować e-mail z grobu.",
         "do_not_have_account_here": "Nie masz konta tutaj?"
     },
@@ -271,5 +273,48 @@
         "if_you_dont_have_account": "Jeśli nie masz konta, możesz się zarejestrować, klikając przycisk",
         "register": "Zarejestrować",
         "log_in": "Zaloguj Się"
+    },
+    "account": {
+        "tab": {
+            "profile": "Profil",
+            "deceased": "Zmarły",
+            "graves": "Graves",
+            "pets": "Zwierzęta domowe"
+        },
+        "content": {
+            "profile":{
+                "title": "Twoje konto: profil",
+                "firstname": "Imię:",
+                "lastname": "Nazwisko:",
+                "email": "E-mail:",
+                "phone": "Numer telefonu:",
+                "change_password": "Zmień hasło:",
+                "new_password": "Nowe hasło:",
+                "repeat_new_password": "Powtórz nowe hasło:",
+                "save": "Zapisać"
+            },
+            "deceased": {
+                "title": "Twoje konto: lista martwych osób",
+                "fullname": "Pełne imię i nazwisko",
+                "death_date": "Data zgonu",
+                "loading": "Ładowanie danych",
+                "no_data": "Dane nieodnalezione"
+            },
+            "graves": {
+                "title": "Twoje konto: Graves",
+                "name_of_grave": "Nazwa grobu",
+                "type": "Rodzaj",
+                "space_available": "Przestrzeń dostępna",
+                "loading": "Ładowanie danych",
+                "no_data": "Dane nieodnalezione"
+            },
+            "pets": {
+                "title": "Twoje konto: Zwierzęta",
+                "petname": "Nazwa zwierzaka",
+                "passed_away": "Zmarł",
+                "loading": "Ładowanie danych",
+                "no_data": "Dane nieodnalezione"
+            }
+        }
     }
 }

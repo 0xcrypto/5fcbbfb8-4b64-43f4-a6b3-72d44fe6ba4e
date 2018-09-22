@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { AppGlobals } from '../app.globals';
 import { AppComponent } from '../app.component';
 import { DialogService } from '../services/dialog.service';
+import { UserService } from '../services/user.service';
+import { User } from '../classes/user';
 
 @Component({
   selector: 'app-header',
@@ -18,20 +20,21 @@ export class HeaderComponent implements OnInit {
   currentRoute:string = null;
   isUserMgtDialogOpen:boolean = false;
   loggedInUserFullName:string = null;
+  USER_INFO:any = null;
+  IS_GUEST:string = null;
 
-  constructor(private translate: TranslateService, 
+  constructor(private translate: TranslateService,
     private _global: AppGlobals, 
     private _router: Router, 
     private route: ActivatedRoute,
-    private _dialog:DialogService) {
-      if(_global.getLoggedInUserDetail()){
-        let user = _global.getLoggedInUserDetail();
-        this.loggedInUserFullName = user['name'] + ' ' + user['surname'];
-      }
+    private _dialog:DialogService,
+    private userService:UserService) {
   }
 
   ngOnInit() {
     this.selectedLanguage = this.getSelectedLanguage();
+    this.userService.castUser.subscribe(user => this.USER_INFO = user);
+    this.userService.castIsGuest.subscribe(is_guest => this.IS_GUEST = is_guest);
   }
 
   changeLanguage(lang:string){
@@ -69,9 +72,12 @@ export class HeaderComponent implements OnInit {
     this._dialog.openDialog();
   }
 
+  logOut(){
+    this.userService.logOut();
+  }
+
   setCurrentRoute(){
     let key = null;
-    debugger;
     if(this._router.url.indexOf('/home') > -1){
       key = 'header.menu.main_gate';
     }

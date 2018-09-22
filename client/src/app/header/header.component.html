@@ -15,14 +15,17 @@
             </ul>
         </div>
         <div>
-            <ul *ngIf="!_global.isGuest">
-                <li class="text-center">{{loggedInUserFullName}}</li>
+            <ul *ngIf="(IS_GUEST=='NO') && USER_INFO">
+                <li class="text-center">{{USER_INFO.name +' '+ USER_INFO.surname}}</li>
+                <app-account></app-account>
             </ul>
         </div>
         <div>
             <ul>
                 <app-shop></app-shop>
-                <li class="inline" *ngIf="!_dialog.isDialogOpen" translate (click)="openUserMgtDialog();">header.menu.login</li>
+                <li class="inline" *ngIf="!_dialog.isDialogOpen && (IS_GUEST=='YES')" translate (click)="openUserMgtDialog();">header.menu.login</li>
+                <li class="inline" *ngIf="(IS_GUEST=='NO')" translate (click)="logOut();">header.menu.logout</li>
+                
                 <li class="inline" routerLink="/home/1" translate>header.menu.exit</li>
                 <div class="clear"></div>
                 <app-sound></app-sound>

@@ -1197,21 +1197,22 @@
 
 		private function loginBuyerAndFetchGraves($options = NULL){
 			$password = $options['password'];
+			$username = urldecode($options['username']);
 			$encrypted_password = md5($password);
 			$data = array();
 
-			$query="select buyer_id, name, surname, email, phone, null as graves, 
-			free from buyers where login='".$options['username']."' 
-			and pass='".$encrypted_password."'";
+			//TODO: REMOVE FOR SERVER
+			$query="select buyer_id, name, surname, email, phone, null as graves, free from buyers where login='".$username."' and pass='".$password."'";
+
+			//TODO: UNCOMMENT FOR SERVER
+			//$query="select buyer_id, name, surname, email, phone, null as graves, free from buyers where login='".$username."' and pass='".$encrypted_password."'";
 
 			$buyer = Yii::app()->db->createCommand($query)->queryRow();
 			
 			if($buyer){
 				//$_SESSION["islogged"] = 1;
 				//$_SESSION["buyerid"] = $row[0];
-				$query = "select user_id,name1,surname,date_birth,date_death from users where 
-				( is_deleted=0 OR is_deleted=1 ) and buyer_id='".$buyer['buyer_id']."' 
-				order by user_id desc";
+				$query = "select user_id,name1,surname,date_birth,date_death from users where ( is_deleted=0 OR is_deleted=1 ) and buyer_id='".$buyer['buyer_id']."' order by user_id desc";
 
 				$result = Yii::app()->db->createCommand($query)->queryAll();
 				$buyer['graves']=array();
@@ -1227,7 +1228,7 @@
 				$data['buyer'] = $buyer;
 			}
 			else{
-				$data['status'] = 'BUYER_NOT_FOUND';
+				$data['status'] = 'LOGIN_NOT_FOUND';
 				$data['buyer'] = [];
 			}
         	return $data;

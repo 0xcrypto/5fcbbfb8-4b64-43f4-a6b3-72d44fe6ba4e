@@ -16,9 +16,9 @@ export interface UserOptions {
 
 @Component({
   selector: 'app-graveyard',
-  templateUrl: './graveyard.component.html'
+  templateUrl: './person-graveyard.component.html'
 })
-export class GraveyardComponent implements OnInit {
+export class PersonGraveyardComponent implements OnInit {
   graves: User[] = [];
   comments: any[] = [];
   objects: any[] = [];

@@ -16,6 +16,9 @@
 .text-center {
     text-align: center;
 }
+.text-right {
+    text-align: right;
+}
 .align-right{
     float: right;
 }
@@ -122,7 +125,7 @@ body header ul  li {
     color: #bfbfbf;
     padding: 1px 5px;
     position: relative;
-    margin-bottom: 3px;
+    margin: 3px;
     cursor: pointer;
     font-size: 11px;
     line-height: 14px;
@@ -521,7 +524,9 @@ form .text-right{
     height: 100%;
     padding: 10px;
 }
-.fill-tabs .tabs > div h4, .form h4 {
+.fill-tabs .tabs > div h4, 
+.stroke-tabs .tabs > div h4, 
+.form h4 {
     color: #848484;
     font-size: 12px;
 }
@@ -577,6 +582,8 @@ form .text-right{
     cursor: pointer;
     height: 15px;
     color: #fff;
+    min-width: 75px;
+    text-align: center;
 }
 .stroke-tabs .tab-bar li.active, .stroke-tabs .tab-bar span.active{
     margin-top: -4px;

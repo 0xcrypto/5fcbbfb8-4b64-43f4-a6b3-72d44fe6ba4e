@@ -11,7 +11,9 @@
             "pet_graveyard": "Pet Graveyard",
             "shop": "Shop",
             "login": "Login",
+            "logout": "Logout",
             "exit": "Exit",
+            "your_account": "Your account",
             "select_language": "Select Language"
         }
     },
@@ -272,5 +274,48 @@
         "if_you_dont_have_account": "If you do not have an account, you may register by clicking the",
         "register": "Register",
         "log_in": "Log-in"
+    },
+    "account": {
+        "tab": {
+            "profile": "Profile",
+            "deceased": "Deceased",
+            "graves": "Graves",
+            "pets": "Pets"
+        },
+        "content": {
+            "profile":{
+                "title": "Your Account: Profile",
+                "firstname": "First Name:",
+                "lastname": "Surname/Last Name:",
+                "email": "E-mail:",
+                "phone": "Phone Number:",
+                "change_password": "Change Password:",
+                "new_password": "New password:",
+                "repeat_new_password": "Repeat new password:",
+                "save": "Save"
+            },
+            "deceased": {
+                "title": "Your Account: List of Dead People",
+                "fullname": "Full Name",
+                "death_date": "Date of Death",
+                "loading": "Loading Data",
+                "no_data": "No Data"
+            },
+            "graves": {
+                "title": "Your Account: Graves",
+                "name_of_grave": "Name of Grave",
+                "type": "Type",
+                "space_available": "Space Available",
+                "no_data": "No Data",
+                "loading": "Loading Data"
+            },
+            "pets": {
+                "title": "Your Account: Pets",
+                "petname": "Pet Name",
+                "passed_away": "Passed Away",
+                "no_data": "No Data",
+                "loading": "Loading Data"
+            }
+        }
     }
 }
