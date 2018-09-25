@@ -264,7 +264,12 @@
         "log_in": "Log-in",
         "i_have_forgotten_password": "I've forgotten my password",
         "info": "When you are logged in you can edit your entry or grave-stone design. These of you who have reservation for communal grave can add any entry at any time after log-in. Those of you who have reservation on Virtual - Graveyard can edit e-mail form the grave.",
-        "do_not_have_account_here": "Do not have account here?"
+        "do_not_have_account_here": "Do not have account here?",
+        "password_not_matched": "Password not matched with Confirm Password",
+        "login_exists": "Email already exists, Please try different email",
+        "error": "Problem in registration, Please try again later",
+        "success": "Registration successful, Please login to continue",
+        "accept_terms": "Please accept terms & condition"
     },
     "forgot_password": {
         "password_reminder": "Password Reminder",
@@ -273,7 +278,9 @@
         "send_my_password": "Send me my password",
         "if_you_dont_have_account": "If you do not have an account, you may register by clicking the",
         "register": "Register",
-        "log_in": "Log-in"
+        "log_in": "Log-in",
+        "login_not_found": "No user exists with email provided",
+        "reset_password_success": "Please check your mail for new password"
     },
     "account": {
         "tab": {

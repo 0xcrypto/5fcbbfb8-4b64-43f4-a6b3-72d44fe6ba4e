@@ -38,13 +38,11 @@ export class AccountComponent implements OnInit {
   ngOnInit() {
     this.selectedAccountTab = 'tab1';
     this.userService.castUser.subscribe(user => {
-      this.firstname = user.name;
-      this.lastname = user.surname;
-      this.email = user.email;
-      this.phone = user.phone;
+      this.firstname = user.name ? user.name : null;
+      this.lastname = user.surname ? user.surname : null;
+      this.email = user.email ? user.email : null;
+      this.phone = user.phone ? user.phone : null;
     });
-
-    
   }
 
   closeAccountDialog() {

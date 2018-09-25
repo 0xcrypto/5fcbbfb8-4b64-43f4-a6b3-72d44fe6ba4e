@@ -144,9 +144,8 @@
 		public function actionCreate()
 		{
 			$method = null;
-
 			$options = $_POST;
-
+			
 			if(isset($options['method'])){
                 $method = $options['method'];
             }
@@ -159,7 +158,9 @@
 				    else if($method == 'ANIMAL_COMMENT')
                         $result = $this->addAnimalComment($options);
 					else if($method == 'REGISTER')
-                        $result = $this->register($options);
+						$result = $this->register($options);
+					else if($method == 'RESET_PASSWORD')
+						$result = $this->resetPassword($options);
 					break;
                 default:
                     $this->_sendResponse(501, 
@@ -1237,29 +1238,32 @@
 		/***
 		 	REQUIRED PARAMETERS
 			--------------------
-			$options['username']
+			$options['email']
 		***/
 
 		private function resetPassword($options = NULL){
-			$sql="select email from buyers where login='".$options['username']."'";	
-        	$buyer = Yii::app()->db->createCommand($query)->queryRow();
-			$new_password = substr(md5(uniqid(rand(), true)),0,8);
-			
-			$result = $this->MailContent('RESET_PASSWORD', array('username'=>$options['username'],
-			 'password'=>$new_password ));
+			$query="select email, login from buyers where email='".$options['email']."'";	
+			$buyer = Yii::app()->db->createCommand($query)->queryRow();
+			if($buyer){
+				$new_password = substr(md5(uniqid(rand(), true)),0,8);
+				$query="update buyers set pass=md5('$new_password') where email='".$options['email']."'";
+				Yii::app()->db->createCommand($query)->execute();
 
-			$headers  = 'MIME-Version: 1.0' . "\r\n";
-            $headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
-			$headers .= 'From: admin_m@wirtualnycmentarz.pl' . "\r\n";
-			
-			//TO-DO = Comment out for live server
-			//@mail($buyer['email'], $result['subject'], $result['message'], $headers);
-			
-			$query="update buyers set pass=md5('$new_password') where login='".$options['username']."'";
-			Yii::app()->db->createCommand($query)->execute();
-
-			$data = array();
-			$data['status'] = 'PASSWORD_CHANGED';
+				$result = $this->MailContent('RESET_PASSWORD', array('username'=>$buyer['login'], 'password'=>$new_password ));
+				$headers  = 'MIME-Version: 1.0' . "\r\n";
+				$headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
+				$headers .= 'From: admin_m@wirtualnycmentarz.pl' . "\r\n";
+				
+				//TO-DO = Comment out for live server
+				//@mail($buyer['email'], $result['subject'], $result['message'], $headers);
+	
+				$data = array();
+				$data['status'] = 'PASSWORD_CHANGED';
+			}
+			else{
+				$data = array();
+				$data['status'] = 'LOGIN_NOT_FOUND';
+			}
 			return $data;
 		}
 		
@@ -1283,7 +1287,7 @@
 			$data = array();
 
 			if($buyer){
-				$data['status'] = 'BUYER_ALREADY_EXISTS';
+				$data['status'] = 'LOGIN_ALREADY_EXISTS';
 			}
 			else{
 				$query="insert into buyers (name,surname,email,phone,login,pass,language)
@@ -1296,11 +1300,11 @@
 				 '".$current_language."')";	
 				 $result = Yii::app()->db->createCommand($query)->execute();
 				 if($result){
-					$data['status'] = 'BUYER_CREATED';
+					$data['status'] = 'SUCCESS';
 					$data['buyer_id'] = Yii::app()->db->getLastInsertID();
 				 }
 				 else{
-					$data['status'] = 'PROBLEM_ADDING_BUYER';
+					$data['status'] = 'ERROR';
 				 }
 			}
             return $data;
