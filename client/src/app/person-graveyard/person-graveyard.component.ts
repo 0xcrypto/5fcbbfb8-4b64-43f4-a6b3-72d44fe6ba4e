@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { User } from '../classes/user';
 import { DataService } from '../services/data.service';
+import { MessageService } from '../services/message.service';
 import { AppGlobals } from '../app.globals';
-import { debug } from 'util';
 import { _iterableDiffersFactory } from '@angular/core/src/application_module';
 import { CookieStorage, LocalStorage, SessionStorage, LocalStorageService } from 'ngx-store';
 
@@ -38,6 +38,7 @@ export class PersonGraveyardComponent implements OnInit {
   condolenceMessage:string = null;
   condolenceSignature:string = null;
   selectedGraveId:number = 0;
+  selectedGraveName:string = null;
   router:Router = null;
   totalGraves: number = 0;
   graveSize: number = 512;
@@ -46,7 +47,8 @@ export class PersonGraveyardComponent implements OnInit {
   };
 
   constructor(private route: ActivatedRoute, 
-    private dataService: DataService, 
+    private dataService: DataService,
+    private messageService:MessageService, 
     private _global: AppGlobals, 
     private _router: Router,
     private localStorageService: LocalStorageService) { 
@@ -133,6 +135,7 @@ export class PersonGraveyardComponent implements OnInit {
     this.dataService.getAllWithMethodAndOptions('PERSON_DETAILS', this._global.serializeAndURIEncode(this.options))
       .subscribe(graves => {
         this.grave = graves[0];
+        this.selectedGraveName = this.grave.name1 +' '+this.grave.surname;
       }
     );
     
@@ -212,5 +215,13 @@ export class PersonGraveyardComponent implements OnInit {
     image.style.position = 'absolute';
     image.style.top = event.clientY + 'px';
     image.style.left = event.clientX + 'px';
+  }
+  shopObjects(){
+    if(this.selectedGraveId){debugger;
+      this.messageService.sendMessage('OPEN_SHOP', {
+          'selectedGrave': this.selectedGraveId,
+          'selectedGraveName': this.selectedGraveName
+        });
+    }
   }
 }

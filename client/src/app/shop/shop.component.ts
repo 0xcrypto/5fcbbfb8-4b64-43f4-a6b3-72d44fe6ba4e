@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { DataService } from '../services/data.service';
+import { MessageService } from '../services/message.service';
 import { AppGlobals } from '../app.globals';
 
 export interface Options {};
@@ -21,13 +22,41 @@ export class ShopComponent implements OnInit {
   options:Options = {};
   isShopDialogOpen:boolean = false;
   selectedShopTab:string = null;
+  selectedGraveId:number;
+  selectedGraveName:string;
+  firstname:string = null;
+  lastname:string = null;
+  dedication:string = null;
+  amount:number = 10;
+  currency:string = 'EUR';
+  isCandleShopFormVisible:boolean = false;
+  isFlowerShopFormVisible:boolean = false;
+  isStoneShopFormVisible:boolean = false;
+  isOtherShopFormVisible:boolean = false;
+  
 
-  constructor(private route: ActivatedRoute, private dataService: DataService, private _global: AppGlobals, private _router: Router) {
+  constructor(private route: ActivatedRoute, 
+    private dataService: DataService, 
+    private _global: AppGlobals, 
+    private _router: Router,
+    private messageService:MessageService) {
     this.router = _router;
   }
 
   ngOnInit() {
     this.selectedShopTab = 'tab1';
+    this.messageService.castMessage.subscribe(object => {
+      let message = object.message;
+      let data = object.data;
+
+      switch(message){
+        case "OPEN_SHOP":
+          this.openShop(data);
+          break;
+        default:
+          break;
+      }
+    });
 
     this.options = this._global.refreshObject(this.options, []);
     this.dataService.getAllWithMethodAndOptions('CANDLE_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
@@ -70,11 +99,57 @@ export class ShopComponent implements OnInit {
     this.isShopDialogOpen = false;
   }
 
-  openShop() {
+  openShop(data:any) {
+    if(data){
+      this.selectedGraveId = data.selectedGrave;
+      this.selectedGraveName = data.selectedGraveName;
+    }
+
     this.isShopDialogOpen = true;
   }
 
   openTab(tabName:string):void{
     this.selectedShopTab = tabName;
+  }
+
+  CandleShoppingChange(){
+    this.isCandleShopFormVisible = false;
+  }
+  FlowerShoppingChange(){
+    this.isFlowerShopFormVisible = false;
+  }
+  StoneShoppingChange(){
+    this.isStoneShopFormVisible = false;
+  }
+  OtherShoppingChange(){
+    this.isOtherShopFormVisible = false;
+  }
+  selectCandle(candle:any){
+    debugger;
+    this.isCandleShopFormVisible = true;
+  }
+  CandleShoppingConfirm(){
+
+  }
+  selectFlower(flower:any){
+    debugger;
+    this.isFlowerShopFormVisible = true;
+  }
+  FlowerShoppingConfirm(){
+    
+  }
+  selectStone(stone:any){
+    debugger;
+    this.isStoneShopFormVisible = true;
+  }
+  StoneShoppingConfirm(){
+
+  }
+  selectOther(card:any){
+    debugger;
+    this.isOtherShopFormVisible = true;
+  }
+  OtherShoppingConfirm(){
+
   }
 }

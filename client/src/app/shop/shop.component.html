@@ -9,32 +9,144 @@
         </p>
         <div class="tabs">
             <div [ngClass]="{'active': (selectedShopTab == 'tab1')}">
-                <div *ngIf="candles" >
-                    <p class="tile" *ngFor="let candle of candles">
-                        <img [attr.src]="candle"/>
-                    </p>
+                <h4 *ngIf="selectedGraveName && selectedGraveId" translate>
+                    shop.purchase_for_grave {{selectedGraveName}}({{selectedGraveId}})
+                </h4>
+                <div *ngIf="!isCandleShopFormVisible">
+                    <div *ngIf="candles" >
+                        <p class="tile" *ngFor="let candle of candles" (click)="selectCandle(candle)">
+                            <img [attr.src]="candle"/>
+                        </p>
+                    </div>
                 </div>
+                <form *ngIf="isCandleShopFormVisible">
+                    <label>
+                        <span translate>shop.form.dedication_signature</span>
+                        <textarea class="big-box" [(ngModel)]="dedication" name="dedication"></textarea>
+                    </label>
+                    <label>
+                        <span translate>shop.form.your_first_and_last_name</span>
+                        <input type="text" [(ngModel)]="firstname" name="firstname"/>&nbsp;
+                        <input type="text" [(ngModel)]="lastname" name="lastname"/>
+                    </label>
+                    <label>
+                        <input type="text" [(ngModel)]="amount" name="amount"/>
+                        <input type="text" [(ngModel)]="currency" name="currency"/>
+                    </label>
+                    <label>
+                        <button type="button" class="align-left" (click)="CandleShoppingChange()">
+                            <span translate>shop.form.back <i class="fa fa-backword"></i></span>
+                        </button>
+                        <button type="button" class="align-right" (click)="CandleShoppingConfirm()">
+                            <span translate>shop.form.confirm <i class="fa fa-forward"></i></span>
+                        </button>
+                    </label>
+                </form>
             </div>
             <div [ngClass]="{'active': (selectedShopTab == 'tab2')}">
-                <div *ngIf="flowers">
-                    <p class="tile" *ngFor="let flower of flowers">
-                        <img [attr.src]="flower"/>
-                    </p>
+                <h4 *ngIf="selectedGraveName && selectedGraveId" translate>
+                    shop.purchase_for_grave {{selectedGraveName}}({{selectedGraveId}})
+                </h4>
+                <div *ngIf="!isFlowerShopFormVisible">
+                    <div *ngIf="flowers">
+                        <p class="tile" *ngFor="let flower of flowers" (click)="selectFlower(flower)">
+                            <img [attr.src]="flower"/>
+                        </p>
+                    </div>
                 </div>
+                <form *ngIf="isFlowerShopFormVisible">
+                    <label>
+                        <span translate>shop.form.dedication_signature</span>
+                        <textarea class="big-box" [(ngModel)]="dedication" name="dedication"></textarea>
+                    </label>
+                    <label>
+                        <span translate>shop.form.your_first_and_last_name</span>
+                        <input type="text" [(ngModel)]="firstname" name="firstname"/>&nbsp;
+                        <input type="text" [(ngModel)]="lastname" name="lastname"/>
+                    </label>
+                    <label>
+                        <input type="text" [(ngModel)]="amount" name="amount"/>
+                        <input type="text" [(ngModel)]="currency" name="currency"/>
+                    </label>
+                    <label>
+                        <button type="button" class="align-left" (click)="FlowerShoppingChange()">
+                            <span translate>shop.form.back <i class="fa fa-backword"></i></span>
+                        </button>
+                        <button type="button" class="align-right" (click)="FlowerShoppingConfirm()">
+                            <span translate>shop.form.confirm <i class="fa fa-forward"></i></span>
+                        </button>
+                    </label>
+                </form>
             </div>
             <div [ngClass]="{'active': (selectedShopTab == 'tab3')}">
-                <div *ngIf="stones">
-                    <p class="tile" *ngFor="let stone of stones">
-                        <img [attr.src]="stone"/>
-                    </p>
+                <h4 *ngIf="selectedGraveName && selectedGraveId" translate>
+                    shop.purchase_for_grave {{selectedGraveName}}({{selectedGraveId}})
+                </h4>
+                <div *ngIf="!isStoneShopFormVisible">
+                    <div *ngIf="stones">
+                        <p class="tile" *ngFor="let stone of stones" (click)="selectStone(stone)">
+                            <img [attr.src]="stone"/>
+                        </p>
+                    </div>
                 </div>
+                <form *ngIf="isStoneShopFormVisible">
+                    <label>
+                        <span translate>shop.form.dedication_signature</span>
+                        <textarea class="big-box" [(ngModel)]="dedication" name="dedication"></textarea>
+                    </label>
+                    <label>
+                        <span translate>shop.form.your_first_and_last_name</span>
+                        <input type="text" [(ngModel)]="firstname" name="firstname"/>&nbsp;
+                        <input type="text" [(ngModel)]="lastname" name="lastname"/>
+                    </label>
+                    <label>
+                        <input type="text" [(ngModel)]="amount" name="amount"/>
+                        <input type="text" [(ngModel)]="currency" name="currency"/>
+                    </label>
+                    <label>
+                        <button type="button" class="align-left" (click)="StoneShoppingChange()">
+                            <span translate>shop.form.back <i class="fa fa-backword"></i></span>
+                        </button>
+                        <button type="button" class="align-right" (click)="StoneShoppingConfirm()">
+                            <span translate>shop.form.confirm <i class="fa fa-forward"></i></span>
+                        </button>
+                    </label>
+                </form>
             </div>
             <div [ngClass]="{'active': (selectedShopTab == 'tab4')}">
-                <div *ngIf="cards">
-                    <p class="tile" *ngFor="let card of cards">
-                        <img [attr.src]="card"/>
-                    </p>
+                <h4 *ngIf="selectedGraveName && selectedGraveId" translate>
+                    shop.purchase_for_grave {{selectedGraveName}}({{selectedGraveId}})
+                </h4>
+                <div *ngIf="isOtherShopFormVisible">
+                    <div *ngIf="cards">
+                        <p class="tile" *ngFor="let card of cards" (click)="selectOther(card)">
+                            <img [attr.src]="card"/>
+                        </p>
+                    </div>
                 </div>
+                <form *ngIf="isOtherShopFormVisible">
+                    <label>
+                        <span translate>shop.form.dedication_signature</span>
+                        <textarea class="big-box" [(ngModel)]="dedication" name="dedication"></textarea>
+                    </label>
+                    <label>
+                        <span translate>shop.form.your_first_and_last_name</span>
+                        <input type="text" [(ngModel)]="firstname" name="firstname"/>
+                        <input type="text" [(ngModel)]="lastname" name="lastname"/>
+                    </label>
+                    <label>
+                        <input type="text" [(ngModel)]="amount" name="amount"/>&nbsp;
+                        <input type="text" [(ngModel)]="currency" name="currency"/>
+                    </label>
+                    <label>
+                        <button type="button" class="align-left" (click)="OtherShoppingChange()">
+                            <span translate>shop.form.back <i class="fa fa-backword"></i></span>
+                        </button>
+                        <button type="button" class="align-right" (click)="OtherShoppingConfirm()">
+                            <span translate>shop.form.confirm <i class="fa fa-forward"></i></span>
+                        </button>
+                    </label>
+                </form>
             </div>
         </div>
     </div>

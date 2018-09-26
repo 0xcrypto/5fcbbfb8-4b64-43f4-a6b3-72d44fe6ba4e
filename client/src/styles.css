@@ -466,6 +466,11 @@ form > label input, form  label textarea,
     width: 150px;
     line-height: 20px;
 }
+form  label textarea.big-box,
+.form  label textarea.big-box{
+    width: 200px;
+    height: 100px;
+}
 form > label button, .form  label button {
     background: none;
     color: #fff;

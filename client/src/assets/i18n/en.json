@@ -85,26 +85,35 @@
         },
         "detail": {
             "tab":{
-                "persoanl_details": "Persoanl Details",
-                "in_memoriam": "In Memoriam",
-                "album": "Album",
-                "remembrance": "Remembrance",
-                "candles": "Candles",
-                "rememberance":{
+                "persoanl_details": {
+                    "title": "Persoanl Details",
+                    "grave_number": "Grave Number",
+                    "firstname": "First Name",
+                    "surname": "Surname/Last Name",
+                    "dob": "Date of Birth",
+                    "religion": "Religion"
+                },
+                "in_memoriam": {
+                    "title": "In Memoriam"
+                },
+                "album": {
+                    "title": "Album"
+                },
+                "remembrance": {
+                    "title": "Remembrance",
                     "add_entry_to_the_book_of_condolence": "Add entry to the Book of condolence",
                     "max_500_characters": "Max 500 characters",
                     "back": "Back",
                     "signature": "Signature",
                     "add_entry": "Add entry",
                     "no_entry": "No entry"
+                },
+                "candles": {
+                    "title": "Candles",
+                    "this_object_will_finish_out_in": "This object will finish out in ",
+                    "lit_a_candle": "Lit a Candle"
                 }
-            },
-            "grave_number": "Grave Number",
-            "firstname": "First Name",
-            "surname": "Surname/Last Name",
-            "dob": "Date of Birth",
-            "religion": "Religion",
-            "this_object_will_finish_out_in": "This object will finish out in "
+            }
         },
         "next_grave": "Next Grave",
         "previous_grave": "Previous Grave",
@@ -144,6 +153,13 @@
             "funeral_flowers": "Funeral Flowers",
             "stones": "Stones",
             "others": "Others"
+        },
+        "purchase_for_grave": "Purchase for grave",
+        "form": {
+            "dedication_signature": "Dedication/Signature",
+            "your_first_and_last_name": "Your First & Last name",
+            "back": "Back",
+            "confirm": "Confirm"
         }
     },
     "contact_us":{
@@ -217,26 +233,35 @@
         },
         "detail": {
             "tab":{
-                "persoanl_details": "Persoanl Details",
-                "in_memoriam": "In Memoriam",
-                "album": "Album",
-                "remembrance": "Remembrance",
-                "candles": "Candles",
-                "rememberance":{
+                "persoanl_details": {
+                    "title": "Persoanl Details",
+                    "grave_number": "Grave Number",
+                    "firstname": "First Name",
+                    "surname": "Surname/Last Name",
+                    "dob": "Date of Birth",
+                    "religion": "Religion"
+                },
+                "in_memoriam": {
+                    "title": "In Memoriam"
+                },
+                "album": {
+                    "title": "Album"
+                },
+                "remembrance": {
+                    "title": "Remembrance",
                     "add_entry_to_the_book_of_condolence": "Add entry to the Book of condolence",
                     "max_500_characters": "Max 500 characters",
                     "back": "Back",
                     "signature": "Signature",
                     "add_entry": "Add entry",
                     "no_entry": "No entry"
+                },
+                "candles": {
+                    "title": "Candles",
+                    "this_object_will_finish_out_in": "This object will finish out in ",
+                    "lit_a_candle": "Lit a Candle"
                 }
-            },
-            "grave_number": "Grave Number",
-            "firstname": "First Name",
-            "surname": "Surname/Last Name",
-            "dob": "Date of Birth",
-            "religion": "Religion",
-            "this_object_will_finish_out_in": "This object will finish out in "
+            }
         },
         "next_grave": "Next Grave",
         "previous_grave": "Previous Grave",

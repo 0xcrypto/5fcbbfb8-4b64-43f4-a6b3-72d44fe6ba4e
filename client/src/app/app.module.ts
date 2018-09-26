@@ -27,6 +27,7 @@ import { AnimalGraveyardComponent } from './animal-graveyard/animal-graveyard.co
 import { UserMgtComponent } from './user-mgt/user-mgt.component';
 
 import { UserService } from './services/user.service';
+import { MessageService } from './services/message.service';
 import { AppGlobals } from './app.globals';
 import { AccountComponent } from './account/account.component';
 export function HttpLoaderFactory(http: HttpClient) {
@@ -77,7 +78,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       barBorderRadius: "3px",
       alwaysVisible: true
     }
-  }, UserService, AppGlobals],
+  }, UserService, AppGlobals, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
