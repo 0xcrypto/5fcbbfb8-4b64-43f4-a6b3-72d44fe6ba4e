@@ -65,9 +65,8 @@ export class UserMgtComponent implements OnInit {
   login(){
     let parameters = ['password='+this.password, 'username='+this.email];
     this.options = this._global.refreshObject(this.options, parameters);
-    this.dataService.getAllWithMethodAndOptions('LOGIN', 
-    this._global.serializeAndURIEncode(this.options))
-    .subscribe(result => { 
+    this.dataService.getAllWithMethodAndOptions('LOGIN', this._global.serializeAndURIEncode(this.options))
+    .subscribe(result => {
       if(result['status'] && result['status'] == "LOGIN_NOT_FOUND")
         this.loginFormError = 'Email & Password not exists in system';
       else{

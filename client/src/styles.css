@@ -471,6 +471,17 @@ form  label textarea.big-box,
     width: 200px;
     height: 100px;
 }
+form > label input[type="radio"],
+.form > label input[type="radio"] {
+    width: 30px;
+}
+form > label input[type="radio"] + span,
+.form > label input[type="radio"] + span {
+    color: #fff;
+    font-size: 12px;
+    line-height: 19px;
+    display: inline-block;
+}
 form > label button, .form  label button {
     background: none;
     color: #fff;

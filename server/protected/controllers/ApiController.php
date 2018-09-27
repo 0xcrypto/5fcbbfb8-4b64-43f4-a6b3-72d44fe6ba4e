@@ -1,7 +1,7 @@
 <?php
 	class ApiController extends Controller
 	{
-		Const APPLICATION_ID = 'ASCCPE';
+		const APPLICATION_ID = 'ASCCPE';
 		const CONFIG = array(
             'HOST_ADDRESS'=>'www.wirtualnycmentarz.pl'
         );
@@ -75,6 +75,8 @@
 						$results = StaticPage::model()->findAll();
 					else if($method == 'FOOTER_MENUS')
 						$results = FooterMenu::model()->findAll();
+					else if($method == 'PRICES')
+						$results = $this->getPrices($options);
 					else
 						$results = array();
 					break;
@@ -161,6 +163,10 @@
 						$result = $this->register($options);
 					else if($method == 'RESET_PASSWORD')
 						$result = $this->resetPassword($options);
+					else if($method == 'ADD_ANIMAL_OBJECT')
+						$result = $this->addAnimalObject($options);
+					else if($method == 'ADD_PERSON_OBJECT')
+						$result = $this->addPersonObject($options);
 					break;
                 default:
                     $this->_sendResponse(501, 
@@ -734,8 +740,6 @@
 			
 			$count_query="select count(*) as total from ($query) t";
 			$count_result = Yii::app()->db->createCommand($count_query)->queryRow()['total'];
-				
-			//$query.=" order by add_date desc limit " .($position*$limit).','.$limit;
 			$query.=" order by add_date desc ";
 			$result = Yii::app()->db->createCommand($query)->queryAll();
 			$data = array(); 
@@ -832,8 +836,8 @@
 
             try{
 				
-				$mail_to   = $this->PAYMENT_CONFIG['ADMIN_EMAIL_TO'];
-				$mail_from = $this->PAYMENT_CONFIG['ADMIN_EMAIL_FROM'];
+				$mail_to   = ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_TO'];
+				$mail_from = ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_FROM'];
 
 				$result = $this->MailContent('NEW_COMMENT', array('id'=>$options['user_id'], 
 				'nick'=>$options['nick'], 'body'=>$options['body'], 'grave_type'=>'person'));
@@ -878,8 +882,8 @@
 			}
 			try{
 				
-				$mail_to   = $this->PAYMENT_CONFIG['ADMIN_EMAIL_TO'];
-				$mail_from = $this->PAYMENT_CONFIG['ADMIN_EMAIL_FROM'];
+				$mail_to   = ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_TO'];
+				$mail_from = ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_FROM'];
 
 				$result = $this->MailContent('NEW_COMMENT', array('id'=>$options['animal_id'], 
 				'nick'=>$options['nick'], 'body'=>$options['body'], 'grave_type'=>'animal'));
@@ -1204,12 +1208,11 @@
 
 			//TODO: REMOVE FOR SERVER
 			$query="select buyer_id, name, surname, email, phone, null as graves, free from buyers where login='".$username."' and pass='".$password."'";
-
+			
 			//TODO: UNCOMMENT FOR SERVER
 			//$query="select buyer_id, name, surname, email, phone, null as graves, free from buyers where login='".$username."' and pass='".$encrypted_password."'";
 
 			$buyer = Yii::app()->db->createCommand($query)->queryRow();
-			
 			if($buyer){
 				//$_SESSION["islogged"] = 1;
 				//$_SESSION["buyerid"] = $row[0];
@@ -1370,8 +1373,8 @@
 				$name = $buyer["name"];
 				$surname = $buyer["surname"];
 				$sendto   = trim($email);
-				$sendfrom = trim($this->PAYMENT_CONFIG['ADMIN_EMAIL_FROM']);
-				$adminmail = trim($this->PAYMENT_CONFIG['ADMIN_EMAIL_TO']);
+				$sendfrom = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_FROM']);
+				$adminmail = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_TO']);
 
 				$result = $this.MailContent('PAYMENT_USER_MAIL', array('amount'=>$options['amount'], 
 				'account_number'=>$options['account_number'], 'address_data'=>$options['address_data'], 
@@ -1386,8 +1389,8 @@
 				//TO-DO = Comment out for live server
 				//@mail($sendto, $result['subject'], $message, $headers);
 
-				$sendto   = trim($this->PAYMENT_CONFIG['ADMIN_EMAIL_TO']);
-				$sendfrom = trim($this->PAYMENT_CONFIG['ADMIN_EMAIL_FROM']);
+				$sendto   = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_TO']);
+				$sendfrom = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_FROM']);
 				$result = $this.MailContent('PAYMENT_ADMIN_MAIL', 
 				array('login'=>$username, 'buyer_id'=>$buyer_id, 'name'=>$name,
 				'surname'=>$surname, 'amount'=>$options['amount'], 'id'=>$options['id'], 
@@ -1423,7 +1426,7 @@
 			$options['object_name']
 		***/
 
-		private function addPetGraveObject($options = NULL){
+		private function addAnimalObject($options = NULL){
 			$payment_method = isset($options['payment_method']) ? $options['payment_method'] : -1; 
 			$payment_id = isset($options['payment_id']) ? $options['payment_id'] : 0;
 			$temp = isset($options['temp']) ? $options['temp'] : 0;
@@ -1468,8 +1471,8 @@
 					$data['status']= "ANIMAL_OBJECT_ADD_SUCCESS";
 					$data['object_id'] = Yii::app()->db->getLastInsertID();
 
-					$sendfrom = trim($this->PAYMENT_CONFIG['ADMIN_EMAIL_FROM']);
-					$sendto = trim($this->PAYMENT_CONFIG['ADMIN_EMAIL_TO']);
+					$sendfrom = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_FROM']);
+					$sendto = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_TO']);
 					$result = $this->MailContent('NEW_OBJECT', 
 					array('id'=>$options['animal_id'], 'object_name'=>$options['object_name'], 
 					'valid_upto'=>$valid_upto, 'comment'=>$options['comment']));
@@ -1487,6 +1490,76 @@
 				}
 			}
 
+			return $data;
+		}
+		
+		
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['payment_method']
+			$options['user_id']
+			$options['buyer_id']
+			$options['payment_id']
+			$options['temp']
+			$options['current_language']
+			$options['valid_upto']
+			$options['comment']
+			$options['object_name']
+			$options['object_id']
+		***/
+
+		private function addPersonObject($options = NULL){
+			$payment_method = isset($options['payment_method']) ? $options['payment_method'] : -1; 
+			$payment_id = isset($options['payment_id']) ? $options['payment_id'] : 0;
+			$temp = isset($options['temp']) ? $options['temp'] : 0;
+			$current_language = isset($options['current_language']) ? $options['current_language'] : 'en';
+			$valid_upto = $options['valid_upto'];
+			$data = array();
+
+			/*$query = "select count(*) as total from users_objects where user_id='".$options['user_id']."' and object_name='".$options['object_name']."' 
+						and comment='".$options['comment']."' and DATE_ADD(add_date,INTERVAL 1 MINUTE)>now() ";
+			$count_result = Yii::app()->db->createCommand($query)->queryRow()['total'];
+			if($count_result > 0){
+				$data['status'] = 'PERSON_OBJECT_ALREADY_EXISTS';
+			}
+			else{*/
+				if($valid_upto == 100000) 
+					$valid_upto = '2970-01-01';
+				else {
+					$valid_upto = mktime(0, 0, 0, date("m"), date("d") + $valid_upto,   date("Y"));
+					$valid_upto = date("Y-m-d", $valid_upto);
+				}
+
+				if($temp == 0)
+					$table = "users_objects";
+				else if($temp == 1)
+					$table = "users_objects_temp";
+
+				$query="insert into $table (object_id,user_id, buyer_id,end_time,comment,object_name, pay_method,
+				paymentid, language) values ('".$options['object_id']."', '".$options['user_id']."', '".
+				$options['buyer_id']."', '".$valid_upto."', '".$options['comment']."', 
+				'".$options['object_name']."', '".$payment_method."','".$payment_id."', '".$current_language."')";
+
+				Yii::app()->db->createCommand($query)->execute();
+
+				$data['status']= "PERSON_OBJECT_ADD_SUCCESS";
+				$data['object_id'] = Yii::app()->db->getLastInsertID();
+				$sendfrom = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_FROM']);
+				$sendto = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_TO']);
+				$result = $this->MailContent('NEW_OBJECT', array('id'=>$options['user_id'], 
+				'object_name'=>$options['object_name'], 'grave_type'=>'person',
+				'valid_upto'=>$valid_upto, 'comment'=>$options['comment']));
+		
+				$message  = wordwrap(trim($result['message']), 100);			
+				$headers  = 'MIME-Version: 1.0' . "\r\n";
+				$headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
+				$headers .= 'From: '.$sendfrom. "\r\n";
+
+				//TO-DO = Comment out for live server
+				//@mail($sendto, $result['subject'], $message, $headers);
+	
+			/*}*/
 			return $data;
 		}
 		
@@ -1614,6 +1687,23 @@
 			return $data; 
 		}
 
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['type']
+
+		***/
+		private function getPrices($options = NULL){
+			$query="select * from price_master where type='".$options['type']."'";	
+			$result = Yii::app()->db->createCommand($query)->queryAll();
+			$data = array();
+
+			foreach($result as $row){
+				$data[] = $row;
+			}
+
+            return $data;
+		}
 
 		private function dateToDays($day, $month, $year)
 		{
@@ -1647,9 +1737,9 @@
 						$content = "<strong>Informacja dla administratora</strong><br /><br />";
 						$content .= "Dodano komentarz do grobu <br />";
 						if ($parameters['grave_type'] == 'animal')
-							$content .= "zwierz�cia ANIMAL_ID: ".$parameters['id']." <a href=\"http://www.wirtualnycmentarz.pl/index.php?id_a=".$parameters['id']."\" target=\"_blank\">http://".$this->CONFIG['HOST_ADDRESS']."/index.php?id_a=".$parameters['id']."</a>.";
+							$content .= "zwierz�cia ANIMAL_ID: ".$parameters['id']." <a href=\"http://www.wirtualnycmentarz.pl/index.php?id_a=".$parameters['id']."\" target=\"_blank\">http://".ApiController::CONFIG['HOST_ADDRESS']."/index.php?id_a=".$parameters['id']."</a>.";
 						else if($parameters['grave_type'] == 'animal')
-							$content .= "osoby PERSON_ID: ".$parameters['id']." <a href=\"http://www.wirtualnycmentarz.pl/index.php?id=".$parameters['id']."\" target=\"_blank\">http://".$this->CONFIG['HOST_ADDRESS']."/index.php?id=".$parameters['id']."</a>.";
+							$content .= "osoby PERSON_ID: ".$parameters['id']." <a href=\"http://www.wirtualnycmentarz.pl/index.php?id=".$parameters['id']."\" target=\"_blank\">http://".ApiController::CONFIG['HOST_ADDRESS']."/index.php?id=".$parameters['id']."</a>.";
 
 						$content .= "<br><br>";
 						$content .= "Podpis pod komentarzem: <strong>".$parameters['nick']."</strong><br><br>";

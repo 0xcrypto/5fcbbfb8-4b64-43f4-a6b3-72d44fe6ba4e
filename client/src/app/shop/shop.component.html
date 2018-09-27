@@ -9,8 +9,8 @@
         </p>
         <div class="tabs">
             <div [ngClass]="{'active': (selectedShopTab == 'tab1')}">
-                <h4 *ngIf="selectedGraveName && selectedGraveId" translate>
-                    shop.purchase_for_grave {{selectedGraveName}}({{selectedGraveId}})
+                <h4 *ngIf="selectedGraveName && selectedGraveId">
+                    <span translate>shop.purchase_for_grave</span> {{selectedGraveName}}({{selectedGraveId}})
                 </h4>
                 <div *ngIf="!isCandleShopFormVisible">
                     <div *ngIf="candles" >
@@ -30,8 +30,10 @@
                         <input type="text" [(ngModel)]="lastname" name="lastname"/>
                     </label>
                     <label>
-                        <input type="text" [(ngModel)]="amount" name="amount"/>
-                        <input type="text" [(ngModel)]="currency" name="currency"/>
+                        <p *ngFor="let object of candle_prices">
+                            <input type="radio" name="candlepricegroup" [value]="object.id" (change)="onCandlePriceGroupSelect(object)">
+                            <span> {{(currentLang == 'en')? object.desc_en : object.desc_pl}} at {{object.price}} {{object.currency}} </span>
+                        </p>
                     </label>
                     <label>
                         <button type="button" class="align-left" (click)="CandleShoppingChange()">
@@ -44,8 +46,8 @@
                 </form>
             </div>
             <div [ngClass]="{'active': (selectedShopTab == 'tab2')}">
-                <h4 *ngIf="selectedGraveName && selectedGraveId" translate>
-                    shop.purchase_for_grave {{selectedGraveName}}({{selectedGraveId}})
+                <h4 *ngIf="selectedGraveName && selectedGraveId">
+                    <span translate>shop.purchase_for_grave</span> {{selectedGraveName}}({{selectedGraveId}})
                 </h4>
                 <div *ngIf="!isFlowerShopFormVisible">
                     <div *ngIf="flowers">
@@ -65,8 +67,10 @@
                         <input type="text" [(ngModel)]="lastname" name="lastname"/>
                     </label>
                     <label>
-                        <input type="text" [(ngModel)]="amount" name="amount"/>
-                        <input type="text" [(ngModel)]="currency" name="currency"/>
+                        <p *ngFor="let object of flower_prices">
+                            <input type="radio" name="flowerpricegroup" [value]="object.id" (change)="onFlowerPriceGroupSelect(object)">
+                            <span> {{(currentLang == 'en')? object.desc_en : object.desc_pl}} at {{object.price}} {{object.currency}} </span>
+                        </p>
                     </label>
                     <label>
                         <button type="button" class="align-left" (click)="FlowerShoppingChange()">
@@ -79,8 +83,8 @@
                 </form>
             </div>
             <div [ngClass]="{'active': (selectedShopTab == 'tab3')}">
-                <h4 *ngIf="selectedGraveName && selectedGraveId" translate>
-                    shop.purchase_for_grave {{selectedGraveName}}({{selectedGraveId}})
+                <h4 *ngIf="selectedGraveName && selectedGraveId">
+                    <span translate>shop.purchase_for_grave</span> {{selectedGraveName}}({{selectedGraveId}})
                 </h4>
                 <div *ngIf="!isStoneShopFormVisible">
                     <div *ngIf="stones">
@@ -100,8 +104,10 @@
                         <input type="text" [(ngModel)]="lastname" name="lastname"/>
                     </label>
                     <label>
-                        <input type="text" [(ngModel)]="amount" name="amount"/>
-                        <input type="text" [(ngModel)]="currency" name="currency"/>
+                        <p *ngFor="let object of stone_prices">
+                            <input type="radio" name="stonepricegroup" [value]="object.id" (change)="onStonePriceGroupSelect(object)">
+                            <span> {{(currentLang == 'en')? object.desc_en : object.desc_pl}} at {{object.price}} {{object.currency}} </span>
+                        </p>
                     </label>
                     <label>
                         <button type="button" class="align-left" (click)="StoneShoppingChange()">
@@ -114,8 +120,8 @@
                 </form>
             </div>
             <div [ngClass]="{'active': (selectedShopTab == 'tab4')}">
-                <h4 *ngIf="selectedGraveName && selectedGraveId" translate>
-                    shop.purchase_for_grave {{selectedGraveName}}({{selectedGraveId}})
+                <h4 *ngIf="selectedGraveName && selectedGraveId">
+                    <span translate>shop.purchase_for_grave</span> {{selectedGraveName}}({{selectedGraveId}})
                 </h4>
                 <div *ngIf="isOtherShopFormVisible">
                     <div *ngIf="cards">
@@ -135,8 +141,10 @@
                         <input type="text" [(ngModel)]="lastname" name="lastname"/>
                     </label>
                     <label>
-                        <input type="text" [(ngModel)]="amount" name="amount"/>&nbsp;
-                        <input type="text" [(ngModel)]="currency" name="currency"/>
+                        <p *ngFor="let object of other_prices">
+                            <input type="radio" name="otherpricegroup" [value]="object.id" (change)="onOtherPriceGroupSelect(object)">
+                            <span> {{(currentLang == 'en')? object.desc_en : object.desc_pl}} at {{object.price}} {{object.currency}} </span>
+                        </p>
                     </label>
                     <label>
                         <button type="button" class="align-left" (click)="OtherShoppingChange()">

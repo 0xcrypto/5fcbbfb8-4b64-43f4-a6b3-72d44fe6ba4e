@@ -30,6 +30,7 @@ export class AppGlobals {
   public APP_IMAGES_LOADED_KEY = 'AppImagesLoaded';
   public USER_INFO_KEY = 'UserInfo';
   public IS_GUEST_KEY = 'IsGuest';
+  public PAYMENT_METHOD = 1; //PAYPAL
   public LANGUAGES:string[] = ['en', 'pl'];
   private images: GraveyardImages[] = [{
     scene: '1_1',

@@ -90,7 +90,35 @@ export class PersonGraveyardComponent implements OnInit {
         this.isGraveyardLoading = false;
       });
     this.selectedGraveDetailTab = 'tab1';
+    
+    this.messageService.castMessage.subscribe(object => {
+      let message = object.message;
 
+      switch(message){
+        case "RELOAD_PERSON_OBJECTS":
+          this.options = this._global.refreshObject(this.options, ['user_id='+this.selectedGraveId]);
+          this.dataService.getAllWithMethodAndOptions('PERSON_OBJECTS', this._global.serializeAndURIEncode(this.options))
+            .subscribe(data => {
+              this.objects = data;
+              for(var i=0; i<=this.objects.length-1; i++){
+                if(this.objects[i].object_name == 'kwiat'){
+                  this.objects[i]['object_url'] = './assets/images/znicze/kwiat'+this.objects[i].object_id+'.png';
+                }
+                else if(this.objects[i].object_name == 'inne'){
+                  this.objects[i]['object_url'] = './assets/images/znicze/inne'+this.objects[i].object_id+'.png';
+                }
+                else if(this.objects[i].object_name == 'kamien'){
+                  this.objects[i]['object_url'] = './assets/images/znicze/kamien'+this.objects[i].object_id+'.png';
+                }
+                else if(this.objects[i].object_name == 'znicz'){
+                  this.objects[i]['object_url'] = './assets/images/znicze/znicz'+this.objects[i].object_id+'.gif';
+                }
+              }
+            }
+          );
+          break;
+      }
+    });
 
     let context = this;
     window.addEventListener("load",function(){
@@ -217,7 +245,7 @@ export class PersonGraveyardComponent implements OnInit {
     image.style.left = event.clientX + 'px';
   }
   shopObjects(){
-    if(this.selectedGraveId){debugger;
+    if(this.selectedGraveId){
       this.messageService.sendMessage('OPEN_SHOP', {
           'selectedGrave': this.selectedGraveId,
           'selectedGraveName': this.selectedGraveName

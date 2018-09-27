@@ -131,12 +131,15 @@
                         </label>
                     </form>
                     <div *ngIf="grave">
-                        <ul class="text-list" *ngFor="let object of objects">
-                            <li>
+                        <ul class="text-list">
+                            <li *ngFor="let object of objects">
                                 <img [attr.src]="object.object_url"/>
                                 <p class="from">
                                     <span class="message">{{object.comment}}</span>&nbsp;&nbsp;
-                                    <span class="message" translate>graveyard.detail.tab.candles.this_object_will_finish_out_in {{object.end_time}}</span>
+                                    <span class="message">
+                                        <span translate>graveyard.detail.tab.candles.this_object_will_finish_out_in</span>&nbsp;&nbsp;
+                                        {{object.end_time}}
+                                    </span>
                                 </p>
                             </li>
                         </ul>

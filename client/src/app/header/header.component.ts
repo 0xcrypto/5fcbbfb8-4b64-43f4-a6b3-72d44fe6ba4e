@@ -7,6 +7,7 @@ import { AppGlobals } from '../app.globals';
 import { AppComponent } from '../app.component';
 import { DialogService } from '../services/dialog.service';
 import { UserService } from '../services/user.service';
+import { MessageService } from '../services/message.service';
 import { User } from '../classes/user';
 
 @Component({
@@ -28,6 +29,7 @@ export class HeaderComponent implements OnInit {
     private _router: Router, 
     private route: ActivatedRoute,
     private _dialog:DialogService,
+    private messageService:MessageService,
     private userService:UserService) {
   }
 
@@ -35,6 +37,16 @@ export class HeaderComponent implements OnInit {
     this.selectedLanguage = this.getSelectedLanguage();
     this.userService.castUser.subscribe(user => this.USER_INFO = user);
     this.userService.castIsGuest.subscribe(is_guest => this.IS_GUEST = is_guest);
+
+    this.messageService.castMessage.subscribe(object => {
+      let message = object.message;
+
+      switch(message){
+        case "OPEN_LOGIN_DIALOG":
+          this.openUserMgtDialog();
+          break;
+      }
+    });
   }
 
   changeLanguage(lang:string){
