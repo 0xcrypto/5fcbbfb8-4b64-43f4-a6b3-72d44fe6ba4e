@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { DataService } from '../services/data.service';
+import { MessageService } from '../services/message.service';
 import { AppGlobals } from '../app.globals';
 import { debug } from 'util';
 import { _iterableDiffersFactory } from '@angular/core/src/application_module';
@@ -37,13 +38,15 @@ export class CatacombComponent implements OnInit {
   isRemeberanceFormOpen:boolean = false;
   condolenceMessage:string = null;
   condolenceSignature:string = null;
-  selectedCatacombId:number = 0;
+  selectedCatacombId:number;
+  selectedCatacombName:string;
   router:Router = null;
   options:Options = {};
   
   constructor(private translate: TranslateService, 
     private route: ActivatedRoute, 
     private dataService: DataService, 
+    private messageService:MessageService, 
     private _global: AppGlobals, 
     private _router: Router) { 
        this.router = _router;
@@ -65,6 +68,35 @@ export class CatacombComponent implements OnInit {
           }
         }
         this.isCatacombsLoading = false;
+      });
+
+      this.messageService.castMessage.subscribe(object => {
+        let message = object.message;
+  
+        switch(message){
+          case "RELOAD_CATACOMB_OBJECTS":
+            this.options = this._global.refreshObject(this.options, ['object_name=znicz', 'user_id='+this.selectedCatacombId]);
+            this.dataService.getAllWithMethodAndOptions('PERSON_OBJECTS', this._global.serializeAndURIEncode(this.options))
+              .subscribe(data => {
+                this.objects = data;
+                for(var i=0; i<=this.objects.length-1; i++){
+                  if(this.objects[i].object_name == 'kwiat'){
+                    this.objects[i]['object_url'] = './assets/images/znicze/kwiat'+this.objects[i].object_id+'.png';
+                  }
+                  else if(this.objects[i].object_name == 'inne'){
+                    this.objects[i]['object_url'] = './assets/images/znicze/inne'+this.objects[i].object_id+'.png';
+                  }
+                  else if(this.objects[i].object_name == 'kamien'){
+                    this.objects[i]['object_url'] = './assets/images/znicze/kamien'+this.objects[i].object_id+'.png';
+                  }
+                  else if(this.objects[i].object_name == 'znicz'){
+                    this.objects[i]['object_url'] = './assets/images/znicze/znicz'+this.objects[i].object_id+'.gif';
+                  }
+                }
+              }
+            );
+            break;
+        }
       });
 
     this.currentLang = this._global.getLanguage();
@@ -112,6 +144,7 @@ export class CatacombComponent implements OnInit {
     this.dataService.getAllWithMethodAndOptions('PERSON_DETAILS', this._global.serializeAndURIEncode(this.options))
       .subscribe(catacombs => {
         this.catacomb = catacombs[0];
+        this.selectedCatacombName = this.catacomb.name1 +' '+this.catacomb.surname;
       }
     );
     
@@ -193,5 +226,12 @@ export class CatacombComponent implements OnInit {
     image.style.top = event.clientY + 'px';
     image.style.left = event.clientX + 'px';
   }
-
+  shopObjects(){
+    if(this.selectedCatacombId){
+      this.messageService.sendMessage('OPEN_SHOP', {
+          'selectedCatacomb': this.selectedCatacombId,
+          'selectedCatacombName': this.selectedCatacombName
+        });
+    }
+  }
 }

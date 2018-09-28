@@ -86,12 +86,15 @@
         "detail": {
             "tab":{
                 "personal_details": {
-                    "title": "Persoanl Details",
+                    "title": "Personal Details",
                     "grave_number": "Grave Number",
                     "firstname": "First Name",
                     "surname": "Surname/Last Name",
                     "dob": "Date of Birth",
-                    "religion": "Religion"
+                    "religion": "Religion",
+                    "birth_country": "Birth Country",
+                    "death_country": "Death Country",
+                    "passed_away": "Passed Away"
                 },
                 "in_memoriam": {
                     "title": "In Memoriam"
@@ -125,26 +128,37 @@
         "back_to_catacomb_main_gate": "Back to Catacombs Main Gate",
         "detail": {
             "tab":{
-                "persoanl_details": "Persoanl Details",
-                "in_memoriam": "In Memoriam",
-                "album": "Album",
-                "remembrance": "Remembrance",
-                "candles": "Candles",
-                "rememberance":{
+                "personal_details": {
+                    "title": "Personal Details",
+                    "grave_number": "Grave Number",
+                    "firstname": "First Name",
+                    "surname": "Surname/Last Name",
+                    "dob": "Date of Birth",
+                    "passed_away": "Passed Away",
+                    "profession": "Profession",
+                    "hobby": "Hobby"
+                },
+                "in_memoriam": {
+                    "title": "In Memoriam"
+                },
+                "album": {
+                    "title": "Album"
+                },
+                "remembrance": {
+                    "title": "Remembrance",
                     "add_entry_to_the_book_of_condolence": "Add entry to the Book of condolence",
                     "max_500_characters": "Max 500 characters",
                     "back": "Back",
                     "signature": "Signature",
                     "add_entry": "Add entry",
                     "no_entry": "No entry"
+                },
+                "candles": {
+                    "title": "Candles",
+                    "this_object_will_finish_out_in": "This object will finish out in ",
+                    "lit_a_candle": "Lit a Candle"
                 }
-            },
-            "grave_number": "Grave Number",
-            "firstname": "First Name",
-            "surname": "Surname/Last Name",
-            "dob": "Date of Birth",
-            "religion": "Religion",
-            "this_object_will_finish_out_in": "This object will finish out in "
+            }
         }
     },
     "shop": {
@@ -235,13 +249,15 @@
         "detail": {
             "tab":{
                 "personal_details": {
-                    "genus": "Genus",
-                    "title": "Persoanl Details",
+                    "title": "Personal Details",
                     "grave_number": "Grave Number",
-                    "firstname": "First Name",
-                    "surname": "Surname/Last Name",
+                    "genus": "Genus",
+                    "name_of_pet": "Name of Pet",
+                    "sexuality": "Sexuality",
+                    "type": "Type",
                     "dob": "Date of Birth",
-                    "religion": "Religion"
+                    "dod": "Date of Death",
+                    "owner_name": "Owner"
                 },
                 "in_memoriam": {
                     "title": "In Memoriam"

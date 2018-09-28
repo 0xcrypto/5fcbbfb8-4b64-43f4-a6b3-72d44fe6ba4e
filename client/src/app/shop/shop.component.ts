@@ -183,6 +183,11 @@ export class ShopComponent implements OnInit {
       this.selectedGraveName = data.selectedAnimalName;
       this.source = 'animal-graveyard';
     }
+    if(data.selectedCatacomb && data.selectedCatacombName){
+      this.selectedGraveId = data.selectedCatacomb;
+      this.selectedGraveName = data.selectedCatacombName;
+      this.source = 'catacomb';
+    }
 
     this.isShopDialogOpen = true;
   }
@@ -317,7 +322,7 @@ export class ShopComponent implements OnInit {
     if(this.isPaymentCompleted)
       this.addObject();
   }
-  addObject(){
+  addObject(){debugger;
     let temp = 0;
     if(this.USER_INFO){
       if(this.source == 'person-graveyard'){
@@ -328,13 +333,10 @@ export class ShopComponent implements OnInit {
         'current_language='+this.currentLang, 'method=ADD_PERSON_OBJECT']);
         this.dataService.createWithMethodAndOptions(this.options)
           .subscribe(result => {
-            if(result['status'] && result['status'] == 'ANIMAL_OBJECT_ALREADY_EXISTS'){
+            if(result['status'] && result['status'] == 'PERSON_OBJECT_ALREADY_EXISTS'){
               alert('Item already exists');  
             }
-            if(result['status'] && result['status'] == 'ANIMAL_NOT_EXISTS'){
-              alert('Animal not exists');
-            }
-            
+
             this.closeShop();
             this.valid_upto = null;
             this.dedication = null;
@@ -350,6 +352,28 @@ export class ShopComponent implements OnInit {
         'current_language='+this.currentLang, 'method=ADD_ANIMAL_OBJECT']);
         this.dataService.createWithMethodAndOptions(this.options)
           .subscribe(result => {
+            if(result['status'] && result['status'] == 'ANIMAL_OBJECT_ALREADY_EXISTS'){
+              alert('Item already exists');  
+            }
+            if(result['status'] && result['status'] == 'ANIMAL_NOT_EXISTS'){
+              alert('Animal not exists');
+            }
+            
+            this.closeShop();
+            this.valid_upto = null;
+            this.dedication = null;
+            this.messageService.sendMessage('RELOAD_ANIMAL_OBJECTS', {});
+          });
+      }
+
+      if(this.source == 'catacomb'){
+        this.options = this._global.refreshObject(this.options, ['payment_method='+this._global.PAYMENT_METHOD,
+        'payment_id='+this.payment_id, 'temp='+temp, 'valid_upto='+ this.valid_upto, 
+        'user_id='+this.selectedGraveId, 'comment='+this.dedication, 'object_name='+this.selectedObjectName, 
+        'object_id='+this.selectedObjectId, 'buyer_id='+this.USER_INFO.buyer_id, 
+        'current_language='+this.currentLang, 'method=ADD_PERSON_OBJECT']);
+        this.dataService.createWithMethodAndOptions(this.options)
+          .subscribe(result => {
             if(result['status'] && result['status'] == 'PERSON_OBJECT_ALREADY_EXISTS'){
               alert('Item already exists');  
             }
@@ -357,7 +381,7 @@ export class ShopComponent implements OnInit {
             this.closeShop();
             this.valid_upto = null;
             this.dedication = null;
-            this.messageService.sendMessage('RELOAD_ANIMAL_OBJECTS', {});
+            this.messageService.sendMessage('RELOAD_CATACOMB_OBJECTS', {});
           });
       }
     }
@@ -390,7 +414,7 @@ export class ShopComponent implements OnInit {
     let price_string = (this.currentLang == 'en') ? desc_en : desc_pl; 
     this.selectedCandlePriceString = price_string.replace('_TOTAL_', price).replace('_CURRENCY_', currency);
     
-    if(this.selectedObjectPrice == 0){
+    if(+this.selectedObjectPrice == 0){
       this.isPaymentCompleted = true;
     }
     else{

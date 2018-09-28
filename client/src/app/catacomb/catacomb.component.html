@@ -40,11 +40,11 @@
         <div class="stroke-tabs catacomb-detail" [ngClass]="{'open': isCatacombDetailsOpen }">
             <button class="close-btn" (click)="closeDetails();"><i class="fas fa-times"></i></button>
             <ul class="tab-bar">
-                <li (click)="openTab('tab1');" [ngClass]="{'active': (selectedCatacombDetailTab == 'tab1')}" translate>catacomb.detail.tab.persoanl_details</li>
-                <li (click)="openTab('tab2');" [ngClass]="{'active': (selectedCatacombDetailTab == 'tab2')}" translate>catacomb.detail.tab.in_memoriam</li>
-                <li (click)="openTab('tab3');" [ngClass]="{'active': (selectedCatacombDetailTab == 'tab3')}" translate>catacomb.detail.tab.album</li>
-                <li (click)="openTab('tab4');" [ngClass]="{'active': (selectedCatacombDetailTab == 'tab4')}" translate>catacomb.detail.tab.remembrance</li>
-                <li (click)="openTab('tab5');" [ngClass]="{'active': (selectedCatacombDetailTab == 'tab5')}" translate>catacomb.detail.tab.candles</li>
+                <li (click)="openTab('tab1');" [ngClass]="{'active': (selectedCatacombDetailTab == 'tab1')}" translate>catacomb.detail.tab.personal_details.title</li>
+                <li (click)="openTab('tab2');" [ngClass]="{'active': (selectedCatacombDetailTab == 'tab2')}" translate>catacomb.detail.tab.in_memoriam.title</li>
+                <li (click)="openTab('tab3');" [ngClass]="{'active': (selectedCatacombDetailTab == 'tab3')}" translate>catacomb.detail.tab.album.title</li>
+                <li (click)="openTab('tab4');" [ngClass]="{'active': (selectedCatacombDetailTab == 'tab4')}" translate>catacomb.detail.tab.remembrance.title</li>
+                <li (click)="openTab('tab5');" [ngClass]="{'active': (selectedCatacombDetailTab == 'tab5')}" translate>catacomb.detail.tab.candles.title</li>
             </ul>
             <div class="tabs">
                 <div [ngClass]="{'active': (selectedCatacombDetailTab == 'tab1')}">
@@ -54,24 +54,32 @@
                     <div class="col-right" *ngIf="catacomb">
                         <form>
                             <label>
-                                <span translate>catacomb.detail.grave_number</span>
+                                <span translate>catacomb.detail.tab.personal_details.grave_number</span>
                                 <span class="field-value">{{catacomb.user_id}}</span>
                             </label>
                             <label>
-                                <span translate>catacomb.detail.firstname</span>
+                                <span translate>catacomb.detail.tab.personal_details.firstname</span>
                                 <span class="field-value">{{catacomb.name1}}</span>
                             </label>
                             <label>
-                                <span translate>catacomb.detail.surname</span>
+                                <span translate>catacomb.detail.tab.personal_details.surname</span>
                                 <span class="field-value">{{catacomb.surname}}</span>
                             </label>
                             <label>
-                                <span translate>catacomb.detail.dob</span>
+                                <span translate>catacomb.detail.tab.personal_details.dob</span>
                                 <span class="field-value">{{catacomb.date_birth}}</span>
                             </label>
                             <label>
-                                <span translate>catacomb.detail.religion</span>
-                                <span class="field-value">{{catacomb.religion_name}}</span>
+                                <span translate>catacomb.detail.tab.personal_details.passed_away</span>
+                                <span class="field-value">{{catacomb.date_death}}</span>
+                            </label>
+                            <label>
+                                <span translate>catacomb.detail.tab.personal_details.profession</span>
+                                <span class="field-value">{{catacomb.profession_name}}</span>
+                            </label>
+                            <label>
+                                <span translate>catacomb.detail.tab.personal_details.hobby</span>
+                                <span class="field-value">{{catacomb.hobby}}</span>
                             </label>
                         </form>
                     </div>
@@ -90,22 +98,22 @@
                 </div>
                 <div [ngClass]="{'active': (selectedCatacombDetailTab == 'tab4')}">
                     <form [hidden]="!isRemeberanceFormOpen">
-                        <h4 translate>catacomb.detail.tab.rememberance.add_entry_to_the_book_of_condolence</h4>
+                        <h4 translate>catacomb.detail.tab.remembrance.add_entry_to_the_book_of_condolence</h4>
                         <label>
-                            <span translate>catacomb.detail.tab.rememberance.max_500_characters</span>
+                            <span translate>catacomb.detail.tab.remembrance.max_500_characters</span>
                             <textarea [(ngModel)]="condolenceMessage" name="message" [ngStyle]="{'height': '100px'}" class="block-field" rows="20"></textarea>
                         </label>
                         <label class="text-right">
-                            <span translate>catacomb.detail.tab.rememberance.signature</span>
+                            <span translate>catacomb.detail.tab.remembrance.signature</span>
                             <input [(ngModel)]="condolenceSignature" name="signature" type="text">
                         </label>
                         <label>
                             <button (click)="closeRememberanceForm();" class="align-left">
                                 <i class="fa fa-backward"></i>
-                                <span translate>&nbsp;&nbsp;catacomb.detail.tab.rememberance.back</span>
+                                <span translate>&nbsp;&nbsp;catacomb.detail.tab.remembrance.back</span>
                             </button>
                             <button class="align-right" (click)="addCondolence();">
-                                <span translate>catacomb.detail.tab.rememberance.add_entry&nbsp;&nbsp;</span>
+                                <span translate>catacomb.detail.tab.remembrance.add_entry&nbsp;&nbsp;</span>
                                 <i class="fa fa-forward"></i>
                             </button>
                         </label>
@@ -113,8 +121,8 @@
                     <div *ngIf="catacomb"  [hidden]="isRemeberanceFormOpen">
                         <form>
                             <label [ngStyle]="{'height': '10px'}">
-                                <span *ngIf="(comments.lenght == 0)" translate>catacomb.detail.tab.rememberance.no_entry</span>
-                                <button (click)="openRememberanceForm();" class="align-right" translate>catacomb.detail.tab.rememberance.add_entry
+                                <span *ngIf="(comments.lenght == 0)" translate>catacomb.detail.tab.remembrance.no_entry</span>
+                                <button (click)="openRememberanceForm();" class="align-right" translate>catacomb.detail.tab.remembrance.add_entry
                                     <i class="fa fa-forward"></i></button>
                             </label>
                         </form>
@@ -130,16 +138,27 @@
                     </div>
                 </div>
                 <div [ngClass]="{'active': (selectedCatacombDetailTab == 'tab5')}">
+                    <form>
+                        <label>
+                            <button class="align-right" (click)="shopObjects();">
+                                <span translate>catacomb.detail.tab.candles.lit_a_candle&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
                     <div *ngIf="catacomb">
-                        <ul class="text-list" *ngFor="let object of objects">
-                            <li *ngFor="let object of objects">
+                        <div class="object-list">
+                            <div *ngFor="let object of objects">
                                 <img [attr.src]="object.object_url"/>
-                                <p class="from">
+                                <div>
                                     <span class="message">{{object.comment}}</span>&nbsp;&nbsp;
-                                    <span class="message" translate>catacomb.detail.this_object_will_finish_out_in {{object.end_time}}</span>
-                                </p>
-                            </li>
-                        </ul>
+                                    <span class="message">
+                                        <span translate>catacomb.detail.tab.candles.this_object_will_finish_out_in</span>&nbsp;&nbsp;
+                                        {{object.end_time}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -45,21 +45,37 @@
                   </div>
                   <div class="col-right" *ngIf="animal">
                       <form>
+                            <label>
+                                <span translate>animal_graveyard.detail.tab.personal_details.grave_number</span>
+                                <span class="field-value">{{animal.animal_id}}</span>
+                            </label>
                           <label>
                               <span translate>animal_graveyard.detail.tab.personal_details.genus</span>
                               <span class="field-value">{{(_global.getLanguage() == _global.LANGUAGES[0]) ? animal.genus_en : animal.genus_pl}}</span>
                           </label>
                           <label>
-                              <span translate>animal_graveyard.detail.tab.personal_details.grave_number</span>
-                              <span class="field-value">{{animal.animal_id}}</span>
+                              <span translate>animal_graveyard.detail.tab.personal_details.name_of_pet</span>
+                              <span class="field-value">{{animal.name}}</span>
                           </label>
                           <label>
-                              <span translate>animal_graveyard.detail.tab.personal_details.firstname</span>
-                              <span class="field-value">{{animal.name}}</span>
+                              <span translate>animal_graveyard.detail.tab.personal_details.sexuality</span>
+                              <span class="field-value">{{animal.gender_name}}</span>
+                          </label>
+                          <label>
+                              <span translate>animal_graveyard.detail.tab.personal_details.type</span>
+                              <span class="field-value">{{animal.animalkind}}</span>
                           </label>
                           <label>
                               <span translate>animal_graveyard.detail.tab.personal_details.dob</span>
                               <span class="field-value">{{animal.date_birth}}</span>
+                          </label>
+                          <label>
+                                <span translate>animal_graveyard.detail.tab.personal_details.dod</span>
+                                <span class="field-value">{{animal.date_death}}</span>
+                            </label>
+                          <label>
+                              <span translate>animal_graveyard.detail.tab.personal_details.owner_name</span>
+                              <span class="field-value">{{animal.owner_name}}</span>
                           </label>
                       </form>
                   </div>

@@ -92,7 +92,10 @@
                     "firstname": "Imię",
                     "surname": "Nazwisko",
                     "dob": "Data urodzenia",
-                    "religion": "Religia"
+                    "religion": "Religia",
+                    "birth_country": "Kraj urodzenia",
+                    "death_country": "Kraj śmierci",
+                    "passed_away": "Zmarł"
                 },
                 "in_memoriam": {
                     "title": "Ku pamięci"
@@ -126,25 +129,36 @@
         "back_to_catacomb_main_gate": "Powrót do głównej bramy katakumb",
         "detail": {
             "tab":{
-                "personal_details": "Dane osobowe",
-                "in_memoriam": "Ku pamięci",
-                "album": "Album",
-                "remembrance": "Pamięć",
-                "candles": "Świece",
-                "rememberance":{
+                "personal_details": {
+                    "title": "Dane osobowe",
+                    "grave_number": "Ciężki numer",
+                    "firstname": "Imię",
+                    "surname": "Nazwisko",
+                    "dob": "Data urodzenia",
+                    "passed_away": "Zmarł",
+                    "profession": "Zawód",
+                    "hobby": "Hobby"
+                },
+                "in_memoriam": {
+                    "title": "Ku pamięci"
+                },
+                "album": {
+                    "title": "Album"
+                },
+                "remembrance": {
+                    "title": "Pamięć",
                     "add_entry_to_the_book_of_condolence": "Dodaj wpis do Księgi kondolencyjnej",
                     "max_500_characters": "Maks. 500 znaków",
                     "back": "Plecy",
                     "signature": "Podpis",
                     "add_entry": "Dodaj wpis"
+                },
+                "candles": {
+                    "title": "Świece",
+                    "this_object_will_finish_out_in": "Ten obiekt zakończy się w",
+                    "lit_a_candle": "Zapalić świeczkę"
                 }
-            },
-            "grave_number": "Ciężki numer",
-            "firstname": "Imię",
-            "surname": "Nazwisko",
-            "dob": "Data urodzenia",
-            "religion": "Religia",
-            "this_object_will_finish_out_in": "Ten obiekt zakończy się w"
+            }
         }
     },
     "shop": {
@@ -236,13 +250,15 @@
         "detail": {
             "tab":{
                 "personal_details": {
-                    "genus": "Rodzaj",
                     "title": "Dane osobowe",
                     "grave_number": "Ciężki numer",
-                    "firstname": "Imię",
-                    "surname": "Nazwisko",
+                    "genus": "Kategoria",
+                    "name_of_pet": "Imię zwierzaka",
+                    "sexuality": "Seksualność",
+                    "type": "Gatunek",
                     "dob": "Data urodzenia",
-                    "religion": "Religia"
+                    "dod": "Data zgonu",
+                    "owner_name": "Właściciel"
                 },
                 "in_memoriam": {
                     "title": "Ku pamięci"
