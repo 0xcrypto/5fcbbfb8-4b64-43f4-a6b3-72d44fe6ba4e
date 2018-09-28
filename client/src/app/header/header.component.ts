@@ -80,6 +80,10 @@ export class HeaderComponent implements OnInit {
     this._router.navigateByUrl('/pet-graveyard/0/'+scene);
   }
 
+  gotoPetGraveyardNoticeboard(){
+    this._router.navigateByUrl('/pet-noticeboard');
+  }
+  
   openUserMgtDialog(){
     this._dialog.openDialog();
   }

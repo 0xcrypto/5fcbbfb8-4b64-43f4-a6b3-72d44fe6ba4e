@@ -9,7 +9,11 @@
                         <li routerLink="/noticeboard" translate>header.menu.graveyard_noticeboard</li>
                         <li (click)="gotoGraveyard();" translate>header.menu.graveyard</li>
                         <li routerLink="/catacomb" translate>header.menu.catacomb</li>
-                        <li (click)="gotoPetGraveyard();" translate>header.menu.pet_graveyard</li>
+                        <li (click)="gotoPetGraveyardNoticeboard();" translate>header.menu.pet_graveyard_noticeboard</li>
+                        <li (click)="gotoPetGraveyard();" translate>
+                            <i class="fa fa-caret-right"></i>
+                            <span translate>header.menu.pet_graveyard</span>    
+                        </li>
                     </ul>
                 </li>
             </ul>
