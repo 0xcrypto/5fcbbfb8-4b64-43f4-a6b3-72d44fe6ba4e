@@ -86,7 +86,7 @@
         },
         "detail": {
             "tab":{
-                "persoanl_details": {
+                "personal_details": {
                     "title": "Dane osobowe",
                     "grave_number": "Ciężki numer",
                     "firstname": "Imię",
@@ -126,7 +126,7 @@
         "back_to_catacomb_main_gate": "Powrót do głównej bramy katakumb",
         "detail": {
             "tab":{
-                "persoanl_details": "Dane osobowe",
+                "personal_details": "Dane osobowe",
                 "in_memoriam": "Ku pamięci",
                 "album": "Album",
                 "remembrance": "Pamięć",
@@ -159,7 +159,8 @@
             "dedication_signature": "Dedykacja / podpis",
             "your_first_and_last_name": "Twoje imię i nazwisko",
             "back": "Plecy",
-            "confirm": "Potwierdzać"
+            "confirm": "Potwierdzać",
+            "valid_upto": "ważne upto"
         }
     },
     "contact_us":{
@@ -234,7 +235,8 @@
         },
         "detail": {
             "tab":{
-                "persoanl_details": {
+                "personal_details": {
+                    "genus": "Rodzaj",
                     "title": "Dane osobowe",
                     "grave_number": "Ciężki numer",
                     "firstname": "Imię",

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 import { User } from '../classes/user';
 import { DataService } from '../services/data.service';
+import { MessageService } from '../services/message.service';
 import { AppGlobals } from '../app.globals';
 import { debug } from 'util';
 import { _iterableDiffersFactory } from '@angular/core/src/application_module';
@@ -36,6 +37,7 @@ export class AnimalGraveyardComponent implements OnInit {
   condolenceMessage:string = null;
   condolenceSignature:string = null;
   selectedAnimalId:number = 0;
+  selectedAnimalName:string = null;
   router:Router = null;
   totalAnimals: number = 0;
   graveSize: number = 512;
@@ -45,6 +47,7 @@ export class AnimalGraveyardComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, 
     private dataService: DataService, 
+    private messageService:MessageService,
     private _global: AppGlobals, 
     private _router: Router,
     private localStorageService: LocalStorageService) { 
@@ -86,6 +89,34 @@ export class AnimalGraveyardComponent implements OnInit {
       });
     this.selectedAnimalDetailTab = 'tab1';
 
+    this.messageService.castMessage.subscribe(object => {
+      let message = object.message;
+
+      switch(message){
+        case "RELOAD_ANIMAL_OBJECTS":
+          this.options = this._global.refreshObject(this.options, ['object_name=znicz', 'id='+this.selectedAnimalId]);
+          this.dataService.getAllWithMethodAndOptions('ANIMAL_OBJECTS', this._global.serializeAndURIEncode(this.options))
+            .subscribe(data => {
+              this.objects = data;
+              for(var i=0; i<=this.objects.length-1; i++){
+                if(this.objects[i].object_name == 'kwiat'){
+                  this.objects[i]['object_url'] = './assets/images/znicze/kwiat'+this.objects[i].object_id+'.png';
+                }
+                else if(this.objects[i].object_name == 'inne'){
+                  this.objects[i]['object_url'] = './assets/images/znicze/inne'+this.objects[i].object_id+'.png';
+                }
+                else if(this.objects[i].object_name == 'kamien'){
+                  this.objects[i]['object_url'] = './assets/images/znicze/kamien'+this.objects[i].object_id+'.png';
+                }
+                else if(this.objects[i].object_name == 'znicz'){
+                  this.objects[i]['object_url'] = './assets/images/znicze/znicz'+this.objects[i].object_id+'.gif';
+                }
+              }
+            }
+          );
+          break;
+      }
+    });
 
     let context = this;
     window.addEventListener("load",function(){
@@ -127,6 +158,7 @@ export class AnimalGraveyardComponent implements OnInit {
     this.dataService.getAllWithMethodAndOptions('ANIMAL_DETAILS', this._global.serializeAndURIEncode(this.options))
       .subscribe(animals => {
         this.animal = animals[0];
+        this.selectedAnimalName = this.animal.name +' '+this.animal.name2;
       }
     );
     
@@ -206,5 +238,13 @@ export class AnimalGraveyardComponent implements OnInit {
     image.style.position = 'absolute';
     image.style.top = event.clientY + 'px';
     image.style.left = event.clientX + 'px';
+  }
+  shopObjects(){
+    if(this.selectedAnimalId){
+      this.messageService.sendMessage('OPEN_SHOP', {
+          'selectedAnimal': this.selectedAnimalId,
+          'selectedAnimalName': this.selectedAnimalName
+        });
+    }
   }
 }

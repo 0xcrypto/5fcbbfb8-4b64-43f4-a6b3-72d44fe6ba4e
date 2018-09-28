@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CookieStorage, LocalStorage, SessionStorage, LocalStorageService } from 'ngx-store';
 import { UserService } from './services/user.service';
+import { DataService } from './services/data.service';
+import * as moment from 'moment'; 
 import { User } from './classes/user';
 
 interface GraveyardImages {
@@ -8,7 +10,7 @@ interface GraveyardImages {
   sky: string;
   graveyard: string;
 }
-
+export interface Options {};
 /*
   DAY = 1
   NIGHT = 2
@@ -21,6 +23,7 @@ interface GraveyardImages {
 
 @Injectable()
 export class AppGlobals {
+  options:Options = {};
   private DEFAULT_LANGUAGE: string = 'en';
   private LANGUAGE_KEY: string = '_lang';
   public GRAVEYARD_OPTIONS_KEY = 'GraveyardOptions';
@@ -154,11 +157,10 @@ export class AppGlobals {
     'assets/images/vg-right-logo.png',
     'assets/images/wall.png',
   ];
-  constructor(private localStorageService: LocalStorageService) {
+  constructor(private localStorageService: LocalStorageService, private dataService: DataService) {
   }
   
   ngInit(){
-    
   }
   setLanguage(language:string) {
     this.localStorageService.set(this.LANGUAGE_KEY, language);

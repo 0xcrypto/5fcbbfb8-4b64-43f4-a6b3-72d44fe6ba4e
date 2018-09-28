@@ -32,7 +32,7 @@
         <div class="stroke-tabs grave-detail" [ngClass]="{'open': isGraveDetailsOpen }">
             <button class="close-btn" (click)="closeDetails();"><i class="fas fa-times"></i></button>
             <ul class="tab-bar">
-                <li (click)="openTab('tab1');" [ngClass]="{'active': (selectedGraveDetailTab == 'tab1')}" translate>graveyard.detail.tab.persoanl_details.title</li>
+                <li (click)="openTab('tab1');" [ngClass]="{'active': (selectedGraveDetailTab == 'tab1')}" translate>graveyard.detail.tab.personal_details.title</li>
                 <li (click)="openTab('tab2');" [ngClass]="{'active': (selectedGraveDetailTab == 'tab2')}" translate>graveyard.detail.tab.in_memoriam.title</li>
                 <li (click)="openTab('tab3');" [ngClass]="{'active': (selectedGraveDetailTab == 'tab3')}" translate>graveyard.detail.tab.album.title</li>
                 <li (click)="openTab('tab4');" [ngClass]="{'active': (selectedGraveDetailTab == 'tab4')}" translate>graveyard.detail.tab.remembrance.title</li>
@@ -46,23 +46,23 @@
                     <div class="col-right" *ngIf="grave">
                         <form>
                             <label>
-                                <span translate>graveyard.detail.tab.persoanl_details.grave_number</span>
+                                <span translate>graveyard.detail.tab.personal_details.grave_number</span>
                                 <span class="field-value">{{grave.user_id}}</span>
                             </label>
                             <label>
-                                <span translate>graveyard.detail.tab.persoanl_details.firstname</span>
+                                <span translate>graveyard.detail.tab.personal_details.firstname</span>
                                 <span class="field-value">{{grave.name1}}</span>
                             </label>
                             <label>
-                                <span translate>graveyard.detail.tab.persoanl_details.surname</span>
+                                <span translate>graveyard.detail.tab.personal_details.surname</span>
                                 <span class="field-value">{{grave.surname}}</span>
                             </label>
                             <label>
-                                <span translate>graveyard.detail.tab.persoanl_details.dob</span>
+                                <span translate>graveyard.detail.tab.personal_details.dob</span>
                                 <span class="field-value">{{grave.date_birth}}</span>
                             </label>
                             <label>
-                                <span translate>graveyard.detail.tab.persoanl_details.religion</span>
+                                <span translate>graveyard.detail.tab.personal_details.religion</span>
                                 <span class="field-value">{{grave.religion_name}}</span>
                             </label>
                         </form>
@@ -131,18 +131,18 @@
                         </label>
                     </form>
                     <div *ngIf="grave">
-                        <ul class="text-list">
-                            <li *ngFor="let object of objects">
+                        <div class="object-list">
+                            <div *ngFor="let object of objects">
                                 <img [attr.src]="object.object_url"/>
-                                <p class="from">
+                                <div>
                                     <span class="message">{{object.comment}}</span>&nbsp;&nbsp;
                                     <span class="message">
                                         <span translate>graveyard.detail.tab.candles.this_object_will_finish_out_in</span>&nbsp;&nbsp;
                                         {{object.end_time}}
                                     </span>
-                                </p>
-                            </li>
-                        </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

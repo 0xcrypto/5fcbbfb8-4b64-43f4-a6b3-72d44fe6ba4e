@@ -32,11 +32,11 @@
       <div class="stroke-tabs grave-detail" [ngClass]="{'open': isGraveDetailsOpen }">
           <button class="close-btn" (click)="closeDetails();"><i class="fas fa-times"></i></button>
           <ul class="tab-bar">
-              <li (click)="openTab('tab1');" [ngClass]="{'active': (selectedAnimalDetailTab == 'tab1')}" translate>graveyard.detail.tab.persoanl_details</li>
-              <li (click)="openTab('tab2');" [ngClass]="{'active': (selectedAnimalDetailTab == 'tab2')}" translate>graveyard.detail.tab.in_memoriam</li>
-              <li (click)="openTab('tab3');" [ngClass]="{'active': (selectedAnimalDetailTab == 'tab3')}" translate>graveyard.detail.tab.album</li>
-              <li (click)="openTab('tab4');" [ngClass]="{'active': (selectedAnimalDetailTab == 'tab4')}" translate>graveyard.detail.tab.remembrance</li>
-              <li (click)="openTab('tab5');" [ngClass]="{'active': (selectedAnimalDetailTab == 'tab5')}" translate>graveyard.detail.tab.candles</li>
+              <li (click)="openTab('tab1');" [ngClass]="{'active': (selectedAnimalDetailTab == 'tab1')}" translate>animal_graveyard.detail.tab.personal_details.title</li>
+              <li (click)="openTab('tab2');" [ngClass]="{'active': (selectedAnimalDetailTab == 'tab2')}" translate>animal_graveyard.detail.tab.in_memoriam.title</li>
+              <li (click)="openTab('tab3');" [ngClass]="{'active': (selectedAnimalDetailTab == 'tab3')}" translate>animal_graveyard.detail.tab.album.title</li>
+              <li (click)="openTab('tab4');" [ngClass]="{'active': (selectedAnimalDetailTab == 'tab4')}" translate>animal_graveyard.detail.tab.remembrance.title</li>
+              <li (click)="openTab('tab5');" [ngClass]="{'active': (selectedAnimalDetailTab == 'tab5')}" translate>animal_graveyard.detail.tab.candles.title</li>
           </ul>
           <div class="tabs">
               <div [ngClass]="{'active': (selectedAnimalDetailTab == 'tab1')}">
@@ -46,19 +46,19 @@
                   <div class="col-right" *ngIf="animal">
                       <form>
                           <label>
-                              <span translate>_genus_</span>
+                              <span translate>animal_graveyard.detail.tab.personal_details.genus</span>
                               <span class="field-value">{{(_global.getLanguage() == _global.LANGUAGES[0]) ? animal.genus_en : animal.genus_pl}}</span>
                           </label>
                           <label>
-                              <span translate>graveyard.detail.grave_number</span>
+                              <span translate>animal_graveyard.detail.tab.personal_details.grave_number</span>
                               <span class="field-value">{{animal.animal_id}}</span>
                           </label>
                           <label>
-                              <span translate>graveyard.detail.firstname</span>
+                              <span translate>animal_graveyard.detail.tab.personal_details.firstname</span>
                               <span class="field-value">{{animal.name}}</span>
                           </label>
                           <label>
-                              <span translate>graveyard.detail.dob</span>
+                              <span translate>animal_graveyard.detail.tab.personal_details.dob</span>
                               <span class="field-value">{{animal.date_birth}}</span>
                           </label>
                       </form>
@@ -78,22 +78,22 @@
               </div>
               <div [ngClass]="{'active': (selectedAnimalDetailTab == 'tab4')}">
                   <form [hidden]="!isRemeberanceFormOpen">
-                      <h4 translate>graveyard.detail.tab.rememberance.add_entry_to_the_book_of_condolence</h4>
+                      <h4 translate>animal_graveyard.detail.tab.remembrance.add_entry_to_the_book_of_condolence</h4>
                       <label>
-                          <span translate>graveyard.detail.tab.rememberance.max_500_characters</span>
+                          <span translate>animal_graveyard.detail.tab.remembrance.max_500_characters</span>
                           <textarea [(ngModel)]="condolenceMessage" name="message" [ngStyle]="{'height': '100px'}" class="block-field" rows="20"></textarea>
                       </label>
                       <label class="text-right">
-                          <span translate>graveyard.detail.tab.rememberance.signature</span>
+                          <span translate>animal_graveyard.detail.tab.remembrance.signature</span>
                           <input [(ngModel)]="condolenceSignature" name="signature" type="text">
                       </label>
                       <label>
                           <button (click)="closeRememberanceForm();" class="align-left">
                               <i class="fa fa-backward"></i>
-                              <span translate>&nbsp;&nbsp;graveyard.detail.tab.rememberance.back</span>
+                              <span translate>&nbsp;&nbsp;animal_graveyard.detail.tab.remembrance.back</span>
                           </button>
                           <button class="align-right" (click)="addCondolence();">
-                              <span translate>graveyard.detail.tab.rememberance.add_entry&nbsp;&nbsp;</span>
+                              <span translate>animal_graveyard.detail.tab.remembrance.add_entry&nbsp;&nbsp;</span>
                               <i class="fa fa-forward"></i>
                           </button>
                       </label>
@@ -101,8 +101,8 @@
                   <div *ngIf="animal"  [hidden]="isRemeberanceFormOpen">
                       <form>
                           <label [ngStyle]="{'height': '10px'}">
-                              <span *ngIf="(comments.lenght == 0)" translate>graveyard.detail.tab.rememberance.no_entry</span>
-                              <button (click)="openRememberanceForm();" class="align-right" translate>graveyard.detail.tab.rememberance.add_entry
+                              <span *ngIf="(comments.lenght == 0)" translate>animal_graveyard.detail.tab.remembrance.no_entry</span>
+                              <button (click)="openRememberanceForm();" class="align-right" translate>animal_graveyard.detail.tab.remembrance.add_entry
                                   <i class="fa fa-forward"></i></button>
                           </label>
                       </form>
@@ -118,16 +118,27 @@
                   </div>
               </div>
               <div [ngClass]="{'active': (selectedAnimalDetailTab == 'tab5')}">
-                  <div *ngIf="animal">
-                      <ul class="text-list" *ngFor="let object of objects">
-                          <li>
-                              <img [attr.src]="object.object_url"/>
-                              <p class="from">
-                                  <span class="message">{{object.comment}}</span>&nbsp;&nbsp;
-                                  <span class="message" translate>graveyard.detail.this_object_will_finish_out_in {{object.end_time}}</span>
-                              </p>
-                          </li>
-                      </ul>
+                    <form>
+                        <label>
+                            <button class="align-right" (click)="shopObjects();">
+                                <span translate>animal_graveyard.detail.tab.candles.lit_a_candle&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                    <div *ngIf="animal">
+                        <div class="object-list">
+                            <div *ngFor="let object of objects">
+                                <img [attr.src]="object.object_url"/>
+                                <div>
+                                    <span class="message">{{object.comment}}</span>&nbsp;&nbsp;
+                                    <span class="message">
+                                        <span translate>animal_graveyard.detail.tab.candles.this_object_will_finish_out_in</span>&nbsp;&nbsp;
+                                        {{object.end_time}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                   </div>
               </div>
           </div>

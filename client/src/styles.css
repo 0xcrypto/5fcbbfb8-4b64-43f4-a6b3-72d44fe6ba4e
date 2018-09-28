@@ -125,7 +125,7 @@ body header ul  li {
     color: #bfbfbf;
     padding: 1px 5px;
     position: relative;
-    margin: 3px;
+    /*margin: 3px;*/
     cursor: pointer;
     font-size: 11px;
     line-height: 14px;
@@ -645,6 +645,24 @@ form .text-right{
     width: 75px;
     height: 75px;
     float: left;
+}
+.object-list{
+    margin-top: 40px;
+}
+.object-list > div {
+    border: 1px solid #333;
+    padding: 5px;
+    position: relative;
+}
+.object-list > div > div {
+    left: 100px;
+    top: 5px;
+    font-size: 11px;    
+    position: absolute;
+}
+.object-list img {
+    width: 50px;
+    height: 50px;
 }
 .popular-grave-col{
     width: 40%;

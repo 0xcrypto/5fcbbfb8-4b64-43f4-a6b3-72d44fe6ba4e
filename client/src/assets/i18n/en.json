@@ -85,7 +85,7 @@
         },
         "detail": {
             "tab":{
-                "persoanl_details": {
+                "personal_details": {
                     "title": "Persoanl Details",
                     "grave_number": "Grave Number",
                     "firstname": "First Name",
@@ -159,7 +159,8 @@
             "dedication_signature": "Dedication/Signature",
             "your_first_and_last_name": "Your First & Last name",
             "back": "Back",
-            "confirm": "Confirm"
+            "confirm": "Confirm",
+            "valid_upto": "Valid up to"
         }
     },
     "contact_us":{
@@ -233,7 +234,8 @@
         },
         "detail": {
             "tab":{
-                "persoanl_details": {
+                "personal_details": {
+                    "genus": "Genus",
                     "title": "Persoanl Details",
                     "grave_number": "Grave Number",
                     "firstname": "First Name",

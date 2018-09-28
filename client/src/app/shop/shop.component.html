@@ -25,22 +25,16 @@
                         <textarea class="big-box" [(ngModel)]="dedication" name="dedication"></textarea>
                     </label>
                     <label>
-                        <span translate>shop.form.your_first_and_last_name</span>
-                        <input type="text" [(ngModel)]="firstname" name="firstname"/>&nbsp;
-                        <input type="text" [(ngModel)]="lastname" name="lastname"/>
-                    </label>
-                    <label>
-                        <p *ngFor="let object of candle_prices">
-                            <input type="radio" name="candlepricegroup" [value]="object.id" (change)="onCandlePriceGroupSelect(object)">
-                            <span> {{(currentLang == 'en')? object.desc_en : object.desc_pl}} at {{object.price}} {{object.currency}} </span>
-                        </p>
+                        <span translate>shop.form.valid_upto</span>
+                        <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onCandleValidUpToDateChange(event, candlePrice);">
+                        <p style="color:#FFF; font-size: 10px;">{{selectedCandlePriceString}}</p>
                     </label>
                     <label>
                         <button type="button" class="align-left" (click)="CandleShoppingChange()">
-                            <span translate>shop.form.back <i class="fa fa-backword"></i></span>
+                            <span translate><i class="fa fa-backward"></i>&nbsp;&nbsp;shop.form.back</span>
                         </button>
                         <button type="button" class="align-right" (click)="CandleShoppingConfirm()">
-                            <span translate>shop.form.confirm <i class="fa fa-forward"></i></span>
+                            <span translate>shop.form.confirm&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
                         </button>
                     </label>
                 </form>
@@ -62,22 +56,16 @@
                         <textarea class="big-box" [(ngModel)]="dedication" name="dedication"></textarea>
                     </label>
                     <label>
-                        <span translate>shop.form.your_first_and_last_name</span>
-                        <input type="text" [(ngModel)]="firstname" name="firstname"/>&nbsp;
-                        <input type="text" [(ngModel)]="lastname" name="lastname"/>
-                    </label>
-                    <label>
-                        <p *ngFor="let object of flower_prices">
-                            <input type="radio" name="flowerpricegroup" [value]="object.id" (change)="onFlowerPriceGroupSelect(object)">
-                            <span> {{(currentLang == 'en')? object.desc_en : object.desc_pl}} at {{object.price}} {{object.currency}} </span>
-                        </p>
+                        <span translate>shop.form.valid_upto</span>
+                        <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onFlowerValidUpToDateChange(event, flowerPrice);">
+                        <p style="color:#FFF; font-size: 10px;">{{selectedFlowerPriceString}}</p>
                     </label>
                     <label>
                         <button type="button" class="align-left" (click)="FlowerShoppingChange()">
-                            <span translate>shop.form.back <i class="fa fa-backword"></i></span>
+                            <span translate><i class="fa fa-backward"></i>&nbsp;&nbsp;shop.form.back</span>
                         </button>
                         <button type="button" class="align-right" (click)="FlowerShoppingConfirm()">
-                            <span translate>shop.form.confirm <i class="fa fa-forward"></i></span>
+                            <span translate>shop.form.confirm&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
                         </button>
                     </label>
                 </form>
@@ -99,22 +87,16 @@
                         <textarea class="big-box" [(ngModel)]="dedication" name="dedication"></textarea>
                     </label>
                     <label>
-                        <span translate>shop.form.your_first_and_last_name</span>
-                        <input type="text" [(ngModel)]="firstname" name="firstname"/>&nbsp;
-                        <input type="text" [(ngModel)]="lastname" name="lastname"/>
-                    </label>
-                    <label>
-                        <p *ngFor="let object of stone_prices">
-                            <input type="radio" name="stonepricegroup" [value]="object.id" (change)="onStonePriceGroupSelect(object)">
-                            <span> {{(currentLang == 'en')? object.desc_en : object.desc_pl}} at {{object.price}} {{object.currency}} </span>
-                        </p>
+                        <span translate>shop.form.valid_upto</span>
+                        <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onStoneValidUpToDateChange(event, stonePrice);">
+                        <p style="color:#FFF; font-size: 10px;">{{selectedStonePriceString}}</p>
                     </label>
                     <label>
                         <button type="button" class="align-left" (click)="StoneShoppingChange()">
-                            <span translate>shop.form.back <i class="fa fa-backword"></i></span>
+                            <span translate><i class="fa fa-backward"></i>&nbsp;&nbsp;shop.form.back</span>
                         </button>
                         <button type="button" class="align-right" (click)="StoneShoppingConfirm()">
-                            <span translate>shop.form.confirm <i class="fa fa-forward"></i></span>
+                            <span translate>shop.form.confirm&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
                         </button>
                     </label>
                 </form>
@@ -136,22 +118,16 @@
                         <textarea class="big-box" [(ngModel)]="dedication" name="dedication"></textarea>
                     </label>
                     <label>
-                        <span translate>shop.form.your_first_and_last_name</span>
-                        <input type="text" [(ngModel)]="firstname" name="firstname"/>
-                        <input type="text" [(ngModel)]="lastname" name="lastname"/>
-                    </label>
-                    <label>
-                        <p *ngFor="let object of other_prices">
-                            <input type="radio" name="otherpricegroup" [value]="object.id" (change)="onOtherPriceGroupSelect(object)">
-                            <span> {{(currentLang == 'en')? object.desc_en : object.desc_pl}} at {{object.price}} {{object.currency}} </span>
-                        </p>
+                        <span translate>shop.form.valid_upto</span>
+                        <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onOtherValidUpToDateChange(event, otherPrice);">
+                        <p style="color:#FFF; font-size: 10px;">{{selectedOtherPriceString}}</p>
                     </label>
                     <label>
                         <button type="button" class="align-left" (click)="OtherShoppingChange()">
-                            <span translate>shop.form.back <i class="fa fa-backword"></i></span>
+                            <span translate><i class="fa fa-backward"></i>&nbsp;&nbsp;shop.form.back</span>
                         </button>
                         <button type="button" class="align-right" (click)="OtherShoppingConfirm()">
-                            <span translate>shop.form.confirm <i class="fa fa-forward"></i></span>
+                            <span translate>shop.form.confirm&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
                         </button>
                     </label>
                 </form>

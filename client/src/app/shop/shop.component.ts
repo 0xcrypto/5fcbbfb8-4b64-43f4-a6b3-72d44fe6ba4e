@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import * as moment from 'moment'; 
 
 import { DataService } from '../services/data.service';
 import { MessageService } from '../services/message.service';
@@ -25,24 +26,26 @@ export class ShopComponent implements OnInit {
   selectedShopTab:string = null;
   selectedGraveId:number;
   selectedGraveName:string;
-  firstname:string = null;
-  lastname:string = null;
+  source:string;
+  TODAY_DATE:string;
+  valid_upto:string = null;
   dedication:string = null;
-  amount:number = 10;
-  currency:string = 'EUR';
   currentLang:string = null;
   isCandleShopFormVisible:boolean = false;
   isFlowerShopFormVisible:boolean = false;
   isStoneShopFormVisible:boolean = false;
   isOtherShopFormVisible:boolean = false;
+  selectedCandlePriceString:string;
+  selectedStonePriceString:string;
+  selectedFlowerPriceString:string;
+  selectedOtherPriceString:string;
   selectedObjectPrice:number;
   selectedObjectCurrency:string;
-  selectedObjectExpiryInDays:string;
   selectedObjectId:string;
-  candle_prices: any[] = [];
-  flower_prices: any[] = [];
-  stone_prices: any[] = [];
-  other_prices: any[] = [];
+  candlePrice: any;
+  flowerPrice: any;
+  stonePrice: any;
+  otherPrice: any;
   candle_price:string = null;
   flower_price:string = null;
   stone_price:string = null;
@@ -63,13 +66,6 @@ export class ShopComponent implements OnInit {
     this.currentLang = this._global.getLanguage();
     this.userService.castUser.subscribe(user => this.USER_INFO = user);
 
-    this.options = this._global.refreshObject(this.options, ['type=candle']);
-    this.dataService.getAllWithMethodAndOptions('PRICES', this._global.serializeAndURIEncode(this.options))
-      .subscribe(data => {
-        this.candle_prices = data;
-      }
-    );
-
     this.messageService.castMessage.subscribe(object => {
       let message = object.message;
       let data = object.data;
@@ -80,6 +76,24 @@ export class ShopComponent implements OnInit {
           break;
       }
     });
+
+    
+    this.options = this._global.refreshObject(this.options, []);
+    this.dataService.getAllWithMethodAndOptions('TODAY_DATE', this._global.serializeAndURIEncode(this.options))
+    .subscribe(result => {
+      if(result['today_date']){
+        this.TODAY_DATE = result['today_date'];
+      }
+    });
+
+    this.options = this._global.refreshObject(this.options, ['type=candle']);
+    this.dataService.getAllWithMethodAndOptions('PRICES', this._global.serializeAndURIEncode(this.options))
+      .subscribe(data => {
+        if(data.length> 0){
+          this.candlePrice = data[0];
+        }
+      }
+    );
 
     this.options = this._global.refreshObject(this.options, []);
     this.dataService.getAllWithMethodAndOptions('CANDLE_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
@@ -123,9 +137,15 @@ export class ShopComponent implements OnInit {
   }
 
   openShop(data:any) {
-    if(data){
+    if(data.selectedGrave && data.selectedGraveName){
       this.selectedGraveId = data.selectedGrave;
       this.selectedGraveName = data.selectedGraveName;
+      this.source = 'person-graveyard';
+    }
+    if(data.selectedAnimal && data.selectedAnimalName){
+      this.selectedGraveId = data.selectedAnimal;
+      this.selectedGraveName = data.selectedAnimalName;
+      this.source = 'animal-graveyard';
     }
 
     this.isShopDialogOpen = true;
@@ -137,7 +157,8 @@ export class ShopComponent implements OnInit {
       this.options = this._global.refreshObject(this.options, ['type=candle']);
       this.dataService.getAllWithMethodAndOptions('PRICES', this._global.serializeAndURIEncode(this.options))
         .subscribe(data => {
-          this.candle_prices = data;
+          if(data.length > 0)
+            this.candlePrice = data[0];
         }
       );
     }
@@ -145,7 +166,8 @@ export class ShopComponent implements OnInit {
       this.options = this._global.refreshObject(this.options, ['type=flower']);
       this.dataService.getAllWithMethodAndOptions('PRICES', this._global.serializeAndURIEncode(this.options))
         .subscribe(data => {
-          this.flower_prices = data;
+          if(data.length > 0)
+            this.flowerPrice = data[0];
         }
       );
     }
@@ -153,7 +175,8 @@ export class ShopComponent implements OnInit {
       this.options = this._global.refreshObject(this.options, ['type=stone']);
       this.dataService.getAllWithMethodAndOptions('PRICES', this._global.serializeAndURIEncode(this.options))
         .subscribe(data => {
-          this.stone_prices = data;
+          if(data.length > 0)
+          this.stonePrice = data[0];
         }
       );
     }
@@ -161,94 +184,180 @@ export class ShopComponent implements OnInit {
       this.options = this._global.refreshObject(this.options, ['type=other']);
       this.dataService.getAllWithMethodAndOptions('PRICES', this._global.serializeAndURIEncode(this.options))
         .subscribe(data => {
-          this.other_prices = data;
+          if(data.length > 0)
+          this.otherPrice = data[0];
         }
       );
     }
   }
 
-  CandleShoppingChange(){
-    this.isCandleShopFormVisible = false;
-  }
-  FlowerShoppingChange(){
-    this.isFlowerShopFormVisible = false;
-  }
-  StoneShoppingChange(){
-    this.isStoneShopFormVisible = false;
-  }
-  OtherShoppingChange(){
-    this.isOtherShopFormVisible = false;
-  }
+  /* CANDLE SHOPPING */
   selectCandle(candle:any){
     let filename = candle.replace(/^.*[\\\/]/, '');
     this.selectedObjectId = filename.replace(/\.[^/.]+$/, "");
     this.isCandleShopFormVisible = true;
   }
+
+  CandleShoppingChange(){
+    this.isCandleShopFormVisible = false;
+  }
+
+  onCandleValidUpToDateChange(event, object:any){
+    if(!this.TODAY_DATE)
+      return;
+
+    let today = moment(this.TODAY_DATE);
+    let validity = moment(this.valid_upto);
+    let diffDays = validity.diff(today, 'days'); 
+    let totalAmount = ((diffDays - 1) > 0) ? parseFloat(object.price) * (diffDays - 1) : 0;
+    this.selectedObjectPrice = totalAmount;
+    this.selectedObjectCurrency = object.currency;
+    let price_string = (this.currentLang == 'en') ? object.desc_en : object.desc_pl; 
+    this.selectedCandlePriceString = price_string.replace('_TOTAL_', totalAmount).replace('_PRICE_', object.price)
+    .replace('_CURRENCY_', object.currency).replace('_CURRENCY_', object.currency);
+  }
+
   CandleShoppingConfirm(){
+    let object_name = 'znicz';
     let payment_id = '12345';
     let temp = 0;
-    let object_name = 'znicz';
+    this.addObject(payment_id, temp, object_name);
+  }
+  
+  /* FLOWER SHOPPING */
+  selectFlower(flower:any){
+    let filename = flower.replace(/^.*[\\\/]/, '');
+    this.selectedObjectId = filename.replace(/\.[^/.]+$/, "");
+    this.isFlowerShopFormVisible = true;
+  }
+
+  FlowerShoppingChange(){
+    this.isFlowerShopFormVisible = false;
+  }
+
+  onFlowerValidUpToDateChange(event, object:any){
+    if(!this.TODAY_DATE)
+      return;
+
+    let today = moment(this.TODAY_DATE);
+    let validity = moment(this.valid_upto);
+    let diffDays = validity.diff(today, 'days'); 
+    let totalAmount = ((diffDays - 1) > 0) ? parseFloat(object.price) * (diffDays - 1) : 0;
+    this.selectedObjectPrice = totalAmount;
+    this.selectedObjectCurrency = object.currency;
+    let price_string = (this.currentLang == 'en') ? object.desc_en : object.desc_pl; 
+    this.selectedFlowerPriceString = price_string.replace('_TOTAL_', totalAmount).replace('_PRICE_', object.price)
+    .replace('_CURRENCY_', object.currency).replace('_CURRENCY_', object.currency);
+  }
+  
+  FlowerShoppingConfirm(){
+    let object_name = 'kwiat';
+    let payment_id = '12345';
+    let temp = 0;
+    this.addObject(payment_id, temp, object_name);
+  }
+
+  /* STONE SHOPPING */
+  selectStone(stone:any){
+    let filename = stone.replace(/^.*[\\\/]/, '');
+    this.selectedObjectId = filename.replace(/\.[^/.]+$/, "");
+    this.isStoneShopFormVisible = true;
+  }
+  StoneShoppingChange(){
+    this.isStoneShopFormVisible = false;
+  }
+  onStoneValidUpToDateChange(event, object:any){
+    if(!this.TODAY_DATE)
+      return;
+
+    let today = moment(this.TODAY_DATE);
+    let validity = moment(this.valid_upto);
+    let diffDays = validity.diff(today, 'days'); 
+    let totalAmount = ((diffDays - 1) > 0) ? parseFloat(object.price) * (diffDays - 1) : 0;
+    this.selectedObjectPrice = totalAmount;
+    this.selectedObjectCurrency = object.currency;
+    let price_string = (this.currentLang == 'en') ? object.desc_en : object.desc_pl; 
+    this.selectedStonePriceString = price_string.replace('_TOTAL_', totalAmount).replace('_PRICE_', object.price)
+    .replace('_CURRENCY_', object.currency).replace('_CURRENCY_', object.currency);
+  }
+  StoneShoppingConfirm(){
+    let object_name = 'kamien';
+    let payment_id = '12345';
+    let temp = 0;
+    this.addObject(payment_id, temp, object_name);
+  }
+  
+  /* OTHER SHOPPING */
+  selectOther(card:any){
+    let filename = card.replace(/^.*[\\\/]/, '');
+    this.selectedObjectId = filename.replace(/\.[^/.]+$/, "");
+    this.isOtherShopFormVisible = true;
+  }
+  OtherShoppingChange(){
+    this.isOtherShopFormVisible = false;
+  }
+  onOtherValidUpToDateChange(event, object:any){
+    if(!this.TODAY_DATE)
+      return;
+
+    let today = moment(this.TODAY_DATE);
+    let validity = moment(this.valid_upto);
+    let diffDays = validity.diff(today, 'days'); 
+    let totalAmount = ((diffDays - 1) > 0) ? parseFloat(object.price) * (diffDays - 1) : 0;
+    this.selectedObjectPrice = totalAmount;
+    this.selectedObjectCurrency = object.currency;
+    let price_string = (this.currentLang == 'en') ? object.desc_en : object.desc_pl; 
+    this.selectedOtherPriceString = price_string.replace('_TOTAL_', totalAmount).replace('_PRICE_', object.price)
+    .replace('_CURRENCY_', object.currency).replace('_CURRENCY_', object.currency);
+  }
+  OtherShoppingConfirm(){
+    let object_name = 'inne';
+    let payment_id = '12345';
+    let temp = 0;
+    this.addObject(payment_id, temp, object_name);
+  }
+  addObject(payment_id:string, temp:number, object_name:string){
     if(this.USER_INFO){
-      this.options = this._global.refreshObject(this.options, ['payment_method='+this._global.PAYMENT_METHOD,
-      'payment_id='+payment_id, 'temp='+temp, 'valid_upto='+ this.selectedObjectExpiryInDays, 
-      'user_id='+this.selectedGraveId, 'comment='+this.dedication, 'object_name='+object_name, 
-      'object_id='+this.selectedObjectId, 'buyer_id='+this.USER_INFO.buyer_id, 
-      'current_language='+this.currentLang, 'method=ADD_PERSON_OBJECT']);
-      this.dataService.createWithMethodAndOptions(this.options)
-        .subscribe(result => {
-          if(result['status'] && result['status'] == 'PERSON_OBJECT_ALREADY_EXISTS'){
-            alert('item already added');
-          }
-          else{
+      if(this.source == 'person-graveyard'){
+        this.options = this._global.refreshObject(this.options, ['payment_method='+this._global.PAYMENT_METHOD,
+        'payment_id='+payment_id, 'temp='+temp, 'valid_upto='+ this.valid_upto, 
+        'user_id='+this.selectedGraveId, 'comment='+this.dedication, 'object_name='+object_name, 
+        'object_id='+this.selectedObjectId, 'buyer_id='+this.USER_INFO.buyer_id, 
+        'current_language='+this.currentLang, 'method=ADD_PERSON_OBJECT']);
+        this.dataService.createWithMethodAndOptions(this.options)
+          .subscribe(result => {
+            if(result['status'] && result['status'] == 'ANIMAL_OBJECT_ALREADY_EXISTS'){
+              alert('Item already exists');  
+            }
+            if(result['status'] && result['status'] == 'ANIMAL_NOT_EXISTS'){
+              alert('Animal not exists');
+            }
+            
             this.closeShop();
             this.messageService.sendMessage('RELOAD_PERSON_OBJECTS', {});
-          }
-        });
+          });
+      }
+
+      if(this.source == 'animal-graveyard'){
+        this.options = this._global.refreshObject(this.options, ['payment_method='+this._global.PAYMENT_METHOD,
+        'payment_id='+payment_id, 'temp='+temp, 'valid_upto='+ this.valid_upto,
+        'animal_id='+this.selectedGraveId, 'comment='+this.dedication, 'object_name='+object_name, 
+        'object_id='+this.selectedObjectId, 'buyer_id='+this.USER_INFO.buyer_id, 
+        'current_language='+this.currentLang, 'method=ADD_ANIMAL_OBJECT']);
+        this.dataService.createWithMethodAndOptions(this.options)
+          .subscribe(result => {
+            if(result['status'] && result['status'] == 'PERSON_OBJECT_ALREADY_EXISTS'){
+              alert('Item already exists');  
+            }
+            
+            this.closeShop();
+            this.messageService.sendMessage('RELOAD_ANIMAL_OBJECTS', {});
+          });
+      }
+      
     }
     else{
       this.messageService.sendMessage('OPEN_LOGIN_DIALOG', {});
     }
-  }
-  selectFlower(flower:any){
-    debugger;
-    this.isFlowerShopFormVisible = true;
-  }
-  FlowerShoppingConfirm(){
-    let object_name = 'kwiat';
-  }
-  selectStone(stone:any){
-    debugger;
-    this.isStoneShopFormVisible = true;
-  }
-  StoneShoppingConfirm(){
-    let object_name = 'kamien';
-  }
-  selectOther(card:any){
-    debugger;
-    this.isOtherShopFormVisible = true;
-  }
-  OtherShoppingConfirm(){
-    let object_name = 'inne';
-  }
-  onCandlePriceGroupSelect(object:any){
-    debugger;
-    this.selectedObjectPrice = object.price;
-    this.selectedObjectCurrency = object.currency;
-    this.selectedObjectExpiryInDays = (object.expire_in_days == 'FOREVER') ? 100000 : object.expire_in_days;
-  }
-  onFlowerPriceGroupSelect(object:any){
-    this.selectedObjectPrice = object.price;
-    this.selectedObjectCurrency = object.currency;
-    this.selectedObjectExpiryInDays = (object.expire_in_days == 'FOREVER') ? 100000 : object.expire_in_days;
-  }
-  onStonePriceGroupSelect(object:any){
-    this.selectedObjectPrice = object.price;
-    this.selectedObjectCurrency = object.currency;
-    this.selectedObjectExpiryInDays = (object.expire_in_days == 'FOREVER') ? 100000 : object.expire_in_days;
-  }
-  onOtherPriceGroupSelect(object:any){
-    this.selectedObjectPrice = object.price;
-    this.selectedObjectCurrency = object.currency;
-    this.selectedObjectExpiryInDays = (object.expire_in_days == 'FOREVER') ? 100000 : object.expire_in_days;
   }
 }

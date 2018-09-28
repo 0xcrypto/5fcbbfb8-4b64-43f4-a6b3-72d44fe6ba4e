@@ -33,7 +33,9 @@
 			switch($_GET['model'])
 			{
 				case 'data':
-					if($method == 'PERSON')
+					if($method == 'TODAY_DATE')
+						$results = $this->getTodayDate();
+					else if($method == 'PERSON')
 						$results = $this->getPerson($options);
 					else if($method == 'PERSONS')
 						$results = $this->getPersons($options);
@@ -1431,7 +1433,7 @@
 			$payment_id = isset($options['payment_id']) ? $options['payment_id'] : 0;
 			$temp = isset($options['temp']) ? $options['temp'] : 0;
 			$current_language = isset($options['current_language']) ? $options['current_language'] : 'en';
-			$valid_upto = $options['valid_upto'];
+			$valid_upto =  date("Y-m-d", strtotime($options['valid_upto']));
 			$data = array();
 
 			$query = "SELECT count(ao_id) as total FROM animals_objects WHERE 
@@ -1446,14 +1448,6 @@
 				$query = "SELECT animals.animal_id as animal_id FROM animals WHERE animals.animal_id = '".$options['animal_id']."'";
 				$count_result = Yii::app()->db->createCommand($query)->queryRow()['animal_id'];
 				if($count_result){
-					if($valid_upto == 100000) // if this is to be forever
-						$valid_upto = '2970-01-01';
-					else
-					{
-						$valid_upto = mktime(0, 0, 0, date("m"), date("d") + $valid_upto,   date("Y"));
-						$valid_upto = date("Y-m-d",$valid_upto);
-					}
-			
 					// they were free to insert animals_objects
 					if($temp == 0)
 						$table = "animals_objects";
@@ -1475,7 +1469,7 @@
 					$sendto = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_TO']);
 					$result = $this->MailContent('NEW_OBJECT', 
 					array('id'=>$options['animal_id'], 'object_name'=>$options['object_name'], 
-					'valid_upto'=>$valid_upto, 'comment'=>$options['comment']));
+					'valid_upto'=>$valid_upto, 'comment'=>$options['comment'], 'grave_type'=>'animal'));
             
 					$message  = wordwrap(trim($result['message']), 100);			
 					$headers  = 'MIME-Version: 1.0' . "\r\n";
@@ -1492,7 +1486,6 @@
 
 			return $data;
 		}
-		
 		
 		/***
 		 	REQUIRED PARAMETERS
@@ -1514,23 +1507,16 @@
 			$payment_id = isset($options['payment_id']) ? $options['payment_id'] : 0;
 			$temp = isset($options['temp']) ? $options['temp'] : 0;
 			$current_language = isset($options['current_language']) ? $options['current_language'] : 'en';
-			$valid_upto = $options['valid_upto'];
+			$valid_upto = date("Y-m-d", strtotime($options['valid_upto']));
 			$data = array();
 
-			/*$query = "select count(*) as total from users_objects where user_id='".$options['user_id']."' and object_name='".$options['object_name']."' 
+			$query = "select count(*) as total from users_objects where user_id='".$options['user_id']."' and object_name='".$options['object_name']."' 
 						and comment='".$options['comment']."' and DATE_ADD(add_date,INTERVAL 1 MINUTE)>now() ";
 			$count_result = Yii::app()->db->createCommand($query)->queryRow()['total'];
 			if($count_result > 0){
 				$data['status'] = 'PERSON_OBJECT_ALREADY_EXISTS';
 			}
-			else{*/
-				if($valid_upto == 100000) 
-					$valid_upto = '2970-01-01';
-				else {
-					$valid_upto = mktime(0, 0, 0, date("m"), date("d") + $valid_upto,   date("Y"));
-					$valid_upto = date("Y-m-d", $valid_upto);
-				}
-
+			else{
 				if($temp == 0)
 					$table = "users_objects";
 				else if($temp == 1)
@@ -1559,7 +1545,7 @@
 				//TO-DO = Comment out for live server
 				//@mail($sendto, $result['subject'], $message, $headers);
 	
-			/*}*/
+			}
 			return $data;
 		}
 		
@@ -1703,6 +1689,12 @@
 			}
 
             return $data;
+		}
+
+		private function getTodayDate(){
+			$data = array();
+			$data['today_date'] = date('Y-m-d');
+			return $data;
 		}
 
 		private function dateToDays($day, $month, $year)

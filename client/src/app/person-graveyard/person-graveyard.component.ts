@@ -96,7 +96,7 @@ export class PersonGraveyardComponent implements OnInit {
 
       switch(message){
         case "RELOAD_PERSON_OBJECTS":
-          this.options = this._global.refreshObject(this.options, ['user_id='+this.selectedGraveId]);
+          this.options = this._global.refreshObject(this.options, ['object_name=znicz', 'user_id='+this.selectedGraveId]);
           this.dataService.getAllWithMethodAndOptions('PERSON_OBJECTS', this._global.serializeAndURIEncode(this.options))
             .subscribe(data => {
               this.objects = data;
