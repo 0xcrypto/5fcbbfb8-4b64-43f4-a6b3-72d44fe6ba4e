@@ -26,14 +26,18 @@
                     </label>
                     <label>
                         <span translate>shop.form.valid_upto</span>
-                        <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onCandleValidUpToDateChange(event, candlePrice);">
+                        <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onCandleValidUpToDateChange(event, candlePrices);">
                         <p style="color:#FFF; font-size: 10px;">{{selectedCandlePriceString}}</p>
+                        <ngx-paypal [config]="payPalConfig" *ngIf="!isPaymentCompleted"></ngx-paypal>
+                        <p *ngFor="let object of candlePrices" style="color:#FFF; font-size: 10px;">
+                            *&nbsp;{{object.price}}&nbsp;{{object.currency}}&nbsp;{{(currentLang == 'en') ? object.period_en : object.period_pl}}
+                        </p>
                     </label>
                     <label>
                         <button type="button" class="align-left" (click)="CandleShoppingChange()">
                             <span translate><i class="fa fa-backward"></i>&nbsp;&nbsp;shop.form.back</span>
                         </button>
-                        <button type="button" class="align-right" (click)="CandleShoppingConfirm()">
+                        <button type="button" class="align-right" (click)="CandleShoppingConfirm()" *ngIf="isPaymentCompleted">
                             <span translate>shop.form.confirm&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
                         </button>
                     </label>
@@ -57,14 +61,18 @@
                     </label>
                     <label>
                         <span translate>shop.form.valid_upto</span>
-                        <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onFlowerValidUpToDateChange(event, flowerPrice);">
+                        <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onFlowerValidUpToDateChange(event, flowerPrices);">
                         <p style="color:#FFF; font-size: 10px;">{{selectedFlowerPriceString}}</p>
+                        <ngx-paypal [config]="payPalConfig" *ngIf="!isPaymentCompleted"></ngx-paypal>
+                        <p *ngFor="let object of flowerPrices" style="color:#FFF; font-size: 10px;">
+                            *&nbsp;{{object.price}}&nbsp;{{object.currency}}&nbsp;{{(currentLang == 'en') ? object.period_en : object.period_pl}}
+                        </p>
                     </label>
                     <label>
                         <button type="button" class="align-left" (click)="FlowerShoppingChange()">
                             <span translate><i class="fa fa-backward"></i>&nbsp;&nbsp;shop.form.back</span>
                         </button>
-                        <button type="button" class="align-right" (click)="FlowerShoppingConfirm()">
+                        <button type="button" class="align-right" (click)="FlowerShoppingConfirm()" *ngIf="isPaymentCompleted">
                             <span translate>shop.form.confirm&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
                         </button>
                     </label>
@@ -88,14 +96,18 @@
                     </label>
                     <label>
                         <span translate>shop.form.valid_upto</span>
-                        <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onStoneValidUpToDateChange(event, stonePrice);">
+                        <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onStoneValidUpToDateChange(event, stonePrices);">
                         <p style="color:#FFF; font-size: 10px;">{{selectedStonePriceString}}</p>
+                        <ngx-paypal [config]="payPalConfig" *ngIf="!isPaymentCompleted"></ngx-paypal>
+                        <p *ngFor="let object of stonePrices" style="color:#FFF; font-size: 10px;">
+                            *&nbsp;{{object.price}}&nbsp;{{object.currency}}&nbsp;{{(currentLang == 'en') ? object.period_en : object.period_pl}}
+                        </p>
                     </label>
                     <label>
                         <button type="button" class="align-left" (click)="StoneShoppingChange()">
                             <span translate><i class="fa fa-backward"></i>&nbsp;&nbsp;shop.form.back</span>
                         </button>
-                        <button type="button" class="align-right" (click)="StoneShoppingConfirm()">
+                        <button type="button" class="align-right" (click)="StoneShoppingConfirm()" *ngIf="isPaymentCompleted">
                             <span translate>shop.form.confirm&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
                         </button>
                     </label>
@@ -119,14 +131,18 @@
                     </label>
                     <label>
                         <span translate>shop.form.valid_upto</span>
-                        <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onOtherValidUpToDateChange(event, otherPrice);">
+                        <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onOtherValidUpToDateChange(event, otherPrices);">
                         <p style="color:#FFF; font-size: 10px;">{{selectedOtherPriceString}}</p>
+                        <ngx-paypal [config]="payPalConfig" *ngIf="!isPaymentCompleted"></ngx-paypal>
+                        <p *ngFor="let object of stonePrices" style="color:#FFF; font-size: 10px;">
+                            *&nbsp;{{object.price}}&nbsp;{{object.currency}}&nbsp;{{(currentLang == 'en') ? object.period_en : object.period_pl}}
+                        </p>
                     </label>
                     <label>
                         <button type="button" class="align-left" (click)="OtherShoppingChange()">
                             <span translate><i class="fa fa-backward"></i>&nbsp;&nbsp;shop.form.back</span>
                         </button>
-                        <button type="button" class="align-right" (click)="OtherShoppingConfirm()">
+                        <button type="button" class="align-right" (click)="OtherShoppingConfirm()" *ngIf="isPaymentCompleted">
                             <span translate>shop.form.confirm&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
                         </button>
                     </label>
@@ -134,3 +150,7 @@
             </div>
         </div>
     </div>
+    <!--
+    sandbox: 'AX9yH-DFyOn8ILuf6TqA13YZJ1bJeVk39RdSRNWvBxnEwVsfslVbLLnCaSjGtLzjPh5tmM7h3wmn7oMA',
+    production: 'ASrZDMsjtHOMaQWC09ejKmyGFcpb9FhJMD5eABntY8zV5M5nE6Cf_4-sBsQVM2k54qYbr_7XMtOXWfqJ'
+    -->

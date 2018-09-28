@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { WebStorageModule } from 'ngx-store';
+import { NgxPayPalModule } from 'ngx-paypal';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient }    from '@angular/common/http';
@@ -62,6 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     HttpClientModule,
     WebStorageModule,
+    NgxPayPalModule,
 	  TranslateModule.forRoot({
 		  loader: {
 		    provide: TranslateLoader,
