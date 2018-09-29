@@ -462,6 +462,7 @@
                         <label>
                             <span translate>graveyard_burial.step7.burial_fee</span>
                         </label>
+                        <p translate>graveyard_burial.step7.multi_layered_authentication_credit_cards</p>
                         <label>
                             <button class="align-left" (click)="burialPrevStep()">
                                 <i class="fa fa-backward"></i>
@@ -477,7 +478,28 @@
             </div>
             <div id="reservation"  [style.display]="(selectedTab == 'reservation') ? 'block' : 'none'">
                 <div *ngIf="isReservationTermsVisible">
-                    <p>lorem ipsum</p>
+                    <div class="scroll-content-2">
+                            <h4>Reservation: Virtual Graveyard Terms and Conditions</h4>
+                            <p>1. Virtual Graveyard a place done in memory of the dead.</p>
+                            <p>2. Personal data are stored in electronic form.</p>
+                            <p>3. Datastore is a payable service.</p>
+                            <p>4. Cost of a given service is specified in Price list which is an integral part of Terms And Conditions.</p>
+                            <p>5. Personal data are stored in Virtual Graveyard after the relevant charge has been paid. </p>
+                            <p>6. Charge for data introduction is a disposable payment that can be made by credit card or electronic money transfer.</p>
+                            <p>7. The transaction can be canceled within 10 days From the day when the entry was made. The amount of money paid on Virtual Graveyard account will be then repaid with a 20% discount for handling charges, data will be removed from the database.</p>
+                            <p>8. After 10 days from the registration,transaction is treated as concluded,and charge is not repayable.</p>
+                            <p>9. Time of storage of data registered to the system is not defined. They are stored until the system exists.</p>
+                            <p>10. The person that registers data has the right to change them or remove from the database. Data deletion is an irreversible process.</p>
+                            <p>11. Person that registers data will receive login and password,that allow to modify the entry on Virtual Graveyard.</p>
+                            <p>12. These regulations are in force for not defined period of time.</p>
+                            <p>13. The person making registration is responsible for the content written on graves and epitaphs.</p>
+                            <p>14. Virtual Graveyard administration reserves the right to remove data registered in database partly or as a whole, if the language is abusive, are converse to decorum or illegal.( e.g making an entry of a living persons without their consent).</p>
+                            <p>15. A living person who introduces his data to Virtual Graveyard Transfer the right to register data of death on a third party that will be informed about it via email send by Virtual Graveyard Administrator.</p>
+                            <p>16. Data for Virtual Graveyard can be deleted by a person who introduced them or by Virtual Graveyard Administrator in situations described in point 14.</p>
+                            <p>17. A living person who introduces his data to Virtual Graveyard database simultaneously agrees for their processing on the basis of Virtual Graveyard running.</p>
+                            <p>18. On the same grave there can be tombs belonging to people of different religious beliefs,what does not result from activities aiming at their violation. It results from the rules on which the website has an influence, and which he can freely settle.</p>
+                            <p>19. Virtual Graveyard Administrator is not responsible for informative materials (pictures and contents) used on the website by third parties. </p>
+                    </div>
                     <form>
                         <label>
                             <button class="align-left" (click)="rejectReservationTerms()">
@@ -743,6 +765,7 @@
                             <label>
                                 <span translate>reservation.step7.burial_fee</span>
                             </label>
+                            <p translate>reservation.step7.multi_layered_authentication_credit_cards</p>
                             <label>
                                 <button class="align-left" (click)="reservationPrevStep()">
                                     <i class="fa fa-backward"></i>

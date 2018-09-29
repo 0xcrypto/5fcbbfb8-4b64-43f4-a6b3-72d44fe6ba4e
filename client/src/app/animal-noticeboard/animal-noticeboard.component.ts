@@ -36,6 +36,8 @@ export class AnimalNoticeboardComponent implements OnInit {
   selectedSceneTime:number = 1;
   selectedSceneSeason:number = 1;
   datalimit = 15;
+  currentBurialStep:number = 1;
+  totalBurialSteps:number = 6;
 
   animalListPages: number[] = [];
   searchedAnimalPages: number[] = [];
@@ -43,6 +45,7 @@ export class AnimalNoticeboardComponent implements OnInit {
   animals: any[] = [];
   searchedAnimals: any[] = [];
   prioritizedAnimals: any[] = [];
+  grave_stones: any[] = [];
 
   router:Router = null;
   currentLang:string = null;
@@ -70,6 +73,15 @@ export class AnimalNoticeboardComponent implements OnInit {
 
     this.getAdvertisements();
     this.getVisibleAnimals();
+
+    this.options = this._global.refreshObject(this.options, []);
+    this.dataService.getAllWithMethodAndOptions('ANIMAL_GRAVE_SMALL_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
+    .subscribe(result => {
+      this.grave_stones = result;
+
+      for(var i=0; i<=this.grave_stones.length-1; i++)
+        this.grave_stones[i] = './assets/images/graves/mini/'+ this.grave_stones[i];
+    });
     
     if(this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_RETURN_TAB) &&
         this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY)){
@@ -348,5 +360,11 @@ export class AnimalNoticeboardComponent implements OnInit {
         }
         
       });
+  }
+  burialPrevStep(){
+    this.currentBurialStep--;
+  }
+  burialNextStep(){
+    this.currentBurialStep++;
   }
 }

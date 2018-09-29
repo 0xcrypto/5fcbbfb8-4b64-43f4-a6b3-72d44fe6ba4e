@@ -69,10 +69,14 @@
 						$results = $this->getStoneTileImages($options);
 					else if($method == 'CARD_TILE_IMAGES')
 						$results = $this->getCardTileImages($options);
-					else if($method == 'GRAVE_SMALL_TILE_IMAGES')
-						$results = $this->getGraveSmallTileImages($options);
-					else if($method == 'GRAVE_LARGE_TILE_IMAGES')
-						$results = $this->getGraveLargeTileImages($options);
+					else if($method == 'PERSON_GRAVE_SMALL_TILE_IMAGES')
+						$results = $this->getPersonGraveSmallTileImages($options);
+					else if($method == 'PERSON_GRAVE_LARGE_TILE_IMAGES')
+						$results = $this->getPersonGraveLargeTileImages($options);
+					else if($method == 'ANIMAL_GRAVE_SMALL_TILE_IMAGES')
+						$results = $this->getPetGraveSmallTileImages($options);
+					else if($method == 'ANIMAL_GRAVE_LARGE_TILE_IMAGES')
+						$results = $this->getPetGraveLargeTileImages($options);
 					else if($method == 'CATACOMB_SMALL_TILE_IMAGES')
 						$results = $this->getCatacombSmallTileImages($options);
 					else if($method == 'CATACOMB_LARGE_TILE_IMAGES')
@@ -827,23 +831,49 @@
 			return ($data); 
 		}
 
-		private function getGraveSmallTileImages($options = NULL){
+		private function getPersonGraveSmallTileImages($options = NULL){
 			$data = array(); 
 			$d = dir("../client/dist/assets/images/graves/mini/");
 			while (false !== ($entry = $d->read())) {
 			if($entry=='.' || $entry=='..') continue;
-				$data[]=$entry;
+				if((strpos($entry, "zw") == -1))
+					$data[]=$entry;
 			}
 			$d->close();
 			return ($data);
 		}
 
-		private function getGraveLargeTileImages($options = NULL){
+		private function getPersonGraveLargeTileImages($options = NULL){
 			$data = array(); 
 			$d = dir("../client/dist/assets/images/graves/maxi/");
 			while (false !== ($entry = $d->read())) {
 			if($entry=='.' || $entry=='..') continue;
-				$data[]=$entry;
+				if(strpos($entry, "zw") == -1)
+					$data[]=$entry;
+			}
+			$d->close();
+			return ($data);
+		}
+
+		private function getPetGraveSmallTileImages($options = NULL){
+			$data = array(); 
+			$d = dir("../client/dist/assets/images/graves/mini/");
+			while (false !== ($entry = $d->read())) {
+			if($entry=='.' || $entry=='..') continue;
+				if(strpos($entry, "zw") > -1)
+					$data[]=$entry;
+			}
+			$d->close();
+			return ($data);
+		}
+
+		private function getPetGraveLargeTileImages($options = NULL){
+			$data = array(); 
+			$d = dir("../client/dist/assets/images/graves/maxi/");
+			while (false !== ($entry = $d->read())) {
+			if($entry=='.' || $entry=='..') continue;
+				if(strpos($entry, "zw") > -1)
+					$data[]=$entry;
 			}
 			$d->close();
 			return ($data);

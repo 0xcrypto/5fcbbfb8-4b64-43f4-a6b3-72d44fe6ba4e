@@ -442,6 +442,54 @@
             "confirm": "Confirm"
         }
     },
+    "animal_graveyard_burial": {
+        "title": "Graveyard Burial",
+        "step": "Step",
+        "of": "of",
+        "prev": "Previous",
+        "next": "Next",
+        "step1": {
+            "choose_graveyard": "Choose graveyard",
+            "choose_grave": "Choose Grave",
+            "single": "Single [for one pet]"
+        },
+        "step2": {
+            "choose_grave_stone": "Choose Grave-Stone"
+        },
+        "step3": {
+            "entry_form_part_1": "Entry Form Part 1",
+            "name_of_your_pet": "Name of your Pet",
+            "genus": "Genus",
+            "type": "Type",
+            "gender": "Gender",
+            "owner_firstname": "Owner's Firstname",
+            "owner_lastname": "Owner's Lastname",
+            "date_of_birth": "Date of Birth",
+            "passed_away": "Passed Away",
+            "upload_photos": "Upload Photos",
+            "required": "required"
+        },
+        "step4": {
+            "entry_form_part_2": "Entry Form Part 2",
+            "in_memoriam": "In memoriam",
+            "up_to_1500_characters": "up to 1500 characters",
+            "signature": "Signature"
+        },
+        "step5": {
+            "confirm_your_entry": "Confirm your entry",
+            "name_of_pet": "Name of Pet",
+            "genus": "Genus",
+            "date_of_birth": "Date of Birth",
+            "passed_away": "Passed Away"
+        },
+        "step6": {
+            "confirm_please": "Confirm please",
+            "passed_away": "Passed Away",
+            "burial_fee": "Burial Fee",
+            "multi_layered_authentication_credit_cards": "Multi-layered credit cards",
+            "confirm": "Confirm"
+        }
+    },
     "reservation": {
         "title": "Reservation",
         "step": "Step",

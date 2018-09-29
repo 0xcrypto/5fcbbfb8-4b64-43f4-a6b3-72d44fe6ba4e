@@ -82,7 +82,7 @@ export class PersonNoticeboardComponent implements OnInit {
     this.getVisibleGraves();
 
     this.options = this._global.refreshObject(this.options, []);
-    this.dataService.getAllWithMethodAndOptions('GRAVE_SMALL_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
+    this.dataService.getAllWithMethodAndOptions('PERSON_GRAVE_SMALL_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
     .subscribe(result => {
       this.grave_stones = result;
 

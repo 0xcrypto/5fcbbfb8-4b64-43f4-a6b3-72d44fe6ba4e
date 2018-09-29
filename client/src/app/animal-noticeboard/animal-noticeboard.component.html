@@ -203,7 +203,217 @@
               </div>
           </div>
           <div id="graveyard-burial"  [style.display]="(selectedTab == 'graveyard-burial') ? 'block' : 'none'">
-          <p translate>animal_graveyard.noticeboard.tabs.graveyard_burial.title</p>
+                <div *ngIf="(currentBurialStep == 1)">
+                    <h4>
+                        <span translate>animal_graveyard_burial.title</span>&nbsp;
+                        <span translate>animal_graveyard_burial.step1.choose_graveyard</span>&nbsp;
+                        <span translate>animal_graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
+                        <span translate>animal_graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                    </h4>
+                    <form>
+                        <label>
+                            <span translate>animal_graveyard_burial.step1.choose_grave</span>
+                            <select name="graveyardBurialSubType" [(ngModel)]="graveyardBurialSubType">
+                                <option value="single" translate>animal_graveyard_burial.step1.single</option>
+                            </select>
+                        </label>
+                        <label>
+                            <button class="align-right" (click)="burialNextStep()">
+                                <span translate>animal_graveyard_burial.next&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                </div>
+                <div *ngIf="(currentBurialStep == 2)">
+                    <h4>
+                        <span translate>animal_graveyard_burial.title</span>&nbsp;
+                        <span translate>animal_graveyard_burial.step2.choose_grave_stone</span>&nbsp;
+                        <span translate>animal_graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
+                        <span translate>animal_graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                    </h4>
+                    <div class="tile-scroll-content">
+                        <p class="tile" *ngFor="let grave_stone of grave_stones">
+                            <img [src]="grave_stone"/>
+                        </p>
+                    </div>
+                    <form>
+                        <label>
+                            <button class="align-left" (click)="burialPrevStep()">
+                                <i class="fa fa-backward"></i>
+                                <span translate>&nbsp;&nbsp;animal_graveyard_burial.prev</span>
+                            </button>
+                            <button class="align-right" (click)="burialNextStep()">
+                                <span translate>animal_graveyard_burial.next&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                </div>
+                <div *ngIf="(currentBurialStep == 3)">
+                    <h4>
+                        <span translate>animal_graveyard_burial.title</span>&nbsp;
+                        <span translate>animal_graveyard_burial.step3.entry_form_part_1</span>&nbsp;
+                        <span translate>animal_graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
+                        <span translate>animal_graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                    </h4>
+                    <form>
+                        <label>
+                            <span translate>animal_graveyard_burial.step3.name_of_your_pet<sup>*</sup></span>
+                            <input type="text">
+                        </label>
+                        <label>
+                            <span translate>animal_graveyard_burial.step3.genus<sup>*</sup></span>
+                            <select>
+                                <option>Genus</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span translate>animal_graveyard_burial.step3.type<sup>*</sup></span>
+                            <input type="text">
+                        </label>
+                        <label>
+                            <span translate>animal_graveyard_burial.step3.gender<sup>*</sup></span>
+                            <input type="radio"> <span>Male</span>&nbsp;&nbsp;
+                            <input type="radio"> <span>Female</span>&nbsp;&nbsp;
+                        </label>
+                        <label>
+                            <span translate>animal_graveyard_burial.step3.date_of_birth<sup>*</sup></span>
+                            <input type="date">
+                        </label>
+                        <label>
+                            <span translate>animal_graveyard_burial.step3.passed_away<sup>*</sup></span>
+                            <input type="date">
+                        </label>
+                        <label>
+                            <span translate>animal_graveyard_burial.step3.owner_firstname<sup>*</sup></span>
+                            <input type="text">
+                        </label>
+                        <label>
+                            <span translate>animal_graveyard_burial.step3.owner_lastname<sup>*</sup></span>
+                            <input type="text">
+                        </label>
+                        <label>
+                            <span translate>animal_graveyard_burial.step3.upload_photos</span>
+                            <button>
+                                <span translate>animal_graveyard_burial.step3.upload_photos&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                    <p class="tile">
+                        <img [src]=""/>
+                    </p>
+                    <p><sup>*</sup><span translate>animal_graveyard_burial.step3.required</span></p>
+                    <form>
+                        <label>
+                            <button class="align-left" (click)="burialPrevStep()">
+                                <i class="fa fa-backward"></i>
+                                <span translate>&nbsp;&nbsp;animal_graveyard_burial.prev</span>
+                            </button>
+                            <button class="align-right" (click)="burialNextStep()">
+                                <span translate>animal_graveyard_burial.next&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                </div>
+                <div *ngIf="(currentBurialStep == 4)">
+                    <h4>
+                        <span translate>animal_graveyard_burial.title</span>&nbsp;
+                        <span translate>animal_graveyard_burial.step4.entry_form_part_2</span>&nbsp;
+                        <span translate>animal_graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
+                        <span translate>animal_graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                    </h4>
+                    <form>
+                        <label>
+                            <span translate>animal_graveyard_burial.step4.in_memoriam</span>
+                            <textarea class="large-box"></textarea>
+                        </label>
+                        <label>
+                            <span translate>animal_graveyard_burial.step4.signature</span>
+                            <input type="text" class="align-right"/>
+                        </label>
+                        <label>
+                            <button class="align-left" (click)="burialPrevStep()">
+                                <i class="fa fa-backward"></i>
+                                <span translate>&nbsp;&nbsp;animal_graveyard_burial.prev</span>
+                            </button>
+                            <button class="align-right" (click)="burialNextStep()">
+                                <span translate>animal_graveyard_burial.next&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                </div>
+                <div *ngIf="(currentBurialStep == 5)">
+                    <h4>
+                        <span translate>animal_graveyard_burial.title</span>&nbsp;
+                        <span translate>animal_graveyard_burial.step5.confirm_your_entry</span>&nbsp;
+                        <span translate>animal_graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
+                        <span translate>animal_graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                    </h4>
+                    <form>
+                        <label>
+                            <span translate>animal_graveyard_burial.step5.name_of_pet</span>
+                        </label>
+                        <label>
+                            <span translate>animal_graveyard_burial.step5.genus</span>
+                        </label>
+                        <label>
+                            <span translate>animal_graveyard_burial.step5.date_of_birth</span>
+                        </label>
+                        <label>
+                            <span translate>animal_graveyard_burial.step5.passed_away</span>
+                        </label>
+                        <label>
+                            <button class="align-left" (click)="burialPrevStep()">
+                                <i class="fa fa-backward"></i>
+                                <span translate>&nbsp;&nbsp;animal_graveyard_burial.prev</span>
+                            </button>
+                            <button class="align-right" (click)="burialNextStep()">
+                                <span translate>animal_graveyard_burial.next&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                </div>
+                <div *ngIf="(currentBurialStep == 6)">
+                    <h4>
+                        <span translate>animal_graveyard_burial.title</span>&nbsp;
+                        <span translate>animal_graveyard_burial.step6.confirm_please</span>&nbsp;
+                        <span translate>animal_graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
+                        <span translate>animal_graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                    </h4>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>1.</td>
+                                <td>(NAME)</td>
+                                <td>
+                                    <span translate>animal_graveyard_burial.step6.passed_away</span>
+                                    <span>(PASSED)</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <form>
+                        <label>
+                            <span translate>animal_graveyard_burial.step6.burial_fee</span>
+                        </label>
+                        <p translate>animal_graveyard_burial.step6.multi_layered_authentication_credit_cards</p>
+                        <label>
+                            <button class="align-left" (click)="burialPrevStep()">
+                                <i class="fa fa-backward"></i>
+                                <span translate>&nbsp;&nbsp;animal_graveyard_burial.prev</span>
+                            </button>
+                            <button class="align-right">
+                                <span translate>animal_graveyard_burial.step6.confirm&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                </div>
           </div>
       </div>
   </div>

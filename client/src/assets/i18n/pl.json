@@ -443,6 +443,57 @@
             "confirm": "Potwierdzać"
         }
     },
+    "animal_graveyard_burial": {
+        "title": "Cmentarz pogrzebowy",
+        "step": "Krok",
+        "of": "z",
+        "prev": "Poprzedni",
+        "next": "Kolejny",
+        "step1": {
+            "choose_graveyard": "Choose graveyard",
+            "choose_grave": "Wybierz Grave",
+            "single": "Pojedynczy [dla jednej osoby]",
+            "family": "Rodzina [dwuosobowy]",
+            "communal": "Wspólny [więcej niż dwie osoby]"
+        },
+        "step2": {
+            "choose_grave_stone": "Wybierz Grave-Stone"
+        },
+        "step3": {
+            "entry_form_part_1": "Formularz zgłoszeniowy Część 1",
+            "name_of_your_pet": "Imię Twojego zwierzaka",
+            "genus": "Rodzaj",
+            "type": "Gatunek",
+            "gender": "Płeć",
+            "owner_firstname": "Imię właściciela",
+            "owner_lastname": "Nazwisko właściciela",
+            "date_of_birth": "Data urodzenia",
+            "passed_away": "Zmarł",
+            "upload_photos": "Załadować zdjęcia",
+            "required": "wymagany"
+        },
+        "step4": {
+            "entry_form_part_2": "Formularz zgłoszeniowy Część 2",
+            "in_memoriam": "Ku pamięci",
+            "up_to_1500_characters": "do 1500 znaków",
+            "signature": "Podpis"
+        },
+        "step5": {
+            "confirm_your_entry": "Potwierdź swój wpis",
+            "name_of_pet": "Imię zwierzaka",
+            "genus": "Rodzaj",
+            "date_of_birth": "Data urodzenia",
+            "passed_away": "Zmarł",
+            "gender": "Płeć"
+        },
+        "step7": {
+            "confirm_please": "Proszę potwierdzić",
+            "passed_away": "Zmarł",
+            "burial_fee": "Opłata pogrzebowa",
+            "multi_layered_authentication_credit_cards": "Wielowarstwowe karty kredytowe",
+            "confirm": "Potwierdzać"
+        }
+    },
     "reservation": {
         "title": "Rezerwacja",
         "step": "Krok",
