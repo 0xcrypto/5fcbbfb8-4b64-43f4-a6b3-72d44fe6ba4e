@@ -384,7 +384,7 @@
         "of": "z",
         "prev": "Poprzedni",
         "next": "Kolejny",
-        "step_one": {
+        "step1": {
             "choose": "Wybierać",
             "graveyard": "Cmentarz",
             "catacomb": "Katakumba",
@@ -502,7 +502,7 @@
         "next": "Kolejny",
         "accept_terms": "Akceptuję warunki i warunki",
         "reject_terms": "Nie akceptuję warunków i warunków",
-        "step_one": {
+        "step1": {
             "choose": "Wybierać",
             "graveyard": "Cmentarz",
             "catacomb": "Katakumba",

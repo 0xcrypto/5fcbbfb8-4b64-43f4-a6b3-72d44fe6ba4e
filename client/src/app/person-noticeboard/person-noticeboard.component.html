@@ -246,17 +246,16 @@
                         <span translate>graveyard_burial.title</span>&nbsp;
                         <span translate>graveyard_burial.step2.choose_grave_stone</span>&nbsp;
                         <span translate>graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
-                        <span translate>graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
-                        <select>
-                            <option>Aheistics</option>
-                            <option>Communal</option>
-                            <option>Muslim</option>
+                        <span translate>graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}&nbsp;
+                        <select (change)="selectCommunity();" name="selectedCommunity" [(ngModel)]="selectedCommunity">
+                            <option *ngFor="let object of communities" [value]="object.community">{{object.community}}</option>
                         </select>
                     </h4>
                     <div class="tile-scroll-content">
-                        <p class="tile" *ngFor="let grave_stone of grave_stones">
-                            <img [src]="grave_stone"/>
-                        </p>
+                        <div class="tile" *ngFor="let stone of grave_stones">
+                            <img [src]="stone.min"/>
+                            <div class="img-hover" [ngStyle]="{'background-image': 'url(' + stone.max + ')'}"></div>
+                        </div>
                     </div>
                     <form>
                         <label>
@@ -549,17 +548,16 @@
                             <span translate>reservation.title</span>&nbsp;
                             <span translate>reservation.step2.choose_grave_stone</span>&nbsp;
                             <span translate>reservation.step</span>&nbsp;{{currentReservationStep}}
-                            <span translate>reservation.of</span>&nbsp;{{totalReservationSteps}}
-                            <select>
-                                <option>Aheistics</option>
-                                <option>Communal</option>
-                                <option>Muslim</option>
+                            <span translate>reservation.of</span>&nbsp;{{totalReservationSteps}}&nbsp;
+                            <select (change)="selectCommunity();" name="selectedCommunity" [(ngModel)]="selectedCommunity">
+                                <option *ngFor="let object of communities" [value]="object.community">{{object.community}}</option>
                             </select>
                         </h4>
                         <div class="tile-scroll-content">
-                            <p class="tile" *ngFor="let grave_stone of grave_stones">
-                                <img [src]="grave_stone"/>
-                            </p>
+                            <div class="tile" *ngFor="let stone of grave_stones">
+                                <img [src]="stone.min"/>
+                                <div class="img-hover" [ngStyle]="{'background-image': 'url(' + stone.max + ')'}"></div>
+                            </div>
                         </div>
                         <form>
                             <label>

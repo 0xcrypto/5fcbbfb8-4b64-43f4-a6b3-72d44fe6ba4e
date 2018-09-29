@@ -75,12 +75,16 @@ export class AnimalNoticeboardComponent implements OnInit {
     this.getVisibleAnimals();
 
     this.options = this._global.refreshObject(this.options, []);
-    this.dataService.getAllWithMethodAndOptions('ANIMAL_GRAVE_SMALL_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
-    .subscribe(result => {
+    this.dataService.getAllWithMethodAndOptions('ANIMAL_GRAVE_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
+    .subscribe(result => {debugger;
       this.grave_stones = result;
 
-      for(var i=0; i<=this.grave_stones.length-1; i++)
-        this.grave_stones[i] = './assets/images/graves/mini/'+ this.grave_stones[i];
+      for(var i=0; i<=this.grave_stones.length-1; i++){
+        this.grave_stones[i] = {
+          'min': './assets/images/graves/mini/'+ this.grave_stones[i],
+          'max': './assets/images/graves/maxi/'+ this.grave_stones[i]
+        };
+      }
     });
     
     if(this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_RETURN_TAB) &&

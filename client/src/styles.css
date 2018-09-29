@@ -52,6 +52,18 @@ table button{
     height: 75px;
     border: 1px solid #808080;
 }
+.tile div.img-hover{
+    position: absolute;
+    display: none;
+    width: 200px;
+    height: 200px;
+    border: 1px solid #808080;
+    background-size:contain; 
+    background-repeat: no-repeat;
+}
+.tile img:hover + .img-hover{
+    display: block;
+}
 #vg-logo{
     cursor: pointer;
     position: absolute;
@@ -482,7 +494,7 @@ label > span.small {
     padding-left: 5px;
 }
 form > label input, form  label textarea, form > label select,
-.form > label input, .form  label textarea, .form > label select {
+.form > label input, .form  label textarea, .form > label select, select {
     border-radius: 3px;
     border: none;
     height: 20px;

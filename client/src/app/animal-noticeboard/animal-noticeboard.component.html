@@ -233,9 +233,10 @@
                         <span translate>animal_graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
                     </h4>
                     <div class="tile-scroll-content">
-                        <p class="tile" *ngFor="let grave_stone of grave_stones">
-                            <img [src]="grave_stone"/>
-                        </p>
+                        <div class="tile" *ngFor="let stone of grave_stones">
+                            <img [src]="stone.min"/>
+                            <div class="img-hover" [ngStyle]="{'background-image': 'url(' + stone.max + ')'}"></div>
+                        </div>
                     </div>
                     <form>
                         <label>

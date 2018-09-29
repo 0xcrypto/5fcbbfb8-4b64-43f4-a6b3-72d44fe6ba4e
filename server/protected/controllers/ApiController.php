@@ -69,14 +69,10 @@
 						$results = $this->getStoneTileImages($options);
 					else if($method == 'CARD_TILE_IMAGES')
 						$results = $this->getCardTileImages($options);
-					else if($method == 'PERSON_GRAVE_SMALL_TILE_IMAGES')
-						$results = $this->getPersonGraveSmallTileImages($options);
-					else if($method == 'PERSON_GRAVE_LARGE_TILE_IMAGES')
-						$results = $this->getPersonGraveLargeTileImages($options);
-					else if($method == 'ANIMAL_GRAVE_SMALL_TILE_IMAGES')
-						$results = $this->getPetGraveSmallTileImages($options);
-					else if($method == 'ANIMAL_GRAVE_LARGE_TILE_IMAGES')
-						$results = $this->getPetGraveLargeTileImages($options);
+					else if($method == 'PERSON_GRAVE_TILE_IMAGES')
+						$results = $this->getPersonGraveTileImages($options);
+					else if($method == 'ANIMAL_GRAVE_TILE_IMAGES')
+						$results = $this->getAnimalGraveTileImages($options);
 					else if($method == 'CATACOMB_SMALL_TILE_IMAGES')
 						$results = $this->getCatacombSmallTileImages($options);
 					else if($method == 'CATACOMB_LARGE_TILE_IMAGES')
@@ -91,6 +87,8 @@
 						$results = FooterMenu::model()->findAll();
 					else if($method == 'PRICES')
 						$results = $this->getPrices($options);
+					else if($method == 'COMMUNITIES')
+						$results = $this->getCommunities($options);
 					else
 						$results = array();
 					break;
@@ -831,45 +829,30 @@
 			return ($data); 
 		}
 
-		private function getPersonGraveSmallTileImages($options = NULL){
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['community']
+		***/
+		private function getPersonGraveTileImages($options = NULL){
+			$query = "SELECT grave as grave FROM communal_graves WHERE community='".$options['community']."'";
+            $result = Yii::app()->db->createCommand($query)->queryAll();
+
+            $count_query="SELECT count(*) as total FROM ($query) t";
+            $count_result = Yii::app()->db->createCommand($count_query)->queryRow()['total'];
+            
+            $data = array();
+            foreach($result as $row){
+                $row['total'] = $count_result;
+                $data[] = $row;
+            }
+
+			return $data;
+		}
+
+		private function getAnimalGraveTileImages($options = NULL){
 			$data = array(); 
 			$d = dir("../client/dist/assets/images/graves/mini/");
-			while (false !== ($entry = $d->read())) {
-			if($entry=='.' || $entry=='..') continue;
-				if((strpos($entry, "zw") == -1))
-					$data[]=$entry;
-			}
-			$d->close();
-			return ($data);
-		}
-
-		private function getPersonGraveLargeTileImages($options = NULL){
-			$data = array(); 
-			$d = dir("../client/dist/assets/images/graves/maxi/");
-			while (false !== ($entry = $d->read())) {
-			if($entry=='.' || $entry=='..') continue;
-				if(strpos($entry, "zw") == -1)
-					$data[]=$entry;
-			}
-			$d->close();
-			return ($data);
-		}
-
-		private function getPetGraveSmallTileImages($options = NULL){
-			$data = array(); 
-			$d = dir("../client/dist/assets/images/graves/mini/");
-			while (false !== ($entry = $d->read())) {
-			if($entry=='.' || $entry=='..') continue;
-				if(strpos($entry, "zw") > -1)
-					$data[]=$entry;
-			}
-			$d->close();
-			return ($data);
-		}
-
-		private function getPetGraveLargeTileImages($options = NULL){
-			$data = array(); 
-			$d = dir("../client/dist/assets/images/graves/maxi/");
 			while (false !== ($entry = $d->read())) {
 			if($entry=='.' || $entry=='..') continue;
 				if(strpos($entry, "zw") > -1)
@@ -1276,6 +1259,30 @@
 
 			return $data;
 		}
+
+		
+
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+
+		***/
+		
+		private function getCommunities($options = NULL){
+            $query = "SELECT DISTINCT community as community FROM communal_graves";
+            $result = Yii::app()->db->createCommand($query)->queryAll();
+
+            $count_query="SELECT count(*) as total FROM ($query) t";
+            $count_result = Yii::app()->db->createCommand($count_query)->queryRow()['total'];
+            
+            $data = array();
+            foreach($result as $row){
+                $row['total'] = $count_result;
+                $data[] = $row;
+            }
+
+            return $data;
+        }
 
 		/***
 		 	REQUIRED PARAMETERS

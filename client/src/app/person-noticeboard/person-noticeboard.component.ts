@@ -43,6 +43,7 @@ export class PersonNoticeboardComponent implements OnInit {
   isReservationTermsVisible:boolean = true;
   currentReservationStep:number = 1;
   totalReservationSteps:number = 7;
+  selectedCommunity:string;
   datalimit = 15;
 
   deadlistPages: number[] = [];
@@ -52,7 +53,8 @@ export class PersonNoticeboardComponent implements OnInit {
   searchedUsers: User[] = [];
   prioritizeGraves: User[] = [];
   grave_stones: any[] = [];
-
+  communities:any[]=[];
+  
   router:Router = null;
   currentLang:string = null;
   alphabetPages: any[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -82,12 +84,9 @@ export class PersonNoticeboardComponent implements OnInit {
     this.getVisibleGraves();
 
     this.options = this._global.refreshObject(this.options, []);
-    this.dataService.getAllWithMethodAndOptions('PERSON_GRAVE_SMALL_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
+    this.dataService.getAllWithMethodAndOptions('COMMUNITIES', this._global.serializeAndURIEncode(this.options))
     .subscribe(result => {
-      this.grave_stones = result;
-
-      for(var i=0; i<=this.grave_stones.length-1; i++)
-        this.grave_stones[i] = './assets/images/graves/mini/'+ this.grave_stones[i];
+      this.communities = result;
     });
     
     if(this.localStorageService.get(this._global.GRAVEYARD_RETURN_TAB) &&
@@ -411,4 +410,17 @@ export class PersonNoticeboardComponent implements OnInit {
   reservationNextStep(){
     this.currentReservationStep++;
   }
+  selectCommunity(){
+    this.options = this._global.refreshObject(this.options, ['community='+this.selectedCommunity]);
+    this.dataService.getAllWithMethodAndOptions('PERSON_GRAVE_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
+    .subscribe(result => {
+      this.grave_stones = result;
+
+      for(var i=0; i<=this.grave_stones.length-1; i++){
+        this.grave_stones[i].min = './assets/images/graves/mini/'+ this.grave_stones[i].grave+'.jpg';
+        this.grave_stones[i].max = './assets/images/graves/maxi/'+ this.grave_stones[i].grave+'.jpg';
+      }
+    });
+  }
 }
+
