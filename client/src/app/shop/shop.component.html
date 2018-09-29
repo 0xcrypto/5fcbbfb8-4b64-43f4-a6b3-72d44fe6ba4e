@@ -9,144 +9,264 @@
         </p>
         <div class="tabs">
             <div [ngClass]="{'active': (selectedShopTab == 'tab1')}">
-                <h4 *ngIf="selectedGraveName && selectedGraveId">
-                    <span translate>shop.purchase_for_grave</span> {{selectedGraveName}}({{selectedGraveId}})
-                </h4>
-                <div *ngIf="!isCandleShopFormVisible">
-                    <div *ngIf="candles" >
-                        <p class="tile" *ngFor="let candle of candles" (click)="selectCandle(candle)">
-                            <img [attr.src]="candle"/>
-                        </p>
+                <div *ngIf="!isSelectedGraveNotAvailable">
+                    <h4 *ngIf="selectedGraveName && selectedGraveId">
+                        <span translate>shop.purchase_for_grave</span> {{selectedGraveName}}({{selectedGraveId}})
+                    </h4>
+                    <div *ngIf="!isCandleShopFormVisible">
+                        <div *ngIf="candles" >
+                            <p class="tile" *ngFor="let candle of candles" (click)="selectCandle(candle)">
+                                <img [attr.src]="candle"/>
+                            </p>
+                        </div>
                     </div>
+                    <form *ngIf="isCandleShopFormVisible">
+                        <label>
+                            <span translate>shop.form.dedication_signature</span>
+                            <textarea class="big-box" [(ngModel)]="dedication" name="dedication"></textarea>
+                        </label>
+                        <label>
+                            <span translate>shop.form.valid_upto</span>
+                            <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onCandleValidUpToDateChange(event, candlePrices);">
+                            <p style="color:#FFF; font-size: 10px;">{{selectedCandlePriceString}}</p>
+                            <ngx-paypal [config]="payPalConfig" *ngIf="!isPaymentCompleted"></ngx-paypal>
+                            <p *ngFor="let object of candlePrices" style="color:#FFF; font-size: 10px;">
+                                *&nbsp;{{object.price}}&nbsp;{{object.currency}}&nbsp;{{(currentLang == 'en') ? object.period_en : object.period_pl}}
+                            </p>
+                        </label>
+                        <label *ngIf="isItemAlreadyExists">
+                            <p style="font-size:11px;color:#f00" translate>shop.form.item_already_exists</p>
+                        </label>
+                        <label>
+                            <button type="button" class="align-left" (click)="CandleShoppingChange()">
+                                <span translate><i class="fa fa-backward"></i>&nbsp;&nbsp;shop.form.back</span>
+                            </button>
+                            <button type="button" class="align-right" (click)="CandleShoppingConfirm()" *ngIf="isPaymentCompleted">
+                                <span translate>shop.form.confirm&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
+                            </button>
+                        </label>
+                    </form>
                 </div>
-                <form *ngIf="isCandleShopFormVisible">
-                    <label>
-                        <span translate>shop.form.dedication_signature</span>
-                        <textarea class="big-box" [(ngModel)]="dedication" name="dedication"></textarea>
-                    </label>
-                    <label>
-                        <span translate>shop.form.valid_upto</span>
-                        <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onCandleValidUpToDateChange(event, candlePrices);">
-                        <p style="color:#FFF; font-size: 10px;">{{selectedCandlePriceString}}</p>
-                        <ngx-paypal [config]="payPalConfig" *ngIf="!isPaymentCompleted"></ngx-paypal>
-                        <p *ngFor="let object of candlePrices" style="color:#FFF; font-size: 10px;">
-                            *&nbsp;{{object.price}}&nbsp;{{object.currency}}&nbsp;{{(currentLang == 'en') ? object.period_en : object.period_pl}}
-                        </p>
-                    </label>
-                    <label>
-                        <button type="button" class="align-left" (click)="CandleShoppingChange()">
-                            <span translate><i class="fa fa-backward"></i>&nbsp;&nbsp;shop.form.back</span>
-                        </button>
-                        <button type="button" class="align-right" (click)="CandleShoppingConfirm()" *ngIf="isPaymentCompleted">
-                            <span translate>shop.form.confirm&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
-                        </button>
-                    </label>
-                </form>
+                <div *ngIf="isSelectedGraveNotAvailable">
+                    <form>
+                        <label>
+                            <span translate>shop.form.choose</span>
+                            <select name="searchGraveType" [(ngModel)]="searchGraveType">
+                                <option value="graveyard" translate>shop.form.graveyard</option>
+                                <option value="pet_graveyard" translate>shop.form.pet_graveyard</option>
+                                <option value="catacomb" translate>shop.form.catacomb</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span translate>shop.form.enter_grave_number_for_new_candle_or_fresh_flower</span>
+                            <input type="text" [(ngModel)]="searchGraveNumber" name="searchGraveNumber">
+                        </label>
+                        <label>
+                            <span></span>
+                            <button type="button" (click)="searchGrave()">
+                                <span translate>shop.form.next&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
+                            </button>
+                        </label>
+                        <label *ngIf="noSearchResult">
+                            <p style="font-size:11px;color:#f00" translate>shop.form.no_result_found</p>
+                        </label>
+                    </form>
+                </div>
             </div>
             <div [ngClass]="{'active': (selectedShopTab == 'tab2')}">
-                <h4 *ngIf="selectedGraveName && selectedGraveId">
-                    <span translate>shop.purchase_for_grave</span> {{selectedGraveName}}({{selectedGraveId}})
-                </h4>
-                <div *ngIf="!isFlowerShopFormVisible">
-                    <div *ngIf="flowers">
-                        <p class="tile" *ngFor="let flower of flowers" (click)="selectFlower(flower)">
-                            <img [attr.src]="flower"/>
-                        </p>
+                <div *ngIf="!isSelectedGraveNotAvailable">
+                    <h4 *ngIf="selectedGraveName && selectedGraveId">
+                        <span translate>shop.purchase_for_grave</span> {{selectedGraveName}}({{selectedGraveId}})
+                    </h4>
+                    <div *ngIf="!isFlowerShopFormVisible">
+                        <div *ngIf="flowers">
+                            <p class="tile" *ngFor="let flower of flowers" (click)="selectFlower(flower)">
+                                <img [attr.src]="flower"/>
+                            </p>
+                        </div>
                     </div>
+                    <form *ngIf="isFlowerShopFormVisible">
+                        <label>
+                            <span translate>shop.form.dedication_signature</span>
+                            <textarea class="big-box" [(ngModel)]="dedication" name="dedication"></textarea>
+                        </label>
+                        <label>
+                            <span translate>shop.form.valid_upto</span>
+                            <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onFlowerValidUpToDateChange(event, flowerPrices);">
+                            <p style="color:#FFF; font-size: 10px;">{{selectedFlowerPriceString}}</p>
+                            <ngx-paypal [config]="payPalConfig" *ngIf="!isPaymentCompleted"></ngx-paypal>
+                            <p *ngFor="let object of flowerPrices" style="color:#FFF; font-size: 10px;">
+                                *&nbsp;{{object.price}}&nbsp;{{object.currency}}&nbsp;{{(currentLang == 'en') ? object.period_en : object.period_pl}}
+                            </p>
+                        </label>
+                        <label *ngIf="isItemAlreadyExists">
+                            <p style="font-size:11px;color:#f00" translate>shop.form.item_already_exists</p>
+                        </label>
+                        <label>
+                            <button type="button" class="align-left" (click)="FlowerShoppingChange()">
+                                <span translate><i class="fa fa-backward"></i>&nbsp;&nbsp;shop.form.back</span>
+                            </button>
+                            <button type="button" class="align-right" (click)="FlowerShoppingConfirm()" *ngIf="isPaymentCompleted">
+                                <span translate>shop.form.confirm&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
+                            </button>
+                        </label>
+                    </form>
                 </div>
-                <form *ngIf="isFlowerShopFormVisible">
-                    <label>
-                        <span translate>shop.form.dedication_signature</span>
-                        <textarea class="big-box" [(ngModel)]="dedication" name="dedication"></textarea>
-                    </label>
-                    <label>
-                        <span translate>shop.form.valid_upto</span>
-                        <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onFlowerValidUpToDateChange(event, flowerPrices);">
-                        <p style="color:#FFF; font-size: 10px;">{{selectedFlowerPriceString}}</p>
-                        <ngx-paypal [config]="payPalConfig" *ngIf="!isPaymentCompleted"></ngx-paypal>
-                        <p *ngFor="let object of flowerPrices" style="color:#FFF; font-size: 10px;">
-                            *&nbsp;{{object.price}}&nbsp;{{object.currency}}&nbsp;{{(currentLang == 'en') ? object.period_en : object.period_pl}}
-                        </p>
-                    </label>
-                    <label>
-                        <button type="button" class="align-left" (click)="FlowerShoppingChange()">
-                            <span translate><i class="fa fa-backward"></i>&nbsp;&nbsp;shop.form.back</span>
-                        </button>
-                        <button type="button" class="align-right" (click)="FlowerShoppingConfirm()" *ngIf="isPaymentCompleted">
-                            <span translate>shop.form.confirm&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
-                        </button>
-                    </label>
-                </form>
+                <div *ngIf="isSelectedGraveNotAvailable">
+                    <form>
+                        <label>
+                            <span translate>shop.form.choose</span>
+                            <select name="searchGraveType" [(ngModel)]="searchGraveType">
+                                <option value="graveyard" translate>shop.form.graveyard</option>
+                                <option value="pet_graveyard" translate>shop.form.pet_graveyard</option>
+                                <option value="catacomb" translate>shop.form.catacomb</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span translate>shop.form.enter_grave_number_for_new_candle_or_fresh_flower</span>
+                            <input type="text" [(ngModel)]="grave_number" name="grave_number">
+                        </label>
+                        <label>
+                            <span></span>
+                            <button type="button" (click)="searchGrave()">
+                                <span translate>shop.form.next&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
+                            </button>
+                        </label>
+                        <label *ngIf="noSearchResult">
+                            <p style="font-size:11px;color:#f00" translate>shop.form.no_result_found</p>
+                        </label>
+                    </form>
+                </div>
             </div>
             <div [ngClass]="{'active': (selectedShopTab == 'tab3')}">
-                <h4 *ngIf="selectedGraveName && selectedGraveId">
-                    <span translate>shop.purchase_for_grave</span> {{selectedGraveName}}({{selectedGraveId}})
-                </h4>
-                <div *ngIf="!isStoneShopFormVisible">
-                    <div *ngIf="stones">
-                        <p class="tile" *ngFor="let stone of stones" (click)="selectStone(stone)">
-                            <img [attr.src]="stone"/>
-                        </p>
+                <div *ngIf="!isSelectedGraveNotAvailable">
+                    <h4 *ngIf="selectedGraveName && selectedGraveId">
+                        <span translate>shop.purchase_for_grave</span> {{selectedGraveName}}({{selectedGraveId}})
+                    </h4>
+                    <div *ngIf="!isStoneShopFormVisible">
+                        <div *ngIf="stones">
+                            <p class="tile" *ngFor="let stone of stones" (click)="selectStone(stone)">
+                                <img [attr.src]="stone"/>
+                            </p>
+                        </div>
                     </div>
+                    <form *ngIf="isStoneShopFormVisible">
+                        <label>
+                            <span translate>shop.form.dedication_signature</span>
+                            <textarea class="big-box" [(ngModel)]="dedication" name="dedication"></textarea>
+                        </label>
+                        <label>
+                            <span translate>shop.form.valid_upto</span>
+                            <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onStoneValidUpToDateChange(event, stonePrices);">
+                            <p style="color:#FFF; font-size: 10px;">{{selectedStonePriceString}}</p>
+                            <ngx-paypal [config]="payPalConfig" *ngIf="!isPaymentCompleted"></ngx-paypal>
+                            <p *ngFor="let object of stonePrices" style="color:#FFF; font-size: 10px;">
+                                *&nbsp;{{object.price}}&nbsp;{{object.currency}}&nbsp;{{(currentLang == 'en') ? object.period_en : object.period_pl}}
+                            </p>
+                        </label>
+                        <label *ngIf="isItemAlreadyExists">
+                            <p style="font-size:11px;color:#f00" translate>shop.form.item_already_exists</p>
+                        </label>
+                        <label>
+                            <button type="button" class="align-left" (click)="StoneShoppingChange()">
+                                <span translate><i class="fa fa-backward"></i>&nbsp;&nbsp;shop.form.back</span>
+                            </button>
+                            <button type="button" class="align-right" (click)="StoneShoppingConfirm()" *ngIf="isPaymentCompleted">
+                                <span translate>shop.form.confirm&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
+                            </button>
+                        </label>
+                    </form>
                 </div>
-                <form *ngIf="isStoneShopFormVisible">
-                    <label>
-                        <span translate>shop.form.dedication_signature</span>
-                        <textarea class="big-box" [(ngModel)]="dedication" name="dedication"></textarea>
-                    </label>
-                    <label>
-                        <span translate>shop.form.valid_upto</span>
-                        <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onStoneValidUpToDateChange(event, stonePrices);">
-                        <p style="color:#FFF; font-size: 10px;">{{selectedStonePriceString}}</p>
-                        <ngx-paypal [config]="payPalConfig" *ngIf="!isPaymentCompleted"></ngx-paypal>
-                        <p *ngFor="let object of stonePrices" style="color:#FFF; font-size: 10px;">
-                            *&nbsp;{{object.price}}&nbsp;{{object.currency}}&nbsp;{{(currentLang == 'en') ? object.period_en : object.period_pl}}
-                        </p>
-                    </label>
-                    <label>
-                        <button type="button" class="align-left" (click)="StoneShoppingChange()">
-                            <span translate><i class="fa fa-backward"></i>&nbsp;&nbsp;shop.form.back</span>
-                        </button>
-                        <button type="button" class="align-right" (click)="StoneShoppingConfirm()" *ngIf="isPaymentCompleted">
-                            <span translate>shop.form.confirm&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
-                        </button>
-                    </label>
-                </form>
+                <div *ngIf="isSelectedGraveNotAvailable">
+                    <form>
+                        <label>
+                            <span translate>shop.form.choose</span>
+                            <select name="searchGraveType" [(ngModel)]="searchGraveType">
+                                <option value="graveyard" translate>shop.form.graveyard</option>
+                                <option value="pet_graveyard" translate>shop.form.pet_graveyard</option>
+                                <option value="catacomb" translate>shop.form.catacomb</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span translate>shop.form.enter_grave_number_for_new_candle_or_fresh_flower</span>
+                            <input type="text" [(ngModel)]="grave_number" name="grave_number">
+                        </label>
+                        <label>
+                            <span></span>
+                            <button type="button" (click)="searchGrave()">
+                                <span translate>shop.form.next&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
+                            </button>
+                        </label>
+                        <label *ngIf="noSearchResult">
+                            <p style="font-size:11px;color:#f00" translate>shop.form.no_result_found</p>
+                        </label>
+                    </form>
+                </div>
             </div>
             <div [ngClass]="{'active': (selectedShopTab == 'tab4')}">
-                <h4 *ngIf="selectedGraveName && selectedGraveId">
-                    <span translate>shop.purchase_for_grave</span> {{selectedGraveName}}({{selectedGraveId}})
-                </h4>
-                <div *ngIf="isOtherShopFormVisible">
-                    <div *ngIf="cards">
-                        <p class="tile" *ngFor="let card of cards" (click)="selectOther(card)">
-                            <img [attr.src]="card"/>
-                        </p>
+                <div *ngIf="!isSelectedGraveNotAvailable">
+                    <h4 *ngIf="selectedGraveName && selectedGraveId">
+                        <span translate>shop.purchase_for_grave</span> {{selectedGraveName}}({{selectedGraveId}})
+                    </h4>
+                    <div *ngIf="!isOtherShopFormVisible">
+                        <div *ngIf="cards">
+                            <p class="tile" *ngFor="let card of cards" (click)="selectOther(card)">
+                                <img [attr.src]="card"/>
+                            </p>
+                        </div>
                     </div>
+                    <form *ngIf="isOtherShopFormVisible">
+                        <label>
+                            <span translate>shop.form.dedication_signature</span>
+                            <textarea class="big-box" [(ngModel)]="dedication" name="dedication"></textarea>
+                        </label>
+                        <label>
+                            <span translate>shop.form.valid_upto</span>
+                            <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onOtherValidUpToDateChange(event, otherPrices);">
+                            <p style="color:#FFF; font-size: 10px;">{{selectedOtherPriceString}}</p>
+                            <ngx-paypal [config]="payPalConfig" *ngIf="!isPaymentCompleted"></ngx-paypal>
+                            <p *ngFor="let object of stonePrices" style="color:#FFF; font-size: 10px;">
+                                *&nbsp;{{object.price}}&nbsp;{{object.currency}}&nbsp;{{(currentLang == 'en') ? object.period_en : object.period_pl}}
+                            </p>
+                        </label>
+                        <label *ngIf="isItemAlreadyExists">
+                            <p style="font-size:11px;color:#f00" translate>shop.form.item_already_exists</p>
+                        </label>
+                        <label>
+                            <button type="button" class="align-left" (click)="OtherShoppingChange()">
+                                <span translate><i class="fa fa-backward"></i>&nbsp;&nbsp;shop.form.back</span>
+                            </button>
+                            <button type="button" class="align-right" (click)="OtherShoppingConfirm()" *ngIf="isPaymentCompleted">
+                                <span translate>shop.form.confirm&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
+                            </button>
+                        </label>
+                    </form>
                 </div>
-                <form *ngIf="isOtherShopFormVisible">
-                    <label>
-                        <span translate>shop.form.dedication_signature</span>
-                        <textarea class="big-box" [(ngModel)]="dedication" name="dedication"></textarea>
-                    </label>
-                    <label>
-                        <span translate>shop.form.valid_upto</span>
-                        <input type="date" [(ngModel)]="valid_upto" name="valid_upto" (change)="onOtherValidUpToDateChange(event, otherPrices);">
-                        <p style="color:#FFF; font-size: 10px;">{{selectedOtherPriceString}}</p>
-                        <ngx-paypal [config]="payPalConfig" *ngIf="!isPaymentCompleted"></ngx-paypal>
-                        <p *ngFor="let object of stonePrices" style="color:#FFF; font-size: 10px;">
-                            *&nbsp;{{object.price}}&nbsp;{{object.currency}}&nbsp;{{(currentLang == 'en') ? object.period_en : object.period_pl}}
-                        </p>
-                    </label>
-                    <label>
-                        <button type="button" class="align-left" (click)="OtherShoppingChange()">
-                            <span translate><i class="fa fa-backward"></i>&nbsp;&nbsp;shop.form.back</span>
-                        </button>
-                        <button type="button" class="align-right" (click)="OtherShoppingConfirm()" *ngIf="isPaymentCompleted">
-                            <span translate>shop.form.confirm&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
-                        </button>
-                    </label>
-                </form>
+                <div *ngIf="isSelectedGraveNotAvailable">
+                    <form>
+                        <label>
+                            <span translate>shop.form.choose</span>
+                            <select name="searchGraveType" [(ngModel)]="searchGraveType">
+                                <option value="graveyard" translate>shop.form.graveyard</option>
+                                <option value="pet_graveyard" translate>shop.form.pet_graveyard</option>
+                                <option value="catacomb" translate>shop.form.catacomb</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span translate>shop.form.enter_grave_number_for_new_candle_or_fresh_flower</span>
+                            <input type="text" [(ngModel)]="grave_number" name="grave_number">
+                        </label>
+                        <label>
+                            <span></span>
+                            <button type="button" (click)="searchGrave()">
+                                <span translate>shop.form.next&nbsp;&nbsp;<i class="fa fa-forward"></i></span>
+                            </button>
+                        </label>
+                        <label *ngIf="noSearchResult">
+                            <p style="font-size:11px;color:#f00" translate>shop.form.no_result_found</p>
+                        </label>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

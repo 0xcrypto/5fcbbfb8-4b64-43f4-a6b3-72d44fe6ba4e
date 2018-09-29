@@ -38,6 +38,11 @@ export class PersonNoticeboardComponent implements OnInit {
   selectedSearchAlphabet:string = null;
   selectedSceneTime:number = 1;
   selectedSceneSeason:number = 1;
+  currentBurialStep:number = 1;
+  totalBurialSteps:number = 7;
+  isReservationTermsVisible:boolean = true;
+  currentReservationStep:number = 1;
+  totalReservationSteps:number = 7;
   datalimit = 15;
 
   deadlistPages: number[] = [];
@@ -46,6 +51,7 @@ export class PersonNoticeboardComponent implements OnInit {
   users: User[] = [];
   searchedUsers: User[] = [];
   prioritizeGraves: User[] = [];
+  grave_stones: any[] = [];
 
   router:Router = null;
   currentLang:string = null;
@@ -74,6 +80,15 @@ export class PersonNoticeboardComponent implements OnInit {
 
     this.getAdvertisements();
     this.getVisibleGraves();
+
+    this.options = this._global.refreshObject(this.options, []);
+    this.dataService.getAllWithMethodAndOptions('GRAVE_SMALL_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
+    .subscribe(result => {
+      this.grave_stones = result;
+
+      for(var i=0; i<=this.grave_stones.length-1; i++)
+        this.grave_stones[i] = './assets/images/graves/mini/'+ this.grave_stones[i];
+    });
     
     if(this.localStorageService.get(this._global.GRAVEYARD_RETURN_TAB) &&
         this.localStorageService.get(this._global.GRAVEYARD_OPTIONS_KEY)){
@@ -89,6 +104,8 @@ export class PersonNoticeboardComponent implements OnInit {
         this.loadSearchData(parameters);
       }
     }
+
+
   }
 
   loadingGrave(user:User, returnTab:string){
@@ -375,5 +392,23 @@ export class PersonNoticeboardComponent implements OnInit {
         }
         
       });
+  }
+  burialPrevStep(){
+    this.currentBurialStep--;
+  }
+  burialNextStep(){
+    this.currentBurialStep++;
+  }
+  acceptReservationTerms(){
+    this.isReservationTermsVisible = false;
+  }
+  rejectReservationTerms(){
+    this.isReservationTermsVisible = true;
+  }
+  reservationPrevStep(){
+    this.currentReservationStep--;
+  }
+  reservationNextStep(){
+    this.currentReservationStep++;
   }
 }

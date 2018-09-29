@@ -211,10 +211,551 @@
                 </div>
             </div>
             <div id="graveyard-burial"  [style.display]="(selectedTab == 'graveyard-burial') ? 'block' : 'none'">
-            <p translate>graveyard.noticeboard.tabs.graveyard_burial.title</p>
+                <div *ngIf="(currentBurialStep == 1)">
+                    <h4>
+                        <span translate>graveyard_burial.title</span>&nbsp;
+                        <span translate>graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
+                        <span translate>graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                    </h4>
+                    <form>
+                        <label>
+                            <span translate>graveyard_burial.step1.choose</span>
+                            <select name="graveyardBurialType" [(ngModel)]="graveyardBurialType">
+                                <option value="graveyard" translate>graveyard_burial.step1.graveyard</option>
+                                <option value="catacomb" translate>graveyard_burial.step1.catacomb</option>
+                            </select>
+                        </label>
+                        <label>
+                            <span translate>graveyard_burial.step1.choose_grave</span>
+                            <select name="graveyardBurialSubType" [(ngModel)]="graveyardBurialSubType">
+                                <option value="single" translate>graveyard_burial.step1.single</option>
+                                <option value="family" translate>graveyard_burial.step1.family</option>
+                                <option value="communal" translate>graveyard_burial.step1.communal</option>
+                            </select>
+                        </label>
+                        <label>
+                            <button class="align-right" (click)="burialNextStep()">
+                                <span translate>graveyard_burial.next&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                </div>
+                <div *ngIf="(currentBurialStep == 2)">
+                    <h4>
+                        <span translate>graveyard_burial.title</span>&nbsp;
+                        <span translate>graveyard_burial.step2.choose_grave_stone</span>&nbsp;
+                        <span translate>graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
+                        <span translate>graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                        <select>
+                            <option>Aheistics</option>
+                            <option>Communal</option>
+                            <option>Muslim</option>
+                        </select>
+                    </h4>
+                    <div class="tile-scroll-content">
+                        <p class="tile" *ngFor="let grave_stone of grave_stones">
+                            <img [src]="grave_stone"/>
+                        </p>
+                    </div>
+                    <form>
+                        <label>
+                            <button class="align-left" (click)="burialPrevStep()">
+                                <i class="fa fa-backward"></i>
+                                <span translate>&nbsp;&nbsp;graveyard_burial.prev</span>
+                            </button>
+                            <button class="align-right" (click)="burialNextStep()">
+                                <span translate>graveyard_burial.next&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                </div>
+                <div *ngIf="(currentBurialStep == 3)">
+                    <h4>
+                        <span translate>graveyard_burial.title</span>&nbsp;
+                        <span translate>graveyard_burial.step3.information_about_death_person</span>&nbsp;
+                        <span translate>graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
+                        <span translate>graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                    </h4>
+                    <form>
+                        <label>
+                            <span translate>graveyard_burial.step3.firstname<sup>*</sup></span>
+                            <input type="text">
+                        </label>
+                        <label>
+                            <span translate>graveyard_burial.step3.surname_or_lastname<sup>*</sup></span>
+                            <input type="text">
+                        </label>
+                        <label>
+                            <span translate>graveyard_burial.step3.date_of_birth<sup>*</sup></span>
+                            <input type="date">
+                        </label>
+                        <label>
+                            <span translate>graveyard_burial.step3.passed_away<sup>*</sup></span>
+                            <input type="date">
+                        </label>
+                        <label>
+                            <span translate>graveyard_burial.step3.gender<sup>*</sup></span>
+                            <input type="radio"> <span>Male</span>&nbsp;&nbsp;
+                            <input type="radio"> <span>Female</span>&nbsp;&nbsp;
+                        </label>
+                        <label>
+                            <span translate>graveyard_burial.step3.upload_photos</span>
+                            <button>
+                                <span translate>graveyard_burial.step3.upload_photos&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                    <p class="tile">
+                        <img [src]=""/>
+                    </p>
+                    <p><sup>*</sup><span translate>graveyard_burial.step3.required</span></p>
+                    <form>
+                        <label>
+                            <button class="align-left" (click)="burialPrevStep()">
+                                <i class="fa fa-backward"></i>
+                                <span translate>&nbsp;&nbsp;graveyard_burial.prev</span>
+                            </button>
+                            <button class="align-right" (click)="burialNextStep()">
+                                <span translate>graveyard_burial.next&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                </div>
+                <div *ngIf="(currentBurialStep == 4)">
+                    <h4>
+                        <span translate>graveyard_burial.title</span>&nbsp;
+                        <span translate>graveyard_burial.step4.information_about_death_person</span>&nbsp;
+                        <span translate>graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
+                        <span translate>graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                    </h4>
+                    <form>
+                        <label>
+                            <span translate>graveyard_burial.step4.in_memoriam</span>
+                            <textarea class="large-box"></textarea>
+                        </label>
+                        <label>
+                            <span translate>graveyard_burial.step4.signature</span>
+                            <input type="text" class="align-right"/>
+                        </label>
+                        <label>
+                            <button class="align-left" (click)="burialPrevStep()">
+                                <i class="fa fa-backward"></i>
+                                <span translate>&nbsp;&nbsp;graveyard_burial.prev</span>
+                            </button>
+                            <button class="align-right" (click)="burialNextStep()">
+                                <span translate>graveyard_burial.next&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                </div>
+                <div *ngIf="(currentBurialStep == 5)">
+                    <h4>
+                        <span translate>graveyard_burial.title</span>&nbsp;
+                        <span translate>graveyard_burial.step5.confirm_your_entry</span>&nbsp;
+                        <span translate>graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
+                        <span translate>graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                    </h4>
+                    <form>
+                        <label>
+                            <span translate>graveyard_burial.step5.firstname</span>
+                        </label>
+                        <label>
+                            <span translate>graveyard_burial.step5.surname_or_lastname</span>
+                        </label>
+                        <label>
+                            <span translate>graveyard_burial.step5.date_of_birth</span>
+                        </label>
+                        <label>
+                            <span translate>graveyard_burial.step5.passed_away</span>
+                        </label>
+                        <label>
+                            <span translate>graveyard_burial.step5.gender</span>
+                        </label>
+                        <label>
+                            <button class="align-left" (click)="burialPrevStep()">
+                                <i class="fa fa-backward"></i>
+                                <span translate>&nbsp;&nbsp;graveyard_burial.prev</span>
+                            </button>
+                            <button class="align-right" (click)="burialNextStep()">
+                                <span translate>graveyard_burial.next&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                </div>
+                <div *ngIf="(currentBurialStep == 6)">
+                    <h4>
+                        <span translate>graveyard_burial.title</span>&nbsp;
+                        <span translate>graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
+                        <span translate>graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                    </h4>
+                    <h4>
+                        <span translate>graveyard_burial.step6.size_of_grave</span>&nbsp;
+                        <span>_1_</span>
+                        <span translate>graveyard_burial.step6.people</span>
+                    </h4>
+                    <p translate>graveyard_burial.step6.list_of_dead_people_in_communal_grave</p>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>1.</td>
+                                <td>(NAME)</td>
+                                <td>
+                                    <span translate>graveyard_burial.step6.passed_away</span>
+                                    <span>(PASSED)</span>
+                                </td>
+                                <td>
+                                    <button translate>graveyard_burial.step6.change</button>
+                                </td>
+                                <td>
+                                    <button translate>graveyard_burial.step6.remove</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <form>
+                        <label>
+                            <button class="align-right">
+                                <span translate>graveyard_burial.step6.add_another_person</span>
+                            </button>
+                        </label>
+                    </form>
+                    <form>
+                        <label>
+                            <button class="align-left" (click)="burialPrevStep()">
+                                <i class="fa fa-backward"></i>
+                                <span translate>&nbsp;&nbsp;graveyard_burial.prev</span>
+                            </button>
+                            <button class="align-right" (click)="burialNextStep()" >
+                                <span translate>graveyard_burial.step6.accept&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                </div>
+                <div *ngIf="(currentBurialStep == 7)">
+                    <h4>
+                        <span translate>graveyard_burial.title</span>&nbsp;
+                        <span translate>graveyard_burial.step7.confirm_please</span>&nbsp;
+                        <span translate>graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
+                        <span translate>graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                    </h4>
+                    <p translate>graveyard_burial.step7.for</p>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>1.</td>
+                                <td>(NAME)</td>
+                                <td>
+                                    <span translate>graveyard_burial.step7.passed_away</span>
+                                    <span>(PASSED)</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <form>
+                        <label>
+                            <span translate>graveyard_burial.step7.burial_fee</span>
+                        </label>
+                        <label>
+                            <button class="align-left" (click)="burialPrevStep()">
+                                <i class="fa fa-backward"></i>
+                                <span translate>&nbsp;&nbsp;graveyard_burial.prev</span>
+                            </button>
+                            <button class="align-right">
+                                <span translate>graveyard_burial.step7.confirm&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                </div>
             </div>
             <div id="reservation"  [style.display]="(selectedTab == 'reservation') ? 'block' : 'none'">
-                <p translate>graveyard.noticeboard.tabs.reservation.title</p>
+                <div *ngIf="isReservationTermsVisible">
+                    <p>lorem ipsum</p>
+                    <form>
+                        <label>
+                            <button class="align-left" (click)="rejectReservationTerms()">
+                                <i class="fa fa-backward"></i>
+                                <span translate>&nbsp;&nbsp;reservation.reject_terms</span>
+                            </button>
+                            <button class="align-right" (click)="acceptReservationTerms()">
+                                <span translate>reservation.accept_terms&nbsp;&nbsp;</span>
+                                <i class="fa fa-forward"></i>
+                            </button>
+                        </label>
+                    </form>
+                </div>
+                <div *ngIf="!isReservationTermsVisible">
+                    <div *ngIf="(currentReservationStep == 1)">
+                        <h4>
+                            <span translate>reservation.title</span>&nbsp;
+                            <span translate>reservation.step</span>&nbsp;{{currentReservationStep}}
+                            <span translate>reservation.of</span>&nbsp;{{totalReservationSteps}}
+                        </h4>
+                        <form>
+                            <label>
+                                <span translate>reservation.step1.choose</span>
+                                <select name="graveyardBurialType" [(ngModel)]="graveyardBurialType">
+                                    <option value="graveyard" translate>reservation.step1.graveyard</option>
+                                    <option value="catacomb" translate>reservation.step1.catacomb</option>
+                                </select>
+                            </label>
+                            <label>
+                                <span translate>reservation.step1.choose_grave</span>
+                                <select name="graveyardBurialSubType" [(ngModel)]="graveyardBurialSubType">
+                                    <option value="single" translate>reservation.step1.single</option>
+                                    <option value="family" translate>reservation.step1.family</option>
+                                    <option value="communal" translate>reservation.step1.communal</option>
+                                </select>
+                            </label>
+                            <label>
+                                <button class="align-right" (click)="reservationNextStep()">
+                                    <span translate>reservation.next&nbsp;&nbsp;</span>
+                                    <i class="fa fa-forward"></i>
+                                </button>
+                            </label>
+                        </form>
+                    </div>
+                    <div *ngIf="(currentReservationStep == 2)">
+                        <h4>
+                            <span translate>reservation.title</span>&nbsp;
+                            <span translate>reservation.step2.choose_grave_stone</span>&nbsp;
+                            <span translate>reservation.step</span>&nbsp;{{currentReservationStep}}
+                            <span translate>reservation.of</span>&nbsp;{{totalReservationSteps}}
+                            <select>
+                                <option>Aheistics</option>
+                                <option>Communal</option>
+                                <option>Muslim</option>
+                            </select>
+                        </h4>
+                        <div class="tile-scroll-content">
+                            <p class="tile" *ngFor="let grave_stone of grave_stones">
+                                <img [src]="grave_stone"/>
+                            </p>
+                        </div>
+                        <form>
+                            <label>
+                                <button class="align-left" (click)="reservationPrevStep()">
+                                    <i class="fa fa-backward"></i>
+                                    <span translate>&nbsp;&nbsp;reservation.prev</span>
+                                </button>
+                                <button class="align-right" (click)="reservationNextStep()">
+                                    <span translate>reservation.next&nbsp;&nbsp;</span>
+                                    <i class="fa fa-forward"></i>
+                                </button>
+                            </label>
+                        </form>
+                    </div>
+                    <div *ngIf="(currentReservationStep == 3)">
+                        <h4>
+                            <span translate>reservation.title</span>&nbsp;
+                            <span translate>reservation.step3.information_about_death_person</span>&nbsp;
+                            <span translate>reservation.step</span>&nbsp;{{currentReservationStep}}
+                            <span translate>reservation.of</span>&nbsp;{{totalReservationSteps}}
+                        </h4>
+                        <form>
+                            <label>
+                                <span translate>reservation.step3.firstname<sup>*</sup></span>
+                                <input type="text">
+                            </label>
+                            <label>
+                                <span translate>reservation.step3.surname_or_lastname<sup>*</sup></span>
+                                <input type="text">
+                            </label>
+                            <label>
+                                <span translate>reservation.step3.date_of_birth<sup>*</sup></span>
+                                <input type="date">
+                            </label>
+                            <label>
+                                <span translate>reservation.step3.passed_away<sup>*</sup></span>
+                                <input type="date">
+                            </label>
+                            <label>
+                                <span translate>reservation.step3.gender<sup>*</sup></span>
+                                <input type="radio"> <span>Male</span>&nbsp;&nbsp;
+                                <input type="radio"> <span>Female</span>&nbsp;&nbsp;
+                            </label>
+                            <label>
+                                <span translate>reservation.step3.upload_photos</span>
+                                <button>
+                                    <span translate>reservation.step3.upload_photos&nbsp;&nbsp;</span>
+                                    <i class="fa fa-forward"></i>
+                                </button>
+                            </label>
+                        </form>
+                        <p class="tile">
+                            <img [src]=""/>
+                        </p>
+                        <p><sup>*</sup><span translate>reservation.step3.required</span></p>
+                        <form>
+                            <label>
+                                <button class="align-left" (click)="reservationPrevStep()">
+                                    <i class="fa fa-backward"></i>
+                                    <span translate>&nbsp;&nbsp;reservation.prev</span>
+                                </button>
+                                <button class="align-right" (click)="reservationNextStep()">
+                                    <span translate>reservation.next&nbsp;&nbsp;</span>
+                                    <i class="fa fa-forward"></i>
+                                </button>
+                            </label>
+                        </form>
+                    </div>
+                    <div *ngIf="(currentReservationStep == 4)">
+                        <h4>
+                            <span translate>reservation.title</span>&nbsp;
+                            <span translate>reservation.step4.information_about_death_person</span>&nbsp;
+                            <span translate>reservation.step</span>&nbsp;{{currentReservationStep}}
+                            <span translate>reservation.of</span>&nbsp;{{totalReservationSteps}}
+                        </h4>
+                        <form>
+                            <label>
+                                <span translate>reservation.step4.in_memoriam</span>
+                                <textarea class="large-box"></textarea>
+                            </label>
+                            <label>
+                                <span translate>reservation.step4.signature</span>
+                                <input type="text" class="align-right"/>
+                            </label>
+                            <label>
+                                <button class="align-left" (click)="reservationPrevStep()">
+                                    <i class="fa fa-backward"></i>
+                                    <span translate>&nbsp;&nbsp;reservation.prev</span>
+                                </button>
+                                <button class="align-right" (click)="reservationNextStep()">
+                                    <span translate>reservation.next&nbsp;&nbsp;</span>
+                                    <i class="fa fa-forward"></i>
+                                </button>
+                            </label>
+                        </form>
+                    </div>
+                    <div *ngIf="(currentReservationStep == 5)">
+                        <h4>
+                            <span translate>reservation.title</span>&nbsp;
+                            <span translate>reservation.step5.confirm_your_entry</span>&nbsp;
+                            <span translate>reservation.step</span>&nbsp;{{currentReservationStep}}
+                            <span translate>reservation.of</span>&nbsp;{{totalReservationSteps}}
+                        </h4>
+                        <form>
+                            <label>
+                                <span translate>reservation.step5.firstname</span>
+                            </label>
+                            <label>
+                                <span translate>reservation.step5.surname_or_lastname</span>
+                            </label>
+                            <label>
+                                <span translate>reservation.step5.date_of_birth</span>
+                            </label>
+                            <label>
+                                <span translate>reservation.step5.passed_away</span>
+                            </label>
+                            <label>
+                                <span translate>reservation.step5.gender</span>
+                            </label>
+                            <label>
+                                <button class="align-left" (click)="reservationPrevStep()">
+                                    <i class="fa fa-backward"></i>
+                                    <span translate>&nbsp;&nbsp;reservation.prev</span>
+                                </button>
+                                <button class="align-right" (click)="reservationNextStep()">
+                                    <span translate>reservation.next&nbsp;&nbsp;</span>
+                                    <i class="fa fa-forward"></i>
+                                </button>
+                            </label>
+                        </form>
+                    </div>
+                    <div *ngIf="(currentReservationStep == 6)">
+                        <h4>
+                            <span translate>reservation.title</span>&nbsp;
+                            <span translate>reservation.step</span>&nbsp;{{currentReservationStep}}
+                            <span translate>reservation.of</span>&nbsp;{{totalReservationSteps}}
+                        </h4>
+                        <h4>
+                            <span translate>reservation.step6.size_of_grave</span>&nbsp;
+                            <span>_1_</span>
+                            <span translate>reservation.step6.people</span>
+                        </h4>
+                        <p translate>reservation.step6.list_of_dead_people_in_communal_grave</p>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>1.</td>
+                                    <td>(NAME)</td>
+                                    <td>
+                                        <span translate>reservation.step6.passed_away</span>
+                                        <span>(PASSED)</span>
+                                    </td>
+                                    <td>
+                                        <button translate>reservation.step6.change</button>
+                                    </td>
+                                    <td>
+                                        <button translate>reservation.step6.remove</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <form>
+                            <label>
+                                <button class="align-right">
+                                    <span translate>reservation.step6.add_another_person</span>
+                                </button>
+                            </label>
+                        </form>
+                        <form>
+                            <label>
+                                <button class="align-left" (click)="reservationPrevStep()">
+                                    <i class="fa fa-backward"></i>
+                                    <span translate>&nbsp;&nbsp;reservation.prev</span>
+                                </button>
+                                <button class="align-right" (click)="reservationNextStep()" >
+                                    <span translate>reservation.step6.accept&nbsp;&nbsp;</span>
+                                    <i class="fa fa-forward"></i>
+                                </button>
+                            </label>
+                        </form>
+                    </div>
+                    <div *ngIf="(currentReservationStep == 7)">
+                        <h4>
+                            <span translate>reservation.title</span>&nbsp;
+                            <span translate>reservation.step7.confirm_please</span>&nbsp;
+                            <span translate>reservation.step</span>&nbsp;{{currentReservationStep}}
+                            <span translate>reservation.of</span>&nbsp;{{totalReservationSteps}}
+                        </h4>
+                        <p translate>reservation.step7.for</p>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>1.</td>
+                                    <td>(NAME)</td>
+                                    <td>
+                                        <span translate>reservation.step7.passed_away</span>
+                                        <span>(PASSED)</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <form>
+                            <label>
+                                <span translate>reservation.step7.burial_fee</span>
+                            </label>
+                            <label>
+                                <button class="align-left" (click)="reservationPrevStep()">
+                                    <i class="fa fa-backward"></i>
+                                    <span translate>&nbsp;&nbsp;reservation.prev</span>
+                                </button>
+                                <button class="align-right">
+                                    <span translate>reservation.step7.confirm&nbsp;&nbsp;</span>
+                                    <i class="fa fa-forward"></i>
+                                </button>
+                            </label>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -163,19 +163,27 @@
         }
     },
     "shop": {
+        "purchase_for_grave": "Purchase for grave",
+        "item_already_exists": "Item already exists",
         "tab": {
             "candles": "Candles",
             "funeral_flowers": "Funeral Flowers",
             "stones": "Stones",
             "others": "Others"
         },
-        "purchase_for_grave": "Purchase for grave",
         "form": {
             "dedication_signature": "Dedication/Signature",
             "your_first_and_last_name": "Your First & Last name",
             "back": "Back",
             "confirm": "Confirm",
-            "valid_upto": "Valid up to"
+            "valid_upto": "Valid up to",
+            "choose": "Choose",
+            "graveyard": "Graveyard",
+            "pet_graveyard": "Pet Graveyard",
+            "catacomb": "Catacomb",
+            "no_result_found": "No result found",
+            "enter_grave_number_for_new_candle_or_fresh_flower": "Enter grave number for new candle or fresh flowers",
+            "next": "Next"
         }
     },
     "contact_us":{
@@ -367,6 +375,138 @@
                 "no_data": "No Data",
                 "loading": "Loading Data"
             }
+        }
+    },
+    "graveyard_burial": {
+        "title": "Graveyard Burial",
+        "step": "Step",
+        "of": "of",
+        "prev": "Previous",
+        "next": "Next",
+        "step1": {
+            "choose": "Choose",
+            "graveyard": "Graveyard",
+            "catacomb": "Catacomb",
+            "choose_grave": "Choose Grave",
+            "single": "Single [for one person]",
+            "family": "Family [for two persons]",
+            "communal": "Communal [more than two persons]"
+        },
+        "step2": {
+            "choose_grave_stone": "Choose Grave-Stone"
+        },
+        "step3": {
+            "information_about_death_person": "Informations about Death Person",
+            "firstname": "First Name",
+            "surname_or_lastname": "Surname/Lastname",
+            "date_of_birth": "Date of Birth",
+            "passed_away": "Passed Away",
+            "gender": "Gender",
+            "upload_photos": "Upload Photos",
+            "required": "required"
+        },
+        "step4": {
+            "information_about_death_person": "Informations about Death Person",
+            "in_memoriam": "In memoriam",
+            "up_to_1500_characters": "up to 1500 characters",
+            "signature": "Signature"
+        },
+        "step5": {
+            "confirm_your_entry": "Confirm your entry",
+            "firstname": "First Name",
+            "surname_or_lastname": "Surname/Lastname",
+            "date_of_birth": "Date of Birth",
+            "passed_away": "Passed Away",
+            "gender": "Gender"
+        },
+        "step6": {
+            "size_of_grave": "Size of Grave",
+            "people": "People",
+            "list_of_dead_people_in_communal_grave": "List of dead people in Communal Grave",
+            "passed_away": "Passed Away",
+            "add_another_person": "Add another Person",
+            "accept": "Accept",
+            "change_grave_stone": "Change Grave-Stone",
+            "remove": "Remove",
+            "change": "Change"
+        },
+        "step7": {
+            "confirm_please": "Confirm please",
+            "choosen_grave": "Choosen Grave",
+            "passed_away": "Passed Away",
+            "single": "Single",
+            "double": "Double",
+            "for": "For",
+            "burial_fee": "Burial Fee",
+            "multi_layered_authentication_credit_cards": "Multi-layered credit cards",
+            "confirm": "Confirm"
+        }
+    },
+    "reservation": {
+        "title": "Reservation",
+        "step": "Step",
+        "of": "of",
+        "prev": "Previous",
+        "next": "Next",
+        "accept_terms": "I accept terms and condition",
+        "reject_terms": "I do not accept terms and condition",
+        "step1": {
+            "choose": "Choose",
+            "graveyard": "Graveyard",
+            "catacomb": "Catacomb",
+            "choose_grave": "Choose Grave",
+            "single": "Single [for one person]",
+            "family": "Family [for two persons]",
+            "communal": "Communal [more than two persons]"
+        },
+        "step2": {
+            "choose_grave_stone": "Choose Grave-Stone"
+        },
+        "step3": {
+            "information_about_death_person": "Informations about Death Person",
+            "firstname": "First Name",
+            "surname_or_lastname": "Surname/Lastname",
+            "date_of_birth": "Date of Birth",
+            "passed_away": "Passed Away",
+            "gender": "Gender",
+            "upload_photos": "Upload Photos",
+            "required": "required"
+        },
+        "step4": {
+            "information_about_death_person": "Informations about Death Person",
+            "in_memoriam": "In memoriam",
+            "up_to_1500_characters": "up to 1500 characters",
+            "signature": "Signature"
+        },
+        "step5": {
+            "confirm_your_entry": "Confirm your entry",
+            "firstname": "First Name",
+            "surname_or_lastname": "Surname/Lastname",
+            "date_of_birth": "Date of Birth",
+            "passed_away": "Passed Away",
+            "gender": "Gender"
+        },
+        "step6": {
+            "size_of_grave": "Size of Grave",
+            "people": "People",
+            "list_of_dead_people_in_communal_grave": "List of dead people in Communal Grave",
+            "passed_away": "Passed Away",
+            "add_another_person": "Add another Person",
+            "accept": "Accept",
+            "change_grave_stone": "Change Grave-Stone",
+            "remove": "Remove",
+            "change": "Change"
+        },
+        "step7": {
+            "confirm_please": "Confirm please",
+            "choosen_grave": "Choosen Grave",
+            "passed_away": "Passed Away",
+            "single": "Single",
+            "double": "Double",
+            "for": "For",
+            "burial_fee": "Burial Fee",
+            "multi_layered_authentication_credit_cards": "Multi-layered credit cards",
+            "confirm": "Confirm"
         }
     }
 }

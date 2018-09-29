@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   }
   
   ngAfterViewInit(){
-    this.backToMainGate();
+    //this.backToMainGate();
   }
 
   backToMainGate(): void {

@@ -163,19 +163,27 @@
         }
     },
     "shop": {
+        "purchase_for_grave": "Zakup grobu",
+        "item_already_exists": "Produkt już istnieje",
         "tab": {
             "candles": "Świece",
             "funeral_flowers": "Kwiaty pogrzebowe",
             "stones": "Kamienie",
             "others": "Inni"
         },
-        "purchase_for_grave": "Zakup grobu",
         "form": {
             "dedication_signature": "Dedykacja / podpis",
             "your_first_and_last_name": "Twoje imię i nazwisko",
             "back": "Plecy",
             "confirm": "Potwierdzać",
-            "valid_upto": "ważne upto"
+            "valid_upto": "ważne upto",
+            "graveyard": "Cmentarz",
+            "choose": "Wybierać",
+            "pet_graveyard": "Cmentarz dla zwierząt domowych",
+            "catacomb": "Katakumba",
+            "no_result_found": "nie znaleziono żadnych wyników",
+            "enter_grave_number_for_new_candle_or_fresh_flower": "Wprowadź liczbę grobu dla świecy lub świeżych kwiatów",
+            "next": "Kolejny"
         }
     },
     "contact_us":{
@@ -368,6 +376,138 @@
                 "loading": "Ładowanie danych",
                 "no_data": "Dane nieodnalezione"
             }
+        }
+    },
+    "graveyard_burial": {
+        "title": "Cmentarz pogrzebowy",
+        "step": "Krok",
+        "of": "z",
+        "prev": "Poprzedni",
+        "next": "Kolejny",
+        "step_one": {
+            "choose": "Wybierać",
+            "graveyard": "Cmentarz",
+            "catacomb": "Katakumba",
+            "choose_grave": "Wybierz Grave",
+            "single": "Pojedynczy [dla jednej osoby]",
+            "family": "Rodzina [dwuosobowy]",
+            "communal": "Wspólny [więcej niż dwie osoby]"
+        },
+        "step2": {
+            "choose_grave_stone": "Wybierz Grave-Stone"
+        },
+        "step3": {
+            "information_about_death_person": "Informacje na temat osoby zmarłej",
+            "firstname": "Imię",
+            "surname_or_lastname": "Nazwisko",
+            "date_of_birth": "Data urodzenia",
+            "passed_away": "Zmarł",
+            "gender": "Płeć",
+            "upload_photos": "Załadować zdjęcia",
+            "required": "wymagany"
+        },
+        "step4": {
+            "information_about_death_person": "Informacje na temat osoby zmarłej",
+            "in_memoriam": "Ku pamięci",
+            "up_to_1500_characters": "do 1500 znaków",
+            "signature": "Podpis"
+        },
+        "step5": {
+            "confirm_your_entry": "Potwierdź swój wpis",
+            "firstname": "Imię",
+            "surname_or_lastname": "Nazwisko",
+            "date_of_birth": "Data urodzenia",
+            "passed_away": "Zmarł",
+            "gender": "Płeć"
+        },
+        "step6": {
+            "size_of_grave": "Rozmiar grobu",
+            "people": "Ludzie",
+            "list_of_dead_people_in_communal_grave": "Lista zmarłych w Komunalnym grobie",
+            "passed_away": "Zmarł",
+            "add_another_person": "Dodaj kolejną osobę",
+            "change_grave_stone": "Zmień Grave-Stone",
+            "accept": "Zaakceptować",
+            "remove": "Usunąć",
+            "change": "Zmiana"
+        },
+        "step7": {
+            "confirm_please": "Proszę potwierdzić",
+            "choosen_grave": "Wybrany grób",
+            "passed_away": "Zmarł",
+            "single": "Pojedynczy",
+            "double": "Podwójnie",
+            "for": "Dla",
+            "burial_fee": "Opłata pogrzebowa",
+            "multi_layered_authentication_credit_cards": "Wielowarstwowe karty kredytowe",
+            "confirm": "Potwierdzać"
+        }
+    },
+    "reservation": {
+        "title": "Rezerwacja",
+        "step": "Krok",
+        "of": "z",
+        "prev": "Poprzedni",
+        "next": "Kolejny",
+        "accept_terms": "Akceptuję warunki i warunki",
+        "reject_terms": "Nie akceptuję warunków i warunków",
+        "step_one": {
+            "choose": "Wybierać",
+            "graveyard": "Cmentarz",
+            "catacomb": "Katakumba",
+            "choose_grave": "Wybierz Grave",
+            "single": "Pojedynczy [dla jednej osoby]",
+            "family": "Rodzina [dwuosobowy]",
+            "communal": "Wspólny [więcej niż dwie osoby]"
+        },
+        "step2": {
+            "choose_grave_stone": "Wybierz Grave-Stone"
+        },
+        "step3": {
+            "information_about_death_person": "Informacje na temat osoby zmarłej",
+            "firstname": "Imię",
+            "surname_or_lastname": "Nazwisko",
+            "date_of_birth": "Data urodzenia",
+            "passed_away": "Zmarł",
+            "gender": "Płeć",
+            "upload_photos": "Załadować zdjęcia",
+            "required": "wymagany"
+        },
+        "step4": {
+            "information_about_death_person": "Informacje na temat osoby zmarłej",
+            "in_memoriam": "Ku pamięci",
+            "up_to_1500_characters": "do 1500 znaków",
+            "signature": "Podpis"
+        },
+        "step5": {
+            "confirm_your_entry": "Potwierdź swój wpis",
+            "firstname": "Imię",
+            "surname_or_lastname": "Nazwisko",
+            "date_of_birth": "Data urodzenia",
+            "passed_away": "Zmarł",
+            "gender": "Płeć"
+        },
+        "step6": {
+            "size_of_grave": "Rozmiar grobu",
+            "people": "Ludzie",
+            "list_of_dead_people_in_communal_grave": "Lista zmarłych w Komunalnym grobie",
+            "passed_away": "Zmarł",
+            "add_another_person": "Dodaj kolejną osobę",
+            "change_grave_stone": "Zmień Grave-Stone",
+            "accept": "Zaakceptować",
+            "remove": "Usunąć",
+            "change": "Zmiana"
+        },
+        "step7": {
+            "confirm_please": "Proszę potwierdzić",
+            "choosen_grave": "Wybrany grób",
+            "passed_away": "Zmarł",
+            "single": "Pojedynczy",
+            "double": "Podwójnie",
+            "for": "Dla",
+            "burial_fee": "Opłata pogrzebowa",
+            "multi_layered_authentication_credit_cards": "Wielowarstwowe karty kredytowe",
+            "confirm": "Potwierdzać"
         }
     }
 }

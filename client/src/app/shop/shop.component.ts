@@ -37,6 +37,8 @@ export class ShopComponent implements OnInit {
   isStoneShopFormVisible:boolean = false;
   isOtherShopFormVisible:boolean = false;
   isPaymentCompleted:boolean = false
+  isSelectedGraveNotAvailable:boolean = false;
+  isItemAlreadyExists:boolean = false;
   selectedCandlePriceString:string;
   selectedStonePriceString:string;
   selectedFlowerPriceString:string;
@@ -45,6 +47,9 @@ export class ShopComponent implements OnInit {
   selectedObjectCurrency:string;
   selectedObjectId:string;
   selectedObjectName:string;
+  searchGraveType:string;
+  searchGraveNumber:string;
+  noSearchResult:boolean = false;
   candlePrices: any[]=[];
   flowerPrices: any[]=[];
   stonePrices: any[]=[];
@@ -170,23 +175,37 @@ export class ShopComponent implements OnInit {
 
   closeShop() {
     this.isShopDialogOpen = false;
+    this.valid_upto = null;
+    this.dedication = null;
+    this.searchGraveType = null;
+    this.searchGraveNumber = null;
+    this.isCandleShopFormVisible = false;
+    this.isFlowerShopFormVisible = false;
+    this.isStoneShopFormVisible = false;
+    this.isOtherShopFormVisible = false;
   }
 
   openShop(data:any) {
-    if(data.selectedGrave && data.selectedGraveName){
-      this.selectedGraveId = data.selectedGrave;
-      this.selectedGraveName = data.selectedGraveName;
-      this.source = 'person-graveyard';
+    if(data){
+      this.isSelectedGraveNotAvailable = false;
+      if(data.selectedGrave && data.selectedGraveName){
+        this.selectedGraveId = data.selectedGrave;
+        this.selectedGraveName = data.selectedGraveName;
+        this.source = 'person-graveyard';
+      }
+      if(data.selectedAnimal && data.selectedAnimalName){
+        this.selectedGraveId = data.selectedAnimal;
+        this.selectedGraveName = data.selectedAnimalName;
+        this.source = 'animal-graveyard';
+      }
+      if(data.selectedCatacomb && data.selectedCatacombName){
+        this.selectedGraveId = data.selectedCatacomb;
+        this.selectedGraveName = data.selectedCatacombName;
+        this.source = 'catacomb';
+      }
     }
-    if(data.selectedAnimal && data.selectedAnimalName){
-      this.selectedGraveId = data.selectedAnimal;
-      this.selectedGraveName = data.selectedAnimalName;
-      this.source = 'animal-graveyard';
-    }
-    if(data.selectedCatacomb && data.selectedCatacombName){
-      this.selectedGraveId = data.selectedCatacomb;
-      this.selectedGraveName = data.selectedCatacombName;
-      this.source = 'catacomb';
+    else{
+      this.isSelectedGraveNotAvailable = true;
     }
 
     this.isShopDialogOpen = true;
@@ -322,7 +341,8 @@ export class ShopComponent implements OnInit {
     if(this.isPaymentCompleted)
       this.addObject();
   }
-  addObject(){debugger;
+  addObject(){
+    this.isItemAlreadyExists = false;
     let temp = 0;
     if(this.USER_INFO){
       if(this.source == 'person-graveyard'){
@@ -334,12 +354,10 @@ export class ShopComponent implements OnInit {
         this.dataService.createWithMethodAndOptions(this.options)
           .subscribe(result => {
             if(result['status'] && result['status'] == 'PERSON_OBJECT_ALREADY_EXISTS'){
-              alert('Item already exists');  
+              this.isItemAlreadyExists = true;
             }
 
             this.closeShop();
-            this.valid_upto = null;
-            this.dedication = null;
             this.messageService.sendMessage('RELOAD_PERSON_OBJECTS', {});
           });
       }
@@ -353,15 +371,13 @@ export class ShopComponent implements OnInit {
         this.dataService.createWithMethodAndOptions(this.options)
           .subscribe(result => {
             if(result['status'] && result['status'] == 'ANIMAL_OBJECT_ALREADY_EXISTS'){
-              alert('Item already exists');  
+              this.isItemAlreadyExists = true;
             }
             if(result['status'] && result['status'] == 'ANIMAL_NOT_EXISTS'){
               alert('Animal not exists');
             }
             
             this.closeShop();
-            this.valid_upto = null;
-            this.dedication = null;
             this.messageService.sendMessage('RELOAD_ANIMAL_OBJECTS', {});
           });
       }
@@ -375,12 +391,10 @@ export class ShopComponent implements OnInit {
         this.dataService.createWithMethodAndOptions(this.options)
           .subscribe(result => {
             if(result['status'] && result['status'] == 'PERSON_OBJECT_ALREADY_EXISTS'){
-              alert('Item already exists');  
+              this.isItemAlreadyExists = true;
             }
             
             this.closeShop();
-            this.valid_upto = null;
-            this.dedication = null;
             this.messageService.sendMessage('RELOAD_CATACOMB_OBJECTS', {});
           });
       }
@@ -420,6 +434,57 @@ export class ShopComponent implements OnInit {
     else{
       this.isPaymentCompleted = false;
       this.initPayPalConfig(currency, price);
+    }
+  }
+  searchGrave(){
+    this.noSearchResult = false;
+    if(this.searchGraveType == 'graveyard'){
+      this.options = this._global.refreshObject(this.options, ['limit=1', 'position=0', 'user_id='+ this.searchGraveNumber]);
+      this.dataService.getAllWithMethodAndOptions('PERSON_DETAILS', this._global.serializeAndURIEncode(this.options))
+        .subscribe(result => {
+          if(result.length > 0){
+            this.source = 'person-graveyard';
+            this.selectedGraveId = result[0].user_id;
+            this.selectedGraveName = result[0].name1 +' '+result[0].surname;
+            this.isSelectedGraveNotAvailable = false;
+          }
+          else{
+            this.noSearchResult = true;
+          }
+        }
+      );
+    }
+    if(this.searchGraveType == 'catacomb'){
+      this.options = this._global.refreshObject(this.options, ['limit=1', 'position=0', 'user_id='+ this.searchGraveNumber]);
+      this.dataService.getAllWithMethodAndOptions('PERSON_DETAILS', this._global.serializeAndURIEncode(this.options))
+        .subscribe(result => {
+          if(result.length > 0){
+            this.source = 'catacomb';
+            this.selectedGraveId = result[0].user_id;
+            this.selectedGraveName = result[0].name1 +' '+result[0].surname;
+            this.isSelectedGraveNotAvailable = false;
+          }
+          else{
+            this.noSearchResult = true;
+          }
+        }
+      );
+    }
+    if(this.searchGraveType == 'pet_graveyard'){
+      this.options = this._global.refreshObject(this.options, ['id='+this.searchGraveNumber]);
+      this.dataService.getAllWithMethodAndOptions('ANIMAL_DETAILS', this._global.serializeAndURIEncode(this.options))
+        .subscribe(result => {
+          if(result.length > 0){
+            this.source = 'animal-graveyard';
+            this.selectedGraveId = result[0].animal_id;
+            this.selectedGraveName = result[0].name;
+            this.isSelectedGraveNotAvailable = false;
+          }
+          else{
+            this.noSearchResult = true;
+          }
+        }
+      );
     }
   }
 }

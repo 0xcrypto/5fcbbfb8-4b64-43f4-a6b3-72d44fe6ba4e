@@ -157,6 +157,11 @@ export class AppGlobals {
     'assets/images/vg-right-logo.png',
     'assets/images/wall.png',
   ];
+  private GRAVE_TYPE=[
+    {
+      "": "name"
+    }
+  ];
   constructor(private localStorageService: LocalStorageService, private dataService: DataService) {
   }
   

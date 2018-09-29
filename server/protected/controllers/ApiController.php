@@ -69,6 +69,14 @@
 						$results = $this->getStoneTileImages($options);
 					else if($method == 'CARD_TILE_IMAGES')
 						$results = $this->getCardTileImages($options);
+					else if($method == 'GRAVE_SMALL_TILE_IMAGES')
+						$results = $this->getGraveSmallTileImages($options);
+					else if($method == 'GRAVE_LARGE_TILE_IMAGES')
+						$results = $this->getGraveLargeTileImages($options);
+					else if($method == 'CATACOMB_SMALL_TILE_IMAGES')
+						$results = $this->getCatacombSmallTileImages($options);
+					else if($method == 'CATACOMB_LARGE_TILE_IMAGES')
+						$results = $this->getCatacombLargeTileImages($options);
 					else if($method == 'LOGIN')
 						$results = $this->loginBuyerAndFetchGraves($options);
 						else if($method == 'ADVERTISEMENTS')
@@ -817,6 +825,50 @@
 			$d->close();
 
 			return ($data); 
+		}
+
+		private function getGraveSmallTileImages($options = NULL){
+			$data = array(); 
+			$d = dir("../client/dist/assets/images/graves/mini/");
+			while (false !== ($entry = $d->read())) {
+			if($entry=='.' || $entry=='..') continue;
+				$data[]=$entry;
+			}
+			$d->close();
+			return ($data);
+		}
+
+		private function getGraveLargeTileImages($options = NULL){
+			$data = array(); 
+			$d = dir("../client/dist/assets/images/graves/maxi/");
+			while (false !== ($entry = $d->read())) {
+			if($entry=='.' || $entry=='..') continue;
+				$data[]=$entry;
+			}
+			$d->close();
+			return ($data);
+		}
+		
+		private function getCatacombSmallTileImages($options = NULL){
+			$data = array(); 
+			$d = dir("../client/dist/assets/images/graves/katak_mini/");
+			while (false !== ($entry = $d->read())) {
+			if($entry=='.' || $entry=='..') continue;
+				$data[]=$entry;
+			}
+			$d->close();
+			return ($data);
+		}
+
+		private function getCatacombLargeTileImages($options = NULL){
+			$data = array(); 
+			$d = dir("../client/dist/assets/images/graves/katak_maxi/");
+			while (false !== ($entry = $d->read())) {
+			if($entry=='.' || $entry=='..') continue;
+				$data[]=$entry;
+			}
+			$d->close();
+			return ($data);
 		}
 
 		/***

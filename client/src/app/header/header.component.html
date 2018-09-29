@@ -30,7 +30,7 @@
                 <li class="inline" *ngIf="!_dialog.isDialogOpen && (IS_GUEST=='YES')" translate (click)="openUserMgtDialog();">header.menu.login</li>
                 <li class="inline" *ngIf="(IS_GUEST=='NO')" translate (click)="logOut();">header.menu.logout</li>
                 
-                <li class="inline" routerLink="/home/1" translate>header.menu.exit</li>
+                <li class="inline" routerLink="/home" translate>header.menu.exit</li>
                 <div class="clear"></div>
                 <app-sound></app-sound>
                
