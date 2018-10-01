@@ -13,6 +13,12 @@
 .hide{
     display: none;
 }
+.featured{
+    color: #ff0;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
 table button{
     background: none;
     color: #fff;
@@ -25,6 +31,9 @@ table button{
     overflow-y: auto;
     overflow-x: hidden;
     height: 350px;
+}
+.tile-scroll-content.small-height{
+    height: 300px;
 }
 .large-box{
     width: 100%;
@@ -46,6 +55,10 @@ table button{
     display: inline-block;
     margin: 5px;
     padding: 0;
+    position: relative;
+}
+.tile.selected{
+    border: 1px solid #b2973d;
 }
 .tile img{
     width: 75px;
@@ -57,6 +70,7 @@ table button{
     display: none;
     width: 200px;
     height: 200px;
+    z-index: 1;
     border: 1px solid #808080;
     background-size:contain; 
     background-repeat: no-repeat;

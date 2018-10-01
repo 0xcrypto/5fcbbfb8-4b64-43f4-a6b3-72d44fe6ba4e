@@ -39,14 +39,37 @@ export class PersonNoticeboardComponent implements OnInit {
   selectedSearchAlphabet:string = null;
   selectedSceneTime:number = 1;
   selectedSceneSeason:number = 1;
-  currentBurialStep:number = 1;
-  totalBurialSteps:number = 7;
+
+  /* RESERVATION INFORMATION */
   isReservationTermsVisible:boolean = true;
   currentReservationStep:number = 1;
   totalReservationSteps:number = 7;
-  selectedCommunity:string;
-  datalimit = 15;
 
+  /* GRAVEYARD BURIAL INFORMATION */
+  currentBurialStep:number = 1;
+  totalBurialSteps:number = 7;
+  graveyardBurialSelectedCommunity:string;
+  uniqueBurialId:string;
+  uniqueReservationId:string;
+  uploadedBurialImage:number = 0;
+  totalBurialImages:number = 7;
+  selectedGraveyardBurialType:string;
+  selectedGraveyardBurialSubType:string;
+  selectedGraveyardBurialImage:string;
+  graveyardBurialFirstname:string;
+  graveyardBurialLastname:string;
+  graveyardBurialDOB:string;
+  graveyardBurialDOD:string;
+  graveyardBurialGender:string;
+  graveyardBurialInMemoriam:string;
+  graveyardBurialSignature:string;
+  graveyardBurialSize:number = 0;
+  graveyardBurialClanName:string;
+  isGraveyardBurialSubTypeVisible:boolean = false;
+  graveyardBurialCommunities:any[]=[];
+  graveyardBurialImages:any[]=[];
+  graveyardBurialEntries:any[]=[];
+  
   deadlistPages: number[] = [];
   searchedDeadPages: number[] = [];
   advertisements: Advertisement[] = [];
@@ -54,8 +77,8 @@ export class PersonNoticeboardComponent implements OnInit {
   searchedUsers: User[] = [];
   prioritizeGraves: User[] = [];
   grave_stones: any[] = [];
-  communities:any[]=[];
   
+  datalimit = 15;
   router:Router = null;
   currentLang:string = null;
   alphabetPages: any[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -80,6 +103,7 @@ export class PersonNoticeboardComponent implements OnInit {
   ngOnInit() {
     this.selectedTab = 'graveyard-noticeboard';
     this.currentLang = this._global.getLanguage();
+    this.uniqueReservationId = this.getUniqueCode(50);
 
     this.getAdvertisements();
     this.getVisibleGraves();
@@ -87,7 +111,7 @@ export class PersonNoticeboardComponent implements OnInit {
     this.options = this._global.refreshObject(this.options, []);
     this.dataService.getAllWithMethodAndOptions('COMMUNITIES', this._global.serializeAndURIEncode(this.options))
     .subscribe(result => {
-      this.communities = result;
+      this.graveyardBurialCommunities = result;
     });
     
     if(this.localStorageService.get(this._global.GRAVEYARD_RETURN_TAB) &&
@@ -289,6 +313,13 @@ export class PersonNoticeboardComponent implements OnInit {
       'order=user_id', 'death_date=zmarli'];
       this.loadData(parameters);
     }
+
+    if(this.selectedTab == 'graveyard-burial'){
+      this.isGraveyardBurialSubTypeVisible = false;
+      this.uniqueBurialId = this.getUniqueCode(50);
+      this.graveyardBurialImages = [];
+      this.uploadedBurialImage = 0;
+    }
   }
 
   loadData(parameters:string[]){
@@ -398,6 +429,115 @@ export class PersonNoticeboardComponent implements OnInit {
   }
   burialNextStep(){
     this.currentBurialStep++;
+
+    if(this.currentBurialStep == 2){
+      if(this.selectedGraveyardBurialType == 'graveyard'){
+        if(this.selectedGraveyardBurialSubType == 'single'){
+          this.graveyardBurialSize = 1;
+          this.options = this._global.refreshObject(this.options, ['grave_type=Graveyard_Single', 'community=Atheistic']);
+          this.dataService.getAllWithMethodAndOptions('PERSON_GRAVE_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
+          .subscribe(result => {
+            this.grave_stones = result;
+      
+            for(var i=0; i<=this.grave_stones.length-1; i++){
+              this.grave_stones[i].data = this.grave_stones[i].grave;
+              this.grave_stones[i].min = './assets/images/graves/mini/'+ this.grave_stones[i].grave+'.jpg';
+              this.grave_stones[i].max = './assets/images/graves/maxi/'+ this.grave_stones[i].grave+'.jpg';
+            }
+          });
+        }
+        else if(this.selectedGraveyardBurialSubType == 'family'){
+          this.graveyardBurialSize = 2;
+          this.options = this._global.refreshObject(this.options, ['grave_type=Graveyard_Family']);
+          this.dataService.getAllWithMethodAndOptions('PERSON_GRAVE_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
+          .subscribe(result => {
+            this.grave_stones = result;
+      
+            for(var i=0; i<=this.grave_stones.length-1; i++){
+              this.grave_stones[i].data = this.grave_stones[i].grave;
+              this.grave_stones[i].min = './assets/images/graves/mini/'+ this.grave_stones[i].grave+'.jpg';
+              this.grave_stones[i].max = './assets/images/graves/maxi/'+ this.grave_stones[i].grave+'.jpg';
+            }
+          });
+        }
+        else if(this.selectedGraveyardBurialSubType == 'communal'){
+          this.options = this._global.refreshObject(this.options, ['grave_type=Graveyard_Communal']);
+          this.dataService.getAllWithMethodAndOptions('PERSON_GRAVE_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
+          .subscribe(result => {
+            this.grave_stones = result;
+      
+            for(var i=0; i<=this.grave_stones.length-1; i++){
+              this.grave_stones[i].data = this.grave_stones[i].grave;
+              this.grave_stones[i].min = './assets/images/graves/mini/'+ this.grave_stones[i].grave+'.jpg';
+              this.grave_stones[i].max = './assets/images/graves/maxi/'+ this.grave_stones[i].grave+'.jpg';
+            }
+          });
+        }
+      }
+      else if(this.selectedGraveyardBurialType == 'catacomb'){
+        this.graveyardBurialSize = 1;
+        this.options = this._global.refreshObject(this.options, ['grave_type=Catacombs']);
+        this.dataService.getAllWithMethodAndOptions('PERSON_GRAVE_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
+        .subscribe(result => {
+          this.grave_stones = result;
+    
+          for(var i=0; i<=this.grave_stones.length-1; i++){
+            this.grave_stones[i].data = this.grave_stones[i].grave;
+            this.grave_stones[i].min = './assets/images/graves/katak_mini/'+ this.grave_stones[i].grave+'.jpg';
+            this.grave_stones[i].max = './assets/images/graves/katak_maxi/'+ this.grave_stones[i].grave+'.jpg';
+          }
+        });
+      }
+    }
+    if(this.currentBurialStep == 5){
+      //'type': this.selectedGraveyardBurialType,
+      //'sub_type': this.selectedGraveyardBurialSubType,
+      if (this.graveyardBurialEntries.some((p) => p.firstname == this.graveyardBurialFirstname))
+        return; 
+      
+      let entry = {
+        'firstname': this.graveyardBurialFirstname,
+        'lastname': this.graveyardBurialLastname,
+        'dob': this.graveyardBurialDOB,
+        'dod': this.graveyardBurialDOD,
+        'gender': this.graveyardBurialGender,
+        'in_memoriam': this.graveyardBurialInMemoriam,
+        'signature': this.graveyardBurialSignature,
+        'images': this.graveyardBurialImages
+      }
+      this.graveyardBurialEntries.push(entry);
+      this.graveyardBurialImages = [];
+      
+    }
+  }
+  addAnotherPersonInGraveyardBurial(){
+    this.graveyardBurialFirstname = null;
+    this.graveyardBurialLastname = null;
+    this.graveyardBurialDOB = null;
+    this.graveyardBurialDOD = null;
+    this.graveyardBurialGender = null;
+    this.graveyardBurialInMemoriam = null;
+    this.graveyardBurialSignature = null;
+    this.graveyardBurialImages = [];
+    this.currentBurialStep = 3;
+  }
+  changeGraveyardBurialPerson(person:any){
+    this.graveyardBurialFirstname = person.firstname;
+    this.graveyardBurialLastname = person.lastname;
+    this.graveyardBurialDOB = person.dob;
+    this.graveyardBurialDOD = person.dod;
+    this.graveyardBurialGender = person.gender;
+    this.graveyardBurialInMemoriam = person.in_memoriam;
+    this.graveyardBurialSignature = person.signature;
+    this.graveyardBurialImages = person.images;
+    this.currentBurialStep = 3;
+  }
+  removeGraveyardBurialPerson(person:any){
+    this.graveyardBurialEntries = this.graveyardBurialEntries
+      .filter(p => p.firstname !== person.firstname);
+    if(this.graveyardBurialEntries.length == 0){
+      this.currentBurialStep = 3;
+    }
   }
   acceptReservationTerms(){
     this.isReservationTermsVisible = false;
@@ -412,34 +552,59 @@ export class PersonNoticeboardComponent implements OnInit {
     this.currentReservationStep++;
   }
   selectCommunity(){
-    this.options = this._global.refreshObject(this.options, ['community='+this.selectedCommunity]);
+    this.options = this._global.refreshObject(this.options, ['community='+this.graveyardBurialSelectedCommunity, 'grave_type=Graveyard_Single']);
     this.dataService.getAllWithMethodAndOptions('PERSON_GRAVE_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
     .subscribe(result => {
       this.grave_stones = result;
 
       for(var i=0; i<=this.grave_stones.length-1; i++){
+        this.grave_stones[i].data = this.grave_stones[i].grave;
         this.grave_stones[i].min = './assets/images/graves/mini/'+ this.grave_stones[i].grave+'.jpg';
         this.grave_stones[i].max = './assets/images/graves/maxi/'+ this.grave_stones[i].grave+'.jpg';
       }
     });
   }
-  uploadBurialPhotos(fileList:any){debugger;
+  uploadBurialPhotos(fileList:any){
+    if(this.uploadedBurialImage == this.totalBurialImages)
+      return;
+    
     let headers = new HttpHeaders();
     headers.set('Content-Type', null);
     headers.set('Accept', "multipart/form-data");
     const formData = new FormData();
-      formData.append('file', fileList[0]);
-    
-    formData.append('unique_id',this.generate_token(50));
+    formData.append('file', fileList[0]);
+    formData.append('unique_id',this.uniqueBurialId);
     formData.append('method', 'ADD_PERSON_TEMP_PHOTO');
-    
+    if(this.uploadedBurialImage == 0){
+      formData.append('is_portrait', '1');
+    }
+      
     this.dataService.uploadWithMethodAndOptions(formData, headers)
       .subscribe(result => {
-        debugger;
+        this.uploadedBurialImage++;
+        this.options = this._global.refreshObject(this.options, ['unique_id='+this.uniqueBurialId]);
+        this.dataService.getAllWithMethodAndOptions('PERSON_TEMP_PHOTOS', this._global.serializeAndURIEncode(this.options))
+        .subscribe(result => {
+          this.graveyardBurialImages = result;
+          for(let i=0;i<this.graveyardBurialImages.length;i++) {
+            this.graveyardBurialImages[i].is_portrait = (parseInt(this.graveyardBurialImages[i].is_portrait) == 1) ? true : false;
+            this.graveyardBurialImages[i].url = './assets/images/zdjecia/large/'+this.graveyardBurialImages[i].file_name;
+          }
+        });
     });
   }
-
-  generate_token(length){
+  changeGraveyardBurialType(){
+    if(this.selectedGraveyardBurialType == 'graveyard'){
+      this.isGraveyardBurialSubTypeVisible = true;
+    }
+    else{
+      this.isGraveyardBurialSubTypeVisible = false;
+    }
+  }
+  selectGraveImage(data:any){
+    this.selectedGraveyardBurialImage = data;
+  }
+  getUniqueCode(length){
     var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
     var b = [];  
     for (var i=0; i<length; i++) {

@@ -2,6 +2,7 @@
 	class ApiController extends Controller
 	{
 		const APPLICATION_ID = 'ASCCPE';
+		const CLIENT_APP_PHOTOS_FOLDER = "../../../client/dist/assets/images/zdjecia/";
 		const CONFIG = array(
             'HOST_ADDRESS'=>'www.wirtualnycmentarz.pl'
         );
@@ -845,10 +846,15 @@
 		/***
 		 	REQUIRED PARAMETERS
 			--------------------
+			$options['grave_type']
+
+			OPTIONAL PARAMETERS
 			$options['community']
 		***/
 		private function getPersonGraveTileImages($options = NULL){
-			$query = "SELECT grave as grave FROM communal_graves WHERE community='".$options['community']."'";
+			$query = "SELECT grave as grave FROM grave_master WHERE  grave_type='".$options['grave_type']."'";
+			(isset($options['community'])) ? $query.=" AND community='".$options['community']."'": "";
+
             $result = Yii::app()->db->createCommand($query)->queryAll();
 
             $count_query="SELECT count(*) as total FROM ($query) t";
@@ -1317,7 +1323,7 @@
 		***/
 		
 		private function getCommunities($options = NULL){
-            $query = "SELECT DISTINCT community as community FROM communal_graves";
+            $query = "SELECT DISTINCT community as community FROM grave_master";
             $result = Yii::app()->db->createCommand($query)->queryAll();
 
             $count_query="SELECT count(*) as total FROM ($query) t";
@@ -1696,25 +1702,27 @@
 		***/
 
 		private function addPersonTemporaryPhoto($options = NULL, $files = NULL){
+			$clientImageFolderPath = $this->getClientImageFolderPath();
 			$data = array();
 			$is_portrait = isset($options['is_portrait']) ? 1 : 0 ;
 			$unique_id = $options['unique_id'];
-			$large_path =  "./zdjecia/large/";
-			$thumb_path =  "./zdjecia/thumb/";
+			$large_path =  $clientImageFolderPath."zdjecia/large/";
+			$thumb_path =  $clientImageFolderPath."zdjecia/thumb/";
 			$prefix = "user_";
 			$filename = $prefix.md5(uniqid(rand(), true)).".jpg";
-			$tmp_name = $_FILES["image"]["tmp_name"][$key];
+			$tmp_name = $_FILES["file"]["tmp_name"];
 			$query="insert into users_photos_temp (uniq_id, file_name, is_portrait) values ('$unique_id','$filename',$is_portrait)";
 			$result = Yii::app()->db->createCommand($query)->execute();
+			$result = true;
 			if($result){
 				if($is_portrait){
-					$this->cyberResizeImage($tmp_name, 200, 265, $thumb_path.'/'.$filename);
+					$this->cyberResizeImage($tmp_name, 200, 265, $thumb_path.$filename);
 				}
 				else{
-					$this->cyberResizeImage($tmp_name, 170, 130, $thumb_path.'/'.$filename);
+					$this->cyberResizeImage($tmp_name, 170, 130, $thumb_path.$filename);
 				}
 
-				$this->cyberResizeImage($tmp_name, 640, 480, $large_path.'/'.$filename);
+				$this->cyberResizeImage($tmp_name, 640, 480, $large_path.$filename);
 				
 				$data['status'] = 'SUCCESS';
 			}
@@ -1734,25 +1742,26 @@
 		***/
 
 		private function addAnimalTemporaryPhoto($options = NULL){
+			$clientImageFolderPath = $this->getClientImageFolderPath();
 			$data = array();
 			$is_portrait = isset($options['is_portrait']) ? 1 : 0 ;
 			$unique_id = $options['unique_id'];
-			$large_path =  "./zdjecia/large/";
-			$thumb_path =  "./zdjecia/thumb/";
+			$large_path =  $clientImageFolderPath."zdjecia/large/";
+			$thumb_path =  $clientImageFolderPath."zdjecia/thumb/";
 			$prefix = "animal_";
 			$filename = $prefix.md5(uniqid(rand(), true)).".jpg";
-			$tmp_name = $_FILES["image"]["tmp_name"][$key];
+			$tmp_name = $_FILES["image"]["tmp_name"];
 			$query="insert into animals_photos_temp (uniq_id, file_name, is_portrait) values ('$unique_id','$filename',$is_portrait)";
 			$result = Yii::app()->db->createCommand($query)->execute();
 			if($result){
 				if($is_portrait){
-					$this->cyberResizeImage($tmp_name, 200, 265, $thumb_path.'/'.$filename);
+					$this->cyberResizeImage($tmp_name, 200, 265, $thumb_path.$filename);
 				}
 				else{
-					$this->cyberResizeImage($tmp_name, 170, 130, $thumb_path.'/'.$filename);
+					$this->cyberResizeImage($tmp_name, 170, 130, $thumb_path.$filename);
 				}
 				
-				$this->cyberResizeImage($tmp_name, 640, 480, $large_path.'/'.$filename);
+				$this->cyberResizeImage($tmp_name, 640, 480, $large_path.$filename);
 				
 				$data['status'] = 'SUCCESS';
 			}
@@ -1770,14 +1779,15 @@
 		***/
 
 		private function deletePersonTemporaryPhoto($options = NULL){
+			$clientImageFolderPath = $this->getClientImageFolderPath();
 			$query="delete from users_photos_temp where uniq_id='".$options['uniq_id']."' and file_name='".$options['file_name']."'";
 			$result = Yii::app()->db->createCommand($query)->execute();
-			$large_path =  "./zdjecia/large/";
-			$thumb_path =  "./zdjecia/thumb/";
+			$large_path =  $clientImageFolderPath."zdjecia/large/";
+			$thumb_path =  $clientImageFolderPath."zdjecia/thumb/";
 			$data = array();
 			if($result){
-				@unlink($large_path.'/'.$options['file_name']);
-				@unlink($thumb_path.'/'.$options['file_name']);
+				@unlink($large_path.$options['file_name']);
+				@unlink($thumb_path.$options['file_name']);
 				$data['status'] = 'SUCCESS';
 			}
 			else{
@@ -1796,12 +1806,12 @@
 		private function deleteAnimalTemporaryPhoto($options = NULL){
 			$query="delete from animals_photos_temp where uniq_id='".$options['uniq_id']."' and file_name='".$options['file_name']."'";
 			$result = Yii::app()->db->createCommand($query)->execute();
-			$large_path =  "./zdjecia/large/";
-			$thumb_path =  "./zdjecia/thumb/";
+			$large_path =  $clientImageFolderPath."zdjecia/large/";
+			$thumb_path =  $clientImageFolderPath."zdjecia/thumb/";
 			$data = array();
 			if($result){
-				@unlink($large_path.'/'.$options['file_name']);
-				@unlink($thumb_path.'/'.$options['file_name']);
+				@unlink($large_path.$options['file_name']);
+				@unlink($thumb_path.$options['file_name']);
 				$data['status'] = 'SUCCESS';
 			}
 			else{
@@ -2078,6 +2088,81 @@
                     break;
             }
             return $result;
-        }
+		}
+		
+		private function getClientImageFolderPath(){
+			return dirname(getcwd())."/client/dist/assets/images/";
+		}
+
+		private function cyberResizeImage($source, $max_x, $max_y, $save_image, $jpeg_quality = 95) {
+			/*
+			 * source - obrazek jpeg
+			 * max_x - maksymalna szerokosc pomniejszonego obrazka
+			 * max_y - maksymalna dlugosc pomniejszonego obrazka
+			 * save_image - nazwa pliku do ktorego zostanie zapisany nowy obrazek
+			 * jpeg_quality - jakosc powstalego obrazu jpeg - jezeli bedzie inny to argument jest nie wazny (domyslnie 100)
+			 * je�eli jakis wymiar obrazka jest mniejszt ni� docelowe wymiart to dodawane jest obramowanie
+			 * z g�ry/do�u i/lub lewej/prawej obecnie ustawione na lolor bia�t ( 255,255,255))
+			 */
+	   
+			   if(@exif_imagetype($source) == IMAGETYPE_JPEG)
+			   {
+				  $img_src = imagecreatefromjpeg($source);
+			   }
+			   elseif(@exif_imagetype($source) == IMAGETYPE_GIF)
+			   {
+				  $img_src = imagecreatefromgif($source);
+			   }
+			   elseif(@exif_imagetype($source) == IMAGETYPE_PNG)
+			   {
+				  $img_src = imagecreatefrompng($source);
+			   }
+			   else
+			   {
+				  return false;
+			   }
+	   
+			$image_x = imagesx($img_src);
+			$image_y = imagesy($img_src);
+				 if ( ($image_x > $max_x) OR ($image_y > $max_y) )
+				 {
+					 $ratio_x = $max_x/$image_x;
+					 if (($ratio_x*$image_y)<$max_y)
+					 {
+						 $ratio_y = $ratio_x;
+					 }
+					 else
+					 {
+						 $ratio_y = $max_y/$image_y;
+						 $ratio_x = $ratio_y;
+					 }
+				 }
+				 else
+				 {
+					 $ratio_x = $ratio_y = 1;
+				 }
+				 $new_x = $image_x*$ratio_x;
+				 $new_y = $image_y*$ratio_y;
+				 $move_x = ($max_x - $new_x )/2;
+				 $move_y = ($max_y - $new_y )/2;
+	   
+			   $new_img = imagecreatetruecolor($max_x, $max_y);
+			   $background = imagecolorallocate($new_img, 0, 0, 0);
+			   imagefill($new_img, 0, 0, $background);
+			   imagecopyresampled($new_img, $img_src, $move_x, $move_y, 0, 0, $new_x, $new_y, $image_x, $image_y);
+			   if(exif_imagetype($source) == IMAGETYPE_JPEG)
+			   {
+				  imagejpeg($new_img, $save_image, $jpeg_quality);
+			   }
+			   elseif(exif_imagetype($source) == IMAGETYPE_GIF)
+			   {
+				  imagegif($new_img, $save_image);
+			   }
+			   elseif(exif_imagetype($source) == IMAGETYPE_PNG)
+			   {
+				  imagepng($new_img, $save_image);
+			   }
+			   return true;
+		}
 	}
 ?>

@@ -393,7 +393,9 @@
             "communal": "Communal [more than two persons]"
         },
         "step2": {
-            "choose_grave_stone": "Choose Grave-Stone"
+            "choose_grave_stone": "Choose Grave-Stone",
+            "name_of_clan": "Name of the Clan/Name of Grave",
+            "enter_size": "Enter size of grave (how many people)"
         },
         "step3": {
             "information_about_death_person": "Informations about Death Person",
@@ -417,7 +419,9 @@
             "surname_or_lastname": "Surname/Lastname",
             "date_of_birth": "Date of Birth",
             "passed_away": "Passed Away",
-            "gender": "Gender"
+            "gender": "Gender",
+            "in_memoriam": "In memoriam",
+            "signature": "Signature"
         },
         "step6": {
             "size_of_grave": "Size of Grave",

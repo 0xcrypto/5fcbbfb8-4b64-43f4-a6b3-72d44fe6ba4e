@@ -394,7 +394,9 @@
             "communal": "Wspólny [więcej niż dwie osoby]"
         },
         "step2": {
-            "choose_grave_stone": "Wybierz Grave-Stone"
+            "choose_grave_stone": "Wybierz Grave-Stone",
+            "name_of_clan": "Nazwa klanu / nazwa grobu",
+            "enter_size": "Wprowadź rozmiar grobu (ilu ludzi)"
         },
         "step3": {
             "information_about_death_person": "Informacje na temat osoby zmarłej",
@@ -418,7 +420,9 @@
             "surname_or_lastname": "Nazwisko",
             "date_of_birth": "Data urodzenia",
             "passed_away": "Zmarł",
-            "gender": "Płeć"
+            "gender": "Płeć",
+            "in_memoriam": "Ku pamięci",
+            "signature": "Podpis"
         },
         "step6": {
             "size_of_grave": "Rozmiar grobu",

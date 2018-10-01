@@ -220,14 +220,14 @@
                     <form>
                         <label>
                             <span translate>graveyard_burial.step1.choose</span>
-                            <select name="graveyardBurialType" [(ngModel)]="graveyardBurialType">
+                            <select name="selectedGraveyardBurialType" [(ngModel)]="selectedGraveyardBurialType" (change)="changeGraveyardBurialType();">
                                 <option value="graveyard" translate>graveyard_burial.step1.graveyard</option>
                                 <option value="catacomb" translate>graveyard_burial.step1.catacomb</option>
                             </select>
                         </label>
-                        <label>
+                        <label *ngIf="isGraveyardBurialSubTypeVisible">
                             <span translate>graveyard_burial.step1.choose_grave</span>
-                            <select name="graveyardBurialSubType" [(ngModel)]="graveyardBurialSubType">
+                            <select name="selectedGraveyardBurialSubType" [(ngModel)]="selectedGraveyardBurialSubType">
                                 <option value="single" translate>graveyard_burial.step1.single</option>
                                 <option value="family" translate>graveyard_burial.step1.family</option>
                                 <option value="communal" translate>graveyard_burial.step1.communal</option>
@@ -247,12 +247,24 @@
                         <span translate>graveyard_burial.step2.choose_grave_stone</span>&nbsp;
                         <span translate>graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
                         <span translate>graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}&nbsp;
-                        <select (change)="selectCommunity();" name="selectedCommunity" [(ngModel)]="selectedCommunity">
-                            <option *ngFor="let object of communities" [value]="object.community">{{object.community}}</option>
+                        <select *ngIf="(selectedGraveyardBurialType == 'graveyard' && selectedGraveyardBurialSubType == 'single')" 
+                             (change)="selectCommunity();" name="graveyardBurialSelectedCommunity" [(ngModel)]="graveyardBurialSelectedCommunity">
+                            <option *ngFor="let object of graveyardBurialCommunities" [value]="object.community">{{object.community}}</option>
                         </select>
                     </h4>
-                    <div class="tile-scroll-content">
-                        <div class="tile" *ngFor="let stone of grave_stones">
+                    <form *ngIf="(selectedGraveyardBurialType == 'graveyard' && selectedGraveyardBurialSubType == 'communal')">
+                        <label>
+                            <span translate>graveyard_burial.step2.name_of_clan</span>
+                            <input type="text" [(ngModel)]="graveyardBurialClanName" name="graveyardBurialClanName"/>
+                        </label>
+                        <label>
+                            <span translate>graveyard_burial.step2.enter_size</span>
+                            <input type="text" [(ngModel)]="graveyardBurialSize" name="graveyardBurialSize"/>
+                        </label>
+                    </form>
+                    <div class="tile-scroll-content" [ngClass]="{'small-height': (selectedGraveyardBurialType == 'graveyard' && selectedGraveyardBurialSubType == 'communal')}">
+                        <div class="tile" *ngFor="let stone of grave_stones" 
+                            [ngClass]="{'selected': (selectedGraveyardBurialImage == stone.data)}" (click)="selectGraveImage(stone.data)">
                             <img [src]="stone.min"/>
                             <div class="img-hover" [ngStyle]="{'background-image': 'url(' + stone.max + ')'}"></div>
                         </div>
@@ -280,36 +292,39 @@
                     <form>
                         <label>
                             <span translate>graveyard_burial.step3.firstname<sup>*</sup></span>
-                            <input type="text">
+                            <input type="text" [(ngModel)]="graveyardBurialFirstname" name="graveyardBurialFirstname">
                         </label>
                         <label>
                             <span translate>graveyard_burial.step3.surname_or_lastname<sup>*</sup></span>
-                            <input type="text">
+                            <input type="text" [(ngModel)]="graveyardBurialLastname" name="graveyardBurialLastname">
                         </label>
                         <label>
                             <span translate>graveyard_burial.step3.date_of_birth<sup>*</sup></span>
-                            <input type="date">
+                            <input type="date" [(ngModel)]="graveyardBurialDOB" name="graveyardBurialDOB">
                         </label>
                         <label>
                             <span translate>graveyard_burial.step3.passed_away<sup>*</sup></span>
-                            <input type="date">
+                            <input type="date" [(ngModel)]="graveyardBurialDOD" name="graveyardBurialDOD">
                         </label>
                         <label>
                             <span translate>graveyard_burial.step3.gender<sup>*</sup></span>
-                            <input type="radio"> <span>Male</span>&nbsp;&nbsp;
-                            <input type="radio"> <span>Female</span>&nbsp;&nbsp;
+                            <input type="radio" value="Male" [(ngModel)]="graveyardBurialGender" name="graveyardBurialGender">
+                            <span style="width:50px;">Male</span>&nbsp;&nbsp;
+                            <input type="radio" value="Female" [(ngModel)]="graveyardBurialGender" name="graveyardBurialGender">
+                            <span style="width:50px;">Female</span>&nbsp;&nbsp;
                         </label>
                         <label>
                             <span translate>graveyard_burial.step3.upload_photos</span>
-                            <input #burialphoto type="file" name="burial-photo" id="burial-photo" style="display: none;" (change)="uploadBurialPhotos(burialphoto.files)"/>
+                            <input #burialphoto type="file" onclick="value = null" name="burial-photo" id="burial-photo" style="display: none;" (change)="uploadBurialPhotos(burialphoto.files)"/>
                             <button (click)="burialphoto.click();">
                                 <span translate>graveyard_burial.step3.upload_photos&nbsp;&nbsp;</span>
                                 <i class="fa fa-forward"></i>
                             </button>
                         </label>
                     </form>
-                    <p class="tile">
-                        <img [src]=""/>
+                    <p class="tile" *ngFor="let image of graveyardBurialImages">
+                        <span class="featured" *ngIf="image.is_portrait"><i class="fa fa-star"></i></span>
+                        <img [src]="image.url"/>
                     </p>
                     <p><sup>*</sup><span translate>graveyard_burial.step3.required</span></p>
                     <form>
@@ -335,11 +350,11 @@
                     <form>
                         <label>
                             <span translate>graveyard_burial.step4.in_memoriam</span>
-                            <textarea class="large-box"></textarea>
+                            <textarea class="large-box" [(ngModel)]="graveyardBurialInMemoriam" name="graveyardBurialInMemoriam"></textarea>
                         </label>
                         <label>
                             <span translate>graveyard_burial.step4.signature</span>
-                            <input type="text" class="align-right"/>
+                            <input type="text" class="align-right"  [(ngModel)]="graveyardBurialSignature" name="graveyardBurialSignature"/>
                         </label>
                         <label>
                             <button class="align-left" (click)="burialPrevStep()">
@@ -363,18 +378,27 @@
                     <form>
                         <label>
                             <span translate>graveyard_burial.step5.firstname</span>
+                            <span>{{graveyardBurialFirstname}}</span>
                         </label>
                         <label>
                             <span translate>graveyard_burial.step5.surname_or_lastname</span>
+                            <span>{{graveyardBurialLastname}}</span>
                         </label>
                         <label>
                             <span translate>graveyard_burial.step5.date_of_birth</span>
+                            <span>{{graveyardBurialDOB}}</span>
                         </label>
                         <label>
                             <span translate>graveyard_burial.step5.passed_away</span>
+                            <span>{{graveyardBurialDOD}}</span>
                         </label>
                         <label>
-                            <span translate>graveyard_burial.step5.gender</span>
+                            <span translate>graveyard_burial.step5.in_memoriam</span>
+                            <span>{{graveyardBurialInMemoriam}}</span>
+                        </label>
+                        <label>
+                            <span translate>graveyard_burial.step5.signature</span>
+                            <span>{{graveyardBurialSignature}}</span>
                         </label>
                         <label>
                             <button class="align-left" (click)="burialPrevStep()">
@@ -396,36 +420,39 @@
                     </h4>
                     <h4>
                         <span translate>graveyard_burial.step6.size_of_grave</span>&nbsp;
-                        <span>_1_</span>
+                        <span>{{graveyardBurialSize}}&nbsp;</span>
                         <span translate>graveyard_burial.step6.people</span>
                     </h4>
                     <p translate>graveyard_burial.step6.list_of_dead_people_in_communal_grave</p>
                     <table>
                         <tbody>
-                            <tr>
-                                <td>1.</td>
-                                <td>(NAME)</td>
+                            <tr *ngFor="let entry of graveyardBurialEntries; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{entry.firstname +' '+ entry.lastname}}</td>
                                 <td>
-                                    <span translate>graveyard_burial.step6.passed_away</span>
-                                    <span>(PASSED)</span>
+                                    <span translate>graveyard_burial.step6.passed_away&nbsp;</span>
+                                    <span>{{entry.dod}}</span>
                                 </td>
                                 <td>
-                                    <button translate>graveyard_burial.step6.change</button>
+                                    <button (click)="changeGraveyardBurialPerson(entry)" 
+                                    translate>graveyard_burial.step6.change</button>
                                 </td>
                                 <td>
-                                    <button translate>graveyard_burial.step6.remove</button>
+                                    <button (click)="removeGraveyardBurialPerson(entry)" 
+                                    translate>graveyard_burial.step6.remove</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                     <form>
                         <label>
-                            <button class="align-right">
+                            <button *ngIf="!(graveyardBurialSize == graveyardBurialEntries.length)"
+                            class="align-right" (click)="addAnotherPersonInGraveyardBurial()">
                                 <span translate>graveyard_burial.step6.add_another_person</span>
                             </button>
                         </label>
-                    </form>
-                    <form>
+                        <br/>
+                        <br/>
                         <label>
                             <button class="align-left" (click)="burialPrevStep()">
                                 <i class="fa fa-backward"></i>
@@ -448,12 +475,12 @@
                     <p translate>graveyard_burial.step7.for</p>
                     <table>
                         <tbody>
-                            <tr>
-                                <td>1.</td>
-                                <td>(NAME)</td>
+                            <tr *ngFor="let entry of graveyardBurialEntries; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{entry.firstname +' '+ entry.lastname}}</td>
                                 <td>
                                     <span translate>graveyard_burial.step7.passed_away</span>
-                                    <span>(PASSED)</span>
+                                    <span>{{entry.dod}}</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -530,7 +557,7 @@
                             </label>
                             <label>
                                 <span translate>reservation.step1.choose_grave</span>
-                                <select name="graveyardBurialSubType" [(ngModel)]="graveyardBurialSubType">
+                                <select name="selectedGraveyardBurialSubType" [(ngModel)]="selectedGraveyardBurialSubType">
                                     <option value="single" translate>reservation.step1.single</option>
                                     <option value="family" translate>reservation.step1.family</option>
                                     <option value="communal" translate>reservation.step1.communal</option>
@@ -550,8 +577,8 @@
                             <span translate>reservation.step2.choose_grave_stone</span>&nbsp;
                             <span translate>reservation.step</span>&nbsp;{{currentReservationStep}}
                             <span translate>reservation.of</span>&nbsp;{{totalReservationSteps}}&nbsp;
-                            <select (change)="selectCommunity();" name="selectedCommunity" [(ngModel)]="selectedCommunity">
-                                <option *ngFor="let object of communities" [value]="object.community">{{object.community}}</option>
+                            <select (change)="selectCommunity();" name="reservationSelectedCommunity" [(ngModel)]="reservationSelectedCommunity">
+                                <option *ngFor="let object of reservationCommunities" [value]="object.community">{{object.community}}</option>
                             </select>
                         </h4>
                         <div class="tile-scroll-content">
