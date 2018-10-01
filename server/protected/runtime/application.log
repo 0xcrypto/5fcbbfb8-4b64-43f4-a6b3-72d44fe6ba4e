@@ -7405,3 +7405,164 @@ Stack trace:
 #3 {main}
 REQUEST_URI=/virtualgrave/server/assets/28306d67/contents.css
 ---
+2018/10/01 09:11:40 [error] [php] Undefined variable: query (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:982)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#6 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/data/PERSON_TEMP_PHOTOS/%7B%22unique_id%22%3A%222o11m2006t16z34b45953935144383%22%7D
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (982)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (47)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/10/01 09:11:54 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'it115_wirtcmen.user_photos_temp' doesn't exist. The SQL statement executed was: select * from user_photos_temp where uniq_id='2o11m2006t16z34b45953935144383'.
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (982)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (47)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/10/01 09:11:54 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'it115_wirtcmen.user_photos_temp' doesn't exist. The SQL statement executed was: select * from user_photos_temp where uniq_id='2o11m2006t16z34b45953935144383'' in C:\wamp64\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp64\www\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(982): CDbCommand->queryAll()
+#2 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(47): ApiController->getPersonTemporaryPhotos(Array)
+#3 C:\wamp64\www\yii\framework\web\actions\CInlineAction.php(49): ApiController->actionList()
+#4 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp64\www\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\wamp64\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('list')
+#8 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/list/method...')
+#9 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#10 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/virtualgrave/server/api/data/PERSON_TEMP_PHOTOS/%7B%22unique_id%22%3A%222o11m2006t16z34b45953935144383%22%7D
+---
+2018/10/01 11:37:25 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'it115_wirtcmen.communal_graves' doesn't exist. The SQL statement executed was: SELECT DISTINCT community as community FROM communal_graves.
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (1320)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (95)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/10/01 11:37:27 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'it115_wirtcmen.communal_graves' doesn't exist. The SQL statement executed was: SELECT DISTINCT community as community FROM communal_graves' in C:\wamp64\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp64\www\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(1320): CDbCommand->queryAll()
+#2 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(95): ApiController->getCommunities(Array)
+#3 C:\wamp64\www\yii\framework\web\actions\CInlineAction.php(49): ApiController->actionList()
+#4 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp64\www\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\wamp64\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('list')
+#8 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/list/method...')
+#9 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#10 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/virtualgrave/server/api/data/COMMUNITIES/%20%7B%20%20%7D%20
+HTTP_REFERER=http://localhost/virtualgrave/client/dist/
+---
+2018/10/01 11:38:44 [error] [php] Undefined variable: result (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:202)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#1 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#5 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/data
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (202)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/10/01 11:45:12 [error] [php] Undefined variable: result (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:202)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#1 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#5 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/data
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (202)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/10/01 11:45:16 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'it115_wirtcmen.communal_graves' doesn't exist. The SQL statement executed was: SELECT DISTINCT community as community FROM communal_graves.
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (1320)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (95)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/10/01 11:45:17 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'it115_wirtcmen.communal_graves' doesn't exist. The SQL statement executed was: SELECT DISTINCT community as community FROM communal_graves' in C:\wamp64\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp64\www\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(1320): CDbCommand->queryAll()
+#2 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(95): ApiController->getCommunities(Array)
+#3 C:\wamp64\www\yii\framework\web\actions\CInlineAction.php(49): ApiController->actionList()
+#4 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp64\www\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\wamp64\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('list')
+#8 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/list/method...')
+#9 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#10 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/virtualgrave/server/api/data/COMMUNITIES/%20%7B%20%20%7D%20
+HTTP_REFERER=http://localhost/virtualgrave/client/dist/
+---
+2018/10/01 11:48:03 [error] [php] Undefined variable: result (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:202)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#1 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#5 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/data
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (202)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/10/01 11:48:06 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'it115_wirtcmen.communal_graves' doesn't exist. The SQL statement executed was: SELECT DISTINCT community as community FROM communal_graves.
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (1320)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (95)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/10/01 11:48:06 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'it115_wirtcmen.communal_graves' doesn't exist. The SQL statement executed was: SELECT DISTINCT community as community FROM communal_graves' in C:\wamp64\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp64\www\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(1320): CDbCommand->queryAll()
+#2 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(95): ApiController->getCommunities(Array)
+#3 C:\wamp64\www\yii\framework\web\actions\CInlineAction.php(49): ApiController->actionList()
+#4 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp64\www\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\wamp64\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('list')
+#8 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/list/method...')
+#9 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#10 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/virtualgrave/server/api/data/COMMUNITIES/%20%7B%20%20%7D%20
+HTTP_REFERER=http://localhost/virtualgrave/client/dist/
+---
+2018/10/01 11:49:42 [error] [php] Undefined variable: result (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:202)
+Stack trace:
+#0 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#1 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#2 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#3 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#5 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/data
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (202)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/10/01 11:53:35 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'it115_wirtcmen.communal_graves' doesn't exist. The SQL statement executed was: SELECT DISTINCT community as community FROM communal_graves.
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (1322)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (95)
+in C:\wamp64\www\virtualgrave\server\index.php (13)
+2018/10/01 11:53:35 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'it115_wirtcmen.communal_graves' doesn't exist. The SQL statement executed was: SELECT DISTINCT community as community FROM communal_graves' in C:\wamp64\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp64\www\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(1322): CDbCommand->queryAll()
+#2 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(95): ApiController->getCommunities(Array)
+#3 C:\wamp64\www\yii\framework\web\actions\CInlineAction.php(49): ApiController->actionList()
+#4 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp64\www\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\wamp64\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): CController->run('list')
+#8 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/list/method...')
+#9 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#10 C:\wamp64\www\virtualgrave\server\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/virtualgrave/server/api/data/COMMUNITIES/%20%7B%20%20%7D%20
+HTTP_REFERER=http://localhost/virtualgrave/client/dist/
+---

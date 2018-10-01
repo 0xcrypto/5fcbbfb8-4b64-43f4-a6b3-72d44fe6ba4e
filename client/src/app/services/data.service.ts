@@ -78,6 +78,13 @@ export class DataService {
 		);
 	}
 
+	uploadWithMethodAndOptions(formData: FormData, options:any): Observable<any> {
+	//	let data = this.jsonToURLEncoded(formData);
+		return this.http.post<any>(this.apiURL, formData, options).pipe(
+		  catchError(this.handleError<any>('uploadWithMethodAndOptions'))
+		);
+	}
+
 	delete (any: any | number): Observable<any> {
 		const id = typeof any === 'number' ? any : any.any_id;
 		const url = `${this.apiURL}/${id}`;

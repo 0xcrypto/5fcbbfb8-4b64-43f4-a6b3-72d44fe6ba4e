@@ -301,7 +301,8 @@
                         </label>
                         <label>
                             <span translate>graveyard_burial.step3.upload_photos</span>
-                            <button>
+                            <input #burialphoto type="file" name="burial-photo" id="burial-photo" style="display: none;" (change)="uploadBurialPhotos(burialphoto.files)"/>
+                            <button (click)="burialphoto.click();">
                                 <span translate>graveyard_burial.step3.upload_photos&nbsp;&nbsp;</span>
                                 <i class="fa fa-forward"></i>
                             </button>

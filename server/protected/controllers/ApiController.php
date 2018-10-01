@@ -43,6 +43,8 @@
 						$results = $this->getPersonDetails($options);
 					else if($method == 'PERSON_PHOTOS')
 						$results = $this->getPersonPhotos($options);
+					else if($method == 'PERSON_TEMP_PHOTOS')
+						$results = $this->getPersonTemporaryPhotos($options);
 					else if($method == 'PERSON_OBJECTS')
 						$results = $this->getPersonObjects($options);
 					else if($method == 'PERSON_COMMENTS')
@@ -57,6 +59,8 @@
 						$results = $this->getAnimalComments($options);
 					else if($method == 'ANIMAL_PHOTOS')
 						$results = $this->getAnimalPhotos($options);
+					else if($method == 'ANIMAL_TEMP_PHOTOS')
+						$results = $this->getAnimalTemporaryPhotos($options);
 					else if($method == 'ANIMAL_OBJECTS')
 						$results = $this->getAnimalObjects($options);
 					else if($method == 'TOMBS')
@@ -159,7 +163,8 @@
 		{
 			$method = null;
 			$options = $_POST;
-			
+			$files = $_FILES;
+
 			if(isset($options['method'])){
                 $method = $options['method'];
             }
@@ -179,6 +184,14 @@
 						$result = $this->addAnimalObject($options);
 					else if($method == 'ADD_PERSON_OBJECT')
 						$result = $this->addPersonObject($options);
+					else if($method == 'ADD_ANIMAL_TEMP_PHOTO')
+						$result = $this->addAnimalTemporaryPhoto($options);
+					else if($method == 'ADD_PERSON_TEMP_PHOTO')
+						$result = $this->addPersonTemporaryPhoto($options, $files);
+					else if($method == 'PERSON_TEMP_PHOTOS_DELETE')
+							$results = $this->deleteAnimalTemporaryPhoto($options);
+					else if($method == 'ANIMAL_TEMP_PHOTOS_DELETE')
+						$results = $this->deleteAnimalTemporaryPhoto($options);
 					break;
                 default:
                     $this->_sendResponse(501, 
@@ -967,6 +980,41 @@
 			return $data;
 		}
 
+		
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['unique_id']
+		***/
+
+		private function getPersonTemporaryPhotos($options = NULL){
+			$data = array();
+			$query="select * from users_photos_temp where uniq_id='".$options['unique_id']."'";
+			$result = Yii::app()->db->createCommand($query)->queryAll();
+			foreach ($result as $row) { 
+				$data[] = $row; 
+			}
+		    
+			return $data;
+		}
+
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['unique_id']
+		***/
+
+		private function getAnimalTemporaryPhotos($options = NULL){
+			$data = array();
+			$query="select * from animals_photos_temp where uniq_id='".$options['unique_id']."'";
+			$result = Yii::app()->db->createCommand($query)->queryAll();
+			foreach ($result as $row) { 
+				$data[] = $row; 
+			}
+		    
+			return $data;
+		}
+
 		/***
 		 	REQUIRED PARAMETERS
 			--------------------
@@ -1634,6 +1682,130 @@
 				//TO-DO = Comment out for live server
 				//@mail($sendto, $result['subject'], $message, $headers);
 	
+			}
+			return $data;
+		}
+		
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['unique_id']
+			$options['is_portrait']
+
+
+		***/
+
+		private function addPersonTemporaryPhoto($options = NULL, $files = NULL){
+			$data = array();
+			$is_portrait = isset($options['is_portrait']) ? 1 : 0 ;
+			$unique_id = $options['unique_id'];
+			$large_path =  "./zdjecia/large/";
+			$thumb_path =  "./zdjecia/thumb/";
+			$prefix = "user_";
+			$filename = $prefix.md5(uniqid(rand(), true)).".jpg";
+			$tmp_name = $_FILES["image"]["tmp_name"][$key];
+			$query="insert into users_photos_temp (uniq_id, file_name, is_portrait) values ('$unique_id','$filename',$is_portrait)";
+			$result = Yii::app()->db->createCommand($query)->execute();
+			if($result){
+				if($is_portrait){
+					$this->cyberResizeImage($tmp_name, 200, 265, $thumb_path.'/'.$filename);
+				}
+				else{
+					$this->cyberResizeImage($tmp_name, 170, 130, $thumb_path.'/'.$filename);
+				}
+
+				$this->cyberResizeImage($tmp_name, 640, 480, $large_path.'/'.$filename);
+				
+				$data['status'] = 'SUCCESS';
+			}
+			else{
+				$data['status'] = 'ERROR';
+			}
+			return $data;
+		}
+		
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['unique_id']
+			$options['is_portrait']
+
+
+		***/
+
+		private function addAnimalTemporaryPhoto($options = NULL){
+			$data = array();
+			$is_portrait = isset($options['is_portrait']) ? 1 : 0 ;
+			$unique_id = $options['unique_id'];
+			$large_path =  "./zdjecia/large/";
+			$thumb_path =  "./zdjecia/thumb/";
+			$prefix = "animal_";
+			$filename = $prefix.md5(uniqid(rand(), true)).".jpg";
+			$tmp_name = $_FILES["image"]["tmp_name"][$key];
+			$query="insert into animals_photos_temp (uniq_id, file_name, is_portrait) values ('$unique_id','$filename',$is_portrait)";
+			$result = Yii::app()->db->createCommand($query)->execute();
+			if($result){
+				if($is_portrait){
+					$this->cyberResizeImage($tmp_name, 200, 265, $thumb_path.'/'.$filename);
+				}
+				else{
+					$this->cyberResizeImage($tmp_name, 170, 130, $thumb_path.'/'.$filename);
+				}
+				
+				$this->cyberResizeImage($tmp_name, 640, 480, $large_path.'/'.$filename);
+				
+				$data['status'] = 'SUCCESS';
+			}
+			else{
+				$data['status'] = 'ERROR';
+			}
+			return $data;
+		}
+
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['unique_id']
+			$options['file_name']
+		***/
+
+		private function deletePersonTemporaryPhoto($options = NULL){
+			$query="delete from users_photos_temp where uniq_id='".$options['uniq_id']."' and file_name='".$options['file_name']."'";
+			$result = Yii::app()->db->createCommand($query)->execute();
+			$large_path =  "./zdjecia/large/";
+			$thumb_path =  "./zdjecia/thumb/";
+			$data = array();
+			if($result){
+				@unlink($large_path.'/'.$options['file_name']);
+				@unlink($thumb_path.'/'.$options['file_name']);
+				$data['status'] = 'SUCCESS';
+			}
+			else{
+				$data['status'] = 'ERROR';
+			}
+			return $data;
+		}
+
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['unique_id']
+			$options['file_name']
+		***/
+
+		private function deleteAnimalTemporaryPhoto($options = NULL){
+			$query="delete from animals_photos_temp where uniq_id='".$options['uniq_id']."' and file_name='".$options['file_name']."'";
+			$result = Yii::app()->db->createCommand($query)->execute();
+			$large_path =  "./zdjecia/large/";
+			$thumb_path =  "./zdjecia/thumb/";
+			$data = array();
+			if($result){
+				@unlink($large_path.'/'.$options['file_name']);
+				@unlink($thumb_path.'/'.$options['file_name']);
+				$data['status'] = 'SUCCESS';
+			}
+			else{
+				$data['status'] = 'ERROR';
 			}
 			return $data;
 		}

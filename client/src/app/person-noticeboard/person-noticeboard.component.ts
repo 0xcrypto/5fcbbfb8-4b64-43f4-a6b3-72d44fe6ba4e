@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { Advertisement } from '../classes/advertisement';
@@ -421,6 +422,31 @@ export class PersonNoticeboardComponent implements OnInit {
         this.grave_stones[i].max = './assets/images/graves/maxi/'+ this.grave_stones[i].grave+'.jpg';
       }
     });
+  }
+  uploadBurialPhotos(fileList:any){debugger;
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', null);
+    headers.set('Accept', "multipart/form-data");
+    const formData = new FormData();
+      formData.append('file', fileList[0]);
+    
+    formData.append('unique_id',this.generate_token(50));
+    formData.append('method', 'ADD_PERSON_TEMP_PHOTO');
+    
+    this.dataService.uploadWithMethodAndOptions(formData, headers)
+      .subscribe(result => {
+        debugger;
+    });
+  }
+
+  generate_token(length){
+    var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
+    var b = [];  
+    for (var i=0; i<length; i++) {
+        var j = (Math.random() * (a.length-1)).toFixed(0);
+        b[i] = a[j];
+    }
+    return b.join("");
   }
 }
 
