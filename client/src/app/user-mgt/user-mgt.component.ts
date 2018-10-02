@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogService } from '../services/dialog.service';
+import { UserManagementDialogService } from '../services/userManagementDialog.service';
 import { DataService } from '../services/data.service';
 import { Router } from '@angular/router';
 import { AppGlobals } from '../app.globals';
@@ -32,7 +32,7 @@ export class UserMgtComponent implements OnInit {
   options: Options = null;
   private loginFormError = null;
 
-  constructor(private _dialog:DialogService, 
+  constructor(private _userMgtDialog:UserManagementDialogService, 
     private _router: Router, 
     private dataService: DataService, 
     private _global: AppGlobals,
@@ -47,7 +47,7 @@ export class UserMgtComponent implements OnInit {
   }
 
   closeButtonClick(){
-    this._dialog.closeDialog();
+    this._userMgtDialog.closeDialog();
   }
 
   openLogin(){
@@ -71,7 +71,7 @@ export class UserMgtComponent implements OnInit {
         this.loginFormError = 'Email & Password not exists in system';
       else{
         this.userService.logIn(result['buyer']);
-        this._dialog.closeDialog();
+        this._userMgtDialog.closeDialog();
       }
     });
   }

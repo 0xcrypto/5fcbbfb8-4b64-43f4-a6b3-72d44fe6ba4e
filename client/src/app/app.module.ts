@@ -31,6 +31,7 @@ import { UserService } from './services/user.service';
 import { MessageService } from './services/message.service';
 import { AppGlobals } from './app.globals';
 import { AccountComponent } from './account/account.component';
+import { CustomDialogComponent } from './customDialog/customDialog.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
@@ -56,6 +57,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CatacombComponent,
     UserMgtComponent,
     AccountComponent,
+    CustomDialogComponent,
   ],
   imports: [
     BrowserModule,

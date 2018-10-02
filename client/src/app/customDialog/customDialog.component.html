@@ -1,0 +1,5 @@
+<div class="dialog small" [ngStyle]="{'display': isOpen ? 'block': 'none'}">
+    <p>{{message}}</p>
+    <button translate>custom_dialog.ok</button>
+</div>
+<div class="dialog-overlay" [ngStyle]="{'display': isOpen ? 'block': 'none'}"></div>

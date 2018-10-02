@@ -1,4 +1,4 @@
-<div class="dialog" [ngStyle]="{'display': (_dialog.isDialogOpen) ? 'block': 'none'}">
+<div class="dialog" [ngStyle]="{'display': (_userMgtDialog.isDialogOpen) ? 'block': 'none'}">
   <button class="close-btn" (click)="closeButtonClick();"><i class="fas fa-times"></i></button>
   <div *ngIf="(currentContent == 'login')">
       <div class="form">
@@ -117,4 +117,4 @@
       </div>      
   </div>
 </div>
-<div class="dialog-overlay" [ngStyle]="{'display': (_dialog.isDialogOpen) ? 'block': 'none'}"></div>
+<div class="dialog-overlay" [ngStyle]="{'display': (_userMgtDialog.isDialogOpen) ? 'block': 'none'}"></div>

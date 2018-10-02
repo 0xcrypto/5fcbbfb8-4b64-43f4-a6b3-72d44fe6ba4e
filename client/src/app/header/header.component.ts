@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { AppGlobals } from '../app.globals';
 import { AppComponent } from '../app.component';
-import { DialogService } from '../services/dialog.service';
+import { UserManagementDialogService } from '../services/userManagementDialog.service';
 import { UserService } from '../services/user.service';
 import { MessageService } from '../services/message.service';
 import { User } from '../classes/user';
@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
     private _global: AppGlobals, 
     private _router: Router, 
     private route: ActivatedRoute,
-    private _dialog:DialogService,
+    private _userMgtDialog:UserManagementDialogService,
     private messageService:MessageService,
     private userService:UserService) {
   }
@@ -85,7 +85,7 @@ export class HeaderComponent implements OnInit {
   }
   
   openUserMgtDialog(){
-    this._dialog.openDialog();
+    this._userMgtDialog.openDialog();
   }
 
   logOut(){

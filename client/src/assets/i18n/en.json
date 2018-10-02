@@ -560,5 +560,16 @@
             "multi_layered_authentication_credit_cards": "Multi-layered credit cards",
             "confirm": "Confirm"
         }
+    },
+    "custom_dialog":{
+        "ok": "OK",
+        "please_provide_firstname": "Please provide Firstname",
+        "please_provide_lastname": "Please provide Lastname",
+        "please_provide_dob": "Please provide Date of Birth",
+        "please_provide_dod": "Please provide Date of Death",
+        "please_select_gender": "Please select Gender",
+        "please_select_graveyard_burial_type": "Please select Graveyard Burial type",
+        "please_select_graveyard_burial_sub_type": "Please select Graveyard Burial sub type",
+        "person_already_exists": "Person already exists"
     }
 }

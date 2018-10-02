@@ -564,5 +564,16 @@
             "multi_layered_authentication_credit_cards": "Wielowarstwowe karty kredytowe",
             "confirm": "Potwierdzać"
         }
+    },
+    "custom_dialog":{
+        "ok": "ok",
+        "please_provide_firstname": "Proszę podać imię",
+        "please_provide_lastname": "Proszę podać nazwisko",
+        "please_provide_dob": "Podaj datę urodzenia",
+        "please_provide_dod": "Podaj datę śmierci",
+        "please_select_gender": "Proszę wybrać płeć",
+        "please_select_graveyard_burial_type": "Proszę wybrać typ Graveyard Burial Type",
+        "please_select_graveyard_burial_sub_type": "Proszę wybrać typ podrzędu Graveyard Burial Sub Type",
+        "person_already_exists": "Osoba już istnieje"
     }
 }

@@ -4,6 +4,7 @@ import { DatePipe } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { Advertisement } from '../classes/advertisement';
 import { DataService } from '../services/data.service';
+import { MessageService } from '../services/message.service';
 import { User } from '../classes/user';
 import { Router } from '@angular/router';
 import { AppGlobals } from '../app.globals';
@@ -42,20 +43,42 @@ export class PersonNoticeboardComponent implements OnInit {
 
   /* RESERVATION INFORMATION */
   isReservationTermsVisible:boolean = true;
-  currentReservationStep:number = 1;
-  totalReservationSteps:number = 7;
+  reservationCurrentStep:number = 1;
+  reservationTotalSteps:number = 7;
+  reservationSelectedCommunity:string;
+  reservationUniqueId:string;
+  reservationUploadedImages:number = 0;
+  reservationTotalImages:number = 7;
+  reservationSelectedType:string;
+  reservationSelectedSubType:string;
+  reservationSelectedStone:string;
+  reservationFirstname:string;
+  reservationLastname:string;
+  reservationDOB:string;
+  reservationDOD:string;
+  reservationGender:string;
+  reservationInMemoriam:string;
+  reservationSignature:string;
+  reservationSize:number = 0;
+  reservationClanName:string;
+  isReservationSubTypeVisible:boolean = false;
+  reservationFee:number;
+  reservationCurrency:string="EUR";
+  reservationCommunities:any[]=[];
+  reservationImages:any[]=[];
+  reservationPersons:any[]=[];
+  reservationData:any;
 
   /* GRAVEYARD BURIAL INFORMATION */
-  currentBurialStep:number = 1;
-  totalBurialSteps:number = 7;
+  graveyardBurialCurrentStep:number = 1;
+  graveyardBurialTotalSteps:number = 7;
   graveyardBurialSelectedCommunity:string;
-  uniqueBurialId:string;
-  uniqueReservationId:string;
-  uploadedBurialImage:number = 0;
-  totalBurialImages:number = 7;
-  selectedGraveyardBurialType:string;
-  selectedGraveyardBurialSubType:string;
-  selectedGraveyardBurialImage:string;
+  graveyardBurialUniqueId:string;
+  graveyardBurialUploadedImages:number = 0;
+  graveyardBurialTotalImages:number = 7;
+  graveyardBurialSelectedType:string;
+  graveyardBurialSelectedSubType:string;
+  graveyardBurialSelectedStone:string;
   graveyardBurialFirstname:string;
   graveyardBurialLastname:string;
   graveyardBurialDOB:string;
@@ -66,9 +89,12 @@ export class PersonNoticeboardComponent implements OnInit {
   graveyardBurialSize:number = 0;
   graveyardBurialClanName:string;
   isGraveyardBurialSubTypeVisible:boolean = false;
+  graveyardBurialFee:number;
+  graveyardBurialCurrency:string="EUR";
   graveyardBurialCommunities:any[]=[];
   graveyardBurialImages:any[]=[];
-  graveyardBurialEntries:any[]=[];
+  graveyardBurialPersons:any[]=[];
+  graveyardBurialData:any;
   
   deadlistPages: number[] = [];
   searchedDeadPages: number[] = [];
@@ -96,7 +122,8 @@ export class PersonNoticeboardComponent implements OnInit {
     private translate: TranslateService, 
     private dataService: DataService, 
     private _global: AppGlobals,
-    private localStorageService: LocalStorageService) {
+    private localStorageService: LocalStorageService,
+    private messageService:MessageService) {
     this.router = _router;
   }
 
@@ -128,7 +155,9 @@ export class PersonNoticeboardComponent implements OnInit {
         this.loadSearchData(parameters);
       }
     }
-
+    this.messageService.castMessage.subscribe(object => {
+      
+    });
 
   }
 
@@ -316,9 +345,9 @@ export class PersonNoticeboardComponent implements OnInit {
 
     if(this.selectedTab == 'graveyard-burial'){
       this.isGraveyardBurialSubTypeVisible = false;
-      this.uniqueBurialId = this.getUniqueCode(50);
+      this.graveyardBurialUniqueId = this.getUniqueCode(50);
       this.graveyardBurialImages = [];
-      this.uploadedBurialImage = 0;
+      this.graveyardBurialUploadedImages = 0;
     }
   }
 
@@ -424,15 +453,13 @@ export class PersonNoticeboardComponent implements OnInit {
         
       });
   }
-  burialPrevStep(){
-    this.currentBurialStep--;
+  graveyardBurialPreviousStep(){
+    this.graveyardBurialCurrentStep--;
   }
-  burialNextStep(){
-    this.currentBurialStep++;
-
-    if(this.currentBurialStep == 2){
-      if(this.selectedGraveyardBurialType == 'graveyard'){
-        if(this.selectedGraveyardBurialSubType == 'single'){
+  graveyardBurialNextStep(){
+    if(this.graveyardBurialCurrentStep == 1){
+      if(this.graveyardBurialSelectedType == 'graveyard'){
+        if(this.graveyardBurialSelectedSubType == 'single'){
           this.graveyardBurialSize = 1;
           this.options = this._global.refreshObject(this.options, ['grave_type=Graveyard_Single', 'community=Atheistic']);
           this.dataService.getAllWithMethodAndOptions('PERSON_GRAVE_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
@@ -446,7 +473,7 @@ export class PersonNoticeboardComponent implements OnInit {
             }
           });
         }
-        else if(this.selectedGraveyardBurialSubType == 'family'){
+        else if(this.graveyardBurialSelectedSubType == 'family'){
           this.graveyardBurialSize = 2;
           this.options = this._global.refreshObject(this.options, ['grave_type=Graveyard_Family']);
           this.dataService.getAllWithMethodAndOptions('PERSON_GRAVE_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
@@ -460,7 +487,7 @@ export class PersonNoticeboardComponent implements OnInit {
             }
           });
         }
-        else if(this.selectedGraveyardBurialSubType == 'communal'){
+        else if(this.graveyardBurialSelectedSubType == 'communal'){
           this.options = this._global.refreshObject(this.options, ['grave_type=Graveyard_Communal']);
           this.dataService.getAllWithMethodAndOptions('PERSON_GRAVE_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
           .subscribe(result => {
@@ -473,8 +500,12 @@ export class PersonNoticeboardComponent implements OnInit {
             }
           });
         }
+        else{
+          this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_SELECT_PERSON_BURIAL_SUB_TYPE' });
+          return;
+        }
       }
-      else if(this.selectedGraveyardBurialType == 'catacomb'){
+      else if(this.graveyardBurialSelectedType == 'catacomb'){
         this.graveyardBurialSize = 1;
         this.options = this._global.refreshObject(this.options, ['grave_type=Catacombs']);
         this.dataService.getAllWithMethodAndOptions('PERSON_GRAVE_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
@@ -488,13 +519,46 @@ export class PersonNoticeboardComponent implements OnInit {
           }
         });
       }
+      else{
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_SELECT_PERSON_BURIAL_TYPE' });
+        return;
+      }
     }
-    if(this.currentBurialStep == 5){
-      //'type': this.selectedGraveyardBurialType,
-      //'sub_type': this.selectedGraveyardBurialSubType,
-      if (this.graveyardBurialEntries.some((p) => p.firstname == this.graveyardBurialFirstname))
-        return; 
-      
+
+    if(this.graveyardBurialCurrentStep == 2){
+      if(this.graveyardBurialSelectedStone == null){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'SELECT_GRAVE_STONE' });
+        return;
+      }
+    }
+
+    if(this.graveyardBurialCurrentStep == 3){
+      if(this.graveyardBurialFirstname == null){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_FIRSTNAME' });
+        return;
+      }
+      if(this.graveyardBurialLastname == null){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_LASTNAME' });
+        return;
+      }
+      if(this.graveyardBurialDOB == null){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_DOB' });
+        return;
+      }
+      if(this.graveyardBurialDOD == null){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_DOD' });
+        return;
+      }
+      if(this.graveyardBurialGender == null){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_GENDER' });
+        return;
+      }
+
+      if (this.graveyardBurialPersons.some((p) => (p.firstname+p.lastname) == this.graveyardBurialFirstname+this.graveyardBurialLastname)){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PERSON_ALREADY_EXISTS' });
+        return;
+      }
+    
       let entry = {
         'firstname': this.graveyardBurialFirstname,
         'lastname': this.graveyardBurialLastname,
@@ -502,13 +566,28 @@ export class PersonNoticeboardComponent implements OnInit {
         'dod': this.graveyardBurialDOD,
         'gender': this.graveyardBurialGender,
         'in_memoriam': this.graveyardBurialInMemoriam,
-        'signature': this.graveyardBurialSignature,
-        'images': this.graveyardBurialImages
+        'signature': this.graveyardBurialSignature
       }
-      this.graveyardBurialEntries.push(entry);
-      this.graveyardBurialImages = [];
-      
+      this.graveyardBurialPersons.push(entry);
     }
+
+    if(this.graveyardBurialCurrentStep == 6){
+      this.graveyardBurialFee = this.graveyardBurialPersons.length * 24;
+    }
+    
+    if(this.graveyardBurialCurrentStep == 7){
+      this.graveyardBurialData = {
+        'type': this.graveyardBurialSelectedType,
+        'sub_type': this.graveyardBurialSelectedSubType,
+        'stone': this.graveyardBurialSelectedStone,
+        'images': this.graveyardBurialImages,
+        'persons': this.graveyardBurialPersons
+      };
+
+      console.log(this.graveyardBurialData);
+    }
+
+    this.graveyardBurialCurrentStep++;
   }
   addAnotherPersonInGraveyardBurial(){
     this.graveyardBurialFirstname = null;
@@ -519,7 +598,7 @@ export class PersonNoticeboardComponent implements OnInit {
     this.graveyardBurialInMemoriam = null;
     this.graveyardBurialSignature = null;
     this.graveyardBurialImages = [];
-    this.currentBurialStep = 3;
+    this.graveyardBurialCurrentStep = 3;
   }
   changeGraveyardBurialPerson(person:any){
     this.graveyardBurialFirstname = person.firstname;
@@ -530,13 +609,13 @@ export class PersonNoticeboardComponent implements OnInit {
     this.graveyardBurialInMemoriam = person.in_memoriam;
     this.graveyardBurialSignature = person.signature;
     this.graveyardBurialImages = person.images;
-    this.currentBurialStep = 3;
+    this.graveyardBurialCurrentStep = 3;
   }
   removeGraveyardBurialPerson(person:any){
-    this.graveyardBurialEntries = this.graveyardBurialEntries
+    this.graveyardBurialPersons = this.graveyardBurialPersons
       .filter(p => p.firstname !== person.firstname);
-    if(this.graveyardBurialEntries.length == 0){
-      this.currentBurialStep = 3;
+    if(this.graveyardBurialPersons.length == 0){
+      this.graveyardBurialCurrentStep = 3;
     }
   }
   acceptReservationTerms(){
@@ -551,7 +630,7 @@ export class PersonNoticeboardComponent implements OnInit {
   reservationNextStep(){
     this.currentReservationStep++;
   }
-  selectCommunity(){
+  selectGraveyardBurialCommunity(){
     this.options = this._global.refreshObject(this.options, ['community='+this.graveyardBurialSelectedCommunity, 'grave_type=Graveyard_Single']);
     this.dataService.getAllWithMethodAndOptions('PERSON_GRAVE_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
     .subscribe(result => {
@@ -564,8 +643,8 @@ export class PersonNoticeboardComponent implements OnInit {
       }
     });
   }
-  uploadBurialPhotos(fileList:any){
-    if(this.uploadedBurialImage == this.totalBurialImages)
+  uploadGraveyardBurialPhotos(fileList:any){
+    if(this.graveyardBurialUploadedImages == this.graveyardBurialTotalImages)
       return;
     
     let headers = new HttpHeaders();
@@ -573,16 +652,16 @@ export class PersonNoticeboardComponent implements OnInit {
     headers.set('Accept', "multipart/form-data");
     const formData = new FormData();
     formData.append('file', fileList[0]);
-    formData.append('unique_id',this.uniqueBurialId);
+    formData.append('unique_id',this.graveyardBurialUniqueId);
     formData.append('method', 'ADD_PERSON_TEMP_PHOTO');
-    if(this.uploadedBurialImage == 0){
+    if(this.graveyardBurialUploadedImages == 0){
       formData.append('is_portrait', '1');
     }
       
     this.dataService.uploadWithMethodAndOptions(formData, headers)
       .subscribe(result => {
-        this.uploadedBurialImage++;
-        this.options = this._global.refreshObject(this.options, ['unique_id='+this.uniqueBurialId]);
+        this.graveyardBurialUploadedImages++;
+        this.options = this._global.refreshObject(this.options, ['unique_id='+this.graveyardBurialUniqueId]);
         this.dataService.getAllWithMethodAndOptions('PERSON_TEMP_PHOTOS', this._global.serializeAndURIEncode(this.options))
         .subscribe(result => {
           this.graveyardBurialImages = result;
@@ -594,15 +673,15 @@ export class PersonNoticeboardComponent implements OnInit {
     });
   }
   changeGraveyardBurialType(){
-    if(this.selectedGraveyardBurialType == 'graveyard'){
+    if(this.graveyardBurialSelectedType == 'graveyard'){
       this.isGraveyardBurialSubTypeVisible = true;
     }
     else{
       this.isGraveyardBurialSubTypeVisible = false;
     }
   }
-  selectGraveImage(data:any){
-    this.selectedGraveyardBurialImage = data;
+  selectGraveyardBurialStone(data:any){
+    this.graveyardBurialSelectedStone = data;
   }
   getUniqueCode(length){
     var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
