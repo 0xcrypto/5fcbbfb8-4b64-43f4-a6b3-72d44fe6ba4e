@@ -448,6 +448,13 @@ body #content .main-gate{
     position: relative;
     left: 355px;
 }
+body #content .animal-graveyard-gate{
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    right: 0;
+}
+
 body footer{
 
     height: 90px;
@@ -624,7 +631,7 @@ form .text-right{
     cursor: pointer;
 }
 .stroke-tabs > div {
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.9);
     border: 3px solid #333;
     border-radius: 4px;
     height: 400px;
@@ -637,7 +644,7 @@ form .text-right{
     padding-left: 5px;
 }
 .stroke-tabs .tab-bar li, .stroke-tabs .tab-bar span {
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.9);
     border-top: 3px solid #333;
     border-radius: 4px 4px 0 0;
     float: left;

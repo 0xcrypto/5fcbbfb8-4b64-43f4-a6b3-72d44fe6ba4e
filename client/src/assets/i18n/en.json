@@ -536,7 +536,9 @@
             "surname_or_lastname": "Surname/Lastname",
             "date_of_birth": "Date of Birth",
             "passed_away": "Passed Away",
-            "gender": "Gender"
+            "gender": "Gender",
+            "in_memoriam": "In memoriam",
+            "signature": "Signature"
         },
         "step6": {
             "size_of_grave": "Size of Grave",

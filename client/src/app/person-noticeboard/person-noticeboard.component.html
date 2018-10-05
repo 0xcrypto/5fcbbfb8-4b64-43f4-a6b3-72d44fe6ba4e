@@ -263,8 +263,8 @@
                         </label>
                     </form>
                     <div class="tile-scroll-content" [ngClass]="{'small-height': (graveyardBurialSelectedType == 'graveyard' && graveyardBurialSelectedSubType == 'communal')}">
-                        <div class="tile" *ngFor="let stone of grave_stones" 
-                            [ngClass]="{'selected': (graveyardBurialSelectedStone == stone.data)}" (click)="selectGraveImage(stone.data)">
+                        <div class="tile" *ngFor="let stone of graveyardBurialStones" 
+                            [ngClass]="{'selected': (graveyardBurialSelectedStone == stone.data)}" (click)="selectGraveyardBurialStone(stone.data)">
                             <img [src]="stone.min"/>
                             <div class="img-hover" [ngStyle]="{'background-image': 'url(' + stone.max + ')'}"></div>
                         </div>
@@ -538,23 +538,23 @@
                     </form>
                 </div>
                 <div *ngIf="!isReservationTermsVisible">
-                    <div *ngIf="(currentReservationStep == 1)">
+                    <div *ngIf="(reservationCurrentStep == 1)">
                         <h4>
                             <span translate>reservation.title</span>&nbsp;
-                            <span translate>reservation.step</span>&nbsp;{{currentReservationStep}}
-                            <span translate>reservation.of</span>&nbsp;{{totalReservationSteps}}
+                            <span translate>reservation.step</span>&nbsp;{{reservationCurrentStep}}
+                            <span translate>reservation.of</span>&nbsp;{{reservationTotalSteps}}
                         </h4>
                         <form>
                             <label>
                                 <span translate>reservation.step1.choose</span>
-                                <select name="graveyardBurialType" [(ngModel)]="graveyardBurialType">
+                                <select name="reservationSelectedType" [(ngModel)]="reservationSelectedType" (change)="changeReservationType();">
                                     <option value="graveyard" translate>reservation.step1.graveyard</option>
                                     <option value="catacomb" translate>reservation.step1.catacomb</option>
                                 </select>
                             </label>
-                            <label>
+                            <label *ngIf="isReservationSubTypeVisible">
                                 <span translate>reservation.step1.choose_grave</span>
-                                <select name="graveyardBurialSelectedSubType" [(ngModel)]="graveyardBurialSelectedSubType">
+                                <select name="reservationSelectedSubType" [(ngModel)]="reservationSelectedSubType">
                                     <option value="single" translate>reservation.step1.single</option>
                                     <option value="family" translate>reservation.step1.family</option>
                                     <option value="communal" translate>reservation.step1.communal</option>
@@ -568,25 +568,37 @@
                             </label>
                         </form>
                     </div>
-                    <div *ngIf="(currentReservationStep == 2)">
+                    <div *ngIf="(reservationCurrentStep == 2)">
                         <h4>
                             <span translate>reservation.title</span>&nbsp;
                             <span translate>reservation.step2.choose_grave_stone</span>&nbsp;
-                            <span translate>reservation.step</span>&nbsp;{{currentReservationStep}}
-                            <span translate>reservation.of</span>&nbsp;{{totalReservationSteps}}&nbsp;
-                            <select (change)="selectGraveyardBurialCommunity();" name="reservationSelectedCommunity" [(ngModel)]="reservationSelectedCommunity">
+                            <span translate>reservation.step</span>&nbsp;{{reservationCurrentStep}}
+                            <span translate>reservation.of</span>&nbsp;{{reservationTotalSteps}}&nbsp;
+                            <select  *ngIf="(reservationSelectedType == 'graveyard' && reservationSelectedSubType == 'single')" 
+                            (change)="selectReservationCommunity();" name="reservationSelectedCommunity" [(ngModel)]="reservationSelectedCommunity">
                                 <option *ngFor="let object of reservationCommunities" [value]="object.community">{{object.community}}</option>
                             </select>
                         </h4>
-                        <div class="tile-scroll-content">
-                            <div class="tile" *ngFor="let stone of grave_stones">
+                        <form *ngIf="(reservationSelectedType == 'graveyard' && reservationSelectedSubType == 'communal')">
+                            <label>
+                                <span translate>graveyard_burial.step2.name_of_clan</span>
+                                <input type="text" [(ngModel)]="reservationClanName" name="reservationClanName"/>
+                            </label>
+                            <label>
+                                <span translate>graveyard_burial.step2.enter_size</span>
+                                <input type="text" [(ngModel)]="reservationSize" name="reservationSize"/>
+                            </label>
+                        </form>
+                        <div class="tile-scroll-content" [ngClass]="{'small-height': (reservationSelectedType == 'graveyard' && reservationSelectedSubType == 'communal')}">
+                            <div class="tile" *ngFor="let stone of reservationStones"
+                            [ngClass]="{'selected': (reservationSelectedStone == stone.data)}" (click)="selectReservationStone(stone.data)">
                                 <img [src]="stone.min"/>
                                 <div class="img-hover" [ngStyle]="{'background-image': 'url(' + stone.max + ')'}"></div>
                             </div>
                         </div>
                         <form>
                             <label>
-                                <button class="align-left" (click)="reservationPrevStep()">
+                                <button class="align-left" (click)="reservationPreviousStep()">
                                     <i class="fa fa-backward"></i>
                                     <span translate>&nbsp;&nbsp;reservation.prev</span>
                                 </button>
@@ -597,50 +609,55 @@
                             </label>
                         </form>
                     </div>
-                    <div *ngIf="(currentReservationStep == 3)">
+                    <div *ngIf="(reservationCurrentStep == 3)">
                         <h4>
                             <span translate>reservation.title</span>&nbsp;
                             <span translate>reservation.step3.information_about_death_person</span>&nbsp;
-                            <span translate>reservation.step</span>&nbsp;{{currentReservationStep}}
-                            <span translate>reservation.of</span>&nbsp;{{totalReservationSteps}}
+                            <span translate>reservation.step</span>&nbsp;{{reservationCurrentStep}}
+                            <span translate>reservation.of</span>&nbsp;{{reservationTotalSteps}}
                         </h4>
                         <form>
                             <label>
                                 <span translate>reservation.step3.firstname<sup>*</sup></span>
-                                <input type="text">
+                                <input type="text" [(ngModel)]="reservationFirstname" name="reservationFirstname">
                             </label>
                             <label>
                                 <span translate>reservation.step3.surname_or_lastname<sup>*</sup></span>
-                                <input type="text">
+                                <input type="text"[(ngModel)]="reservationLastname" name="reservationLastname">
                             </label>
                             <label>
                                 <span translate>reservation.step3.date_of_birth<sup>*</sup></span>
-                                <input type="date">
+                                <input type="date" [(ngModel)]="reservationDOB" name="reservationDOB">
                             </label>
                             <label>
                                 <span translate>reservation.step3.passed_away<sup>*</sup></span>
-                                <input type="date">
+                                <input type="date" [(ngModel)]="reservationDOD" name="reservationDOD">
                             </label>
                             <label>
                                 <span translate>reservation.step3.gender<sup>*</sup></span>
-                                <input type="radio"> <span>Male</span>&nbsp;&nbsp;
-                                <input type="radio"> <span>Female</span>&nbsp;&nbsp;
+                                <input type="radio" value="Male" [(ngModel)]="reservationGender" name="reservationGender"> 
+                                <span style="width:50px;">Male</span>&nbsp;&nbsp;
+                                <input type="radio" value="Female" [(ngModel)]="reservationGender" name="reservationGender"> 
+                                <span style="width:50px;">Female</span>&nbsp;&nbsp;
                             </label>
                             <label>
                                 <span translate>reservation.step3.upload_photos</span>
-                                <button>
+                                <input #reservationphoto type="file" onclick="value = null" name="reservation-photo" id="reservation-photo" 
+                                style="display: none;" (change)="uploadReservationPhotos(reservationphoto.files)"/>
+                                <button (click)="reservationphoto.click();">
                                     <span translate>reservation.step3.upload_photos&nbsp;&nbsp;</span>
                                     <i class="fa fa-forward"></i>
                                 </button>
                             </label>
                         </form>
-                        <p class="tile">
-                            <img [src]=""/>
+                        <p class="tile" *ngFor="let image of reservationImages">
+                            <span class="featured" *ngIf="image.is_portrait"><i class="fa fa-star"></i></span>
+                            <img [src]="image.url"/>
                         </p>
                         <p><sup>*</sup><span translate>reservation.step3.required</span></p>
                         <form>
                             <label>
-                                <button class="align-left" (click)="reservationPrevStep()">
+                                <button class="align-left" (click)="reservationPreviousStep()">
                                     <i class="fa fa-backward"></i>
                                     <span translate>&nbsp;&nbsp;reservation.prev</span>
                                 </button>
@@ -651,24 +668,24 @@
                             </label>
                         </form>
                     </div>
-                    <div *ngIf="(currentReservationStep == 4)">
+                    <div *ngIf="(reservationCurrentStep == 4)">
                         <h4>
                             <span translate>reservation.title</span>&nbsp;
                             <span translate>reservation.step4.information_about_death_person</span>&nbsp;
-                            <span translate>reservation.step</span>&nbsp;{{currentReservationStep}}
-                            <span translate>reservation.of</span>&nbsp;{{totalReservationSteps}}
+                            <span translate>reservation.step</span>&nbsp;{{reservationCurrentStep}}
+                            <span translate>reservation.of</span>&nbsp;{{reservationTotalSteps}}
                         </h4>
                         <form>
                             <label>
                                 <span translate>reservation.step4.in_memoriam</span>
-                                <textarea class="large-box"></textarea>
+                                <textarea class="large-box" [(ngModel)]="reservationInMemoriam" name="reservationInMemoriam"></textarea>
                             </label>
                             <label>
                                 <span translate>reservation.step4.signature</span>
-                                <input type="text" class="align-right"/>
+                                <input type="text" class="align-right"  [(ngModel)]="reservationSignature" name="reservationSignature"/>
                             </label>
                             <label>
-                                <button class="align-left" (click)="reservationPrevStep()">
+                                <button class="align-left" (click)="reservationPreviousStep()">
                                     <i class="fa fa-backward"></i>
                                     <span translate>&nbsp;&nbsp;reservation.prev</span>
                                 </button>
@@ -679,31 +696,40 @@
                             </label>
                         </form>
                     </div>
-                    <div *ngIf="(currentReservationStep == 5)">
+                    <div *ngIf="(reservationCurrentStep == 5)">
                         <h4>
                             <span translate>reservation.title</span>&nbsp;
                             <span translate>reservation.step5.confirm_your_entry</span>&nbsp;
-                            <span translate>reservation.step</span>&nbsp;{{currentReservationStep}}
-                            <span translate>reservation.of</span>&nbsp;{{totalReservationSteps}}
+                            <span translate>reservation.step</span>&nbsp;{{reservationCurrentStep}}
+                            <span translate>reservation.of</span>&nbsp;{{reservationTotalSteps}}
                         </h4>
                         <form>
                             <label>
                                 <span translate>reservation.step5.firstname</span>
+                                <span>{{reservationFirstname}}</span>
                             </label>
                             <label>
                                 <span translate>reservation.step5.surname_or_lastname</span>
+                                <span>{{reservationLastname}}</span>
                             </label>
                             <label>
                                 <span translate>reservation.step5.date_of_birth</span>
+                                <span>{{reservationDOB}}</span>
                             </label>
                             <label>
                                 <span translate>reservation.step5.passed_away</span>
+                                <span>{{reservationDOD}}</span>
                             </label>
                             <label>
                                 <span translate>reservation.step5.gender</span>
+                                <span>{{reservationInMemoriam}}</span>
                             </label>
                             <label>
-                                <button class="align-left" (click)="reservationPrevStep()">
+                                <span translate>reservation.step5.signature</span>
+                                <span>{{reservationSignature}}</span>
+                            </label>
+                            <label>
+                                <button class="align-left" (click)="reservationPreviousStep()">
                                     <i class="fa fa-backward"></i>
                                     <span translate>&nbsp;&nbsp;reservation.prev</span>
                                 </button>
@@ -714,46 +740,49 @@
                             </label>
                         </form>
                     </div>
-                    <div *ngIf="(currentReservationStep == 6)">
+                    <div *ngIf="(reservationCurrentStep == 6)">
                         <h4>
                             <span translate>reservation.title</span>&nbsp;
-                            <span translate>reservation.step</span>&nbsp;{{currentReservationStep}}
-                            <span translate>reservation.of</span>&nbsp;{{totalReservationSteps}}
+                            <span translate>reservation.step</span>&nbsp;{{reservationCurrentStep}}
+                            <span translate>reservation.of</span>&nbsp;{{reservationTotalSteps}}
                         </h4>
                         <h4>
                             <span translate>reservation.step6.size_of_grave</span>&nbsp;
-                            <span>_1_</span>
+                            <span>{{reservationSize}}&nbsp;</span>
                             <span translate>reservation.step6.people</span>
                         </h4>
                         <p translate>reservation.step6.list_of_dead_people_in_communal_grave</p>
                         <table>
                             <tbody>
-                                <tr>
-                                    <td>1.</td>
-                                    <td>(NAME)</td>
+                                <tr *ngFor="let entry of reservationPersons; let i = index">
+                                    <td>{{i+1}}</td>
+                                    <td>{{entry.firstname +' '+ entry.lastname}}</td>
                                     <td>
-                                        <span translate>reservation.step6.passed_away</span>
-                                        <span>(PASSED)</span>
+                                        <span translate>graveyard_burial.step6.passed_away&nbsp;</span>
+                                        <span>{{entry.dod}}</span>
                                     </td>
                                     <td>
-                                        <button translate>reservation.step6.change</button>
+                                        <button (click)="changeReservationPerson(entry)" 
+                                        translate>graveyard_burial.step6.change</button>
                                     </td>
                                     <td>
-                                        <button translate>reservation.step6.remove</button>
+                                        <button (click)="removeReservationPerson(entry)" 
+                                        translate>graveyard_burial.step6.remove</button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <form>
                             <label>
-                                <button class="align-right">
+                                <button  *ngIf="!(reservationSize == reservationPersons.length)"
+                                class="align-right" (click)="addAnotherPersonInReservation()">
                                     <span translate>reservation.step6.add_another_person</span>
                                 </button>
                             </label>
-                        </form>
-                        <form>
+                            <br/>
+                            <br/>
                             <label>
-                                <button class="align-left" (click)="reservationPrevStep()">
+                                <button class="align-left" (click)="reservationPreviousStep()">
                                     <i class="fa fa-backward"></i>
                                     <span translate>&nbsp;&nbsp;reservation.prev</span>
                                 </button>
@@ -764,22 +793,22 @@
                             </label>
                         </form>
                     </div>
-                    <div *ngIf="(currentReservationStep == 7)">
+                    <div *ngIf="(reservationCurrentStep == 7)">
                         <h4>
                             <span translate>reservation.title</span>&nbsp;
                             <span translate>reservation.step7.confirm_please</span>&nbsp;
-                            <span translate>reservation.step</span>&nbsp;{{currentReservationStep}}
-                            <span translate>reservation.of</span>&nbsp;{{totalReservationSteps}}
+                            <span translate>reservation.step</span>&nbsp;{{reservationCurrentStep}}
+                            <span translate>reservation.of</span>&nbsp;{{reservationTotalSteps}}
                         </h4>
                         <p translate>reservation.step7.for</p>
                         <table>
                             <tbody>
-                                <tr>
-                                    <td>1.</td>
-                                    <td>(NAME)</td>
+                                <tr *ngFor="let entry of reservationPersons; let i = index">
+                                    <td>{{i+1}}</td>
+                                    <td>{{entry.firstname +' '+ entry.lastname}}</td>
                                     <td>
-                                        <span translate>reservation.step7.passed_away&nbsp;</span>
-                                        <span>(PASSED)</span>
+                                        <span translate>graveyard_burial.step7.passed_away&nbsp;</span>
+                                        <span>{{entry.dod}}</span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -787,6 +816,7 @@
                         <form>
                             <label>
                                 <span translate>reservation.step7.burial_fee</span>
+                                <span style="color:#fff">{{reservationFee}}&nbsp;{{reservationCurrency}}</span>
                             </label>
                             <p translate>reservation.step7.multi_layered_authentication_credit_cards</p>
                             <label>

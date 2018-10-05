@@ -540,7 +540,9 @@
             "surname_or_lastname": "Nazwisko",
             "date_of_birth": "Data urodzenia",
             "passed_away": "Zmarł",
-            "gender": "Płeć"
+            "gender": "Płeć",
+            "in_memoriam": "Ku pamięci",
+            "signature": "Podpis"
         },
         "step6": {
             "size_of_grave": "Rozmiar grobu",

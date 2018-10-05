@@ -186,7 +186,7 @@
 					else if($method == 'ADD_PERSON_OBJECT')
 						$result = $this->addPersonObject($options);
 					else if($method == 'ADD_ANIMAL_TEMP_PHOTO')
-						$result = $this->addAnimalTemporaryPhoto($options);
+						$result = $this->addAnimalTemporaryPhoto($options, $files);
 					else if($method == 'ADD_PERSON_TEMP_PHOTO')
 						$result = $this->addPersonTemporaryPhoto($options, $files);
 					else if($method == 'PERSON_TEMP_PHOTOS_DELETE')
@@ -870,15 +870,20 @@
 		}
 
 		private function getAnimalGraveTileImages($options = NULL){
-			$data = array(); 
-			$d = dir("../client/dist/assets/images/graves/mini/");
-			while (false !== ($entry = $d->read())) {
-			if($entry=='.' || $entry=='..') continue;
-				if(strpos($entry, "zw") > -1)
-					$data[]=$entry;
-			}
-			$d->close();
-			return ($data);
+			$query = "SELECT grave as grave FROM grave_master WHERE  grave_type='".$options['grave_type']."'";
+			(isset($options['community'])) ? $query.=" AND community='".$options['community']."'": "";
+
+            $result = Yii::app()->db->createCommand($query)->queryAll();
+
+            $count_query="SELECT count(*) as total FROM ($query) t";
+            $count_result = Yii::app()->db->createCommand($count_query)->queryRow()['total'];
+            
+            $data = array();
+            foreach($result as $row){
+                $row['total'] = $count_result;
+                $data[] = $row;
+            }
+			return $data;
 		}
 		
 		private function getCatacombSmallTileImages($options = NULL){
@@ -1750,7 +1755,7 @@
 			$thumb_path =  $clientImageFolderPath."zdjecia/thumb/";
 			$prefix = "animal_";
 			$filename = $prefix.md5(uniqid(rand(), true)).".jpg";
-			$tmp_name = $_FILES["image"]["tmp_name"];
+			$tmp_name = $_FILES["file"]["tmp_name"];
 			$query="insert into animals_photos_temp (uniq_id, file_name, is_portrait) values ('$unique_id','$filename',$is_portrait)";
 			$result = Yii::app()->db->createCommand($query)->execute();
 			if($result){

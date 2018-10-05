@@ -203,197 +203,206 @@
               </div>
           </div>
           <div id="graveyard-burial"  [style.display]="(selectedTab == 'graveyard-burial') ? 'block' : 'none'">
-                <div *ngIf="(currentBurialStep == 1)">
+                <div *ngIf="(graveyardBurialCurrentStep == 1)">
                     <h4>
                         <span translate>animal_graveyard_burial.title</span>&nbsp;
                         <span translate>animal_graveyard_burial.step1.choose_graveyard</span>&nbsp;
-                        <span translate>animal_graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
-                        <span translate>animal_graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                        <span translate>animal_graveyard_burial.step</span>&nbsp;{{graveyardBurialCurrentStep}}
+                        <span translate>animal_graveyard_burial.of</span>&nbsp;{{graveyardBurialTotalSteps}}
                     </h4>
                     <form>
                         <label>
                             <span translate>animal_graveyard_burial.step1.choose_grave</span>
-                            <select name="graveyardBurialSubType" [(ngModel)]="graveyardBurialSubType">
+                            <select name="graveyardBurialSelectedSubType" [(ngModel)]="graveyardBurialSelectedSubType">
                                 <option value="single" translate>animal_graveyard_burial.step1.single</option>
                             </select>
                         </label>
                         <label>
-                            <button class="align-right" (click)="burialNextStep()">
+                            <button class="align-right" (click)="graveyardBurialNextStep()">
                                 <span translate>animal_graveyard_burial.next&nbsp;&nbsp;</span>
                                 <i class="fa fa-forward"></i>
                             </button>
                         </label>
                     </form>
                 </div>
-                <div *ngIf="(currentBurialStep == 2)">
+                <div *ngIf="(graveyardBurialCurrentStep == 2)">
                     <h4>
                         <span translate>animal_graveyard_burial.title</span>&nbsp;
                         <span translate>animal_graveyard_burial.step2.choose_grave_stone</span>&nbsp;
-                        <span translate>animal_graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
-                        <span translate>animal_graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                        <span translate>animal_graveyard_burial.step</span>&nbsp;{{graveyardBurialCurrentStep}}
+                        <span translate>animal_graveyard_burial.of</span>&nbsp;{{graveyardBurialTotalSteps}}
                     </h4>
                     <div class="tile-scroll-content">
-                        <div class="tile" *ngFor="let stone of grave_stones">
+                        <div class="tile" *ngFor="let stone of graveyardBurialStones"
+                        [ngClass]="{'selected': (graveyardBurialSelectedStone == stone.data)}" (click)="selectGraveyardBurialStone(stone.data)">
                             <img [src]="stone.min"/>
                             <div class="img-hover" [ngStyle]="{'background-image': 'url(' + stone.max + ')'}"></div>
                         </div>
                     </div>
                     <form>
                         <label>
-                            <button class="align-left" (click)="burialPrevStep()">
+                            <button class="align-left" (click)="graveyardBurialPreviousStep()">
                                 <i class="fa fa-backward"></i>
                                 <span translate>&nbsp;&nbsp;animal_graveyard_burial.prev</span>
                             </button>
-                            <button class="align-right" (click)="burialNextStep()">
+                            <button class="align-right" (click)="graveyardBurialNextStep()">
                                 <span translate>animal_graveyard_burial.next&nbsp;&nbsp;</span>
                                 <i class="fa fa-forward"></i>
                             </button>
                         </label>
                     </form>
                 </div>
-                <div *ngIf="(currentBurialStep == 3)">
+                <div *ngIf="(graveyardBurialCurrentStep == 3)">
                     <h4>
                         <span translate>animal_graveyard_burial.title</span>&nbsp;
                         <span translate>animal_graveyard_burial.step3.entry_form_part_1</span>&nbsp;
-                        <span translate>animal_graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
-                        <span translate>animal_graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                        <span translate>animal_graveyard_burial.step</span>&nbsp;{{graveyardBurialCurrentStep}}
+                        <span translate>animal_graveyard_burial.of</span>&nbsp;{{graveyardBurialTotalSteps}}
                     </h4>
                     <form>
                         <label>
                             <span translate>animal_graveyard_burial.step3.name_of_your_pet<sup>*</sup></span>
-                            <input type="text">
+                            <input type="text" [(ngModel)]="graveyardBurialPetName" name="graveyardBurialPetName">
                         </label>
                         <label>
                             <span translate>animal_graveyard_burial.step3.genus<sup>*</sup></span>
-                            <select>
+                            <select [(ngModel)]="graveyardBurialGenus" name="graveyardBurialGenus">
                                 <option>Genus</option>
                             </select>
                         </label>
                         <label>
                             <span translate>animal_graveyard_burial.step3.type<sup>*</sup></span>
-                            <input type="text">
+                            <input type="text" [(ngModel)]="graveyardBurialPetType" name="graveyardBurialPetType">
                         </label>
                         <label>
                             <span translate>animal_graveyard_burial.step3.gender<sup>*</sup></span>
-                            <input type="radio"> <span>Male</span>&nbsp;&nbsp;
-                            <input type="radio"> <span>Female</span>&nbsp;&nbsp;
+                            <input type="radio" value="Male" [(ngModel)]="graveyardBurialGender" name="graveyardBurialGender">
+                            <span style="width:50px;">Male</span>&nbsp;&nbsp;
+                            <input type="radio" value="Female" [(ngModel)]="graveyardBurialGender" name="graveyardBurialGender">
+                            <span style="width:50px;">Female</span>&nbsp;&nbsp;
                         </label>
                         <label>
                             <span translate>animal_graveyard_burial.step3.date_of_birth<sup>*</sup></span>
-                            <input type="date">
+                            <input type="date" [(ngModel)]="graveyardBurialDOB" name="graveyardBurialDOB">
                         </label>
                         <label>
                             <span translate>animal_graveyard_burial.step3.passed_away<sup>*</sup></span>
-                            <input type="date">
+                            <input type="date" [(ngModel)]="graveyardBurialDOD" name="graveyardBurialDOD">
                         </label>
                         <label>
                             <span translate>animal_graveyard_burial.step3.owner_firstname<sup>*</sup></span>
-                            <input type="text">
+                            <input type="text" [(ngModel)]="graveyardBurialOwnerFirstname" name="graveyardBurialOwnerFirstname">
                         </label>
                         <label>
                             <span translate>animal_graveyard_burial.step3.owner_lastname<sup>*</sup></span>
-                            <input type="text">
+                            <input type="text" [(ngModel)]="graveyardBurialOwnerLastname" name="graveyardBurialOwnerLastname">
                         </label>
                         <label>
                             <span translate>animal_graveyard_burial.step3.upload_photos</span>
-                            <button>
+                            <input #burialphoto type="file" onclick="value = null" name="burial-photo" id="burial-photo" style="display: none;" (change)="uploadGraveyardBurialPhotos(burialphoto.files)"/>
+                            <button (click)="burialphoto.click();">
                                 <span translate>animal_graveyard_burial.step3.upload_photos&nbsp;&nbsp;</span>
                                 <i class="fa fa-forward"></i>
                             </button>
                         </label>
                     </form>
-                    <p class="tile">
-                        <img [src]=""/>
+                    <p class="tile" *ngFor="let image of graveyardBurialImages">
+                        <span class="featured" *ngIf="image.is_portrait"><i class="fa fa-star"></i></span>
+                        <img [src]="image.url"/>
                     </p>
                     <p><sup>*</sup><span translate>animal_graveyard_burial.step3.required</span></p>
                     <form>
                         <label>
-                            <button class="align-left" (click)="burialPrevStep()">
+                            <button class="align-left" (click)="graveyardBurialPreviousStep()">
                                 <i class="fa fa-backward"></i>
                                 <span translate>&nbsp;&nbsp;animal_graveyard_burial.prev</span>
                             </button>
-                            <button class="align-right" (click)="burialNextStep()">
+                            <button class="align-right" (click)="graveyardBurialNextStep()">
                                 <span translate>animal_graveyard_burial.next&nbsp;&nbsp;</span>
                                 <i class="fa fa-forward"></i>
                             </button>
                         </label>
                     </form>
                 </div>
-                <div *ngIf="(currentBurialStep == 4)">
+                <div *ngIf="(graveyardBurialCurrentStep == 4)">
                     <h4>
                         <span translate>animal_graveyard_burial.title</span>&nbsp;
                         <span translate>animal_graveyard_burial.step4.entry_form_part_2</span>&nbsp;
-                        <span translate>animal_graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
-                        <span translate>animal_graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                        <span translate>animal_graveyard_burial.step</span>&nbsp;{{graveyardBurialCurrentStep}}
+                        <span translate>animal_graveyard_burial.of</span>&nbsp;{{graveyardBurialTotalSteps}}
                     </h4>
                     <form>
                         <label>
                             <span translate>animal_graveyard_burial.step4.in_memoriam</span>
-                            <textarea class="large-box"></textarea>
+                            <textarea class="large-box" [(ngModel)]="graveyardBurialInMemoriam" name="graveyardBurialInMemoriam"></textarea>
                         </label>
                         <label>
                             <span translate>animal_graveyard_burial.step4.signature</span>
-                            <input type="text" class="align-right"/>
+                            <input type="text" class="align-right"  [(ngModel)]="graveyardBurialSignature" name="graveyardBurialSignature"/>
                         </label>
                         <label>
-                            <button class="align-left" (click)="burialPrevStep()">
+                            <button class="align-left" (click)="graveyardBurialPreviousStep()">
                                 <i class="fa fa-backward"></i>
                                 <span translate>&nbsp;&nbsp;animal_graveyard_burial.prev</span>
                             </button>
-                            <button class="align-right" (click)="burialNextStep()">
+                            <button class="align-right" (click)="graveyardBurialNextStep()">
                                 <span translate>animal_graveyard_burial.next&nbsp;&nbsp;</span>
                                 <i class="fa fa-forward"></i>
                             </button>
                         </label>
                     </form>
                 </div>
-                <div *ngIf="(currentBurialStep == 5)">
+                <div *ngIf="(graveyardBurialCurrentStep == 5)">
                     <h4>
                         <span translate>animal_graveyard_burial.title</span>&nbsp;
                         <span translate>animal_graveyard_burial.step5.confirm_your_entry</span>&nbsp;
-                        <span translate>animal_graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
-                        <span translate>animal_graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                        <span translate>animal_graveyard_burial.step</span>&nbsp;{{graveyardBurialCurrentStep}}
+                        <span translate>animal_graveyard_burial.of</span>&nbsp;{{graveyardBurialTotalSteps}}
                     </h4>
                     <form>
                         <label>
                             <span translate>animal_graveyard_burial.step5.name_of_pet</span>
+                            <span>{{graveyardBurialPetName}}</span>
                         </label>
                         <label>
                             <span translate>animal_graveyard_burial.step5.genus</span>
+                            <span>{{graveyardBurialGenus}}</span>
                         </label>
                         <label>
                             <span translate>animal_graveyard_burial.step5.date_of_birth</span>
+                            <span>{{graveyardBurialDOB}}</span>
                         </label>
                         <label>
                             <span translate>animal_graveyard_burial.step5.passed_away</span>
+                            <span>{{graveyardBurialDOD}}</span>
                         </label>
                         <label>
-                            <button class="align-left" (click)="burialPrevStep()">
+                            <button class="align-left" (click)="graveyardBurialPreviousStep()">
                                 <i class="fa fa-backward"></i>
                                 <span translate>&nbsp;&nbsp;animal_graveyard_burial.prev</span>
                             </button>
-                            <button class="align-right" (click)="burialNextStep()">
+                            <button class="align-right" (click)="graveyardBurialNextStep()">
                                 <span translate>animal_graveyard_burial.next&nbsp;&nbsp;</span>
                                 <i class="fa fa-forward"></i>
                             </button>
                         </label>
                     </form>
                 </div>
-                <div *ngIf="(currentBurialStep == 6)">
+                <div *ngIf="(graveyardBurialCurrentStep == 6)">
                     <h4>
                         <span translate>animal_graveyard_burial.title</span>&nbsp;
                         <span translate>animal_graveyard_burial.step6.confirm_please</span>&nbsp;
-                        <span translate>animal_graveyard_burial.step</span>&nbsp;{{currentBurialStep}}
-                        <span translate>animal_graveyard_burial.of</span>&nbsp;{{totalBurialSteps}}
+                        <span translate>animal_graveyard_burial.step</span>&nbsp;{{graveyardBurialCurrentStep}}
+                        <span translate>animal_graveyard_burial.of</span>&nbsp;{{graveyardBurialTotalSteps}}
                     </h4>
                     <table>
                         <tbody>
-                            <tr>
-                                <td>1.</td>
-                                <td>(NAME)</td>
+                            <tr *ngFor="let entry of graveyardBurialAnimals; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{entry.petname}}</td>
                                 <td>
-                                    <span translate>animal_graveyard_burial.step6.passed_away</span>
-                                    <span>(PASSED)</span>
+                                    <span translate>graveyard_burial.step7.passed_away&nbsp;</span>
+                                    <span>{{entry.dod}}</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -401,10 +410,11 @@
                     <form>
                         <label>
                             <span translate>animal_graveyard_burial.step6.burial_fee</span>
+                            <span style="color:#fff">{{graveyardBurialFee}}&nbsp;{{graveyardBurialCurrency}}</span>
                         </label>
                         <p translate>animal_graveyard_burial.step6.multi_layered_authentication_credit_cards</p>
                         <label>
-                            <button class="align-left" (click)="burialPrevStep()">
+                            <button class="align-left" (click)="graveyardBurialPreviousStep()">
                                 <i class="fa fa-backward"></i>
                                 <span translate>&nbsp;&nbsp;animal_graveyard_burial.prev</span>
                             </button>

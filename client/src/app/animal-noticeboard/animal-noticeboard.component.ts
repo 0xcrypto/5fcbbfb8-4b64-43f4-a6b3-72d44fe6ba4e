@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { HttpClient, HttpHeaders, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { Advertisement } from '../classes/advertisement';
 import { DataService } from '../services/data.service';
+import { MessageService } from '../services/message.service';
 import { Router } from '@angular/router';
 import { AppGlobals } from '../app.globals';
 import { CookieStorage, LocalStorage, SessionStorage, LocalStorageService } from 'ngx-store';
@@ -36,8 +38,37 @@ export class AnimalNoticeboardComponent implements OnInit {
   selectedSceneTime:number = 1;
   selectedSceneSeason:number = 1;
   datalimit = 15;
-  currentBurialStep:number = 1;
-  totalBurialSteps:number = 6;
+
+  /* GRAVEYARD BURIAL INFORMATION */
+  graveyardBurialCurrentStep:number = 1;
+  graveyardBurialTotalSteps:number = 6;
+  graveyardBurialSelectedCommunity:string;
+  graveyardBurialUniqueId:string;
+  graveyardBurialUploadedImages:number = 0;
+  graveyardBurialTotalImages:number = 7;
+  graveyardBurialSelectedType:string;
+  graveyardBurialSelectedSubType:string;
+  graveyardBurialSelectedStone:string;
+  graveyardBurialPetName:string;
+  graveyardBurialGenus:string;
+  graveyardBurialPetType:string;
+  graveyardBurialDOB:string;
+  graveyardBurialDOD:string;
+  graveyardBurialGender:string;
+  graveyardBurialOwnerFirstname:string;
+  graveyardBurialOwnerLastname:string;
+  graveyardBurialInMemoriam:string;
+  graveyardBurialSignature:string;
+  graveyardBurialSize:number = 0;
+  graveyardBurialClanName:string;
+  isGraveyardBurialSubTypeVisible:boolean = false;
+  graveyardBurialFee:number;
+  graveyardBurialCurrency:string="EUR";
+  graveyardBurialCommunities:any[]=[];
+  graveyardBurialImages:any[]=[];
+  graveyardBurialAnimals:any[]=[];
+  graveyardBurialStones: any[] = [];
+  graveyardBurialData:any;
 
   animalListPages: number[] = [];
   searchedAnimalPages: number[] = [];
@@ -45,7 +76,6 @@ export class AnimalNoticeboardComponent implements OnInit {
   animals: any[] = [];
   searchedAnimals: any[] = [];
   prioritizedAnimals: any[] = [];
-  grave_stones: any[] = [];
 
   router:Router = null;
   currentLang:string = null;
@@ -63,7 +93,8 @@ export class AnimalNoticeboardComponent implements OnInit {
     private translate: TranslateService, 
     private dataService: DataService, 
     private _global: AppGlobals,
-    private localStorageService: LocalStorageService) {
+    private localStorageService: LocalStorageService,
+    private messageService:MessageService) {
     this.router = _router;
   }
 
@@ -73,19 +104,6 @@ export class AnimalNoticeboardComponent implements OnInit {
 
     this.getAdvertisements();
     this.getVisibleAnimals();
-
-    this.options = this._global.refreshObject(this.options, []);
-    this.dataService.getAllWithMethodAndOptions('ANIMAL_GRAVE_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
-    .subscribe(result => {debugger;
-      this.grave_stones = result;
-
-      for(var i=0; i<=this.grave_stones.length-1; i++){
-        this.grave_stones[i] = {
-          'min': './assets/images/graves/mini/'+ this.grave_stones[i],
-          'max': './assets/images/graves/maxi/'+ this.grave_stones[i]
-        };
-      }
-    });
     
     if(this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_RETURN_TAB) &&
         this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY)){
@@ -261,6 +279,7 @@ export class AnimalNoticeboardComponent implements OnInit {
     this.searchOptions = this._global.refreshObject(this.searchOptions, parameters);
     this.searchAnimals(this._global.serializeAndURIEncode(this.searchOptions));
   }
+
   openTab(name:string) {
     this.selectedTab = name;
 
@@ -273,6 +292,10 @@ export class AnimalNoticeboardComponent implements OnInit {
     if(this.selectedTab == 'graveyard-noticeboard'){
       this.getAdvertisements();
       this.getVisibleAnimals();
+    }
+
+    if(this.selectedTab == 'graveyard-burial'){
+      this.graveyardBurialUniqueId = this.getUniqueCode(50);
     }
   }
 
@@ -365,10 +388,175 @@ export class AnimalNoticeboardComponent implements OnInit {
         
       });
   }
-  burialPrevStep(){
-    this.currentBurialStep--;
+
+  /* GRAVE BURIAL */
+  graveyardBurialPreviousStep(){
+    this.graveyardBurialCurrentStep--;
   }
-  burialNextStep(){
-    this.currentBurialStep++;
+
+  graveyardBurialNextStep(){
+    if(this.graveyardBurialCurrentStep == 1){
+      this.options = this._global.refreshObject(this.options, ['grave_type=PetGraveyard_Single']);
+      this.dataService.getAllWithMethodAndOptions('ANIMAL_GRAVE_TILE_IMAGES', this._global.serializeAndURIEncode(this.options))
+      .subscribe(result => {
+        this.graveyardBurialStones = result;
+  
+        for(var i=0; i<=this.graveyardBurialStones.length-1; i++){
+          this.graveyardBurialStones[i].data = this.graveyardBurialStones[i].grave;
+          this.graveyardBurialStones[i].min = './assets/images/graves/mini/'+ this.graveyardBurialStones[i].grave+'.jpg';
+          this.graveyardBurialStones[i].max = './assets/images/graves/maxi/'+ this.graveyardBurialStones[i].grave+'.jpg';
+        }
+      });
+    }
+
+    if(this.graveyardBurialCurrentStep == 2){
+      if(this.graveyardBurialSelectedStone == null){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'SELECT_GRAVE_STONE' });
+        return;
+      }
+    }
+
+    if(this.graveyardBurialCurrentStep == 3){
+      if(this.graveyardBurialPetName == null){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_PETNAME' });
+        return;
+      }
+      if(this.graveyardBurialGenus == null){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_GENUS' });
+        return;
+      }
+      if(this.graveyardBurialPetType == null){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_GENUS' });
+        return;
+      }
+      if(this.graveyardBurialDOB == null){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_DOB' });
+        return;
+      }
+      if(this.graveyardBurialDOD == null){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_DOD' });
+        return;
+      }
+      if(this.graveyardBurialGender == null){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_GENDER' });
+        return;
+      }
+      if(this.graveyardBurialOwnerFirstname == null){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_OWNER_FIRSTNAME' });
+        return;
+      }
+      if(this.graveyardBurialOwnerFirstname == null){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_OWNER_LASTNAME' });
+        return;
+      }
+      if (this.graveyardBurialAnimals.some((a) => (a.petname) == this.graveyardBurialPetName)){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'ANIMAL_ALREADY_EXISTS' });
+        return;
+      }
+    
+      let entry = {
+        'petname': this.graveyardBurialPetName,
+        'genus': this.graveyardBurialGenus,
+        'type': this.graveyardBurialPetType,
+        'dob': this.graveyardBurialDOB,
+        'dod': this.graveyardBurialDOD,
+        'gender': this.graveyardBurialGender,
+        'owner_firstname': this.graveyardBurialOwnerFirstname,
+        'owner_lastname': this.graveyardBurialOwnerLastname,
+        'in_memoriam': this.graveyardBurialInMemoriam,
+        'signature': this.graveyardBurialSignature
+      }
+      this.graveyardBurialAnimals.push(entry);
+    }
+
+    if(this.graveyardBurialCurrentStep == 5){
+      this.graveyardBurialFee = this.graveyardBurialAnimals.length * 24;
+      this.graveyardBurialData = {
+        'sub_type': this.graveyardBurialSelectedSubType,
+        'stone': this.graveyardBurialSelectedStone,
+        'images': this.graveyardBurialImages,
+        'animals': this.graveyardBurialAnimals
+      };
+      console.log(this.graveyardBurialData);
+    }
+
+    this.graveyardBurialCurrentStep++;
+  }
+
+  changeGraveyardBurialType(){
+    if(this.graveyardBurialSelectedType == 'graveyard'){
+      this.isGraveyardBurialSubTypeVisible = true;
+    }
+    else{
+      this.isGraveyardBurialSubTypeVisible = false;
+    }
+  }
+
+  changeGraveyardBurialAnimal(animal:any){
+    this.graveyardBurialPetName = animal.petname;
+    this.graveyardBurialGenus = animal.genus;
+    this.graveyardBurialPetType = animal.type;
+    this.graveyardBurialDOB = animal.dob;
+    this.graveyardBurialDOD = animal.dod;
+    this.graveyardBurialGender = animal.gender;
+    this.graveyardBurialOwnerFirstname = animal.owner_firstname;
+    this.graveyardBurialOwnerLastname = animal.owner_lastname;
+    this.graveyardBurialInMemoriam = animal.in_memoriam;
+    this.graveyardBurialSignature = animal.signature;
+    this.graveyardBurialImages = [];
+    this.graveyardBurialCurrentStep = 3;
+
+  }
+
+  removeGraveyardBurialAnimal(person:any){
+    this.graveyardBurialAnimals = this.graveyardBurialAnimals
+      .filter(p => p.firstname !== person.firstname);
+    if(this.graveyardBurialAnimals.length == 0){
+      this.graveyardBurialCurrentStep = 3;
+    }
+  }
+
+  uploadGraveyardBurialPhotos(fileList:any){
+    if(this.graveyardBurialUploadedImages == this.graveyardBurialTotalImages)
+      return;
+    
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', null);
+    headers.set('Accept', "multipart/form-data");
+    const formData = new FormData();
+    formData.append('file', fileList[0]);
+    formData.append('unique_id',this.graveyardBurialUniqueId);
+    formData.append('method', 'ADD_ANIMAL_TEMP_PHOTO');
+    if(this.graveyardBurialUploadedImages == 0){
+      formData.append('is_portrait', '1');
+    }
+      
+    this.dataService.uploadWithMethodAndOptions(formData, headers)
+      .subscribe(result => {
+        this.graveyardBurialUploadedImages++;
+        this.options = this._global.refreshObject(this.options, ['unique_id='+this.graveyardBurialUniqueId]);
+        this.dataService.getAllWithMethodAndOptions('ANIMAL_TEMP_PHOTOS', this._global.serializeAndURIEncode(this.options))
+        .subscribe(result => {
+          this.graveyardBurialImages = result;
+          for(let i=0;i<this.graveyardBurialImages.length;i++) {
+            this.graveyardBurialImages[i].is_portrait = (parseInt(this.graveyardBurialImages[i].is_portrait) == 1) ? true : false;
+            this.graveyardBurialImages[i].url = './assets/images/zdjecia/large/'+this.graveyardBurialImages[i].file_name;
+          }
+        });
+    });
+  }
+
+  selectGraveyardBurialStone(data:any){
+    this.graveyardBurialSelectedStone = data;
+  }
+
+  getUniqueCode(length){
+    var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
+    var b = [];  
+    for (var i=0; i<length; i++) {
+        var j = (Math.random() * (a.length-1)).toFixed(0);
+        b[i] = a[j];
+    }
+    return b.join("");
   }
 }

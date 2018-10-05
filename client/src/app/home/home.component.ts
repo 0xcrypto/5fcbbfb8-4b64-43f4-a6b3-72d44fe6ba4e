@@ -45,7 +45,11 @@ export class HomeComponent implements OnInit {
       this.router.navigateByUrl('/noticeboard');
     }, 1000);
   }
-
+  
+  openPetNoticeboard() {
+    this.router.navigateByUrl('/pet-noticeboard');
+  }
+  
   loadImages(){
     this.isImageLoadingScreenVisible = true;
     var images = new Array();
@@ -59,8 +63,8 @@ export class HomeComponent implements OnInit {
     setTimeout(function(){
       window['component'].isImageLoadingScreenVisible = false;
       window['component'].localStorage.set(window['component']._global.APP_IMAGES_LOADED_KEY, "YES");
-      document.querySelector('#images-loading').innerHTML = '';
-    }, 5000);
+      //document.querySelector('#images-loading').innerHTML = '';
+    }, 10000);
   }
 }
 

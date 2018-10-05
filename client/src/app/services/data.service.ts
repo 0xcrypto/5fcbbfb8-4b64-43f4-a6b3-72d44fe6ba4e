@@ -13,7 +13,10 @@ const httpOptions = {
 })
 export class DataService {
 	private protocol = location.protocol === 'https:' ? 'https' : 'http';
-	private apiURL = this.protocol + '://localhost/virtualgrave/server/api/data';  
+	/*LOCAL SERVER*/
+	//private apiURL = this.protocol + '://codeshow/virtualgrave/server/api/data';  
+	/*LIVE SERVER*/
+	private apiURL = this.protocol + '://codeshow.in/virtualgrave/server/api/data';  
 
   constructor(private http: HttpClient) { }
 
@@ -79,7 +82,6 @@ export class DataService {
 	}
 
 	uploadWithMethodAndOptions(formData: FormData, options:any): Observable<any> {
-	//	let data = this.jsonToURLEncoded(formData);
 		return this.http.post<any>(this.apiURL, formData, options).pipe(
 		  catchError(this.handleError<any>('uploadWithMethodAndOptions'))
 		);

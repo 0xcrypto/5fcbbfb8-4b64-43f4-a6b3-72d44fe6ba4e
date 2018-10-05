@@ -17,7 +17,7 @@ export class SoundComponent implements OnInit {
 
   ngOnInit() {
     this.player = new Audio();
-    //this.play();
+    this.play();
   }
 
   play(){
