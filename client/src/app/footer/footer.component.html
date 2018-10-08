@@ -1,4 +1,4 @@
-<footer>
+<footer [style.backgroundImage]="'url('+ imageService.getImage('assets/images/bg-bottom.jpg') +')'">
   <ul>
     <li *ngFor="let menu of menus">
         <a *ngIf="menu.type == 'EXTERNAL_LINK'" [attr.href]="menu.external_link" target="_target">

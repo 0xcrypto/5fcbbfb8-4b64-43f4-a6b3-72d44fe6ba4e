@@ -1,11 +1,12 @@
-<div id="content" class="loading-bg with-logo-cursor" *ngIf="isGraveyardLoading">
+<div id="content" class="loading-bg with-logo-cursor" *ngIf="isGraveyardLoading" 
+[style.backgroundImage]="'url('+ imageService.getImage('assets/images/wall.png') +')'">
   <app-user-mgt></app-user-mgt>
-  <img src="./assets/images/logo.gif" id="logo-gif" [ngStyle]="{'height': '200px', 'width':'145px'}"/>
+  <img [src]="imageService.getImage('assets/images/logo.gif')" id="logo-gif" [ngStyle]="{'height': '200px', 'width':'145px'}"/>
 </div>
 <div id="content" class="graveyard" *ngIf="!isGraveyardLoading">
   <app-user-mgt></app-user-mgt>
   <app-logo></app-logo>
-  <div class="sub-header">
+  <div class="sub-header" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/header.jpg') +')'">
       <button (click)="nextGrave()" class="btn-left" translate>graveyard.next_grave<i class="fa fa-play-circle right-icon"></i></button>
       <button (click)="backToSearchResults()" class="btn-middle" translate>graveyard.back_to_search_result</button>
       <button (click)="previousGrave()" class="btn-right" translate><i class="fa fa-play-circle left-icon"></i>graveyard.previous_grave</button>
@@ -13,9 +14,9 @@
   <div class="graveyard-sky-container" [ngStyle]="{'background-image': skyImage}"></div>
   <div class="graveyard-container" >
       <ul [ngStyle]="{'margin-left': '-'+graveyardStartPosition+'px', 'width': (graveSize * totalAnimals)+'px', 'background-image': graveyardImage}">
-          <div *ngIf="isRainfallScene" class="rainfall">&nbsp;</div>
-          <div *ngIf="isSnowfallScene" class="snowfall">&nbsp;</div>
-          <div *ngIf="isThunderstromScene" class="thunderstrom">&nbsp;</div>
+          <div *ngIf="isRainfallScene" class="rainfall" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/rain.gif') +')'">&nbsp;</div>
+          <div *ngIf="isSnowfallScene" class="snowfall" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/snow.gif') +')'">&nbsp;</div>
+          <div *ngIf="isThunderstromScene" class="thunderstrom" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/thunderstrom.gif') +')'">&nbsp;</div>
               
           <li *ngFor="let animal of animals">
               <div  class="grave" [ngStyle]="{'background-image': animal.graveUrl, 'width': graveSize+'px'}" >

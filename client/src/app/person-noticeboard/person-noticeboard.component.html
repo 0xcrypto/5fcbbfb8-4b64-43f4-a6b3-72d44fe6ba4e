@@ -1,4 +1,5 @@
-<div *ngIf="!isGraveLoadingScreenVisible" id="content" class="notice-bg">
+<div *ngIf="!isGraveLoadingScreenVisible" id="content" class="notice-bg" 
+[style.backgroundImage]="'url('+ imageService.getImage('assets/images/noticeboard.png') +')'">
     <app-user-mgt></app-user-mgt>
     <app-logo></app-logo>
     <div class="fill-tabs">
@@ -13,7 +14,7 @@
             <div id="graveyard-noticeboard"  
             [style.display]="(selectedTab == 'graveyard-noticeboard') ? 'block' : 'none'">
             <div class="popular-grave-col">
-                <div class="tile" *ngFor="let user of prioritizeGraves" >
+                <div class="tile" *ngFor="let user of prioritizeGraves" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/floating-tile.png') +')'">
                     <p class="name">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</p>
                     <p translate>graveyard.noticeboard.tabs.graveyard_noticeboard.will_be_sadly_missed</p>
                     <p>
@@ -23,8 +24,10 @@
                 </div>
             </div>
             <div class="options-col">
-                <div class="option">
-                    <button (click)="gotoGraveyard();" translate>graveyard.noticeboard.tabs.graveyard_noticeboard.go_to_graveyard</button>
+                <div class="option" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/option-shadow.png') +')'">
+                    <button (click)="gotoGraveyard();" 
+                    [style.backgroundImage]="'url('+ imageService.getImage('assets/images/option-background.png') +')'"
+                     translate>graveyard.noticeboard.tabs.graveyard_noticeboard.go_to_graveyard</button>
                 </div>
                 <div class="option">
                     <button translate>graveyard.noticeboard.tabs.graveyard_noticeboard.choose_graveyard</button>
@@ -46,7 +49,7 @@
                 </div>
             </div>
             <div class="advertisement-col">
-                <div *ngFor="let advertisement of advertisements" class="tile">
+                <div *ngFor="let advertisement of advertisements" class="tile" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/floating-tile.png') +')'">
                     <img *ngIf="advertisement.image" [attr.src]="advertisement.image" />
                     <p *ngIf="advertisement.text">{{advertisement.text}}</p>
                     <a *ngIf="advertisement.url" [attr.href]="advertisement.url" target="_blank">{{advertisement.url}}</a>
@@ -832,43 +835,59 @@
         </div>
     </div>
 </div>
-<div *ngIf="isGraveLoadingScreenVisible" id="content" class="loading-bg">
+<div *ngIf="isGraveLoadingScreenVisible" id="content" class="loading-bg" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/wall.png') +')'">
     <app-user-mgt></app-user-mgt>
     <app-logo></app-logo>
     <ul id="loading-options">
         <li>
             <label translate>graveyard.loading_screen.day</label>
-            <button class="day" (click)="setSceneTime(1);" [ngClass]="{'active': (selectedSceneTime == 1) }"><span></span></button>
+            <button class="day" 
+            [style.backgroundImage]="'url('+ imageService.getImage('assets/images/day.png') +')'" 
+            (click)="setSceneTime(1);" [ngClass]="{'active': (selectedSceneTime == 1) }"><span></span></button>
         </li>
         <li>
             <label translate>graveyard.loading_screen.night</label>
-            <button class="night" (click)="setSceneTime(2);" [ngClass]="{'active': (selectedSceneTime == 2) }"><span></span></button>
+            <button class="night" 
+            [style.backgroundImage]="'url('+ imageService.getImage('assets/images/night.png') +')'" 
+            (click)="setSceneTime(2);" [ngClass]="{'active': (selectedSceneTime == 2) }"><span></span></button>
         </li>
         <li class="seperator"></li>
         <li>
             <label translate>graveyard.loading_screen.blue_sky</label>
-            <button class="blue-sky" (click)="setSceneSeason(1);" [ngClass]="{'active': (selectedSceneSeason == 1) }"><span></span></button>
+            <button class="blue-sky" 
+            [style.backgroundImage]="'url('+ imageService.getImage('assets/images/blue-sky.png') +')'" 
+            (click)="setSceneSeason(1);" [ngClass]="{'active': (selectedSceneSeason == 1) }"><span></span></button>
         </li>
         <li>
             <label translate>graveyard.loading_screen.rain</label>
-            <button class="rain" (click)="setSceneSeason(2);" [ngClass]="{'active': (selectedSceneSeason == 2) }"><span></span></button>
+            <button class="rain" 
+            [style.backgroundImage]="'url('+ imageService.getImage('assets/images/rain.png') +')'" 
+            (click)="setSceneSeason(2);" [ngClass]="{'active': (selectedSceneSeason == 2) }"><span></span></button>
         </li>
         <li>
             <label translate>graveyard.loading_screen.thunder_strom</label>
-            <button class="thunder-strom" (click)="setSceneSeason(3);" [ngClass]="{'active': (selectedSceneSeason == 3) }"><span></span></button>
+            <button class="thunder-strom" 
+            [style.backgroundImage]="'url('+ imageService.getImage('assets/images/thunder-strom.png') +')'" 
+            (click)="setSceneSeason(3);" [ngClass]="{'active': (selectedSceneSeason == 3) }"><span></span></button>
         </li>
         <li>
             <label translate>graveyard.loading_screen.snow</label>
-            <button class="snow" (click)="setSceneSeason(4);" [ngClass]="{'active': (selectedSceneSeason == 4) }"><span></span></button>
+            <button class="snow" 
+            [style.backgroundImage]="'url('+ imageService.getImage('assets/images/snow.png') +')'" 
+            (click)="setSceneSeason(4);" [ngClass]="{'active': (selectedSceneSeason == 4) }"><span></span></button>
         </li>
         <li class="seperator"></li>
         <li>
             <label translate>graveyard.loading_screen.random</label>
-            <button class="random" (click)="randomSceneSelection();" [ngClass]="{'active': isRandomSceneSelected }"><span></span></button>
+            <button class="random" 
+            [style.backgroundImage]="'url('+ imageService.getImage('assets/images/random.png') +')'" 
+            (click)="randomSceneSelection();" [ngClass]="{'active': isRandomSceneSelected }"><span></span></button>
         </li>
         <li>
             <label>&nbsp;</label>
-            <button class="ok" (click)="showGraveyard();"></button>
+            <button class="ok" 
+            [style.backgroundImage]="'url('+ imageService.getImage('assets/images/ok.png') +')'" 
+             (click)="showGraveyard();"></button>
         </li>
     </ul>
 </div>

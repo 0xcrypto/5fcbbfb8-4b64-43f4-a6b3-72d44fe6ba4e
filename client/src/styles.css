@@ -86,7 +86,7 @@ table button{
     z-index: 9;    
     top: 15px;
     left: 70px;
-    background-image: url(./assets/images/vg-logo.png);
+    /*background-image: url(./assets/images/vg-logo.png);*/
     background-position: center;
     opacity: 1;
 }
@@ -100,7 +100,7 @@ table button{
     z-index: 9;
     top: 60px;
     left: 30px;
-    background-image: url(./assets/images/vg-left-logo.png);
+    /*background-image: url(./assets/images/vg-left-logo.png);*/
     background-position: center;
     background-size: 100%;
 }
@@ -111,7 +111,7 @@ table button{
     z-index: 9;
     top: 60px;
     right: 30px;
-    background-image: url(./assets/images/vg-right-logo.png);
+    /*background-image: url(./assets/images/vg-right-logo.png);*/
     background-position: center;
     background-size: 100%;
 }
@@ -123,7 +123,7 @@ body{
 body header{
     height: 50px;
     background-repeat: repeat-x;
-    background-image: url(./assets/images/header.jpg);
+    /*background-image: url(./assets/images/header.jpg);*/
     background-position: center top;
     position: fixed;
     left: 0;
@@ -241,14 +241,14 @@ body #content{
 }
 body #content.notice-bg{
     overflow: inherit;
-    background-image: url(./assets/images/noticeboard.png);
+    /*background-image: url(./assets/images/noticeboard.png);*/
     background-size: 110%;
     background-repeat: no-repeat;
     background-position: center -180px;
 }
 body #content.loading-bg{
     overflow: inherit;
-    background-image: url(./assets/images/wall.png);
+    /*background-image: url(./assets/images/wall.png);*/
     background-repeat: repeat;
     background-size: contain;
     -webkit-animation: backgroundScroll 5s linear infinite;
@@ -296,7 +296,7 @@ body #content .sky{
     width: 100%;
     display: block;
     position: absolute;
-    background-image: url(./assets/images/sky.jpg);
+    /*background-image: url(./assets/images/sky.jpg);*/
 	background-size: 145%;
     background-repeat: no-repeat;
 }
@@ -309,7 +309,7 @@ body #content .top-board{
     overflow: hidden;
     position: absolute;
     z-index: 3;
-    background-image: url(./assets/images/top-board.png);
+    /*background-image: url(./assets/images/top-board.png);*/
     background-repeat: no-repeat;
     margin-left: -120px;
     background-size: cover;
@@ -324,7 +324,7 @@ body #content .birds{
     overflow: hidden;
     position: absolute;
     z-index: 2;
-    background-image: url(./assets/images/birds-flying.gif);
+    /*background-image: url(./assets/images/birds-flying.gif);*/
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -335,7 +335,7 @@ body #content.goto-notice-wall .birds{
 body #content .gate-left{
    width: 165px;
    height: 298px;
-   background-image: url(./assets/images/gate-left.png);
+   /*background-image: url(./assets/images/gate-left.png);*/
    background-repeat: no-repeat;
    background-size: contain;
    transition: -webkit-transform 3s linear;
@@ -350,7 +350,7 @@ body #content .gate-right{
     height: 298px;
     float: right;
     z-index: 3;
-    background-image: url(./assets/images/gate-right.png);
+    /*background-image: url(./assets/images/gate-right.png);*/
     background-size: contain;
     background-repeat: no-repeat;
     transition: -webkit-transform 3s linear;
@@ -387,7 +387,7 @@ body #content .lion-left{
     top: 120px;
     left: 170px;
     z-index: 3;
-    background-image: url(./assets/images/lion.png);
+    /*background-image: url(./assets/images/lion.png);*/
     background-repeat: no-repeat;
 }
 body #content .lion-right{
@@ -402,7 +402,7 @@ body #content .lion-right{
     -webkit-filter: FlipX;
     filter: FlipX;
     -ms-filter: "FlipX";
-    background-image: url(./assets/images/lion.png);
+    /*background-image: url(./assets/images/lion.png);*/
     background-repeat: no-repeat;
 }
 body #content .gate-wall {
@@ -411,7 +411,7 @@ body #content .gate-wall {
     width: 100%;
     z-index: 2;
     opacity: 1;
-	background-image: url(./assets/images/main-gate.png);
+	/*background-image: url(./assets/images/main-gate.png);*/
     background-position: bottom center;
     background-repeat: no-repeat;    
     background-size: contain;
@@ -429,7 +429,7 @@ body #content .notice-wall{
     height: 100%;
     width: 100%;
     z-index: 1;
-    background-image: url(./assets/images/notice-board.png);
+    /*background-image: url(./assets/images/notice-board.png);*/
     background-repeat: no-repeat;
     background-size: 45%;
     transition: all 1.0s ease-in-out;
@@ -456,9 +456,8 @@ body #content .animal-graveyard-gate{
 }
 
 body footer{
-
     height: 90px;
-    background-image: url(./assets/images/bg-bottom.jpg);
+    /*background-image: url(./assets/images/bg-bottom.jpg);*/
     background-repeat: repeat;
     width: 100%;
     margin: 0;
@@ -736,7 +735,7 @@ form .text-right{
     margin: 0 13px;
 }
 .options-col .option{
-    background-image: url(./assets/images/option-shadow.png);
+    /*background-image: url(./assets/images/option-shadow.png);*/
     background-repeat: no-repeat;
     background-position: center 8px;
     margin: 0 auto;
@@ -746,7 +745,7 @@ form .text-right{
     position: relative;
 }
 .options-col .option button{
-    background-image: url(./assets/images/option-background.png);
+    /*background-image: url(./assets/images/option-background.png);*/
     background-repeat: no-repeat;
     background-position: center;
     display: block;
@@ -802,7 +801,7 @@ form .text-right{
     height: 105px;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url(./assets/images/floating-tile.png);
+    /*background-image: url(./assets/images/floating-tile.png);*/
 	padding: 15px;
 }
 .popular-grave-col .tile p,
@@ -1004,49 +1003,49 @@ table tbody{
     box-shadow: 0 0 20px 0 #fff;
 }
 #loading-options li button.day{
-    background-image: url(./assets/images/day.png);
+    /*background-image: url(./assets/images/day.png);*/
 }
 #loading-options li:hover button.day, #loading-options li button.day.active{
     background-image: url(./assets/images/day-active.png);
 }
 #loading-options li button.night{
-    background-image: url(./assets/images/night.png);
+    /*background-image: url(./assets/images/night.png);*/
 }
 #loading-options li:hover button.night, #loading-options li button.night.active{
     background-image: url(./assets/images/night-active.png);
 }
 #loading-options li button.blue-sky{
-    background-image: url(./assets/images/blue-sky.png);
+    /*background-image: url(./assets/images/blue-sky.png);*/
 }
 #loading-options li:hover button.blue-sky, #loading-options li button.blue-sky.active{
     background-image: url(./assets/images/blue-sky-active.png);
 }
 #loading-options li button.rain{
-    background-image: url(./assets/images/rain.png);
+    /*background-image: url(./assets/images/rain.png);*/
 }
 #loading-options li:hover button.rain, #loading-options li button.rain.active{
     background-image: url(./assets/images/rain-active.png);
 }
 #loading-options li button.thunder-strom{
-    background-image: url(./assets/images/thunder-strom.png);
+    /*background-image: url(./assets/images/thunder-strom.png);*/
 }
 #loading-options li:hover button.thunder-strom, #loading-options li button.thunder-strom.active{
     background-image: url(./assets/images/thunder-strom-active.png);
 }
 #loading-options li button.snow{
-    background-image: url(./assets/images/snow.png);
+    /*background-image: url(./assets/images/snow.png);*/
 }
 #loading-options li:hover button.snow, #loading-options li button.snow.active{
     background-image: url(./assets/images/snow-active.png);
 }
 #loading-options li button.random{
-    background-image: url(./assets/images/random.png);
+    /*background-image: url(./assets/images/random.png);*/
 }
 #loading-options li:hover button.random, #loading-options li button.random.active{
     background-image: url(./assets/images/random-active.png);
 }
 #loading-options li button.ok{
-    background-image: url(./assets/images/ok.png);
+    /*background-image: url(./assets/images/ok.png);*/
 }
 #loading-options li:hover button.ok, #loading-options li button.ok.active{
     background-image: url(./assets/images/ok-active.png);
@@ -1059,7 +1058,7 @@ table tbody{
     height: 100px;
 }
 .graveyard .sub-header, .catacombs .sub-header{
-    background-image: url(./assets/images/header.jpg);
+    /*background-image: url(./assets/images/header.jpg);*/
     height: 35px;
     background-position: center -15px;
     position: absolute;
@@ -1191,7 +1190,7 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     color: #848484;
 }
 .rainfall{
-    background-image: url(./assets/images/rain.gif);
+    /*background-image: url(./assets/images/rain.gif);*/
     background-repeat: repeat;
     height: 600px;
     background-size: contain;
@@ -1199,7 +1198,7 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     position: absolute;
 }
 .snowfall{
-    background-image: url(./assets/images/snow.gif);
+    /*background-image: url(./assets/images/snow.gif);*/
     background-repeat: repeat;
     height: 600px;
     background-size: contain;
@@ -1207,7 +1206,7 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     position: absolute;
 }
 .thunderstrom{
-    background-image: url(./assets/images/thunderstrom.gif);
+    /*background-image: url(./assets/images/thunderstrom.gif);*/
     background-repeat: repeat;
     height: 600px;
     background-size: contain;
@@ -1250,10 +1249,10 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     transition: all 3s linear;
 }
 .catacombs .outer-wall.en{
-    background-image: url(./assets/images/cat-main-en.png);
+    /*background-image: url(./assets/images/cat-main-en.png);*/
 }
 .catacombs .outer-wall.pl{
-    background-image: url(./assets/images/cat-main-pl.png);
+    /*background-image: url(./assets/images/cat-main-pl.png);*/
 }
 .catacombs .gate{
     height: 500px;
@@ -1263,7 +1262,7 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     width: 300px;
     z-index: 10;
     background-size: contain;
-    background-image: url(./assets/images/cat-door.png);
+    /*background-image: url(./assets/images/cat-door.png);*/
     background-repeat: no-repeat;
     background-size: contain;
     transition: -webkit-transform 3s linear;
@@ -1292,7 +1291,7 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     display: none;
 }
 .catacombs .dane-way{
-    background-image: url(./assets/images/cat-dane.png);
+    /*background-image: url(./assets/images/cat-dane.png);*/
     position: absolute;
     right: 0;
     left: 0;
@@ -1310,7 +1309,7 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     display: none;
 }
 .catacombs .catacombs-container{
-    background-image: url(./assets/images/cat-wall-minor.jpg);
+    /*background-image: url(./assets/images/cat-wall-minor.jpg);*/
     background-repeat: repeat-x;
     height: 435px;
 }
@@ -1376,7 +1375,7 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
 }
 .catacombs-container > ul li .catacomb > .slab{
     display: block;
-    background-image: url(./assets/images/cat-stand.png);
+    /*background-image: url(./assets/images/cat-stand.png);*/
     background-repeat: no-repeat;
     position: absolute;
     width: 100%;
@@ -1387,7 +1386,7 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
 }
 .catacombs-container > ul li .catacomb > .candle-stand{
     display: block;
-    background-image: url(./assets/images/cat-candle.png);
+    /*background-image: url(./assets/images/cat-candle.png);*/
     background-repeat: no-repeat;
     height: 70px;
     width: 50px;

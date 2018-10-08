@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Advertisement } from '../classes/advertisement';
 import { DataService } from '../services/data.service';
 import { MessageService } from '../services/message.service';
+import { ImageService } from '../services/image.service';
 import { Router } from '@angular/router';
 import { AppGlobals } from '../app.globals';
 import { CookieStorage, LocalStorage, SessionStorage, LocalStorageService } from 'ngx-store';
@@ -94,11 +95,15 @@ export class AnimalNoticeboardComponent implements OnInit {
     private dataService: DataService, 
     private _global: AppGlobals,
     private localStorageService: LocalStorageService,
+    private imageService:ImageService,
     private messageService:MessageService) {
     this.router = _router;
   }
 
   ngOnInit() {
+    if(this.imageService.cachedImages.length == 0)
+      this.router.navigateByUrl('/home');
+
     this.selectedTab = 'graveyard-noticeboard';
     this.currentLang = this._global.getLanguage();
 

@@ -1,4 +1,4 @@
-<header>
+<header [style.backgroundImage]="'url('+ imageService.getImage('assets/images/header.jpg') +')'">
     <div>
         <div>
             <ul>
@@ -47,7 +47,7 @@
             </ul>
         </div>
     </div>
-    <div id="vg-logo"></div>
-    <div id="vg-left-logo"></div>
-    <div id="vg-right-logo"></div>
+    <div id="vg-logo" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/vg-logo.png') +')'"></div>
+    <div id="vg-left-logo" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/vg-left-logo.png') +')'"></div>
+    <div id="vg-right-logo" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/vg-right-logo.png') +')'"></div>
 </header>

@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import {Router} from '@angular/router';
 import { AppGlobals } from '../app.globals';
 import { CookieStorage, LocalStorage, SessionStorage, LocalStorageService } from 'ngx-store';
+import { ImageService } from '../services/image.service';
+import { MessageService } from '../services/message.service';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-home',
@@ -17,15 +20,23 @@ export class HomeComponent implements OnInit {
   constructor(private _router: Router, 
     private route: ActivatedRoute, 
     private _global: AppGlobals,
-    private localStorage:LocalStorageService) {
+    private localStorage:LocalStorageService,
+    private imageService:ImageService,
+    private messageService:MessageService) {
     this.router = _router;
   }
 
   ngOnInit() {
-    if(!this.localStorage.get(this._global.APP_IMAGES_LOADED_KEY)){
-      window['component'] = this;
-      this.loadImages();
-    }
+    this.isImageLoadingScreenVisible = true;
+    this.imageService.load();
+    this.messageService.castMessage.subscribe(object => {
+      let message = object.message;
+      switch(message){
+        case "APP_IMAGES_LOADED":
+          this.isImageLoadingScreenVisible = false;
+          break;
+      }
+    });
   }
   
   ngAfterViewInit(){
@@ -50,22 +61,6 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl('/pet-noticeboard');
   }
   
-  loadImages(){
-    this.isImageLoadingScreenVisible = true;
-    var images = new Array();
-    
-    for (let i = 0; i < this._global.IMAGES.length; i++) {
-      var image = document.createElement('img');
-      image.src = this._global.IMAGES[i];
-      document.querySelector('#images-loading').appendChild(image);
-    }
-
-    setTimeout(function(){
-      window['component'].isImageLoadingScreenVisible = false;
-      window['component'].localStorage.set(window['component']._global.APP_IMAGES_LOADED_KEY, "YES");
-      //document.querySelector('#images-loading').innerHTML = '';
-    }, 10000);
-  }
 }
 
 

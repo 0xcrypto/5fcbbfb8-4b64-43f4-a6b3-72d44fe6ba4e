@@ -14,9 +14,9 @@ const httpOptions = {
 export class DataService {
 	private protocol = location.protocol === 'https:' ? 'https' : 'http';
 	/*LOCAL SERVER*/
-	//private apiURL = this.protocol + '://codeshow/virtualgrave/server/api/data';  
+	private apiURL = this.protocol + '://localhost/virtualgrave/server/api/data';  
 	/*LIVE SERVER*/
-	private apiURL = this.protocol + '://codeshow.in/virtualgrave/server/api/data';  
+	//private apiURL = this.protocol + '://codeshow.in/virtualgrave/server/api/data';  
 
   constructor(private http: HttpClient) { }
 

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 import { DataService } from '../services/data.service';
 import { MessageService } from '../services/message.service';
+import { ImageService } from '../services/image.service';
 import { AppGlobals } from '../app.globals';
 import { debug } from 'util';
 import { _iterableDiffersFactory } from '@angular/core/src/application_module';
@@ -48,11 +49,15 @@ export class CatacombComponent implements OnInit {
     private dataService: DataService, 
     private messageService:MessageService, 
     private _global: AppGlobals, 
+    private imageService:ImageService,
     private _router: Router) { 
        this.router = _router;
   }
 
   ngOnInit() {
+    if(this.imageService.cachedImages.length == 0)
+      this.router.navigateByUrl('/home');
+
     this.isCatacombsLoading = true;
     this.selectedCatacombDetailTab = 'tab1';
 

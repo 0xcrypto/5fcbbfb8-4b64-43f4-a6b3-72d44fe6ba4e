@@ -1,4 +1,5 @@
-<div id="content" class="notice-bg">
+<div id="content" class="notice-bg" 
+[style.backgroundImage]="'url('+ imageService.getImage('assets/images/noticeboard.png') +')'">
   <app-user-mgt></app-user-mgt>
   <div class="scroll-content">
         <div *ngIf="page">

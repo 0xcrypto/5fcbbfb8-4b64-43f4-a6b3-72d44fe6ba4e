@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AppGlobals } from '../app.globals';
 import { DataService } from '../services/data.service';
+import { ImageService } from '../services/image.service';
 
 export interface Options {
 };
@@ -16,7 +17,9 @@ export class FooterComponent implements OnInit {
   language: string = null;
   options: Options = null;
 
-  constructor(private dataService: DataService, private _global: AppGlobals) {
+  constructor(private dataService: DataService,
+    private imageService:ImageService, 
+    private _global: AppGlobals) {
   }
 
   ngOnInit() {

@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { AppGlobals } from '../app.globals';
 import { StaticPage } from '../classes/staticpage';
 import { DataService } from '../services/data.service';
+import { ImageService } from '../services/image.service';
 
 export interface Options {
 };
@@ -20,7 +21,8 @@ export class StaticpageComponent implements OnInit {
   options: Options = null;
 
   constructor(private route: ActivatedRoute, private dataService: DataService,
-    private location: Location, private _global: AppGlobals) { }
+    private location: Location, private _global: AppGlobals,
+    private imageService:ImageService) { }
 
   ngOnInit() {
     this.getStaticPage();

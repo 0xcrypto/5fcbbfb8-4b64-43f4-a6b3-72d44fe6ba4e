@@ -1,30 +1,32 @@
-<div id="content" class="loading-bg" *ngIf="isCatacombsLoading" >
+<div id="content" class="loading-bg" *ngIf="isCatacombsLoading" 
+[style.backgroundImage]="'url('+ imageService.getImage('assets/images/wall.png') +')'">
     <app-user-mgt></app-user-mgt>
-    <img src="./assets/images/logo.gif" id="logo-gif" [ngStyle]="{'height': '200px', 'width':'145px'}"/>
+    <img [src]="imageService.getImage('assets/images/logo.gif')" id="logo-gif" [ngStyle]="{'height': '200px', 'width':'145px'}"/>
 </div>
 <div id="content" class="catacombs" *ngIf="!isCatacombsLoading" [ngClass]="{
   'opening-gate': isOpeningGate,
   'moving-into-dane': isMovingIntoDane, 
   'reached-into-dane': isInDane}">
   <app-user-mgt></app-user-mgt>
-  <div class="outer-wall" [ngClass]="{'en': (currentLang == 'en'), 'pl': (currentLang == 'pl')}"></div>
-  <div class="gate" (click)="openGate();"></div>
-  <div class="dane-way"></div>
+  <div class="outer-wall" *ngIf="(currentLang == 'en')" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-main-en.png') +')'"></div>
+  <div class="outer-wall" *ngIf="(currentLang == 'pl')" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-main-pl.png') +')'"></div>
+  <div class="gate" (click)="openGate();" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-door.png') +')'"></div>
+  <div class="dane-way" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-dane.png') +')'"></div>
   
   <div class="dane">
     <app-logo></app-logo>
-    <div class="sub-header">
+    <div class="sub-header" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/header.jpg') +')'">
         <button (click)="nextCrypt()" class="btn-left" translate>catacomb.next_crypt<i class="fa fa-play-circle right-icon"></i></button>
         <button (click)="backToMainGate()" class="btn-middle" translate>catacomb.back_to_catacomb_main_gate</button>
         <button (click)="previousCrypt()" class="btn-right" translate><i class="fa fa-play-circle left-icon"></i>catacomb.prev_crypt</button>
     </div>
-    <div class="catacombs-container" [ngStyle]="{'width': (catacombSize * totalCatacombs)+'px'}">
+    <div class="catacombs-container" [ngStyle]="{'width': (catacombSize * totalCatacombs)+'px'}" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-wall-minor.jpg') +')'">
         <ul [ngStyle]="{'margin-left': '-'+catacombStartPosition+'px', 'width': (catacombSize * totalCatacombs)+'px'}">
             <li *ngFor="let catacomb of catacombs">
                 <div  class="catacomb" [ngStyle]="{ 'width': catacombSize+'px' }" >
                     <div class="style" [ngStyle]="{ 'background-image': catacomb.imageUrl }"></div>
-                    <p class="slab"></p>
-                    <p class="candle-stand"></p>
+                    <p class="slab" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-stand.png') +')'"></p>
+                    <p class="candle-stand" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-candle.png') +')'"></p>
                     <div class="detail">
                         <p class="name" (click)="showCatacombDetails(catacomb);">
                           {{([].constructor.isArray(catacomb).name1) ? 

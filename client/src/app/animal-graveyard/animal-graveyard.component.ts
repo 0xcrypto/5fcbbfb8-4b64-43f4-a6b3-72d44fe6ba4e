@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { User } from '../classes/user';
 import { DataService } from '../services/data.service';
 import { MessageService } from '../services/message.service';
+import { ImageService } from '../services/image.service';
 import { AppGlobals } from '../app.globals';
 import { debug } from 'util';
 import { _iterableDiffersFactory } from '@angular/core/src/application_module';
@@ -50,11 +51,15 @@ export class AnimalGraveyardComponent implements OnInit {
     private messageService:MessageService,
     private _global: AppGlobals, 
     private _router: Router,
+    private imageService:ImageService,
     private localStorageService: LocalStorageService) { 
     this.router = _router;
   }
 
   ngOnInit() {
+    if(this.imageService.cachedImages.length == 0)
+      this.router.navigateByUrl('/home');
+
     let position = +this.route.snapshot.paramMap.get('position');
     let scene = this.route.snapshot.paramMap.get('scene');
     let season = scene.split('_')[1];

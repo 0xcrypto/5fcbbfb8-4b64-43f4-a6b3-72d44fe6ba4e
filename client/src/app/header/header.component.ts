@@ -8,6 +8,7 @@ import { AppComponent } from '../app.component';
 import { UserManagementDialogService } from '../services/userManagementDialog.service';
 import { UserService } from '../services/user.service';
 import { MessageService } from '../services/message.service';
+import { ImageService } from '../services/image.service';
 import { User } from '../classes/user';
 
 @Component({
@@ -30,6 +31,7 @@ export class HeaderComponent implements OnInit {
     private route: ActivatedRoute,
     private _userMgtDialog:UserManagementDialogService,
     private messageService:MessageService,
+    private imageService:ImageService,
     private userService:UserService) {
   }
 
