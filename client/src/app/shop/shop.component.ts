@@ -39,10 +39,6 @@ export class ShopComponent implements OnInit {
   isPaymentCompleted:boolean = false
   isSelectedGraveNotAvailable:boolean = false;
   isItemAlreadyExists:boolean = false;
-  selectedCandlePriceString:string;
-  selectedStonePriceString:string;
-  selectedFlowerPriceString:string;
-  selectedOtherPriceString:string;
   selectedObjectPrice:number;
   selectedObjectCurrency:string;
   selectedObjectId:string;
@@ -59,15 +55,17 @@ export class ShopComponent implements OnInit {
   stone_price:string = null;
   other_price:string = null;
   USER_INFO:any = null;
-  payment_id:string = null;
+  payment_id:number = null;
   payPalConfig?: PayPalConfig;
 
-  constructor(private route: ActivatedRoute, 
-    private dataService: DataService, 
-    private _global: AppGlobals, 
-    private _router: Router,
-    private messageService:MessageService,
-    private userService:UserService) {
+  constructor(
+      private route: ActivatedRoute,  
+      private dataService: DataService, 
+      private _global: AppGlobals, 
+      private _router: Router, 
+      private messageService:MessageService,  
+      private userService:UserService 
+    ) {
     this.router = _router;
   }
 
@@ -86,7 +84,6 @@ export class ShopComponent implements OnInit {
           break;
       }
     });
-
     
     this.options = this._global.refreshObject(this.options, []);
     this.dataService.getAllWithMethodAndOptions('TODAY_DATE', this._global.serializeAndURIEncode(this.options))
@@ -155,7 +152,7 @@ export class ShopComponent implements OnInit {
         },
         onPaymentComplete: (data, actions) => {
           //this.payment_id = data.transactions[0].related_resources[0].sale.id;
-          this.payment_id = "12345";
+          this.payment_id = 12345;
           this.isPaymentCompleted = true;
         },
         onCancel: (data, actions) => {
@@ -258,11 +255,13 @@ export class ShopComponent implements OnInit {
     this.isCandleShopFormVisible = false;
   }
 
-  onCandleValidUpToDateChange(event, prices:any){
+  onCandleValidUpToDateChange(priceId){
     if(!this.TODAY_DATE)
       return;
 
-    this.onObjectValiditySelect(prices);
+    var object = this.candlePrices.filter(price => price.id == priceId)[0];
+
+    this.onObjectValiditySelect(object);
   }
 
   CandleShoppingConfirm(){
@@ -284,11 +283,12 @@ export class ShopComponent implements OnInit {
     this.isFlowerShopFormVisible = false;
   }
 
-  onFlowerValidUpToDateChange(event, prices:any){
+  onFlowerValidUpToDateChange(priceId){
     if(!this.TODAY_DATE)
       return;
 
-    this.onObjectValiditySelect(prices);
+    var object = this.flowerPrices.filter(price=>price.id == priceId)[0];
+    this.onObjectValiditySelect(object);
   }
   
   FlowerShoppingConfirm(){
@@ -304,15 +304,19 @@ export class ShopComponent implements OnInit {
     this.selectedObjectId = filename.replace(/\.[^/.]+$/, "");
     this.isStoneShopFormVisible = true;
   }
+
   StoneShoppingChange(){
     this.isStoneShopFormVisible = false;
   }
-  onStoneValidUpToDateChange(event, prices:any){
+
+  onStoneValidUpToDateChange(priceId){
     if(!this.TODAY_DATE)
       return;
 
-      this.onObjectValiditySelect(prices);
+      var object = this.stonePrices.filter(price=>price.id == priceId)[0];
+      this.onObjectValiditySelect(object);
   }
+
   StoneShoppingConfirm(){
     this.selectedObjectName = 'kamien';
 
@@ -326,15 +330,19 @@ export class ShopComponent implements OnInit {
     this.selectedObjectId = filename.replace(/\.[^/.]+$/, "");
     this.isOtherShopFormVisible = true;
   }
+
   OtherShoppingChange(){
     this.isOtherShopFormVisible = false;
   }
-  onOtherValidUpToDateChange(event, prices:any){
+
+  onOtherValidUpToDateChange(priceId){
     if(!this.TODAY_DATE)
       return;
 
-    this.onObjectValiditySelect(prices);
+    var object = this.otherPrices.filter(price=>price.id == priceId)[0];
+    this.onObjectValiditySelect(object);
   }
+
   OtherShoppingConfirm(){
     this.selectedObjectName = 'inne';
 
@@ -404,36 +412,24 @@ export class ShopComponent implements OnInit {
     }
   }
 
-  onObjectValiditySelect(list:any[]){
+  onObjectValiditySelect(priceObject:any){
     let today = moment(this.TODAY_DATE);
-    let validity = moment(this.valid_upto);
-    let diffDays = validity.diff(today, 'days');
-    let price = 0, currency = null, desc_en, desc_pl, index = -1;
+    let price = 0, currency = null;
 
-    if(today == validity)
-      return;
+    price = parseFloat(priceObject.price);
+    currency = priceObject.currency;
 
-    for(let i=0;i<=list.length-1;i++){
-      if(diffDays >= parseInt(list[i].days))
-        index = i;
-    }
-
-    price = list[index].price;
-    currency = list[index].currency;
-    desc_en = list[index].desc_en;
-    desc_pl = list[index].desc_pl;
-
+    this.valid_upto = moment(today, "YYYY-MM-DD").add(parseInt(priceObject.days), 'days').format("YYYY-MM-DD");
     this.selectedObjectPrice = price;
     this.selectedObjectCurrency = currency;
-    let price_string = (this.currentLang == 'en') ? desc_en : desc_pl; 
-    this.selectedCandlePriceString = price_string.replace('_TOTAL_', price).replace('_CURRENCY_', currency);
-    
-    if(+this.selectedObjectPrice == 0){
-      this.isPaymentCompleted = true;
-    }
-    else{
+
+    if(this.selectedObjectPrice > 0){
       this.isPaymentCompleted = false;
       this.initPayPalConfig(currency, price);
+    }
+    else{
+      this.payment_id = 0;
+      this.isPaymentCompleted = true;
     }
   }
   searchGrave(){
