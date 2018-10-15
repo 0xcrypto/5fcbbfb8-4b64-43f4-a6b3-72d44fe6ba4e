@@ -17,7 +17,6 @@
 		{
 				return array();
 		}
-
 		public function actionList()
 		{
 			$options = null;
@@ -181,6 +180,10 @@
 						$result = $this->register($options);
 					else if($method == 'RESET_PASSWORD')
 						$result = $this->resetPassword($options);
+					else if($method == 'ADD_PERSON')
+						$result = $this->addPerson($options);
+					else if($method == 'ADD_ANIMAL')
+						$result = $this->addAnimal($options);
 					else if($method == 'ADD_ANIMAL_OBJECT')
 						$result = $this->addAnimalObject($options);
 					else if($method == 'ADD_PERSON_OBJECT')
@@ -1700,6 +1703,209 @@
 		/***
 		 	REQUIRED PARAMETERS
 			--------------------
+			$options['temp']
+			$options['religion_id']
+			$options['religion_name']
+			$options['payment_method']
+			$options['payment_id']
+			$options['amount']
+			$options['current_language']
+			$options['date_birth']
+			$options['date_death']
+			$options['buyer_id']
+			$options['place_id']
+			$options['grave_id']
+			$options['name']
+			$options['surname']
+			$options['gender']
+			$options['grave_image']
+
+			$options['bio_title']
+			$options['bio_body']
+
+			$options['unique_id']
+		***/
+
+		private function addPerson($options = NULL){
+			$temp = isset($options['temp']) ? $options['temp'] : 0;
+			$table = ($temp == 0) ? "users" : "users_temp";
+			$graveyard_id = $this->getGraveyardIdByReligionId($options['religion_id']);
+			$payment_method = isset($options['payment_method']) ? $options['payment_method'] : -1; 
+			$payment_id = isset($options['payment_id']) ? $options['payment_id'] : 0;
+			$current_language = isset($options['current_language']) ? $options['current_language'] : 'en';
+			$today_date = date('Y-m-d');
+
+			$_dateb_y = substr($options['date_birth'], 6,9);
+			$_dateb_m = substr($options['date_birth'], 3,2);
+			$_dateb_d = substr($options['date_birth'], 0,2);
+			$date_birth = $_dateb_y.'-'.$_dateb_m.'-'.$_dateb_d;
+
+			$_dated_y = substr($options['date_death'], 6,9);
+			$_dated_m = substr($options['date_death'], 3,2);
+			$_dated_d = substr($options['date_death'], 0,2);
+			$date_death = $_dated_y.'-'.$_dated_m.'-'.$_dated_d;
+
+			$data = array();
+
+			$query="insert into $table ( buyer_id, place_id, grave_id, graveyard_id, 
+								name1, surname, date_birth, date_death, gender, 
+								religion_name, religion_id, grave_image, 
+								pay_method, amount, paymentid, language,
+								add_date, is_deleted ) values (
+								'".$options['buyer_id']."', '".$options['place_id']."', '".$options['grave_id']."', '".$graveyard_id."', 
+								'".$options['name']."', '".$options['surname']."', '".$date_birth."', '".$date_death."', '".$options['gender']."',
+								'".$options['religion_name']."', '".$options['religion_id']."',  '".$options['grave_image']."', 
+								'".$payment_method."', '".$options['amount']."', '".$payment_id."', '".$current_language."',
+								'".$today_date."', 0)";
+			
+			if(Yii::app()->db->createCommand($query)->execute()){
+				$user_id = Yii::app()->db->getLastInsertID();
+				if($user_id){
+					$query="insert into biography(user_id, order_num, title, body)  values ( $user_id, 0 , '".$options['bio_title']."','".$options['bio_body']."')";
+					
+					if(Yii::app()->db->createCommand($query)->execute()){
+						$query = "SELECT * FROM users_photos_temp WHERE uniq_id = '".$options['unique_id']."'";
+						$result = Yii::app()->db->createCommand($query)->queryAll();
+						foreach($result as $row){
+							$query = "insert into users_photos (user_id, file_name, is_portrait) values ('".$user_id."','".$row['filename']."','".$row['is_portrait']."')";
+							Yii::app()->db->createCommand($query)->execute();
+						}
+						$data['status']= "PERSON_ADD_SUCCESS";
+						$data['user_id']= $user_id;
+
+						/*
+						TODO MAIL LOGIN WHEN ADD PERSON GRAVE
+						$sendfrom = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_FROM']);
+						$sendto = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_TO']);
+						$result = $this->MailContent('NEW_OBJECT', array('id'=>$options['user_id'], 
+						'object_name'=>$options['object_name'], 'grave_type'=>'person',
+						'valid_upto'=>$valid_upto, 'comment'=>$options['comment']));
+				
+						$message  = wordwrap(trim($result['message']), 100);			
+						$headers  = 'MIME-Version: 1.0' . "\r\n";
+						$headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
+						$headers .= 'From: '.$sendfrom. "\r\n";
+						*/
+						//TO-DO = Comment out for live server
+						//@mail($sendto, $result['subject'], $message, $headers);
+	
+					}
+					else{
+						$data['status']= "PERSON_ADD_ERROR";
+					}
+				}
+				else{
+					$data['status']= "PERSON_ADD_ERROR";
+				}
+			}
+			else{
+				$data['status']= "PERSON_ADD_ERROR";
+			}
+			return $data;
+		}
+		
+		
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
+			$options['temp']
+			$options['payment_method']
+			$options['payment_id']
+			$options['amount']
+			$options['current_language']
+			$options['date_birth']
+			$options['date_death']
+			$options['buyer_id']
+			$options['al_id']
+			$options['gender']
+			$options['animalkind']
+			$options['name']
+			$options['owner_name']
+			$options['owner_surname']
+			$options['grave_image']
+			$options['image_url']
+			$options['grave_id']
+			$options['live_history']
+			$options['live_history_signature']
+			$options['unique_id']
+		***/
+
+		private function addAnimal($options = NULL){
+			$temp = isset($options['temp']) ? $options['temp'] : 0;
+			$table = ($temp == 0) ? "animals" : "animals_temp";
+			$graveyard_id = $this->getGraveyardIdByReligionId($options['religion_id']);
+			$payment_method = isset($options['payment_method']) ? $options['payment_method'] : -1; 
+			$payment_id = isset($options['payment_id']) ? $options['payment_id'] : 0;
+			$current_language = isset($options['current_language']) ? $options['current_language'] : 'en';
+			$today_date = date('Y-m-d');
+
+			$_dateb_y = substr($options['date_birth'], 6,9);
+			$_dateb_m = substr($options['date_birth'], 3,2);
+			$_dateb_d = substr($options['date_birth'], 0,2);
+			$date_birth = $_dateb_y.'-'.$_dateb_m.'-'.$_dateb_d;
+
+			$_dated_y = substr($options['date_death'], 6,9);
+			$_dated_m = substr($options['date_death'], 3,2);
+			$_dated_d = substr($options['date_death'], 0,2);
+			$date_death = $_dated_y.'-'.$_dated_m.'-'.$_dated_d;
+
+			$data = array();
+
+			$query="insert into $table ( buyer_id, al_id, gender, animalkind, 
+										name, owner_name, owner_surname, date_birth, date_death, 
+										grave_image, image_url, is_deleted, grave_id, 
+										pay_method, amount, paymentid, language, add_date
+										live_history, live_history_signature ) values (
+								'".$options['buyer_id']."', '".$options['al_id']."', '".$options['gender']."', '".$options['animalkind']."', 
+								'".$options['name']."', '".$options['owner_name']."', '".$options['owner_surname']."', '".$date_birth."', '".$date_death."', 
+								'".$options['grave_image']."', '".$options['image_url']."',  0, '".$options['grave_id']."'
+								'".$payment_method."', '".$options['amount']."', '".$payment_id."', '".$current_language."', '".$today_date."',
+								'".$options['live_history']."', '".$options['live_history_signature']."')";
+			
+			if(Yii::app()->db->createCommand($query)->execute()){
+				$animal_id = Yii::app()->db->getLastInsertID();
+				if($animal_id){
+					$query = "SELECT * FROM animals_photos_temp WHERE uniq_id = '".$options['unique_id']."'";
+					$result = Yii::app()->db->createCommand($query)->queryAll();
+					foreach($result as $row){
+						$query = "insert into animals_photos (animal_id, file_name, is_portrait) values 
+						('".$animal_id."','".$row['filename']."','".$row['is_portrait']."')";
+						Yii::app()->db->createCommand($query)->execute();
+					}
+
+					$data['status']= "ANIMAL_ADD_SUCCESS";
+					$data['animal_id']= $animal_id;
+
+					/*
+					TODO MAIL LOGIN WHEN ADD ANIMAL GRAVE
+					$sendfrom = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_FROM']);
+					$sendto = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_TO']);
+					$result = $this->MailContent('NEW_OBJECT', array('id'=>$options['user_id'], 
+					'object_name'=>$options['object_name'], 'grave_type'=>'person',
+					'valid_upto'=>$valid_upto, 'comment'=>$options['comment']));
+			
+					$message  = wordwrap(trim($result['message']), 100);			
+					$headers  = 'MIME-Version: 1.0' . "\r\n";
+					$headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
+					$headers .= 'From: '.$sendfrom. "\r\n";
+					*/
+					//TO-DO = Comment out for live server
+					//@mail($sendto, $result['subject'], $message, $headers);
+				}
+				else{
+					$data['status']= "ANIMAL_ADD_ERROR";
+				}
+			}
+			else{
+				$data['status']= "ANIMAL_ADD_ERROR";
+			}
+			return $data;
+		}
+		
+
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
 			$options['unique_id']
 			$options['is_portrait']
 
@@ -2168,6 +2374,30 @@
 				  imagepng($new_img, $save_image);
 			   }
 			   return true;
+		}
+
+		private function getGraveyardIdByReligionId( $religion_id ){
+			$graveyard_id = 0;
+			if($religion_id == 0 || !$religion_id) $graveyard_id = 4;
+			elseif($religion_id == 1) $graveyard_id = 5;
+			elseif($religion_id == 2) $graveyard_id = 6;
+			elseif($religion_id == 3) $graveyard_id = 8;
+			elseif($religion_id == 4) $graveyard_id = 1;
+			elseif($religion_id == 5) $graveyard_id = 1;
+			elseif($religion_id == 6) $graveyard_id = 3;
+			elseif($religion_id == 7) $graveyard_id = 9;
+			elseif($religion_id == 8) $graveyard_id = 1;
+			elseif($religion_id == 9) $graveyard_id = 1;
+			elseif($religion_id == 10) $graveyard_id = 7;
+			elseif($religion_id == 11) $graveyard_id = 1;
+			elseif($religion_id == 12) $graveyard_id = 5;
+			elseif($religion_id == 13) $graveyard_id = 10;
+			elseif($religion_id == 14) $graveyard_id = 2;
+			elseif($religion_id == 15) $graveyard_id = 4;
+			elseif($religion_id == 16) $graveyard_id = 4;
+			elseif($religion_id == 17) $graveyard_id = 11;
+			elseif($religion_id == 18) $graveyard_id = 10;
+			return $graveyard_id;
 		}
 	}
 ?>
