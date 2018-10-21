@@ -405,6 +405,7 @@
             "date_of_birth": "Data urodzenia",
             "passed_away": "Zmarł",
             "gender": "Płeć",
+            "religion": "Religia",
             "upload_photos": "Załadować zdjęcia",
             "required": "wymagany"
         },
@@ -525,6 +526,7 @@
             "date_of_birth": "Data urodzenia",
             "passed_away": "Zmarł",
             "gender": "Płeć",
+            "religion": "Religia",
             "upload_photos": "Załadować zdjęcia",
             "required": "wymagany"
         },

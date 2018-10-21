@@ -404,6 +404,7 @@
             "date_of_birth": "Date of Birth",
             "passed_away": "Passed Away",
             "gender": "Gender",
+            "religion": "Religion",
             "upload_photos": "Upload Photos",
             "required": "required"
         },
@@ -521,6 +522,7 @@
             "date_of_birth": "Date of Birth",
             "passed_away": "Passed Away",
             "gender": "Gender",
+            "religion": "Religion",
             "upload_photos": "Upload Photos",
             "required": "required"
         },

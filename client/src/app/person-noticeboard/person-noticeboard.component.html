@@ -310,6 +310,12 @@
                             <input type="date" [(ngModel)]="graveyardBurialDOD" name="graveyardBurialDOD">
                         </label>
                         <label>
+                            <span translate>graveyard_burial.step3.religion<sup>*</sup></span>
+                            <select name="graveyardBurialSelectedReligion" [(ngModel)]="graveyardBurialSelectedReligion">
+                                <option *ngFor="let object of graveyardBurialReligions" [value]="object.religion_id">{{(currentLang == 'en') ? object.name_en : object.name_pl }}</option>
+                            </select>
+                        </label>
+                        <label>
                             <span translate>graveyard_burial.step3.gender<sup>*</sup></span>
                             <input type="radio" value="Male" [(ngModel)]="graveyardBurialGender" name="graveyardBurialGender">
                             <span style="width:50px;">Male</span>&nbsp;&nbsp;
@@ -495,7 +501,7 @@
                         </label>
                         <p translate>graveyard_burial.step7.multi_layered_authentication_credit_cards</p>
                         <label>
-                            <button class="align-right">
+                            <button class="align-right" (click)="confirmAddingGraves();">
                                 <span translate>graveyard_burial.step7.confirm&nbsp;&nbsp;</span>
                                 <i class="fa fa-forward"></i>
                             </button>
@@ -635,6 +641,12 @@
                             <label>
                                 <span translate>reservation.step3.passed_away<sup>*</sup></span>
                                 <input type="date" [(ngModel)]="reservationDOD" name="reservationDOD">
+                            </label>
+                            <label>
+                                <span translate>reservation.step3.religion<sup>*</sup></span>
+                                <select name="reservationSelectedReligion" [(ngModel)]="reservationSelectedReligion">
+                                    <option *ngFor="let object of reservationReligions" [value]="object.religion_id">{{(currentLang == 'en') ? object.name_en : object.name_pl }}</option>
+                                </select>
                             </label>
                             <label>
                                 <span translate>reservation.step3.gender<sup>*</sup></span>

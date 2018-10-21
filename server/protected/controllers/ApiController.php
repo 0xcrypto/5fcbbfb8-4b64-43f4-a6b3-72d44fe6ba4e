@@ -93,6 +93,8 @@
 						$results = $this->getPrices($options);
 					else if($method == 'COMMUNITIES')
 						$results = $this->getCommunities($options);
+					else if($method == 'RELIGIONS')
+						$results = $this->getReligions($options);
 					else
 						$results = array();
 					break;
@@ -182,6 +184,8 @@
 						$result = $this->resetPassword($options);
 					else if($method == 'ADD_PERSON')
 						$result = $this->addPerson($options);
+					else if($method == 'ADD_PERSON_MULTI_GRAVES')
+						$result = $this->addMultigrave($options);
 					else if($method == 'ADD_ANIMAL')
 						$result = $this->addAnimal($options);
 					else if($method == 'ADD_ANIMAL_OBJECT')
@@ -1058,6 +1062,29 @@
 		/***
 		 	REQUIRED PARAMETERS
 			--------------------
+			$options['order'] = 'name_pl', 'name_en'
+
+		***/
+		
+		private function getReligions($options = NULL){
+            $query = "SELECT * FROM religion";
+            $result = Yii::app()->db->createCommand($query)->queryAll();
+
+            if(isset($options['order']) && in_array($options['order'],array('name_pl', 'name_en'))){
+                $query .= " ORDER BY ".$options['order'];
+            }
+			
+			$data = array();
+            foreach($result as $row){
+                $data[] = $row;
+            }
+
+            return $data;
+		}
+		
+		/***
+		 	REQUIRED PARAMETERS
+			--------------------
 			optional - $options['position']
 			optional - $options['limit']
 			optional - $options['order'] -> 'rand', 'animal_id', 'animal_id_desc', 'buyer_id', 
@@ -1701,6 +1728,46 @@
 		}
 		
 		/***
+			REQUIRED PARAMETERS
+			-------------------
+			$options['place_id']
+			$options['family_name']
+			$options['graves'] = collection of added graves array('grave_id', 'grave_image')
+		*/
+
+		private function addMultigrave($options = NULL){
+			$place_id = isset($options['place_id']) ? $options['place_id'] : 2;
+			$family_name = $options['family_name'];
+			$nextMultigraveId = 0;
+			$data = array();
+
+			if(isset($options['multigrave_id']))
+			{
+				$query="select max(multigrave_id) as m from multi_graves";	
+				$row = Yii::app()->db->createCommand($query)->queryRow();
+				print_r($row);exit;
+				if($row['m'] == 0 || $row['m'] == "")
+					$nextMultigraveId = 1;
+				else
+					$nextMultigraveId = $row['m'] + 1;
+			} else {
+				$nextMultigraveId = $options['multigrave_id'];
+			}
+			
+			foreach($options['graves'] as $grave)
+			{
+				$query = "insert into multi_graves (multigrave_id, grave_id, grave_image, family_name, places )values(
+							$nextMultigraveId, '".$grave["grave_id"]."', '".$grave["grave_image"]."',
+							'".$family_name."', '".$place_id."')";    
+				
+				Yii::app()->db->createCommand($query)->execute();
+			}
+			
+			$data['status'] = 'MULTI_GRAVE_ADDED';
+			$data['multigrave_id'] = $nextMultigraveId;
+			return $data;
+		}
+		/***
 		 	REQUIRED PARAMETERS
 			--------------------
 			$options['temp']
@@ -1713,8 +1780,8 @@
 			$options['date_birth']
 			$options['date_death']
 			$options['buyer_id']
-			$options['place_id']
-			$options['grave_id']
+			$options['place_id'] // 1=grob(graveyard) AND 3=katak(catacomb) AND 4=Other
+			$options['grave_id'] // 1=single AND 2=family(2 person) AND 3=communal(more than 2) || 1=catacomb
 			$options['name']
 			$options['surname']
 			$options['gender']
@@ -2378,25 +2445,18 @@
 
 		private function getGraveyardIdByReligionId( $religion_id ){
 			$graveyard_id = 0;
-			if($religion_id == 0 || !$religion_id) $graveyard_id = 4;
-			elseif($religion_id == 1) $graveyard_id = 5;
-			elseif($religion_id == 2) $graveyard_id = 6;
-			elseif($religion_id == 3) $graveyard_id = 8;
-			elseif($religion_id == 4) $graveyard_id = 1;
-			elseif($religion_id == 5) $graveyard_id = 1;
-			elseif($religion_id == 6) $graveyard_id = 3;
-			elseif($religion_id == 7) $graveyard_id = 9;
-			elseif($religion_id == 8) $graveyard_id = 1;
-			elseif($religion_id == 9) $graveyard_id = 1;
-			elseif($religion_id == 10) $graveyard_id = 7;
-			elseif($religion_id == 11) $graveyard_id = 1;
-			elseif($religion_id == 12) $graveyard_id = 5;
-			elseif($religion_id == 13) $graveyard_id = 10;
+			if($religion_id == 4 || $religion_id == 5 || $religion_id == 8 || 
+			$religion_id == 9 || $religion_id == 11) $graveyard_id = 1;
 			elseif($religion_id == 14) $graveyard_id = 2;
-			elseif($religion_id == 15) $graveyard_id = 4;
-			elseif($religion_id == 16) $graveyard_id = 4;
+			elseif($religion_id == 6) $graveyard_id = 3;
+			elseif($religion_id == 15 || $religion_id == 16) $graveyard_id = 4;
+			elseif($religion_id == 1 || $religion_id == 12) $graveyard_id = 5;
+			elseif($religion_id == 2) $graveyard_id = 6;
+			elseif($religion_id == 10) $graveyard_id = 7;
+			elseif($religion_id == 3) $graveyard_id = 8;
+			elseif($religion_id == 7) $graveyard_id = 9;
+			elseif($religion_id == 13 || $religion_id == 18) $graveyard_id = 10;
 			elseif($religion_id == 17) $graveyard_id = 11;
-			elseif($religion_id == 18) $graveyard_id = 10;
 			return $graveyard_id;
 		}
 	}
