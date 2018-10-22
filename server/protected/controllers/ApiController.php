@@ -1732,34 +1732,29 @@
 			-------------------
 			$options['place_id']
 			$options['family_name']
+			$options['grave_image']
 			$options['graves'] = collection of added graves array('grave_id', 'grave_image')
 		*/
 
 		private function addMultigrave($options = NULL){
 			$place_id = isset($options['place_id']) ? $options['place_id'] : 2;
 			$family_name = $options['family_name'];
+			$grave_image = $options["grave_image"];
+			$graves = explode(',', $options['graves']);
 			$nextMultigraveId = 0;
 			$data = array();
 
-			if(isset($options['multigrave_id']))
-			{
-				$query="select max(multigrave_id) as m from multi_graves";	
-				$row = Yii::app()->db->createCommand($query)->queryRow();
-				print_r($row);exit;
-				if($row['m'] == 0 || $row['m'] == "")
-					$nextMultigraveId = 1;
-				else
-					$nextMultigraveId = $row['m'] + 1;
-			} else {
-				$nextMultigraveId = $options['multigrave_id'];
-			}
+			$query="select max(multigrave_id) as m from multi_graves";	
+			$row = Yii::app()->db->createCommand($query)->queryRow();
 			
-			foreach($options['graves'] as $grave)
-			{
+			if($row['m'] == 0 || $row['m'] == "")
+				$nextMultigraveId = 1;
+			else
+				$nextMultigraveId = $row['m'] + 1;
+
+			for($i=0; $i <= count($graves)-1; $i++){
 				$query = "insert into multi_graves (multigrave_id, grave_id, grave_image, family_name, places )values(
-							$nextMultigraveId, '".$grave["grave_id"]."', '".$grave["grave_image"]."',
-							'".$family_name."', '".$place_id."')";    
-				
+					$nextMultigraveId, '".$graves[$i]."', '".$grave_image."', '".$family_name."', '".$place_id."')";    
 				Yii::app()->db->createCommand($query)->execute();
 			}
 			
@@ -1767,6 +1762,7 @@
 			$data['multigrave_id'] = $nextMultigraveId;
 			return $data;
 		}
+
 		/***
 		 	REQUIRED PARAMETERS
 			--------------------
@@ -1817,12 +1813,12 @@
 			$query="insert into $table ( buyer_id, place_id, grave_id, graveyard_id, 
 								name1, surname, date_birth, date_death, gender, 
 								religion_name, religion_id, grave_image, 
-								pay_method, amount, paymentid, language,
+								pay_method, amount, paymentid, language, flash_data, 
 								add_date, is_deleted ) values (
 								'".$options['buyer_id']."', '".$options['place_id']."', '".$options['grave_id']."', '".$graveyard_id."', 
 								'".$options['name']."', '".$options['surname']."', '".$date_birth."', '".$date_death."', '".$options['gender']."',
 								'".$options['religion_name']."', '".$options['religion_id']."',  '".$options['grave_image']."', 
-								'".$payment_method."', '".$options['amount']."', '".$payment_id."', '".$current_language."',
+								'".$payment_method."', '".$options['amount']."', '".$payment_id."', '".$current_language."', '', 
 								'".$today_date."', 0)";
 			
 			if(Yii::app()->db->createCommand($query)->execute()){
@@ -1834,11 +1830,12 @@
 						$query = "SELECT * FROM users_photos_temp WHERE uniq_id = '".$options['unique_id']."'";
 						$result = Yii::app()->db->createCommand($query)->queryAll();
 						foreach($result as $row){
-							$query = "insert into users_photos (user_id, file_name, is_portrait) values ('".$user_id."','".$row['filename']."','".$row['is_portrait']."')";
+							$query = "insert into users_photos (user_id, file_name, is_portrait) values ('".$user_id."','".$row['file_name']."','".$row['is_portrait']."')";
 							Yii::app()->db->createCommand($query)->execute();
 						}
 						$data['status']= "PERSON_ADD_SUCCESS";
 						$data['user_id']= $user_id;
+						$data['grave_image']= $options['grave_image'];
 
 						/*
 						TODO MAIL LOGIN WHEN ADD PERSON GRAVE
@@ -1936,7 +1933,7 @@
 					$result = Yii::app()->db->createCommand($query)->queryAll();
 					foreach($result as $row){
 						$query = "insert into animals_photos (animal_id, file_name, is_portrait) values 
-						('".$animal_id."','".$row['filename']."','".$row['is_portrait']."')";
+						('".$animal_id."','".$row['file_name']."','".$row['is_portrait']."')";
 						Yii::app()->db->createCommand($query)->execute();
 					}
 

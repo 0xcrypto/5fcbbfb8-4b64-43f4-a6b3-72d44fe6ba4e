@@ -85,6 +85,7 @@ export class PersonNoticeboardComponent implements OnInit {
   graveyardBurialSelectedType:string;
   graveyardBurialSelectedSubType:string;
   graveyardBurialSelectedStoneId:string;
+  graveyardBurialSelectedStoneData: any;
   graveyardBurialFirstname:string;
   graveyardBurialLastname:string;
   graveyardBurialDOB:string;
@@ -92,7 +93,7 @@ export class PersonNoticeboardComponent implements OnInit {
   graveyardBurialGender:string;
   graveyardBurialInMemoriam:string;
   graveyardBurialSignature:string;
-  graveyardBurialSize:number = 0;
+  graveyardBurialSize:any;
   graveyardBurialClanName:string;
   isGraveyardBurialSubTypeVisible:boolean = false;
   graveyardBurialFee:number;
@@ -103,7 +104,8 @@ export class PersonNoticeboardComponent implements OnInit {
   graveyardBurialStones: any[] = [];
   graveyardBurialData:any;
   graveyardBurialReligions: any[] = [];
-  graveyardBurialSelectedReligion: string;
+  graveyardBurialSelectedReligionId: string;
+  graveyardBurialSelectedReligionName: string;
   
   deadlistPages: number[] = [];
   searchedDeadPages: number[] = [];
@@ -162,7 +164,7 @@ export class PersonNoticeboardComponent implements OnInit {
       this.graveyardBurialReligions = this.reservationReligions = result;
     });
     
-    this.options = this._global.refreshObject(this.options, ['type=grave']);
+    this.options = this._global.refreshObject(this.options, ['type=person_grave']);
     this.dataService.getAllWithMethodAndOptions('PRICES', this._global.serializeAndURIEncode(this.options))
       .subscribe(data => {
         this.gravePrice = parseFloat(data[0].price);
@@ -494,6 +496,13 @@ export class PersonNoticeboardComponent implements OnInit {
     this.graveyardBurialCurrentStep--;
   }
 
+  getGraveyardBurialReligion(event: Event) {
+    let selectedOptions = event.target['options'];
+    let selectedIndex = selectedOptions.selectedIndex;
+    this.graveyardBurialSelectedReligionName = selectedOptions[selectedIndex].text;
+    this.graveyardBurialSelectedReligionId = selectedOptions[selectedIndex].value;
+ }
+
   graveyardBurialNextStep(){
     if(this.graveyardBurialCurrentStep == 1){
       if(this.graveyardBurialSelectedType == 'graveyard'){
@@ -562,14 +571,12 @@ export class PersonNoticeboardComponent implements OnInit {
         return;
       }
     }
-
     if(this.graveyardBurialCurrentStep == 2){
       if(this.graveyardBurialSelectedStoneId == null){
         this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'SELECT_GRAVE_STONE' });
         return;
       }
     }
-
     if(this.graveyardBurialCurrentStep == 3){
       if(this.graveyardBurialFirstname == null){
         this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_FIRSTNAME' });
@@ -595,70 +602,97 @@ export class PersonNoticeboardComponent implements OnInit {
         this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PERSON_ALREADY_EXISTS' });
         return;
       }
-    
-      let entry = {
+
+    }
+    if(this.graveyardBurialCurrentStep == 4){
+      debugger;
+      this.graveyardBurialPersons.push({
         'firstname': this.graveyardBurialFirstname,
         'lastname': this.graveyardBurialLastname,
         'dob': this.graveyardBurialDOB,
         'dod': this.graveyardBurialDOD,
         'gender': this.graveyardBurialGender,
         'in_memoriam': this.graveyardBurialInMemoriam,
-        'signature': this.graveyardBurialSignature
-      }
-      this.graveyardBurialPersons.push(entry);
-    }
+        'signature': this.graveyardBurialSignature,
+        'unique_id': this.graveyardBurialUniqueId,
+        'religion_id': this.graveyardBurialSelectedReligionId,
+        'religion_name': this.graveyardBurialSelectedReligionName,
+        'images': this.graveyardBurialImages
+      });
 
+      this.graveyardBurialImages = [];
+      this.graveyardBurialUploadedImages = 0;
+    }
     if(this.graveyardBurialCurrentStep == 6){
-      this.graveyardBurialFee = this.graveyardBurialPersons.length * 24;
-    }
-    
-    if(this.graveyardBurialCurrentStep == 7){
-      let place_id = 0;
-      let grave_id = 0;
-      
-      if(this.graveyardBurialSelectedType == 'graveyard'){
-        place_id = 1;
-
-        if(this.graveyardBurialSelectedSubType == 'single'){
-          grave_id = 1;
-        }
-        else if(this.graveyardBurialSelectedSubType == 'family'){
-          grave_id = 1;
-        }
-        else if(this.graveyardBurialSelectedSubType == 'single'){
-          grave_id = 1;
-        }
-      }
-      else if(this.graveyardBurialSelectedType == 'catacomb'){
-        place_id = 3;
-        grave_id = 1;
-      }
-
-      let payment_method = 1;
-      let payment_id = 12345;
-      
-      for(let i=0; i<=this.graveyardBurialPersons.length-1;i++) {
-        this.options = this._global.refreshObject(this.options, ['method=ADD_PERSON', 'temp=0',
-        'religion_id='+this.graveyardBurialSelectedReligion, 'payment_method='+payment_method, 
-        'payment_id='+payment_id, 'amount='+this.gravePrice, 'current_language='+this.currentLang,
-        'date_birth='+this.graveyardBurialPersons[i].dob, 'date_death='+this.graveyardBurialPersons[i].dod,
-        'buyer_id='+this.USER_INFO.buyer_id, 'place_id='+place_id, 'grave_id='+grave_id,
-        'name='+this.graveyardBurialPersons[i].firstname, 'surname='+this.graveyardBurialPersons[i].lastname,
-        'gender='+this.graveyardBurialPersons[i].gender, 'grave_image='+this.graveyardBurialSelectedStoneId,
-        'bio_title='+this.graveyardBurialPersons[i].signature, 'in_memoriam='+this.graveyardBurialPersons[i].in_memoriam
-        ]);
-        this.dataService.createWithMethodAndOptions(this.options)
-        .subscribe(result => {
-          
-        });
-      }
-      //'images': this.graveyardBurialImages,
-      console.log(this.graveyardBurialData);
+      this.graveyardBurialFee = this.graveyardBurialPersons.length * this.gravePrice;
     }
 
     this.graveyardBurialCurrentStep++;
   }
 
+  confirmAddingGraveyardBurial(){
+    let place_id = 0;
+    let grave_id = 0;
+    let grave_image = 0;
+    let payment_method = 1;
+    let payment_id = 12345;
+    let graveSize = parseInt(this.graveyardBurialSize, 10);
+    let added_persons = [];
+    debugger;
+
+    if(this.graveyardBurialSelectedType == 'graveyard'){
+      place_id = 1;
+
+      if(this.graveyardBurialSelectedSubType == 'single'){
+        grave_id = 1;
+      }
+      else if(this.graveyardBurialSelectedSubType == 'family'){
+        grave_id = 2;
+      }
+      else if(this.graveyardBurialSelectedSubType == 'communal'){
+        grave_id = 3;
+      }
+    }
+    else if(this.graveyardBurialSelectedType == 'catacomb'){
+      place_id = 3;
+      grave_id = 1;
+    }
+    
+    for(let i=0; i<=this.graveyardBurialPersons.length-1; i++) {
+      this.options = this._global.refreshObject(this.options, ['method=ADD_PERSON', 'temp=0',
+        'religion_id=' + this.graveyardBurialPersons[i].religion_id, 'religion_name=' + this.graveyardBurialPersons[i].religion_name, 
+        'payment_method=' + payment_method, 'payment_id=' + payment_id, 'amount=' + this.gravePrice, 'current_language=' + this.currentLang,
+        'date_birth=' + this.graveyardBurialPersons[i].dob, 'date_death=' + this.graveyardBurialPersons[i].dod,
+        'buyer_id=' + this.USER_INFO.buyer_id, 'place_id=' + place_id, 'grave_id=' + grave_id,
+        'name=' + this.graveyardBurialPersons[i].firstname, 'surname=' + this.graveyardBurialPersons[i].lastname,
+        'gender=' + this.graveyardBurialPersons[i].gender, 'grave_image=' + this.graveyardBurialSelectedStoneId,
+        'bio_title=' + this.graveyardBurialPersons[i].signature, 'bio_body=' + this.graveyardBurialPersons[i].in_memoriam,
+        'unique_id=' + this.graveyardBurialPersons[i].unique_id
+      ]);
+      this.dataService.createWithMethodAndOptions(this.options)
+      .subscribe(result => {
+        if(result['status'] == "PERSON_ADD_SUCCESS"){
+          grave_image = result['grave_image'];
+          added_persons.push(parseInt(result['user_id']))
+        }
+
+        if( graveSize == added_persons.length && added_persons.length > 0 && grave_id == 3){
+          this.options = this._global.refreshObject(this.options, ['method=ADD_PERSON_MULTI_GRAVES', 'place_id=' + place_id,
+              'family_name=' + this.graveyardBurialClanName, 'graves=' + added_persons, 'grave_image='+grave_image]);
+            this.dataService.createWithMethodAndOptions(this.options)
+            .subscribe(result => {
+              if(result['status'] == 'MULTI_GRAVE_ADDED'){
+                //result[multigrave_id]
+                this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'GRAVE_ADDED_SUCCESSFULLY' });
+              }
+            });
+        }
+        else{
+          this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'GRAVE_ADDED_SUCCESSFULLY' });
+        }
+      });
+    }
+  }
   changeGraveyardBurialType(){
     if(this.graveyardBurialSelectedType == 'graveyard'){
       this.isGraveyardBurialSubTypeVisible = true;
@@ -678,6 +712,7 @@ export class PersonNoticeboardComponent implements OnInit {
     this.graveyardBurialSignature = null;
     this.graveyardBurialImages = [];
     this.graveyardBurialCurrentStep = 3;
+    this.graveyardBurialUniqueId = this.getUniqueCode(50);
   }
 
   changeGraveyardBurialPerson(person:any){
@@ -744,8 +779,9 @@ export class PersonNoticeboardComponent implements OnInit {
     });
   }
 
-  selectGraveyardBurialStone(data:any){debugger;
+  selectGraveyardBurialStone(data:any){
     this.graveyardBurialSelectedStoneId = data.substring(data.lastIndexOf('_')+1, data.length);
+    this.graveyardBurialSelectedStoneData = data;
   }
 
   /* RESERVATION */
@@ -873,6 +909,7 @@ export class PersonNoticeboardComponent implements OnInit {
         'in_memoriam': this.reservationInMemoriam,
         'signature': this.reservationSignature
       }
+
       this.reservationPersons.push(entry);
     }
 
@@ -914,6 +951,7 @@ export class PersonNoticeboardComponent implements OnInit {
     this.reservationSignature = null;
     this.reservationImages = [];
     this.reservationCurrentStep = 3;
+    this.reservationUniqueId = this.getUniqueCode(50);
   }
 
   changeReservationPerson(person:any){

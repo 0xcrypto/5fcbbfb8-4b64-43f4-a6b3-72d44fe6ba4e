@@ -267,7 +267,7 @@
                     </form>
                     <div class="tile-scroll-content" [ngClass]="{'small-height': (graveyardBurialSelectedType == 'graveyard' && graveyardBurialSelectedSubType == 'communal')}">
                         <div class="tile" *ngFor="let stone of graveyardBurialStones" 
-                            [ngClass]="{'selected': (graveyardBurialSelectedStone == stone.data)}" (click)="selectGraveyardBurialStone(stone.data)">
+                            [ngClass]="{'selected': (graveyardBurialSelectedStoneData == stone.data)}" (click)="selectGraveyardBurialStone(stone.data)">
                             <img [src]="stone.min"/>
                             <div class="img-hover" [ngStyle]="{'background-image': 'url(' + stone.max + ')'}"></div>
                         </div>
@@ -311,15 +311,15 @@
                         </label>
                         <label>
                             <span translate>graveyard_burial.step3.religion<sup>*</sup></span>
-                            <select name="graveyardBurialSelectedReligion" [(ngModel)]="graveyardBurialSelectedReligion">
+                            <select name="graveyardBurialSelectedReligionId" [(ngModel)]="graveyardBurialSelectedReligionId" (change)="getGraveyardBurialReligion($event)">
                                 <option *ngFor="let object of graveyardBurialReligions" [value]="object.religion_id">{{(currentLang == 'en') ? object.name_en : object.name_pl }}</option>
                             </select>
                         </label>
                         <label>
                             <span translate>graveyard_burial.step3.gender<sup>*</sup></span>
-                            <input type="radio" value="Male" [(ngModel)]="graveyardBurialGender" name="graveyardBurialGender">
+                            <input type="radio" value="2" [(ngModel)]="graveyardBurialGender" name="graveyardBurialGender">
                             <span style="width:50px;">Male</span>&nbsp;&nbsp;
-                            <input type="radio" value="Female" [(ngModel)]="graveyardBurialGender" name="graveyardBurialGender">
+                            <input type="radio" value="1" [(ngModel)]="graveyardBurialGender" name="graveyardBurialGender">
                             <span style="width:50px;">Female</span>&nbsp;&nbsp;
                         </label>
                         <label>
@@ -501,7 +501,7 @@
                         </label>
                         <p translate>graveyard_burial.step7.multi_layered_authentication_credit_cards</p>
                         <label>
-                            <button class="align-right" (click)="confirmAddingGraves();">
+                            <button class="align-right" (click)="confirmAddingGraveyardBurial();">
                                 <span translate>graveyard_burial.step7.confirm&nbsp;&nbsp;</span>
                                 <i class="fa fa-forward"></i>
                             </button>
@@ -650,9 +650,9 @@
                             </label>
                             <label>
                                 <span translate>reservation.step3.gender<sup>*</sup></span>
-                                <input type="radio" value="Male" [(ngModel)]="reservationGender" name="reservationGender"> 
+                                <input type="radio" value="2" [(ngModel)]="reservationGender" name="reservationGender"> 
                                 <span style="width:50px;">Male</span>&nbsp;&nbsp;
-                                <input type="radio" value="Female" [(ngModel)]="reservationGender" name="reservationGender"> 
+                                <input type="radio" value="1" [(ngModel)]="reservationGender" name="reservationGender"> 
                                 <span style="width:50px;">Female</span>&nbsp;&nbsp;
                             </label>
                             <label>

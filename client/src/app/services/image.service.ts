@@ -88,6 +88,9 @@ export class ImageService {
   }
 
   downloadImage(url:string){
+    if(url.indexOf('null') > -1)
+      return;
+
     let contentType = null, extension = url.split('.').pop().toLowerCase();
     if(extension == 'jpg' || extension == 'jpeg'){
       contentType = 'image/jpeg';
