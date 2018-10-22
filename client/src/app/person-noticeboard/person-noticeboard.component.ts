@@ -578,6 +578,7 @@ export class PersonNoticeboardComponent implements OnInit {
       }
     }
     if(this.graveyardBurialCurrentStep == 3){
+      debugger;
       if(this.graveyardBurialFirstname == null){
         this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_FIRSTNAME' });
         return;

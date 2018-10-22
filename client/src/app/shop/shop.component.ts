@@ -77,7 +77,7 @@ export class ShopComponent implements OnInit {
     this.messageService.castMessage.subscribe(object => {
       let message = object.message;
       let data = object.data;
-
+debugger;
       switch(message){
         case "OPEN_SHOP":
           this.openShop(data);

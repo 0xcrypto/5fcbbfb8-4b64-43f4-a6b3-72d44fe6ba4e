@@ -8104,3 +8104,18 @@ REQUEST_URI=/virtualgrave/server/api/data
 in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (2430)
 in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (1994)
 in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (198)
+2018/10/22 11:09:19 [error] [php] imagejpeg(C:\wamp64\www\virtualgrave/client/dist/assets/images/zdjecia/thumb/user_fbed18a5fe5d3984a655e8f0f2c48c0f.jpg): failed to open stream: No such file or directory (C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php:2430)
+Stack trace:
+#0 C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php(198): ApiController->addPersonTemporaryPhoto()
+#1 C:\wamp64\www\yii\framework\web\actions\CInlineAction.php(49): ApiController->actionCreate()
+#2 C:\wamp64\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#3 C:\wamp64\www\yii\framework\web\CController.php(286): ApiController->runAction()
+#4 C:\wamp64\www\yii\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#5 C:\wamp64\www\yii\framework\web\CWebApplication.php(282): ApiController->run()
+#6 C:\wamp64\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#7 C:\wamp64\www\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#8 C:\wamp64\www\virtualgrave\server\index.php(13): CWebApplication->run()
+REQUEST_URI=/virtualgrave/server/api/data
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (2430)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (1994)
+in C:\wamp64\www\virtualgrave\server\protected\controllers\ApiController.php (198)

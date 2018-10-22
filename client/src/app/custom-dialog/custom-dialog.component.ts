@@ -3,8 +3,8 @@ import { MessageService } from '../services/message.service';
 import { TranslationService } from '../services/translation.service';
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: './customDialog.component.html'
+  selector: 'app-custom-dialog',
+  templateUrl: './custom-dialog.component.html'
 })
 export class CustomDialogComponent implements OnInit {
   public isOpen:boolean = false;
@@ -14,10 +14,10 @@ export class CustomDialogComponent implements OnInit {
     private translation:TranslationService) { }
 
   ngOnInit() {
-    this.messageService.castMessage.subscribe(object => {
+    this.messageService.castMessage.subscribe(object => {debugger;
       let message = object.message;
       let data = object.data;
-
+      debugger;
       switch(message){
         case "OPEN_CUSTOM_DIALOG":
           this.setMessage(this.translation.getTranslatedString(data));

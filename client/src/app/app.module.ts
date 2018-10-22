@@ -21,6 +21,7 @@ import { PricingComponent } from './pricing/pricing.component';
 import { LogoComponent } from './logo/logo.component';
 import { SoundComponent } from './sound/sound.component';
 import { ShopComponent } from './shop/shop.component';
+import { CustomDialogComponent } from './custom-dialog/custom-dialog.component';
 import { CatacombComponent } from './catacomb/catacomb.component';
 import { NgSlimScrollModule, SLIMSCROLL_DEFAULTS } from 'ngx-slimscroll';
 import { AnimalNoticeboardComponent } from './animal-noticeboard/animal-noticeboard.component';
@@ -31,7 +32,6 @@ import { UserService } from './services/user.service';
 import { MessageService } from './services/message.service';
 import { AppGlobals } from './app.globals';
 import { AccountComponent } from './account/account.component';
-import { CustomDialogComponent } from './customDialog/customDialog.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
