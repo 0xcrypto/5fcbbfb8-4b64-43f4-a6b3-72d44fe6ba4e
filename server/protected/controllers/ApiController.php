@@ -1803,10 +1803,13 @@
 			$_dateb_d = substr($options['date_birth'], 0,2);
 			$date_birth = $_dateb_y.'-'.$_dateb_m.'-'.$_dateb_d;
 
-			$_dated_y = substr($options['date_death'], 6,9);
-			$_dated_m = substr($options['date_death'], 3,2);
-			$_dated_d = substr($options['date_death'], 0,2);
-			$date_death = $_dated_y.'-'.$_dated_m.'-'.$_dated_d;
+			$date_death = '0000-00-00';
+			if(isset($options['date_death'])){
+				$_dated_y = substr($options['date_death'], 6,9);
+				$_dated_m = substr($options['date_death'], 3,2);
+				$_dated_d = substr($options['date_death'], 0,2);
+				$date_death = $_dated_y.'-'.$_dated_m.'-'.$_dated_d;
+			}
 
 			$data = array();
 

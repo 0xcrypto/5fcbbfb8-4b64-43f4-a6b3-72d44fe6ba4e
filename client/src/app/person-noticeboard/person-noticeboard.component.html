@@ -600,7 +600,7 @@
                         </form>
                         <div class="tile-scroll-content" [ngClass]="{'small-height': (reservationSelectedType == 'graveyard' && reservationSelectedSubType == 'communal')}">
                             <div class="tile" *ngFor="let stone of reservationStones"
-                            [ngClass]="{'selected': (reservationSelectedStone == stone.data)}" (click)="selectReservationStone(stone.data)">
+                            [ngClass]="{'selected': (reservationSelectedStoneData == stone.data)}" (click)="selectReservationStone(stone.data)">
                                 <img [src]="stone.min"/>
                                 <div class="img-hover" [ngStyle]="{'background-image': 'url(' + stone.max + ')'}"></div>
                             </div>
@@ -639,12 +639,8 @@
                                 <input type="date" [(ngModel)]="reservationDOB" name="reservationDOB">
                             </label>
                             <label>
-                                <span translate>reservation.step3.passed_away<sup>*</sup></span>
-                                <input type="date" [(ngModel)]="reservationDOD" name="reservationDOD">
-                            </label>
-                            <label>
                                 <span translate>reservation.step3.religion<sup>*</sup></span>
-                                <select name="reservationSelectedReligion" [(ngModel)]="reservationSelectedReligion">
+                                <select name="reservationSelectedReligionId" [(ngModel)]="reservationSelectedReligionId"  (change)="getReservationBurialReligion($event)">
                                     <option *ngFor="let object of reservationReligions" [value]="object.religion_id">{{(currentLang == 'en') ? object.name_en : object.name_pl }}</option>
                                 </select>
                             </label>
@@ -732,10 +728,6 @@
                                 <span>{{reservationDOB}}</span>
                             </label>
                             <label>
-                                <span translate>reservation.step5.passed_away</span>
-                                <span>{{reservationDOD}}</span>
-                            </label>
-                            <label>
                                 <span translate>reservation.step5.gender</span>
                                 <span>{{reservationInMemoriam}}</span>
                             </label>
@@ -774,7 +766,7 @@
                                     <td>{{entry.firstname +' '+ entry.lastname}}</td>
                                     <td>
                                         <span translate>graveyard_burial.step6.passed_away&nbsp;</span>
-                                        <span>{{entry.dod}}</span>
+                                        <span>--</span>
                                     </td>
                                     <td>
                                         <button (click)="changeReservationPerson(entry)" 
@@ -822,8 +814,8 @@
                                     <td>{{i+1}}</td>
                                     <td>{{entry.firstname +' '+ entry.lastname}}</td>
                                     <td>
-                                        <span translate>graveyard_burial.step7.passed_away&nbsp;</span>
-                                        <span>{{entry.dod}}</span>
+                                        <span translate>reservation.step7.passed_away&nbsp;</span>
+                                        <span>--</span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -835,7 +827,7 @@
                             </label>
                             <p translate>reservation.step7.multi_layered_authentication_credit_cards</p>
                             <label>
-                                <button class="align-right">
+                                <button class="align-right" (click)="confirmAddingReservation()">
                                     <span translate>reservation.step7.confirm&nbsp;&nbsp;</span>
                                     <i class="fa fa-forward"></i>
                                 </button>
