@@ -235,7 +235,7 @@
                     </h4>
                     <div class="tile-scroll-content">
                         <div class="tile" *ngFor="let stone of graveyardBurialStones"
-                        [ngClass]="{'selected': (graveyardBurialSelectedStone == stone.data)}" (click)="selectGraveyardBurialStone(stone.data)">
+                        [ngClass]="{'selected': (graveyardBurialSelectedStoneData == stone.data)}" (click)="selectGraveyardBurialStone(stone.data)">
                             <img [src]="stone.min"/>
                             <div class="img-hover" [ngStyle]="{'background-image': 'url(' + stone.max + ')'}"></div>
                         </div>
@@ -268,7 +268,7 @@
                         <label>
                             <span translate>animal_graveyard_burial.step3.genus<sup>*</sup></span>
                             <select [(ngModel)]="graveyardBurialGenus" name="graveyardBurialGenus">
-                                <option>Genus</option>
+                                <option *ngFor="let object of graveyardBurialAnimalGenusList" [value]="object.al_id">{{(currentLang == 'en') ? object.name_en : object.name_pl }}</option>
                             </select>
                         </label>
                         <label>
@@ -419,7 +419,7 @@
                                 <i class="fa fa-backward"></i>
                                 <span translate>&nbsp;&nbsp;animal_graveyard_burial.prev</span>
                             </button>
-                            <button class="align-right">
+                            <button class="align-right" (click)="confirmAddingGraveyardBurial();">
                                 <span translate>animal_graveyard_burial.step6.confirm&nbsp;&nbsp;</span>
                                 <i class="fa fa-forward"></i>
                             </button>

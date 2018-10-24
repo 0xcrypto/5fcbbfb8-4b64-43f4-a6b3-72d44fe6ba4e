@@ -6,6 +6,7 @@ import { Advertisement } from '../classes/advertisement';
 import { DataService } from '../services/data.service';
 import { MessageService } from '../services/message.service';
 import { ImageService } from '../services/image.service';
+import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { AppGlobals } from '../app.globals';
 import { CookieStorage, LocalStorage, SessionStorage, LocalStorageService } from 'ngx-store';
@@ -49,7 +50,8 @@ export class AnimalNoticeboardComponent implements OnInit {
   graveyardBurialTotalImages:number = 7;
   graveyardBurialSelectedType:string;
   graveyardBurialSelectedSubType:string;
-  graveyardBurialSelectedStone:string;
+  graveyardBurialSelectedStoneId:string;
+  graveyardBurialSelectedStoneData: any;
   graveyardBurialPetName:string;
   graveyardBurialGenus:string;
   graveyardBurialPetType:string;
@@ -60,7 +62,7 @@ export class AnimalNoticeboardComponent implements OnInit {
   graveyardBurialOwnerLastname:string;
   graveyardBurialInMemoriam:string;
   graveyardBurialSignature:string;
-  graveyardBurialSize:number = 0;
+  graveyardBurialSize:any;
   graveyardBurialClanName:string;
   isGraveyardBurialSubTypeVisible:boolean = false;
   graveyardBurialFee:number;
@@ -68,8 +70,10 @@ export class AnimalNoticeboardComponent implements OnInit {
   graveyardBurialCommunities:any[]=[];
   graveyardBurialImages:any[]=[];
   graveyardBurialAnimals:any[]=[];
+  graveyardBurialAnimalGenusList:any[]=[];
   graveyardBurialStones: any[] = [];
   graveyardBurialData:any;
+  graveBurialPrice: number;
 
   animalListPages: number[] = [];
   searchedAnimalPages: number[] = [];
@@ -77,6 +81,7 @@ export class AnimalNoticeboardComponent implements OnInit {
   animals: any[] = [];
   searchedAnimals: any[] = [];
   prioritizedAnimals: any[] = [];
+  USER_INFO:any = null;
 
   router:Router = null;
   currentLang:string = null;
@@ -96,7 +101,8 @@ export class AnimalNoticeboardComponent implements OnInit {
     private _global: AppGlobals,
     private localStorageService: LocalStorageService,
     private imageService:ImageService,
-    private messageService:MessageService) {
+    private messageService:MessageService,
+    private userService:UserService) {
     this.router = _router;
   }
 
@@ -107,9 +113,24 @@ export class AnimalNoticeboardComponent implements OnInit {
     this.selectedTab = 'graveyard-noticeboard';
     this.currentLang = this._global.getLanguage();
 
+    this.userService.castUser.subscribe(user => this.USER_INFO = user);
+
     this.getAdvertisements();
     this.getVisibleAnimals();
     
+    this.options = this._global.refreshObject(this.options, []);
+    this.dataService.getAllWithMethodAndOptions('ANIMAL_TYPES', this._global.serializeAndURIEncode(this.options))
+    .subscribe(result => {
+      this.graveyardBurialAnimalGenusList = result;
+    });
+
+    this.options = this._global.refreshObject(this.options, ['type=animal_grave']);
+    this.dataService.getAllWithMethodAndOptions('PRICES', this._global.serializeAndURIEncode(this.options))
+      .subscribe(data => {
+        this.graveBurialPrice = parseFloat(data[0].price);
+      }
+    );
+
     if(this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_RETURN_TAB) &&
         this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY)){
 
@@ -413,14 +434,12 @@ export class AnimalNoticeboardComponent implements OnInit {
         }
       });
     }
-
     if(this.graveyardBurialCurrentStep == 2){
-      if(this.graveyardBurialSelectedStone == null){
+      if(this.graveyardBurialSelectedStoneId == null){
         this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'SELECT_GRAVE_STONE' });
         return;
       }
     }
-
     if(this.graveyardBurialCurrentStep == 3){
       if(this.graveyardBurialPetName == null){
         this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_PETNAME' });
@@ -450,7 +469,7 @@ export class AnimalNoticeboardComponent implements OnInit {
         this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_OWNER_FIRSTNAME' });
         return;
       }
-      if(this.graveyardBurialOwnerFirstname == null){
+      if(this.graveyardBurialOwnerLastname == null){
         this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_OWNER_LASTNAME' });
         return;
       }
@@ -458,8 +477,18 @@ export class AnimalNoticeboardComponent implements OnInit {
         this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'ANIMAL_ALREADY_EXISTS' });
         return;
       }
-    
-      let entry = {
+    }
+    if(this.graveyardBurialCurrentStep == 4){
+      if(this.graveyardBurialInMemoriam == null){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_IN_MEMORIAM' });
+        return;
+      }
+      if(this.graveyardBurialSignature == null){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_SIGNATURE' });
+        return;
+      }
+
+      this.graveyardBurialAnimals.push({
         'petname': this.graveyardBurialPetName,
         'genus': this.graveyardBurialGenus,
         'type': this.graveyardBurialPetType,
@@ -469,23 +498,52 @@ export class AnimalNoticeboardComponent implements OnInit {
         'owner_firstname': this.graveyardBurialOwnerFirstname,
         'owner_lastname': this.graveyardBurialOwnerLastname,
         'in_memoriam': this.graveyardBurialInMemoriam,
-        'signature': this.graveyardBurialSignature
-      }
-      this.graveyardBurialAnimals.push(entry);
-    }
+        'signature': this.graveyardBurialSignature,
+        'unique_id': this.graveyardBurialUniqueId,
+        'images': this.graveyardBurialImages
+      });
 
+      this.graveyardBurialImages = [];
+      this.graveyardBurialUploadedImages = 0;
+    }
     if(this.graveyardBurialCurrentStep == 5){
-      this.graveyardBurialFee = this.graveyardBurialAnimals.length * 24;
-      this.graveyardBurialData = {
-        'sub_type': this.graveyardBurialSelectedSubType,
-        'stone': this.graveyardBurialSelectedStone,
-        'images': this.graveyardBurialImages,
-        'animals': this.graveyardBurialAnimals
-      };
-      console.log(this.graveyardBurialData);
+      this.graveyardBurialFee = this.graveyardBurialAnimals.length * this.graveBurialPrice;
     }
 
     this.graveyardBurialCurrentStep++;
+  }
+
+  
+
+  confirmAddingGraveyardBurial(){
+    let grave_id = 1;
+    let grave_image = 0;
+    let payment_method = 1;
+    let payment_id = 12345;
+    let graveSize = parseInt(this.graveyardBurialSize, 10);
+    let added_animals = [];
+    
+    for(let i=0; i<=this.graveyardBurialAnimals.length-1; i++) {
+      this.options = this._global.refreshObject(this.options, ['method=ADD_ANIMAL', 'temp=0',
+        'payment_method=' + payment_method, 'payment_id=' + payment_id, 'amount=' + this.graveBurialPrice, 'current_language=' + this.currentLang,
+        'date_birth=' + this.graveyardBurialAnimals[i].dob, 'date_death=' + this.graveyardBurialAnimals[i].dod,
+        'buyer_id=' + this.USER_INFO.buyer_id, 'al_id=' + this.graveyardBurialAnimals[i].genus,  'gender=' + this.graveyardBurialAnimals[i].gender, 
+        'animalkind=' + this.graveyardBurialAnimals[i].type, 'name=' + this.graveyardBurialAnimals[i].firstname, 
+        'owner_name=' + this.graveyardBurialAnimals[i].owner_firstname, 'owner_surname=' + this.graveyardBurialAnimals[i].owner_lastname,
+        'grave_image=' + this.graveyardBurialSelectedStoneId, 'grave_id=' + grave_id,
+        'live_history_signature=' + this.graveyardBurialAnimals[i].signature, 'live_history=' + this.graveyardBurialAnimals[i].in_memoriam,
+        'unique_id=' + this.graveyardBurialAnimals[i].unique_id
+      ]);
+      this.dataService.createWithMethodAndOptions(this.options)
+      .subscribe(result => {
+        if(result['status'] == "ANIMAL_ADD_SUCCESS"){
+          grave_image = result['grave_image'];
+          added_animals.push(parseInt(result['animal_id']))
+        }
+
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'GRAVE_ADDED_SUCCESSFULLY' });
+      });
+    }
   }
 
   changeGraveyardBurialType(){
@@ -552,7 +610,8 @@ export class AnimalNoticeboardComponent implements OnInit {
   }
 
   selectGraveyardBurialStone(data:any){
-    this.graveyardBurialSelectedStone = data;
+    this.graveyardBurialSelectedStoneId = data.substring(data.lastIndexOf('_')+1, data.length);
+    this.graveyardBurialSelectedStoneData = data;
   }
 
   getUniqueCode(length){
