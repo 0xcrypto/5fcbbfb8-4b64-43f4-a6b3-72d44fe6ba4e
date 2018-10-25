@@ -407,7 +407,9 @@
             "gender": "Gender",
             "religion": "Religion",
             "upload_photos": "Upload Photos",
-            "required": "required"
+            "required": "required",
+            "male": "Male",
+            "female": "Female"
         },
         "step4": {
             "information_about_death_person": "Informations about Death Person",
@@ -473,7 +475,9 @@
             "date_of_birth": "Date of Birth",
             "passed_away": "Passed Away",
             "upload_photos": "Upload Photos",
-            "required": "required"
+            "required": "required",
+            "male": "Male",
+            "female": "Female"
         },
         "step4": {
             "entry_form_part_2": "Entry Form Part 2",
@@ -525,7 +529,9 @@
             "gender": "Gender",
             "religion": "Religion",
             "upload_photos": "Upload Photos",
-            "required": "required"
+            "required": "required",
+            "male": "Male",
+            "female": "Female"
         },
         "step4": {
             "information_about_death_person": "Informations about Death Person",
@@ -582,7 +588,9 @@
         "please_provide_memoriam": "Please provide in memoriam",
         "please_provide_signature": "Please provide signature",
         "burial_done_successfully": "Graveyard burial done successfully",
+        "burial_error": "Problem adding burial, Please try again later",
         "reservation_done_successfully": "Reservation done successfully",
+        "reservation_error": "Problem adding reservation, Please try again later",
         "details_already_exists": "Details already exists",
         "please_provide_pet_name": "Please provide pet name",
         "please_provide_genus": "Please select genus",

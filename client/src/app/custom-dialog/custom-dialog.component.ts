@@ -9,6 +9,7 @@ import { TranslationService } from '../services/translation.service';
 export class CustomDialogComponent implements OnInit {
   public isOpen:boolean = false;
   public message:string;
+  public callback: any;
 
   constructor(private messageService:MessageService,
     private translation:TranslationService) { }
@@ -20,6 +21,7 @@ export class CustomDialogComponent implements OnInit {
 
       switch(message){
         case "OPEN_CUSTOM_DIALOG":
+          this.callback = object.callback ? object.callback : null;
           this.setMessage(this.translation.getTranslatedString(data.translationKey));
           this.open();
           break;
@@ -41,5 +43,9 @@ export class CustomDialogComponent implements OnInit {
 
   close(){
     this.isOpen = false;
+
+    if(this.callback){
+      this.callback();
+    }
   }
 }

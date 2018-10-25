@@ -684,9 +684,12 @@ export class PersonNoticeboardComponent implements OnInit {
       ]);
       this.dataService.createWithMethodAndOptions(this.options)
       .subscribe(result => {
-        if(result['status'] == "PERSON_ADD_SUCCESS"){
+        if(result && result['status'] == "PERSON_ADD_SUCCESS"){
           grave_image = result['grave_image'];
           added_persons.push(parseInt(result['user_id']))
+        }
+        else{
+          this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'BURIAL_ERROR'});
         }
 
         if( graveSize == added_persons.length && added_persons.length > 0 && grave_id == 3){
@@ -984,10 +987,14 @@ export class PersonNoticeboardComponent implements OnInit {
       ]);
       this.dataService.createWithMethodAndOptions(this.options)
       .subscribe(result => {
-        if(result['status'] == "PERSON_ADD_SUCCESS"){
+        if(result && result['status'] == "PERSON_ADD_SUCCESS"){
           grave_image = result['grave_image'];
           added_persons.push(parseInt(result['user_id']))
         }
+        else{
+          this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'RESERVATION_ERROR'});
+        }
+
 
         if( reservationSize == added_persons.length && added_persons.length > 0 && grave_id == 3){
           this.options = this._global.refreshObject(this.options, ['method=ADD_PERSON_MULTI_GRAVES', 'place_id=' + place_id,

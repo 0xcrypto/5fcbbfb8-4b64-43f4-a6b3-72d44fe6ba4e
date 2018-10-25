@@ -408,7 +408,9 @@
             "gender": "Płeć",
             "religion": "Religia",
             "upload_photos": "Załadować zdjęcia",
-            "required": "wymagany"
+            "required": "wymagany",
+            "male": "Męski",
+            "female": "Płeć żeńska"
         },
         "step4": {
             "information_about_death_person": "Informacje na temat osoby zmarłej",
@@ -476,7 +478,9 @@
             "date_of_birth": "Data urodzenia",
             "passed_away": "Zmarł",
             "upload_photos": "Załadować zdjęcia",
-            "required": "wymagany"
+            "required": "wymagany",
+            "male": "Męski",
+            "female": "Płeć żeńska"
         },
         "step4": {
             "entry_form_part_2": "Formularz zgłoszeniowy Część 2",
@@ -529,7 +533,9 @@
             "gender": "Płeć",
             "religion": "Religia",
             "upload_photos": "Załadować zdjęcia",
-            "required": "wymagany"
+            "required": "wymagany",
+            "male": "Męski",
+            "female": "Płeć żeńska"
         },
         "step4": {
             "information_about_death_person": "Informacje na temat osoby zmarłej",

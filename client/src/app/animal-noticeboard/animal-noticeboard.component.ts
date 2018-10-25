@@ -513,11 +513,8 @@ export class AnimalNoticeboardComponent implements OnInit {
     this.graveyardBurialCurrentStep++;
   }
 
-  
-
   confirmAddingGraveyardBurial(){
     let grave_id = 1;
-    let grave_image = 0;
     let payment_method = 1;
     let payment_id = 12345;
     let graveSize = parseInt(this.graveyardBurialSize, 10);
@@ -530,19 +527,24 @@ export class AnimalNoticeboardComponent implements OnInit {
         'buyer_id=' + this.USER_INFO.buyer_id, 'al_id=' + this.graveyardBurialAnimals[i].genus,  'gender=' + this.graveyardBurialAnimals[i].gender, 
         'animalkind=' + this.graveyardBurialAnimals[i].type, 'name=' + this.graveyardBurialAnimals[i].firstname, 
         'owner_name=' + this.graveyardBurialAnimals[i].owner_firstname, 'owner_surname=' + this.graveyardBurialAnimals[i].owner_lastname,
-        'grave_image=' + this.graveyardBurialSelectedStoneId, 'grave_id=' + grave_id,
-        'live_history_signature=' + this.graveyardBurialAnimals[i].signature, 'live_history=' + this.graveyardBurialAnimals[i].in_memoriam,
+        'grave_image=' + this.graveyardBurialSelectedStoneId, 'grave_id=' + grave_id, 'image_url=',
+        'live_history=' + this.graveyardBurialAnimals[i].in_memoriam, 'live_history_signature=' + this.graveyardBurialAnimals[i].signature,
         'unique_id=' + this.graveyardBurialAnimals[i].unique_id
       ]);
       this.dataService.createWithMethodAndOptions(this.options)
       .subscribe(result => {
-        if(result['status'] == "ANIMAL_ADD_SUCCESS"){
-          grave_image = result['grave_image'];
-          added_animals.push(parseInt(result['animal_id']))
+        if(result && result['status'] == "ANIMAL_ADD_SUCCESS"){
+          added_animals.push(parseInt(result['animal_id']));
+          this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'BURIAL_DONE_SUCCESSFULLY'}, function(){
+            this._router.navigateByUrl('/home');
+          });
+        }
+        else{
+          this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'BURIAL_ERROR'});
         }
       });
     }
-    this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'BURIAL_DONE_SUCCESSFULLY' });
+    
   }
 
   changeGraveyardBurialType(){

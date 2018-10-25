@@ -6,8 +6,8 @@ export class MessageService {
   private message = new BehaviorSubject<any>({});
   castMessage = this.message.asObservable();
 
-  sendMessage(message: string, data:any) {
-      this.message.next({message: message, data: data});
+  sendMessage(message: string, data:any, callback: any = null) {
+      this.message.next({message: message, data: data, callback: callback});
   }
 
   clearMessage() {

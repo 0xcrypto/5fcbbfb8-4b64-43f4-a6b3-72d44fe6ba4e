@@ -1798,17 +1798,10 @@
 			$current_language = isset($options['current_language']) ? $options['current_language'] : 'en';
 			$today_date = date('Y-m-d');
 
-			$_dateb_y = substr($options['date_birth'], 6,9);
-			$_dateb_m = substr($options['date_birth'], 3,2);
-			$_dateb_d = substr($options['date_birth'], 0,2);
-			$date_birth = $_dateb_y.'-'.$_dateb_m.'-'.$_dateb_d;
-
+			$date_birth = $options['date_birth'];
 			$date_death = '0000-00-00';
 			if(isset($options['date_death'])){
-				$_dated_y = substr($options['date_death'], 6,9);
-				$_dated_m = substr($options['date_death'], 3,2);
-				$_dated_d = substr($options['date_death'], 0,2);
-				$date_death = $_dated_y.'-'.$_dated_m.'-'.$_dated_d;
+				$date_death = $options['date_death'];
 			}
 
 			$data = array();
@@ -1900,32 +1893,24 @@
 		private function addAnimal($options = NULL){
 			$temp = isset($options['temp']) ? $options['temp'] : 0;
 			$table = ($temp == 0) ? "animals" : "animals_temp";
-			$graveyard_id = $this->getGraveyardIdByReligionId($options['religion_id']);
 			$payment_method = isset($options['payment_method']) ? $options['payment_method'] : -1; 
 			$payment_id = isset($options['payment_id']) ? $options['payment_id'] : 0;
 			$current_language = isset($options['current_language']) ? $options['current_language'] : 'en';
 			$today_date = date('Y-m-d');
 
-			$_dateb_y = substr($options['date_birth'], 6,9);
-			$_dateb_m = substr($options['date_birth'], 3,2);
-			$_dateb_d = substr($options['date_birth'], 0,2);
-			$date_birth = $_dateb_y.'-'.$_dateb_m.'-'.$_dateb_d;
-
-			$_dated_y = substr($options['date_death'], 6,9);
-			$_dated_m = substr($options['date_death'], 3,2);
-			$_dated_d = substr($options['date_death'], 0,2);
-			$date_death = $_dated_y.'-'.$_dated_m.'-'.$_dated_d;
+			$date_birth = $options['date_birth'];
+			$date_death = $options['date_death'];
 
 			$data = array();
 
 			$query="insert into $table ( buyer_id, al_id, gender, animalkind, 
 										name, owner_name, owner_surname, date_birth, date_death, 
 										grave_image, image_url, is_deleted, grave_id, 
-										pay_method, amount, paymentid, language, add_date
+										pay_method, amount, paymentid, language, add_date, 
 										live_history, live_history_signature ) values (
 								'".$options['buyer_id']."', '".$options['al_id']."', '".$options['gender']."', '".$options['animalkind']."', 
 								'".$options['name']."', '".$options['owner_name']."', '".$options['owner_surname']."', '".$date_birth."', '".$date_death."', 
-								'".$options['grave_image']."', '".$options['image_url']."',  0, '".$options['grave_id']."'
+								'".$options['grave_image']."', '".$options['image_url']."',  0, '".$options['grave_id']."',
 								'".$payment_method."', '".$options['amount']."', '".$payment_id."', '".$current_language."', '".$today_date."',
 								'".$options['live_history']."', '".$options['live_history_signature']."')";
 			
