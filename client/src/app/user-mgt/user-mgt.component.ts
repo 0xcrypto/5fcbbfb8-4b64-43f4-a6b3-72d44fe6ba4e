@@ -4,6 +4,7 @@ import { DataService } from '../services/data.service';
 import { Router } from '@angular/router';
 import { AppGlobals } from '../app.globals';
 import { TranslationService } from '../services/translation.service';
+import { MessageService } from '../services/message.service';
 import { CookieStorage, LocalStorage, SessionStorage, LocalStorageService } from 'ngx-store';
 import { UserService } from '../services/user.service';
 
@@ -21,16 +22,11 @@ export class UserMgtComponent implements OnInit {
   private firstname:string = null;
   private lastname:string = null;
   private terms_and_conditions:boolean = false;
-  private isResetPasswordMessageVisible:boolean = false;
-  private resetPasswordMessage:string = null;
-  private isRegisterMessageVisible:boolean = false;
-  private registerPasswordMessage:string = null;
   private phone:string = null;
   private isGuest:boolean = true;
   private loggedInUser:any = [];
   router:Router = null;
   options: Options = null;
-  private loginFormError = null;
 
   constructor(private _userMgtDialog:UserManagementDialogService, 
     private _router: Router, 
@@ -38,6 +34,7 @@ export class UserMgtComponent implements OnInit {
     private _global: AppGlobals,
     private localStorageService: LocalStorageService,
     private userService:UserService,
+    private messageService:MessageService,
     private translation:TranslationService
     ) { 
       this.router = _router;
@@ -67,8 +64,9 @@ export class UserMgtComponent implements OnInit {
     this.options = this._global.refreshObject(this.options, parameters);
     this.dataService.getAllWithMethodAndOptions('LOGIN', this._global.serializeAndURIEncode(this.options))
     .subscribe(result => {
-      if(result['status'] && result['status'] == "LOGIN_NOT_FOUND")
-        this.loginFormError = 'Email & Password not exists in system';
+      if(result['status'] && result['status'] == "LOGIN_NOT_FOUND"){
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'USERNAME_PASSWORD_NOT_FOUND' });
+      }
       else{
         this.userService.logIn(result['buyer']);
         this._userMgtDialog.closeDialog();
@@ -78,13 +76,11 @@ export class UserMgtComponent implements OnInit {
 
   register(){
     if(this.password != this.confirm_password){
-      this.isRegisterMessageVisible = true;
-      this.registerPasswordMessage = this.translation.getTranslatedString('REGISTER_PASSWORD_NOT_MATCHED');
+      this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'REGISTER_PASSWORD_NOT_MATCHED' });
       return;
     }
     if(!this.terms_and_conditions){
-      this.isRegisterMessageVisible = true;
-      this.registerPasswordMessage = this.translation.getTranslatedString('REGISTER_ACCEPT_TERMS');
+      this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'REGISTER_ACCEPT_TERMS' });
       return;
     }
 
@@ -95,19 +91,17 @@ export class UserMgtComponent implements OnInit {
       .subscribe(result => {
         if(result){
           if(result['status'] == 'LOGIN_ALREADY_EXISTS'){
-            this.registerPasswordMessage = this.translation.getTranslatedString('REGISTER_LOGIN_EXISTS');
-            this.isRegisterMessageVisible = true;
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'REGISTER_LOGIN_EXISTS' });
+            return;
           }
           else if(result['status'] == 'ERROR'){
-            this.registerPasswordMessage = this.translation.getTranslatedString('REGISTER_ERROR');
-            this.isRegisterMessageVisible = true;
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'REGISTER_ERROR' });
+            return;
           }
           else{
-            this.registerPasswordMessage = this.translation.getTranslatedString('REGISTER_SUCCESS');
-            this.isRegisterMessageVisible = true;
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'REGISTER_SUCCESS' });
+            return;
           }
-
-          return;
         }
       });
   }
@@ -119,12 +113,12 @@ export class UserMgtComponent implements OnInit {
       .subscribe(result => {
         if(result){
           if(result['status'] == 'LOGIN_NOT_FOUND'){
-            this.resetPasswordMessage = this.translation.getTranslatedString('RESET_PASSWORD_LOGIN_NOT_FOUND');
-            this.isResetPasswordMessageVisible = true;
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'RESET_PASSWORD_LOGIN_NOT_FOUND' });
+            return;
           }
           else{
-            this.resetPasswordMessage = this.translation.getTranslatedString('RESET_PASSWORD_SUCCESS');
-            this.isResetPasswordMessageVisible = true;
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'RESET_PASSWORD_SUCCESS' });
+            return;
           }
         }
       });

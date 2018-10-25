@@ -15,12 +15,12 @@ export class CustomDialogComponent implements OnInit {
 
   ngOnInit() {
     this.messageService.castMessage.subscribe(object => {
-      let message = object.message;
+      let message= object.message;
       let data = object.data;
 
       switch(message){
         case "OPEN_CUSTOM_DIALOG":
-          this.setMessage(this.translation.getTranslatedString(data));
+          this.setMessage(this.translation.getTranslatedString(data.translationKey));
           this.open();
           break;
       }

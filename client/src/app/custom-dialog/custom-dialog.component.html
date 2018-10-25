@@ -1,5 +1,8 @@
 <div class="dialog small" [ngStyle]="{'display': isOpen ? 'block': 'none'}">
   <p>{{message}}</p>
-  <button translate>custom_dialog.ok</button>
+  <button class="close-btn" (click)="close()">
+    <span translate>custom_dialog.ok</span>&nbsp;
+    <i class="fa fa-forward"></i>
+  </button>
 </div>
 <div class="dialog-overlay" [ngStyle]="{'display': isOpen ? 'block': 'none'}"></div>

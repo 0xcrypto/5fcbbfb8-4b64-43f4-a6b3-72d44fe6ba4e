@@ -436,55 +436,55 @@ export class AnimalNoticeboardComponent implements OnInit {
     }
     if(this.graveyardBurialCurrentStep == 2){
       if(this.graveyardBurialSelectedStoneId == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'SELECT_GRAVE_STONE' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_SELECT_STONE' });
         return;
       }
     }
     if(this.graveyardBurialCurrentStep == 3){
       if(this.graveyardBurialPetName == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_PETNAME' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_PETNAME' });
         return;
       }
       if(this.graveyardBurialGenus == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_GENUS' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_GENUS' });
         return;
       }
       if(this.graveyardBurialPetType == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_GENUS' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_PET_TYPE' });
         return;
       }
       if(this.graveyardBurialDOB == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_DOB' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_DOB' });
         return;
       }
       if(this.graveyardBurialDOD == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_DOD' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_DOD' });
         return;
       }
       if(this.graveyardBurialGender == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_GENDER' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_GENDER' });
         return;
       }
       if(this.graveyardBurialOwnerFirstname == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_OWNER_FIRSTNAME' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_OWNER_FIRSTNAME' });
         return;
       }
       if(this.graveyardBurialOwnerLastname == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_OWNER_LASTNAME' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_OWNER_LASTNAME' });
         return;
       }
       if (this.graveyardBurialAnimals.some((a) => (a.petname) == this.graveyardBurialPetName)){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'ANIMAL_ALREADY_EXISTS' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'DETAILS_ALREADY_EXISTS' });
         return;
       }
     }
     if(this.graveyardBurialCurrentStep == 4){
       if(this.graveyardBurialInMemoriam == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_IN_MEMORIAM' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_IN_MEMORIAM' });
         return;
       }
       if(this.graveyardBurialSignature == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_SIGNATURE' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_SIGNATURE' });
         return;
       }
 
@@ -540,10 +540,9 @@ export class AnimalNoticeboardComponent implements OnInit {
           grave_image = result['grave_image'];
           added_animals.push(parseInt(result['animal_id']))
         }
-
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'GRAVE_ADDED_SUCCESSFULLY' });
       });
     }
+    this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'BURIAL_DONE_SUCCESSFULLY' });
   }
 
   changeGraveyardBurialType(){

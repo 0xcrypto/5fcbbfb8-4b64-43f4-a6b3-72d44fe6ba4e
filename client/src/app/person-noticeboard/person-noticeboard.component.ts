@@ -550,7 +550,7 @@ export class PersonNoticeboardComponent implements OnInit {
           });
         }
         else{
-          this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_SELECT_PERSON_BURIAL_SUB_TYPE' });
+          this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_SELECT_BURIAL_TYPE' });
           return;
         }
       }
@@ -569,54 +569,54 @@ export class PersonNoticeboardComponent implements OnInit {
         });
       }
       else{
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_SELECT_PERSON_BURIAL_TYPE' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_SELECT_BURIAL_SUB_TYPE' });
         return;
       }
     }
     if(this.graveyardBurialCurrentStep == 2){
       if(this.graveyardBurialSelectedStoneId == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'SELECT_GRAVE_STONE' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_SELECT_STONE' });
         return;
       }
     }
     if(this.graveyardBurialCurrentStep == 3){
       if(this.graveyardBurialFirstname == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_FIRSTNAME' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_FIRSTNAME' });
         return;
       }
       if(this.graveyardBurialLastname == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_LASTNAME' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_LASTNAME' });
         return;
       }
       if(this.graveyardBurialDOB == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_DOB' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_DOB' });
         return;
       }
       if(this.graveyardBurialDOD == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_DOD' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_DOD' });
         return;
       }
       if(this.graveyardBurialGender == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_GENDER' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_SELECT_GENDER' });
         return;
       }
       if(this.graveyardBurialSelectedReligionId == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_SELECT_RELIGION' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_SELECT_RELIGION' });
         return;
       }
       if (this.graveyardBurialPersons.some((p) => (p.firstname+p.lastname) == this.graveyardBurialFirstname+this.graveyardBurialLastname)){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PERSON_ALREADY_EXISTS' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PERSON_ALREADY_EXISTS' });
         return;
       }
 
     }
     if(this.graveyardBurialCurrentStep == 4){
       if(this.graveyardBurialInMemoriam == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_IN_MEMORIAM' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_IN_MEMORIAM' });
         return;
       }
       if(this.graveyardBurialSignature == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_SIGNATURE' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_SIGNATURE' });
         return;
       }
       
@@ -692,19 +692,17 @@ export class PersonNoticeboardComponent implements OnInit {
         if( graveSize == added_persons.length && added_persons.length > 0 && grave_id == 3){
           this.options = this._global.refreshObject(this.options, ['method=ADD_PERSON_MULTI_GRAVES', 'place_id=' + place_id,
               'family_name=' + this.graveyardBurialClanName, 'graves=' + added_persons, 'grave_image='+grave_image]);
-            this.dataService.createWithMethodAndOptions(this.options)
-            .subscribe(result => {
-              if(result['status'] == 'MULTI_GRAVE_ADDED'){
-                //result[multigrave_id]
-                this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'GRAVE_ADDED_SUCCESSFULLY' });
-              }
-            });
-        }
-        else{
-          this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'GRAVE_ADDED_SUCCESSFULLY' });
+          this.dataService.createWithMethodAndOptions(this.options)
+          .subscribe(result => {
+            if(result['status'] == 'MULTI_GRAVE_ADDED'){
+              //result[multigrave_id]
+              this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'BURIAL_DONE_SUCCESSFULLY' });
+            }
+          });
         }
       });
     }
+    this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'BURIAL_DONE_SUCCESSFULLY' });
   }
 
   changeGraveyardBurialType(){
@@ -858,7 +856,7 @@ export class PersonNoticeboardComponent implements OnInit {
           });
         }
         else{
-          this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_SELECT_PERSON_BURIAL_SUB_TYPE' });
+          this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_SELECT_RESERVATION_SUB_TYPE' });
           return;
         }
       }
@@ -877,49 +875,49 @@ export class PersonNoticeboardComponent implements OnInit {
         });
       }
       else{
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_SELECT_PERSON_BURIAL_TYPE' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_SELECT_RESERVATION_TYPE' });
         return;
       }
     }
     if(this.reservationCurrentStep == 2){
       if(this.reservationSelectedStoneId == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'SELECT_GRAVE_STONE' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_SELECT_STONE' });
         return;
       }
     }
     if(this.reservationCurrentStep == 3){
       if(this.reservationFirstname == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_FIRSTNAME' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_FIRSTNAME' });
         return;
       }
       if(this.reservationLastname == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_LASTNAME' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_LASTNAME' });
         return;
       }
       if(this.reservationDOB == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_DOB' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_DOB' });
         return;
       }
       if(this.reservationGender == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_GENDER' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_SELECT_GENDER' });
         return;
       }
       if(this.reservationSelectedReligionId == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_SELECT_RELIGION' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_SELECT_RELIGION' });
         return;
       }
       if (this.reservationPersons.some((p) => (p.firstname+p.lastname) == this.reservationFirstname+this.reservationLastname)){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PERSON_ALREADY_EXISTS' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PERSON_ALREADY_EXISTS' });
         return;
       }
     }
     if(this.reservationCurrentStep == 4){
       if(this.reservationInMemoriam == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_IN_MEMORIAM' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_IN_MEMORIAM' });
         return;
       }
       if(this.reservationSignature == null){
-        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'PLEASE_PROVIDE_SIGNATURE' });
+        this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_SIGNATURE' });
         return;
       }
       
@@ -946,7 +944,7 @@ export class PersonNoticeboardComponent implements OnInit {
     this.reservationCurrentStep++;
   }
 
-  confirmAddingReservation(){debugger;
+  confirmAddingReservation(){
     let place_id = 0;
     let grave_id = 0;
     let grave_image = 0;
@@ -994,19 +992,17 @@ export class PersonNoticeboardComponent implements OnInit {
         if( reservationSize == added_persons.length && added_persons.length > 0 && grave_id == 3){
           this.options = this._global.refreshObject(this.options, ['method=ADD_PERSON_MULTI_GRAVES', 'place_id=' + place_id,
               'family_name=' + this.graveyardBurialClanName, 'graves=' + added_persons, 'grave_image='+grave_image]);
-            this.dataService.createWithMethodAndOptions(this.options)
-            .subscribe(result => {
-              if(result['status'] == 'MULTI_GRAVE_ADDED'){
-                //result[multigrave_id]
-                this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'GRAVE_RESERVATION_ADDED_SUCCESSFULLY' });
-              }
-            });
-        }
-        else{
-          this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'data': 'GRAVE_RESERVATION_ADDED_SUCCESSFULLY' });
+          this.dataService.createWithMethodAndOptions(this.options)
+          .subscribe(result => {
+            if(result['status'] == 'MULTI_GRAVE_ADDED'){
+              //result[multigrave_id]
+              this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'RESERVATION_DONE_SUCCESSFULLY' });
+            }
+          });
         }
       });
     }
+    this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'RESERVATION_DONE_SUCCESSFULLY' });
   }
 
   getReservationBurialReligion(event: Event) {

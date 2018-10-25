@@ -16,9 +16,6 @@
                   </button>
               </label>
               <label>
-                  <p style="color:#f00;" *ngIf="loginFormError">{{loginFormError}}</p>
-              </label>
-              <label>
                 <p translate>login.info</p>
               </label>
               <label>
@@ -59,9 +56,6 @@
                 <input type="password" [(ngModel)]="confirm_password" name="confirm_password"/>
             </label>
             <label>
-                <p *ngIf="isRegisterMessageVisible">{{registerPasswordMessage}}</p>
-            </label>
-            <label>
                 <p translate><input type="checkbox" style="width:50px;" [(ngModel)]="terms_and_conditions" name="terms_and_conditions"/>
                     register.short_info</p>
             </label>
@@ -94,9 +88,6 @@
                   <button type="button" class="grey-button" (click)="forgotpassword()">
                       <span translate>forgot_password.send_my_password</span>
                   </button>
-              </label>
-              <label>
-                  <p *ngIf="isResetPasswordMessageVisible">{{resetPasswordMessage}}</p>
               </label>
               <label>
                     <p translate>forgot_password.short_info</p>

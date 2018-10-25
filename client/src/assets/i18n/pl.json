@@ -303,7 +303,8 @@
         "info": "Po zalogowaniu możesz edytować swój wpis lub kamień-kamień. Ci z was, którzy mają rezerwację do wspólnego grobu, mogą dodać dowolny wpis w dowolnym momencie po zalogowaniu. Ci z was, którzy mają rezerwację na Virtual - Graveyard, mogą edytować e-mail z grobu.",
         "do_not_have_account_here": "Nie masz konta tutaj?",
         "register": "Zarejestrować",
-        "i_have_forgotten_password": "Zapomniałem hasła"
+        "i_have_forgotten_password": "Zapomniałem hasła",
+        "username_password_not_found": "Nazwa użytkownika i hasło nie istnieje w systemie"
     },
     "register": {
         "register": "Zarejestrować",
@@ -571,13 +572,26 @@
     },
     "custom_dialog":{
         "ok": "ok",
+        "please_select_burial_type": "Wybierz rodzaj grobu",
+        "please_select_burial_sub_type": "Wybierz typ podklasztorny",
+        "please_select_reservation_type": "Proszę wybrać rodzaj rezerwacji",
+        "please_select_reservation_sub_type": "Wybierz rodzaj subskrypcji rezerwacji",
+        "please_select_stone": "Proszę wybrać kamień",
         "please_provide_firstname": "Proszę podać imię",
         "please_provide_lastname": "Proszę podać nazwisko",
         "please_provide_dob": "Podaj datę urodzenia",
         "please_provide_dod": "Podaj datę śmierci",
         "please_select_gender": "Proszę wybrać płeć",
-        "please_select_graveyard_burial_type": "Proszę wybrać typ Graveyard Burial Type",
-        "please_select_graveyard_burial_sub_type": "Proszę wybrać typ podrzędu Graveyard Burial Sub Type",
-        "person_already_exists": "Osoba już istnieje"
+        "please_select_religion": "Wybierz religię",
+        "please_provide_memoriam": "Podaj w memoriam",
+        "please_provide_signature": "Podaj podpis",
+        "burial_done_successfully": "Cmentarzysko zostało wykonane z powodzeniem",
+        "reservation_done_successfully": "Rezerwacja została pomyślnie zakończona",
+        "details_already_exists": "Szczegóły już istnieją",
+        "please_provide_pet_name": "Podaj nazwę zwierzaka",
+        "please_provide_genus": "Wybierz rodzaj",
+        "please_provide_pet_type": "Proszę podać typ zwierzęcia",
+        "please_provide_owner_firstname": "Podaj imię właściciela",
+        "please_provide_owner_lastname": "Podaj nazwisko właściciela"
     }
 }

@@ -302,7 +302,8 @@
         "info": "When you are logged in you can edit your entry or grave-stone design. These of you who have reservation for communal grave can add any entry at any time after log-in. Those of you who have reservation on Virtual - Graveyard can edit e-mail form the grave.",
         "do_not_have_account_here": "Do not have account here?",
         "register": "Register",
-        "i_have_forgotten_password": "I've forgotten my password"
+        "i_have_forgotten_password": "I've forgotten my password",
+        "username_password_not_found": "Username & Password not exists in system"
     },
     "register": {
         "register": "Register",
@@ -567,13 +568,26 @@
     },
     "custom_dialog":{
         "ok": "OK",
+        "please_select_burial_type": "Please select burial type",
+        "please_select_burial_sub_type": "Please select burial sub type",
+        "please_select_reservation_type": "Please select reservation type",
+        "please_select_reservation_sub_type": "Please select reservation sub type",
+        "please_select_stone": "Please select stone",
         "please_provide_firstname": "Please provide Firstname",
         "please_provide_lastname": "Please provide Lastname",
         "please_provide_dob": "Please provide Date of Birth",
         "please_provide_dod": "Please provide Date of Death",
         "please_select_gender": "Please select Gender",
-        "please_select_graveyard_burial_type": "Please select Graveyard Burial type",
-        "please_select_graveyard_burial_sub_type": "Please select Graveyard Burial sub type",
-        "person_already_exists": "Person already exists"
+        "please_select_religion": "Please select religion",
+        "please_provide_memoriam": "Please provide in memoriam",
+        "please_provide_signature": "Please provide signature",
+        "burial_done_successfully": "Graveyard burial done successfully",
+        "reservation_done_successfully": "Reservation done successfully",
+        "details_already_exists": "Details already exists",
+        "please_provide_pet_name": "Please provide pet name",
+        "please_provide_genus": "Please select genus",
+        "please_provide_pet_type": "Please provide pet type",
+        "please_provide_owner_firstname": "Please provide owner first name",
+        "please_provide_owner_lastname": "Please provide owner last name"
     }
 }
