@@ -96,10 +96,11 @@ export class AnimalGraveyardComponent implements OnInit {
 
     this.messageService.castMessage.subscribe(object => {
       let message = object.message;
+      let data = object.data;
 
       switch(message){
         case "RELOAD_ANIMAL_OBJECTS":
-          this.options = this._global.refreshObject(this.options, ['object_name=znicz', 'id='+this.selectedAnimalId]);
+          this.options = this._global.refreshObject(this.options, ['object_name=znicz', 'id='+ + data.id]);
           this.dataService.getAllWithMethodAndOptions('ANIMAL_OBJECTS', this._global.serializeAndURIEncode(this.options))
             .subscribe(data => {
               this.objects = data;
@@ -245,6 +246,17 @@ export class AnimalGraveyardComponent implements OnInit {
     image.style.left = event.clientX + 'px';
   }
   shopObjects(){
+    if(this.selectedAnimalId){
+      this.messageService.sendMessage('OPEN_SHOP', {
+          'selectedAnimal': this.selectedAnimalId,
+          'selectedAnimalName': this.selectedAnimalName
+        });
+    }
+  }
+  openShop(animal: any){
+    this.selectedAnimalId = animal.animal_id;
+    this.selectedAnimalName = animal.name +' '+animal.name2;
+
     if(this.selectedAnimalId){
       this.messageService.sendMessage('OPEN_SHOP', {
           'selectedAnimal': this.selectedAnimalId,

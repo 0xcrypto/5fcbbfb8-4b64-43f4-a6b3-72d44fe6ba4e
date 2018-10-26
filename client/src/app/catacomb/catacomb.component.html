@@ -26,7 +26,10 @@
                 <div  class="catacomb" [ngStyle]="{ 'width': catacombSize+'px' }" >
                     <div class="style" [ngStyle]="{ 'background-image': catacomb.imageUrl }"></div>
                     <p class="slab" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-stand.png') +')'"></p>
-                    <p class="candle-stand" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-candle.png') +')'"></p>
+                    <p class="candle-stand" (click)="openShop(catacomb);" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-candle.png') +')'"></p>
+                    <div class="object-bucket" *ngFor="let object of objects">
+                        <img [attr.src]="object.object_url"/>
+                    </div>
                     <div class="detail">
                         <p class="name" (click)="showCatacombDetails(catacomb);">
                           {{([].constructor.isArray(catacomb).name1) ? 

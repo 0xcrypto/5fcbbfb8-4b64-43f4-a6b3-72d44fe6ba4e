@@ -19,8 +19,10 @@
             <div *ngIf="isThunderstromScene" class="thunderstrom" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/thunderstrom.gif') +')'">&nbsp;</div>
                 
             <li *ngFor="let grave of graves">
-                <div  class="grave" [ngStyle]="{'background-image': grave.graveUrl, 'width': graveSize+'px'}" >
-                    <div>
+                <div class="grave" [ngStyle]="{ 'width': graveSize+'px' }" >
+                    <div class="style" [ngStyle]="{ 'background-image': grave.graveUrl }"></div>
+                    <p class="candle-stand" (click)="openShop(grave)" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-candle.png') +')'"></p>
+                    <div class="detail">
                         <p class="name" (click)="showGraveDetails(grave);">{{[].constructor.isArray(grave.name1) ? grave.name1[0] : grave.name1}} {{grave.surname}}</p>
                         <p>
                             <span><label>Born</label>{{grave.date_birth}}</span>

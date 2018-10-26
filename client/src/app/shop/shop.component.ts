@@ -366,7 +366,7 @@ export class ShopComponent implements OnInit {
             }
 
             this.closeShop();
-            this.messageService.sendMessage('RELOAD_PERSON_OBJECTS', {});
+            this.messageService.sendMessage('RELOAD_PERSON_OBJECTS', {'id': this.selectedGraveId});
           });
       }
 
@@ -386,7 +386,7 @@ export class ShopComponent implements OnInit {
             }
             
             this.closeShop();
-            this.messageService.sendMessage('RELOAD_ANIMAL_OBJECTS', {});
+            this.messageService.sendMessage('RELOAD_ANIMAL_OBJECTS', {'id': this.selectedGraveId});
           });
       }
 
@@ -403,7 +403,7 @@ export class ShopComponent implements OnInit {
             }
             
             this.closeShop();
-            this.messageService.sendMessage('RELOAD_CATACOMB_OBJECTS', {});
+            this.messageService.sendMessage('RELOAD_CATACOMB_OBJECTS', {'id': this.selectedGraveId});
           });
       }
     }

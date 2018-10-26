@@ -98,10 +98,11 @@ export class PersonGraveyardComponent implements OnInit {
     
     this.messageService.castMessage.subscribe(object => {
       let message = object.message;
-
+      let data = object.data;
+      
       switch(message){
         case "RELOAD_PERSON_OBJECTS":
-          this.options = this._global.refreshObject(this.options, ['object_name=znicz', 'user_id='+this.selectedGraveId]);
+          this.options = this._global.refreshObject(this.options, ['object_name=znicz', 'user_id=' + data.id]);
           this.dataService.getAllWithMethodAndOptions('PERSON_OBJECTS', this._global.serializeAndURIEncode(this.options))
             .subscribe(data => {
               this.objects = data;
@@ -255,6 +256,17 @@ export class PersonGraveyardComponent implements OnInit {
           'selectedGrave': this.selectedGraveId,
           'selectedGraveName': this.selectedGraveName
         });
+    }
+  }
+  openShop(grave: any){
+    this.selectedGraveId = grave.user_id;
+    this.selectedGraveName = grave.name1 +' '+grave.surname;
+
+    if(this.selectedGraveId){
+      this.messageService.sendMessage('OPEN_SHOP', {
+        'selectedGrave': this.selectedGraveId,
+        'selectedGraveName': this.selectedGraveName
+      });
     }
   }
 }

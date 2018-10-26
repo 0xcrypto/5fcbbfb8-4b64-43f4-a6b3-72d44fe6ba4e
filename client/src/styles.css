@@ -1,5 +1,6 @@
 *{
     font-family: verdana;
+    user-select: none;
 }
 *:focus{
     outline: none;
@@ -86,7 +87,6 @@ table button{
     z-index: 9;    
     top: 15px;
     left: 70px;
-    /*background-image: url(./assets/images/vg-logo.png);*/
     background-position: center;
     opacity: 1;
 }
@@ -100,7 +100,6 @@ table button{
     z-index: 9;
     top: 60px;
     left: 30px;
-    /*background-image: url(./assets/images/vg-left-logo.png);*/
     background-position: center;
     background-size: 100%;
 }
@@ -111,7 +110,6 @@ table button{
     z-index: 9;
     top: 60px;
     right: 30px;
-    /*background-image: url(./assets/images/vg-right-logo.png);*/
     background-position: center;
     background-size: 100%;
 }
@@ -123,7 +121,6 @@ body{
 body header{
     height: 50px;
     background-repeat: repeat-x;
-    /*background-image: url(./assets/images/header.jpg);*/
     background-position: center top;
     position: fixed;
     left: 0;
@@ -241,14 +238,12 @@ body #content{
 }
 body #content.notice-bg{
     overflow: inherit;
-    /*background-image: url(./assets/images/noticeboard.png);*/
     background-size: 110%;
     background-repeat: no-repeat;
     background-position: center -180px;
 }
 body #content.loading-bg{
     overflow: inherit;
-    /*background-image: url(./assets/images/wall.png);*/
     background-repeat: repeat;
     background-size: contain;
     -webkit-animation: backgroundScroll 5s linear infinite;
@@ -296,7 +291,6 @@ body #content .sky{
     width: 100%;
     display: block;
     position: absolute;
-    /*background-image: url(./assets/images/sky.jpg);*/
 	background-size: 145%;
     background-repeat: no-repeat;
 }
@@ -309,7 +303,6 @@ body #content .top-board{
     overflow: hidden;
     position: absolute;
     z-index: 3;
-    /*background-image: url(./assets/images/top-board.png);*/
     background-repeat: no-repeat;
     margin-left: -120px;
     background-size: cover;
@@ -324,7 +317,6 @@ body #content .birds{
     overflow: hidden;
     position: absolute;
     z-index: 2;
-    /*background-image: url(./assets/images/birds-flying.gif);*/
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -335,7 +327,6 @@ body #content.goto-notice-wall .birds{
 body #content .gate-left{
    width: 165px;
    height: 298px;
-   /*background-image: url(./assets/images/gate-left.png);*/
    background-repeat: no-repeat;
    background-size: contain;
    transition: -webkit-transform 3s linear;
@@ -350,7 +341,6 @@ body #content .gate-right{
     height: 298px;
     float: right;
     z-index: 3;
-    /*background-image: url(./assets/images/gate-right.png);*/
     background-size: contain;
     background-repeat: no-repeat;
     transition: -webkit-transform 3s linear;
@@ -387,7 +377,6 @@ body #content .lion-left{
     top: 120px;
     left: 170px;
     z-index: 3;
-    /*background-image: url(./assets/images/lion.png);*/
     background-repeat: no-repeat;
 }
 body #content .lion-right{
@@ -402,7 +391,6 @@ body #content .lion-right{
     -webkit-filter: FlipX;
     filter: FlipX;
     -ms-filter: "FlipX";
-    /*background-image: url(./assets/images/lion.png);*/
     background-repeat: no-repeat;
 }
 body #content .gate-wall {
@@ -411,7 +399,6 @@ body #content .gate-wall {
     width: 100%;
     z-index: 2;
     opacity: 1;
-	/*background-image: url(./assets/images/main-gate.png);*/
     background-position: bottom center;
     background-repeat: no-repeat;    
     background-size: contain;
@@ -429,7 +416,6 @@ body #content .notice-wall{
     height: 100%;
     width: 100%;
     z-index: 1;
-    /*background-image: url(./assets/images/notice-board.png);*/
     background-repeat: no-repeat;
     background-size: 45%;
     transition: all 1.0s ease-in-out;
@@ -457,7 +443,6 @@ body #content .animal-graveyard-gate{
 
 body footer{
     height: 90px;
-    /*background-image: url(./assets/images/bg-bottom.jpg);*/
     background-repeat: repeat;
     width: 100%;
     margin: 0;
@@ -735,7 +720,6 @@ form .text-right{
     margin: 0 13px;
 }
 .options-col .option{
-    /*background-image: url(./assets/images/option-shadow.png);*/
     background-repeat: no-repeat;
     background-position: center 8px;
     margin: 0 auto;
@@ -745,7 +729,6 @@ form .text-right{
     position: relative;
 }
 .options-col .option button{
-    /*background-image: url(./assets/images/option-background.png);*/
     background-repeat: no-repeat;
     background-position: center;
     display: block;
@@ -801,7 +784,6 @@ form .text-right{
     height: 105px;
     background-repeat: no-repeat;
     background-position: center;
-    /*background-image: url(./assets/images/floating-tile.png);*/
 	padding: 15px;
 }
 .popular-grave-col .tile p,
@@ -1058,7 +1040,6 @@ table tbody{
     height: 100px;
 }
 .graveyard .sub-header, .catacombs .sub-header{
-    /*background-image: url(./assets/images/header.jpg);*/
     height: 35px;
     background-position: center -15px;
     position: absolute;
@@ -1153,15 +1134,29 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     width: 512px;
     height: 515px;
 }
-.graveyard-container > ul li .grave{
+.graveyard-container > ul li .grave {
     height: 100%;
+    position: relative;
+}
+.graveyard-container > ul li .candle-stand {
+    display: block;
+    background-repeat: no-repeat;
+    height: 70px;
+    width: 50px;
+    background-size: contain;
+    position: absolute;
+    bottom: 0;
+    background-position: 0 20px;
+    left: 80px;
+    cursor: pointer;
+}
+.graveyard-container > ul li .style {
+    height: 100%;
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center bottom;
-    background-size: contain;
-    margin: 0 auto;
-    position: absolute;
 }
-.graveyard-container > ul li .grave > div {
+.graveyard-container > ul li .grave > .detail {
     color: #a2a2a2;
     width: 200px;
     margin: 320px auto auto;
@@ -1169,28 +1164,30 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     background: rgba(0, 0, 0, 0.6);
     border: 1px solid #a2a2a2;
     border-radius: 5px;
+    position: absolute;
+    top: 0;
+    left: 150px;
 }
-.graveyard-container > ul li .grave > div p.name{
+.graveyard-container > ul li .grave > .detail p.name{
     font-weight: bold;
     font-size: 13px;
     text-align: center;
     cursor: pointer;
 }
-.graveyard-container > ul li .grave > div p.name:hover{
+.graveyard-container > ul li .grave > .detail p.name:hover{
     color: #b2973d;
 }
-.graveyard-container > ul li .grave > div span{
+.graveyard-container > ul li .grave > .detail span{
     display: inline-block;
     width: 45%;
     font-size: 10px;
     text-align: center;
 }
-.graveyard-container > ul li .grave > div label{
+.graveyard-container > ul li .grave > .detail label{
     display: block;
     color: #848484;
 }
 .rainfall{
-    /*background-image: url(./assets/images/rain.gif);*/
     background-repeat: repeat;
     height: 600px;
     background-size: contain;
@@ -1198,7 +1195,6 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     position: absolute;
 }
 .snowfall{
-    /*background-image: url(./assets/images/snow.gif);*/
     background-repeat: repeat;
     height: 600px;
     background-size: contain;
@@ -1206,7 +1202,6 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     position: absolute;
 }
 .thunderstrom{
-    /*background-image: url(./assets/images/thunderstrom.gif);*/
     background-repeat: repeat;
     height: 600px;
     background-size: contain;
@@ -1262,7 +1257,6 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     width: 300px;
     z-index: 10;
     background-size: contain;
-    /*background-image: url(./assets/images/cat-door.png);*/
     background-repeat: no-repeat;
     background-size: contain;
     transition: -webkit-transform 3s linear;
@@ -1291,7 +1285,6 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     display: none;
 }
 .catacombs .dane-way{
-    /*background-image: url(./assets/images/cat-dane.png);*/
     position: absolute;
     right: 0;
     left: 0;
@@ -1309,7 +1302,6 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     display: none;
 }
 .catacombs .catacombs-container{
-    /*background-image: url(./assets/images/cat-wall-minor.jpg);*/
     background-repeat: repeat-x;
     height: 435px;
 }
@@ -1375,7 +1367,6 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
 }
 .catacombs-container > ul li .catacomb > .slab{
     display: block;
-    /*background-image: url(./assets/images/cat-stand.png);*/
     background-repeat: no-repeat;
     position: absolute;
     width: 100%;
@@ -1386,7 +1377,6 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
 }
 .catacombs-container > ul li .catacomb > .candle-stand{
     display: block;
-    /*background-image: url(./assets/images/cat-candle.png);*/
     background-repeat: no-repeat;
     height: 70px;
     width: 50px;
@@ -1395,6 +1385,7 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     bottom: 260px;
     background-position: 0 20px;
     left: 80px;
+    cursor: pointer;
 }
 .catacombs-container > ul li .catacomb > div p.name{
     font-weight: bold;

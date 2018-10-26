@@ -61,7 +61,7 @@ export class CatacombComponent implements OnInit {
     this.isCatacombsLoading = true;
     this.selectedCatacombDetailTab = 'tab1';
 
-    this.options = this._global.refreshObject(this.options, ['limit=20', 'position=0', 'place_id='+this.catacombsPlaceId, 'order=user_id']);
+    this.options = this._global.refreshObject(this.options, ['position=0', 'place_id='+this.catacombsPlaceId, 'order=user_id']);
     this.dataService.getAllWithMethodAndOptions('PERSONS', this._global.serializeAndURIEncode(this.options))
       .subscribe(catacombs => {
         this.catacombs = catacombs;
@@ -77,13 +77,14 @@ export class CatacombComponent implements OnInit {
 
       this.messageService.castMessage.subscribe(object => {
         let message = object.message;
+        let data = object.data;
   
         switch(message){
           case "RELOAD_CATACOMB_OBJECTS":
-            this.options = this._global.refreshObject(this.options, ['object_name=znicz', 'user_id='+this.selectedCatacombId]);
+            this.options = this._global.refreshObject(this.options, ['object_name=znicz', 'user_id=' + data.id]);
             this.dataService.getAllWithMethodAndOptions('PERSON_OBJECTS', this._global.serializeAndURIEncode(this.options))
-              .subscribe(data => {
-                this.objects = data;
+              .subscribe(result => {
+                this.objects = result;
                 for(var i=0; i<=this.objects.length-1; i++){
                   if(this.objects[i].object_name == 'kwiat'){
                     this.objects[i]['object_url'] = './assets/images/znicze/kwiat'+this.objects[i].object_id+'.png';
@@ -98,6 +99,8 @@ export class CatacombComponent implements OnInit {
                     this.objects[i]['object_url'] = './assets/images/znicze/znicz'+this.objects[i].object_id+'.gif';
                   }
                 }
+
+                this.updateCatabombObjects(this.objects, data.id);
               }
             );
             break;
@@ -113,6 +116,10 @@ export class CatacombComponent implements OnInit {
     });
   }
 
+  updateCatabombObjects(objects: any, id: any){
+    var catacomb = this.catacombs.filter(catacomb => catacomb.user_id == id)[0];
+    catacomb.znicze = objects;
+  }
   nextCrypt(){
     if(this.catacombStartPosition == ((this.totalCatacombs - 2) * this.catacombSize ))
       return;
@@ -232,6 +239,16 @@ export class CatacombComponent implements OnInit {
     image.style.left = event.clientX + 'px';
   }
   shopObjects(){
+    if(this.selectedCatacombId){
+      this.messageService.sendMessage('OPEN_SHOP', {
+          'selectedCatacomb': this.selectedCatacombId,
+          'selectedCatacombName': this.selectedCatacombName
+        });
+    }
+  }
+  openShop(catacomb: any){
+    this.selectedCatacombId = catacomb.user_id;
+    this.selectedCatacombName = catacomb.name1 +' '+catacomb.surname;
     if(this.selectedCatacombId){
       this.messageService.sendMessage('OPEN_SHOP', {
           'selectedCatacomb': this.selectedCatacombId,
