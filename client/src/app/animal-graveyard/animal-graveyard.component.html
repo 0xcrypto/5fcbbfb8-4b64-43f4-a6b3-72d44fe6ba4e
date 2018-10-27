@@ -22,6 +22,9 @@
               <div class="grave" [ngStyle]="{'width': graveSize+'px'}" >
                   <div class="style" [ngStyle]="{ 'background-image': animal.graveUrl }"></div>
                   <p class="candle-stand" (click)="openShop(animal);" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-candle.png') +')'"></p>
+                  <div class="object-container" >
+                    <img (click)="openShop(animal);" *ngFor="let object of animal.objects" [attr.src]="object.object_url"/>
+                  </div>
                   <div class="detail">
                       <p class="name" (click)="showGraveDetails(animal);">{{animal.name}}</p>
                       <p>

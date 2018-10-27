@@ -1150,6 +1150,19 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     left: 80px;
     cursor: pointer;
 }
+.graveyard-container > ul li .object-container{
+    width: 200px;
+    height: 50px;
+    position: absolute;
+    bottom: 15px;
+    left: 140px;
+    overflow: hidden;
+}
+.graveyard-container > ul li .object-container > img{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
 .graveyard-container > ul li .style {
     height: 100%;
     background-size: contain;
@@ -1385,6 +1398,19 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     bottom: 260px;
     background-position: 0 20px;
     left: 80px;
+    cursor: pointer;
+}
+.catacombs-container > ul li .catacomb > .object-container{
+    width: 200px;
+    height: 50px;
+    position: absolute;
+    top: 275px;
+    left: 140px;
+    overflow: hidden;
+}
+.catacombs-container > ul li .catacomb > .object-container > img{
+    width: 50px;
+    height: 50px;
     cursor: pointer;
 }
 .catacombs-container > ul li .catacomb > div p.name{

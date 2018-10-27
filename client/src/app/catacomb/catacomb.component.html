@@ -23,12 +23,12 @@
     <div class="catacombs-container" [ngStyle]="{'width': (catacombSize * totalCatacombs)+'px'}" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-wall-minor.jpg') +')'">
         <ul [ngStyle]="{'margin-left': '-'+catacombStartPosition+'px', 'width': (catacombSize * totalCatacombs)+'px'}">
             <li *ngFor="let catacomb of catacombs">
-                <div  class="catacomb" [ngStyle]="{ 'width': catacombSize+'px' }" >
+                <div class="catacomb" [ngStyle]="{ 'width': catacombSize+'px' }" >
                     <div class="style" [ngStyle]="{ 'background-image': catacomb.imageUrl }"></div>
                     <p class="slab" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-stand.png') +')'"></p>
                     <p class="candle-stand" (click)="openShop(catacomb);" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-candle.png') +')'"></p>
-                    <div class="object-bucket" *ngFor="let object of objects">
-                        <img [attr.src]="object.object_url"/>
+                    <div class="object-container" >
+                        <img (click)="openShop(catacomb);" *ngFor="let object of catacomb.objects" [attr.src]="object.object_url"/>
                     </div>
                     <div class="detail">
                         <p class="name" (click)="showCatacombDetails(catacomb);">

@@ -474,8 +474,7 @@
 						u.gender,
 						grave_image,
 						'' as multigrave,
-						'' as znicze,
-						'' as kwiatki, 
+						'' as objects, 
 						u.grave_id,
 						null as ilosc,
 						0 as koniec, 
@@ -555,8 +554,7 @@
 				$row['name1']=explode("|",$row['name1']);
 				$row['other']=explode("|",$row['other']);
 				$row['multigrave']=array();//multigrave
-				$row['znicze']=array();//znicze -> candles
-				$row['kwiatki']=array();//kwiatki -> flowers
+				$row['objects']=array();//znicze -> candles
 				$row['ilosc']=$count_result['total'];// number of all graves
 				
 				$date_birth=explode("-",$row['date_birth']);
@@ -588,41 +586,34 @@
 							u.date_death,						
 							u.date_birth,
 							u.grave_image,
-							'' AS znicze,
-							'' AS kwiatki,
+							'' AS objects,
 							u.gender
 						from multi_graves mg, multi_graves mg2, users u 
 						where mg2.grave_id=u.user_id and mg.multigrave_id=mg2.multigrave_id and mg.grave_id=".$user_id."";
 				$result2 = Yii::app()->db->createCommand($sql)->queryAll();	
 				foreach($result2 as $row2)
-				{	//we overwrite initial data for family graves the name of the tomb
-					$row['name1']=$row2['family_name'];
-					$row['grave_image']=$row2['grave_image'];
-					$row2['surname']=explode("|",$row2['surname']);
+				{
+					//we overwrite initial data for family graves the name of the tomb
+					$row['name1'] = $row2['family_name'];
+					$row['grave_image'] = $row2['grave_image'];
+					$row2['surname'] = explode("|", $row2['surname']);
+
 					///we collect flowers and candles for every deceased person in multigrain
-					$candles = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$row2['grave_id']." and (object_name like 'znicz%' or object_name like 'kamien%') and end_time>now() order by add_date desc limit 5")->queryAll();	
-					$row2['znicze'] = array();
-					$row2['kwiatki'] = array();
-					foreach($candles as $candle)
-						$row2['znicze'][]=$candle;
-						
-					$flowers = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$row2['grave_id']." and object_name like 'kwiat%' and end_time>now() order by add_date desc limit 2")->queryAll();	
-					foreach($flowers as $flower)
-						$row2['kwiatki'][]=$flower;
+					//znicze or kmien or kwiatki = candle or stone or flower
+					$objects = Yii::app()->db->createCommand("select object_id, object_name, comment from users_objects where user_id=".$row2['grave_id']." and (object_name like 'znicz%' or object_name like 'kamien%' or object_name like 'kwiat%') and end_time>now() order by add_date desc")->queryAll();	
+					$row2['objects'] = array();
+					foreach($objects as $object)
+						$row2['objects'][]=$object;
 						
 					$row['multigrave'][]=$row2;
 				}
 				
-				$candles = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$user_id." and (object_name like 'znicz%' or object_name like 'kamien%') and end_time>now() order by add_date desc limit 5")->queryAll();	
-				$row2['znicze'] = array();
-				foreach($candles as $candle)
-					$row['znicze'][]=$candle;
-					
-				$flowers = Yii::app()->db->createCommand("select object_id,object_name,comment from users_objects where user_id=".$user_id." and object_name like 'kwiat%' and end_time>now() order by add_date desc limit 2")->queryAll();	
-				$row2['kwiatki'] = array();
-				foreach($flowers as $flower)
-					$row['kwiatki'][]=$flower;
-					
+				//znicze or kmien or kwiatki= candle or stone or flower
+				$objects = Yii::app()->db->createCommand("select object_id, object_name, comment from users_objects where user_id=".$user_id." and (object_name like 'znicz%' or object_name like 'kamien%' or object_name like 'kwiat%') and end_time>now() order by add_date desc")->queryAll();	
+				$row2['objects'] = array();
+				foreach($objects as $object)
+					$row['objects'][]=$object;
+				
 				$data[] = $row; 
 			} 
 			return ($data); 
@@ -765,11 +756,13 @@
 		private function getPersonObjects($options = NULL){
 			$query="select object_id,object_name,comment,end_time, '' AS total, uo_id from users_objects where 
 				user_id='".$options['user_id']."' and end_time>now()";	
-        
-			if($options['object_name']=='znicz')
-				$query.=" and (object_name like 'znicz%' or object_name like 'kamien%')";
-			elseif($options['object_name'] != '')
-				$query.=" and object_name like '".$options['object_name']."%'";
+		
+			if(isset($options['object_name'])){
+				if($options['object_name']=='znicz')
+					$query.=" and (object_name like 'znicz%' or object_name like 'kamien%')";
+				elseif($options['object_name'] != '')
+					$query.=" and object_name like '".$options['object_name']."%'";
+			}
 			
 			$count_query="select count(*) as total from ($query) t";
 			$count_result = Yii::app()->db->createCommand($count_query)->queryRow()['total'];
@@ -1196,7 +1189,7 @@
                 
                 $row['memoriam'] = $memoriam; unset($memoriam);
 
-                $query="select object_id,object_name,comment from animals_objects where animal_id=".$animal_id." and (object_name like 'znicz%' or object_name like 'kamien%') and end_time>now() order by add_date desc";
+                $query="select object_id, object_name, comment from animals_objects where animal_id=".$animal_id." and (object_name like 'znicz%' or object_name like 'kamien%' or object_name like 'kwiat%') and end_time>now() order by add_date desc";
 				$object_result = Yii::app()->db->createCommand($query)->queryAll();
 				$objects = array();
                 foreach($object_result as $object_row){
@@ -1329,13 +1322,14 @@
 			$query = "SELECT object_id, object_name, comment, end_time,'' 
 			AS total, ao_id FROM animals_objects 
 				WHERE animal_id='".$options['id']."' AND end_time>now()";	
-        
-	        if($options['object_name']=='znicz')
-		    	$query.=" AND (object_name LIKE 'znicz%' OR object_name LIKE 'kamien%')";
-			elseif($options['object_name']!='')
-        		$query.=" AND object_name LIKE '".$options['object_name']."%'";
-        	
-		    $count_result = Yii::app()->db->createCommand("SELECT count(*) as total FROM ($query) t")->queryRow()['total'];
+		
+			if(isset($options['object_name'])){
+				if($options['object_name']=='znicz')
+		    		$query.=" AND (object_name LIKE 'znicz%' OR object_name LIKE 'kamien%')";
+				elseif($options['object_name']!='')
+        			$query.=" AND object_name LIKE '".$options['object_name']."%'";
+        	}
+	        $count_result = Yii::app()->db->createCommand("SELECT count(*) as total FROM ($query) t")->queryRow()['total'];
 			
 		    $query .= " ORDER BY add_date DESC ";
 

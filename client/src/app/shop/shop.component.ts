@@ -398,9 +398,8 @@ export class ShopComponent implements OnInit {
         'current_language='+this.currentLang, 'method=ADD_PERSON_OBJECT']);
         this.dataService.createWithMethodAndOptions(this.options)
           .subscribe(result => {
-            if(result['status'] && result['status'] == 'PERSON_OBJECT_ALREADY_EXISTS'){
+            if(result['status'] && result['status'] == 'PERSON_OBJECT_ALREADY_EXISTS')
               this.isItemAlreadyExists = true;
-            }
             
             this.closeShop();
             this.messageService.sendMessage('RELOAD_CATACOMB_OBJECTS', {'id': this.selectedGraveId});

@@ -72,6 +72,13 @@ export class CatacombComponent implements OnInit {
             catacombs[i].imageUrl = 'url(./assets/images/graves/katak'+catacombs[i].grave_id+'_'+catacombs[i].grave_image+'.png)';
           }
         }
+
+        for(let i=0; i<=catacombs.length-1;i++){
+          if(this.catacombs[i]['objects']){
+            this.catacombs[i]['objects'] = this.updateObjectImages(this.catacombs[i]['objects']);
+          }
+        }
+
         this.isCatacombsLoading = false;
       });
 
@@ -81,25 +88,10 @@ export class CatacombComponent implements OnInit {
   
         switch(message){
           case "RELOAD_CATACOMB_OBJECTS":
-            this.options = this._global.refreshObject(this.options, ['object_name=znicz', 'user_id=' + data.id]);
+            this.options = this._global.refreshObject(this.options, ['user_id=' + data.id]);
             this.dataService.getAllWithMethodAndOptions('PERSON_OBJECTS', this._global.serializeAndURIEncode(this.options))
               .subscribe(result => {
-                this.objects = result;
-                for(var i=0; i<=this.objects.length-1; i++){
-                  if(this.objects[i].object_name == 'kwiat'){
-                    this.objects[i]['object_url'] = './assets/images/znicze/kwiat'+this.objects[i].object_id+'.png';
-                  }
-                  else if(this.objects[i].object_name == 'inne'){
-                    this.objects[i]['object_url'] = './assets/images/znicze/inne'+this.objects[i].object_id+'.png';
-                  }
-                  else if(this.objects[i].object_name == 'kamien'){
-                    this.objects[i]['object_url'] = './assets/images/znicze/kamien'+this.objects[i].object_id+'.png';
-                  }
-                  else if(this.objects[i].object_name == 'znicz'){
-                    this.objects[i]['object_url'] = './assets/images/znicze/znicz'+this.objects[i].object_id+'.gif';
-                  }
-                }
-
+                this.objects = this.updateObjectImages(result);
                 this.updateCatabombObjects(this.objects, data.id);
               }
             );
@@ -118,8 +110,29 @@ export class CatacombComponent implements OnInit {
 
   updateCatabombObjects(objects: any, id: any){
     var catacomb = this.catacombs.filter(catacomb => catacomb.user_id == id)[0];
-    catacomb.znicze = objects;
+    catacomb['objects'] = objects;
   }
+
+  updateObjectImages(objects: any){
+    for(var j=0; j<=objects.length-1; j++) {
+      switch(objects[j].object_name) {
+        case 'kwiat': 
+          objects[j]['object_url'] = './assets/images/znicze/kwiat'+objects[j].object_id+'.png';
+          break;
+        case 'inne': 
+          objects[j]['object_url'] = './assets/images/znicze/inne'+objects[j].object_id+'.png';
+          break;
+        case 'kamien': 
+          objects[j]['object_url'] = './assets/images/znicze/kamien'+objects[j].object_id+'.png';
+          break;
+        case 'znicz':
+          objects[j]['object_url'] = './assets/images/znicze/znicz'+objects[j].object_id+'.gif';
+          break;
+      }
+    }
+    return objects;
+  }
+
   nextCrypt(){
     if(this.catacombStartPosition == ((this.totalCatacombs - 2) * this.catacombSize ))
       return;
@@ -176,24 +189,10 @@ export class CatacombComponent implements OnInit {
       }
     );
 
-    this.options = this._global.refreshObject(this.options, ['object_name=znicz', 'user_id='+catacomb.user_id]);
+    this.options = this._global.refreshObject(this.options, ['user_id='+catacomb.user_id]);
     this.dataService.getAllWithMethodAndOptions('PERSON_OBJECTS', this._global.serializeAndURIEncode(this.options))
       .subscribe(data => {
-        this.objects = data;
-        for(var i=0; i<=this.objects.length-1; i++){
-          if(this.objects[i].object_name == 'kwiat'){
-            this.objects[i]['object_url'] = './assets/images/znicze/kwiat'+this.objects[i].object_id+'.png';
-          }
-          else if(this.objects[i].object_name == 'inne'){
-            this.objects[i]['object_url'] = './assets/images/znicze/inne'+this.objects[i].object_id+'.png';
-          }
-          else if(this.objects[i].object_name == 'kamien'){
-            this.objects[i]['object_url'] = './assets/images/znicze/kamien'+this.objects[i].object_id+'.png';
-          }
-          else if(this.objects[i].object_name == 'znicz'){
-            this.objects[i]['object_url'] = './assets/images/znicze/znicz'+this.objects[i].object_id+'.gif';
-          }
-        }
+        this.objects = this.updateObjectImages(data);
       }
     );
   }

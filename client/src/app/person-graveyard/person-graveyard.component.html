@@ -22,6 +22,9 @@
                 <div class="grave" [ngStyle]="{ 'width': graveSize+'px' }" >
                     <div class="style" [ngStyle]="{ 'background-image': grave.graveUrl }"></div>
                     <p class="candle-stand" (click)="openShop(grave)" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-candle.png') +')'"></p>
+                    <div class="object-container" >
+                        <img (click)="openShop(grave);" *ngFor="let object of grave.objects" [attr.src]="object.object_url"/>
+                    </div>
                     <div class="detail">
                         <p class="name" (click)="showGraveDetails(grave);">{{[].constructor.isArray(grave.name1) ? grave.name1[0] : grave.name1}} {{grave.surname}}</p>
                         <p>
