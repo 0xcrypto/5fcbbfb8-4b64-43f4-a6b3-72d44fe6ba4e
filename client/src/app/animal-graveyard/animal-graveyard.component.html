@@ -1,5 +1,6 @@
 <div id="content" class="loading-bg with-logo-cursor" *ngIf="isGraveyardLoading" 
-[style.backgroundImage]="'url('+ imageService.getImage('assets/images/wall.png') +')'">
+[style.backgroundImage]="'url('+ imageService.getImage('assets/images/wall.png') +')'" 
+(document:mousemove)="onMouseMove($event)" >
   <app-user-mgt></app-user-mgt>
   <img [src]="imageService.getImage('assets/images/logo.gif')" id="logo-gif" [ngStyle]="{'height': '200px', 'width':'145px'}"/>
 </div>

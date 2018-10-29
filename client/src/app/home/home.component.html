@@ -1,6 +1,7 @@
-<div id="content" class="loading-bg-black with-logo-cursor" *ngIf="isImageLoadingScreenVisible" >
+<div id="content" class="loading-bg-black with-logo-cursor" *ngIf="isImageLoadingScreenVisible"
+(document:mousemove)="onMouseMove($event)" >
   <app-user-mgt></app-user-mgt>  
-  <img src="assets/images/logo.gif" id="logo-gif" [ngStyle]="{'height': '200px', 'width':'145px'}"/>
+  <img src="assets/images/logo.gif" id="logo-gif" [ngStyle]="{'height': '200px', 'width':'145px'}" />
 </div>
 <div id="content" *ngIf="!isImageLoadingScreenVisible" [ngClass]="{'goto-notice-wall': isGateOpen, 
 'return-to-maingate': isReturnedToMainGate}">

@@ -15,7 +15,10 @@ export interface Options {};
 
 @Component({
   selector: 'app-catacomb',
-  templateUrl: './catacomb.component.html'
+  templateUrl: './catacomb.component.html',
+  host: {
+    '(document:mousemove)': 'onMouseMove($event)'
+  }
 })
 export class CatacombComponent implements OnInit {
   catacombs:any[] = [];
@@ -45,7 +48,6 @@ export class CatacombComponent implements OnInit {
   options:Options = {};
   
   constructor(private translate: TranslateService, 
-    private route: ActivatedRoute, 
     private dataService: DataService, 
     private messageService:MessageService, 
     private _global: AppGlobals, 
@@ -60,6 +62,7 @@ export class CatacombComponent implements OnInit {
 
     this.isCatacombsLoading = true;
     this.selectedCatacombDetailTab = 'tab1';
+    this.currentLang = this._global.getLanguage();
 
     this.options = this._global.refreshObject(this.options, ['position=0', 'place_id='+this.catacombsPlaceId, 'order=user_id']);
     this.dataService.getAllWithMethodAndOptions('PERSONS', this._global.serializeAndURIEncode(this.options))
@@ -79,7 +82,7 @@ export class CatacombComponent implements OnInit {
           }
         }
 
-        this.isCatacombsLoading = false;
+        //this.isCatacombsLoading = false;
       });
 
     this.messageService.castMessage.subscribe(object => {
@@ -101,13 +104,6 @@ export class CatacombComponent implements OnInit {
       }
     });
 
-    this.currentLang = this._global.getLanguage();
-    let context = this;
-    window.addEventListener("load",function(){
-      document.querySelector('#content.loading-bg').addEventListener("mousemove", context.mouseMove);
-      document.querySelector('#content.loading-bg').addEventListener("mouseup", context.mouseUp);
-      document.querySelector('#content.loading-bg').addEventListener("mousedown", context.mouseDown); 
-    });
   }
 
   updateCatabombObjects(objects: any, id: any){
@@ -238,23 +234,13 @@ export class CatacombComponent implements OnInit {
       });
   }
 
-  mouseUp = (event: MouseEvent) => {
-    this.moveLogo(event);
-  }
-
-  mouseDown = (event: MouseEvent) => {
-    this.moveLogo(event);
-  }
-
-  mouseMove = (event: MouseEvent) => {
-    this.moveLogo(event);
-  }
-
-  moveLogo(event:MouseEvent){
+  onMouseMove = (event: MouseEvent) => {
     var image = document.getElementById('logo-gif');
-    image.style.position = 'absolute';
-    image.style.top = event.clientY + 'px';
-    image.style.left = event.clientX + 'px';
+    if(image){
+      image.style.position = 'absolute';
+      image.style.top = (event.clientY - 50 ) + 'px';
+      image.style.left = (event.clientX - 500 ) + 'px';
+    }
   }
   
   shopObjects(){
@@ -265,6 +251,7 @@ export class CatacombComponent implements OnInit {
         });
     }
   }
+
   openShop(catacomb: any){
     this.selectedCatacombId = catacomb.user_id;
     this.selectedCatacombName = catacomb.name1 +' '+catacomb.surname;

@@ -17,7 +17,10 @@ export interface UserOptions {
 
 @Component({
   selector: 'app-graveyard',
-  templateUrl: './person-graveyard.component.html'
+  templateUrl: './person-graveyard.component.html',
+  host: {
+    '(document:mousemove)': 'onMouseMove($event)'
+  }
 })
 export class PersonGraveyardComponent implements OnInit {
   graves: User[] = [];
@@ -123,18 +126,6 @@ export class PersonGraveyardComponent implements OnInit {
           );
           break;
       }
-    });
-
-    let context = this;
-    window.addEventListener("load",function(){
-      let loadingBackground = document.querySelector('#content.loading-bg');
-
-      if(!loadingBackground)
-        return;
-
-      loadingBackground.addEventListener("mousemove", context.mouseMove);
-      loadingBackground.addEventListener("mouseup", context.mouseUp);
-      loadingBackground.addEventListener("mousedown", context.mouseDown); 
     });
   }
 
@@ -257,23 +248,13 @@ export class PersonGraveyardComponent implements OnInit {
       });
   }
 
-  mouseUp = (event: MouseEvent) => {
-    this.moveLogo(event);
-  }
-
-  mouseDown = (event: MouseEvent) => {
-    this.moveLogo(event);
-  }
-
-  mouseMove = (event: MouseEvent) => {
-    this.moveLogo(event);
-  }
-
-  moveLogo(event:MouseEvent){
+  onMouseMove = (event: MouseEvent) => {
     var image = document.getElementById('logo-gif');
-    image.style.position = 'absolute';
-    image.style.top = event.clientY + 'px';
-    image.style.left = event.clientX + 'px';
+    if(image){
+      image.style.position = 'absolute';
+      image.style.top = (event.clientY - 50 ) + 'px';
+      image.style.left = (event.clientX - 500 ) + 'px';
+    }
   }
 
   shopObjects(){

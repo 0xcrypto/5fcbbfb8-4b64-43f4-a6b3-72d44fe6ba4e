@@ -9,7 +9,10 @@ import { debug } from 'util';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html'
+  templateUrl: './home.component.html',
+  host: {
+    '(document:mousemove)': 'onMouseMove($event)'
+  }
 })
 export class HomeComponent implements OnInit {
   isGateOpen:boolean=false;
@@ -61,6 +64,14 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl('/pet-noticeboard');
   }
   
+  onMouseMove = (event: MouseEvent) => {
+    var image = document.getElementById('logo-gif');
+    if(image){
+      image.style.position = 'absolute';
+      image.style.top = (event.clientY - 50 ) + 'px';
+      image.style.left = (event.clientX - 500 ) + 'px';
+    }
+  }
 }
 
 
