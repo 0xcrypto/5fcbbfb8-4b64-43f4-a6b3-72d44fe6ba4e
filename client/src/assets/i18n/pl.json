@@ -1,5 +1,10 @@
 {
     "app.name" : "Wirtualny grób",
+    "app.message" : {
+        "problem_uploading_photo": "Problem z przesłaniem zdjęcia. Spróbuj ponownie później",
+        "add_comment_error": "Problem adding comment, Please try again later",
+        "add_object_error" : "Problem z obiektem zakupów. Spróbuj ponownie później"
+    },
     "header" : {
         "menu" : {
             "you_are_at": "Jesteś w",
@@ -18,7 +23,6 @@
             "select_language": "Wybierz język"
         }
     },
-
     "graveyard": {
         "noticeboard" : {
             "tabs" : {
@@ -457,6 +461,7 @@
         "of": "z",
         "prev": "Poprzedni",
         "next": "Kolejny",
+        "animal_not_exists": "Zwierzę nie istnieje",
         "step1": {
             "choose_graveyard": "Choose graveyard",
             "choose_grave": "Wybierz Grave",

@@ -32,9 +32,6 @@
                                 <span>{{(currentLang == 'en') ? object.desc_en : object.desc_pl}}&nbsp;-&nbsp;{{object.price}}&nbsp;{{object.currency}}</span>
                             </p>
                         </label>
-                        <label *ngIf="isItemAlreadyExists">
-                            <p style="font-size:11px;color:#f00" translate>shop.form.item_already_exists</p>
-                        </label>
                         <label>
                             <button type="button" class="align-left" (click)="CandleShoppingChange()">
                                 <span translate><i class="fa fa-backward"></i>&nbsp;&nbsp;shop.form.back</span>
@@ -94,9 +91,6 @@
                                 <input type="radio" [value]="object.id" (click)="onFlowerValidUpToDateChange(object.id);" name="selectedFlowerPrice">&nbsp;
                                 <span>{{(currentLang == 'en') ? object.desc_en : object.desc_pl}}&nbsp;-&nbsp;{{object.price}}&nbsp;{{object.currency}}</span>
                             </p>
-                        </label>
-                        <label *ngIf="isItemAlreadyExists">
-                            <p style="font-size:11px;color:#f00" translate>shop.form.item_already_exists</p>
                         </label>
                         <label>
                             <button type="button" class="align-left" (click)="FlowerShoppingChange()">
@@ -158,9 +152,6 @@
                                 <span>{{(currentLang == 'en') ? object.desc_en : object.desc_pl}}&nbsp;-&nbsp;{{object.price}}&nbsp;{{object.currency}}</span>
                             </p>
                         </label>
-                        <label *ngIf="isItemAlreadyExists">
-                            <p style="font-size:11px;color:#f00" translate>shop.form.item_already_exists</p>
-                        </label>
                         <label>
                             <button type="button" class="align-left" (click)="StoneShoppingChange()">
                                 <span translate><i class="fa fa-backward"></i>&nbsp;&nbsp;shop.form.back</span>
@@ -220,9 +211,6 @@
                                 <input type="radio" [value]="object.id" (click)="onOtherValidUpToDateChange(object.id);" name="selectedOtherPrice">&nbsp;
                                 <span>{{(currentLang == 'en') ? object.desc_en : object.desc_pl}}&nbsp;-&nbsp;{{object.price}}&nbsp;{{object.currency}}</span>
                             </p>
-                        </label>
-                        <label *ngIf="isItemAlreadyExists">
-                            <p style="font-size:11px;color:#f00" translate>shop.form.item_already_exists</p>
                         </label>
                         <label>
                             <button type="button" class="align-left" (click)="OtherShoppingChange()">

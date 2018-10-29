@@ -186,18 +186,18 @@
 						$result = $this->addPerson($options);
 					else if($method == 'ADD_PERSON_MULTI_GRAVES')
 						$result = $this->addMultigrave($options);
-					else if($method == 'ADD_ANIMAL')
-						$result = $this->addAnimal($options);
-					else if($method == 'ADD_ANIMAL_OBJECT')
-						$result = $this->addAnimalObject($options);
 					else if($method == 'ADD_PERSON_OBJECT')
 						$result = $this->addPersonObject($options);
-					else if($method == 'ADD_ANIMAL_TEMP_PHOTO')
-						$result = $this->addAnimalTemporaryPhoto($options, $files);
 					else if($method == 'ADD_PERSON_TEMP_PHOTO')
 						$result = $this->addPersonTemporaryPhoto($options, $files);
 					else if($method == 'PERSON_TEMP_PHOTOS_DELETE')
 							$results = $this->deleteAnimalTemporaryPhoto($options);
+					else if($method == 'ADD_ANIMAL')
+						$result = $this->addAnimal($options);
+					else if($method == 'ADD_ANIMAL_OBJECT')
+						$result = $this->addAnimalObject($options);
+					else if($method == 'ADD_ANIMAL_TEMP_PHOTO')
+						$result = $this->addAnimalTemporaryPhoto($options, $files);
 					else if($method == 'ANIMAL_TEMP_PHOTOS_DELETE')
 						$results = $this->deleteAnimalTemporaryPhoto($options);
 					break;
@@ -917,30 +917,37 @@
 		***/
 
 		private function addPersonComment($options = NULL){
+			$data = array();
 			$query="insert into users_comments (nick,body,user_id) values 
 			('".$options['nick']."','".$options['body']."',".$options['user_id'].");";    
-            Yii::app()->db->createCommand($query)->execute();
-			$data = array();
-
-			$data['status'] = 'USER_COMMENT_ADDED';
-			$data['comment_id'] = Yii::app()->db->getLastInsertID();
-
-            try{
+            
+			if(Yii::app()->db->createCommand($query)->execute()){
+				$data['status'] = 'USER_COMMENT_ADDED';
+				$data['comment_id'] = Yii::app()->db->getLastInsertID();
 				
-				$mail_to   = ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_TO'];
-				$mail_from = ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_FROM'];
-
-				$result = $this->MailContent('NEW_COMMENT', array('id'=>$options['user_id'], 
-				'nick'=>$options['nick'], 'body'=>$options['body'], 'grave_type'=>'person'));
-				$message  = wordwrap($result['message'], 100);          
-				$headers  = 'MIME-Version: 1.0' . "\r\n";
-				$headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
-				$headers .= 'From: '.$mail_from. "\r\n";
-
-				//TO-DO = Comment out for live server
-				//@mail($mail_to, $result['subject'], $message, $headers);
+				try{
+				
+					$mail_to   = ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_TO'];
+					$mail_from = ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_FROM'];
+	
+					$result = $this->MailContent('NEW_COMMENT', array('id'=>$options['user_id'], 
+					'nick'=>$options['nick'], 'body'=>$options['body'], 'grave_type'=>'person'));
+					$message  = wordwrap($result['message'], 100);          
+					$headers  = 'MIME-Version: 1.0' . "\r\n";
+					$headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
+					$headers .= 'From: '.$mail_from. "\r\n";
+	
+					//TO-DO = Comment out for live server
+					//@mail($mail_to, $result['subject'], $message, $headers);
+				}
+				catch(Exception $e){
+					$data['status'] = 'PERSON_COMMENT_ERROR';
+				}
 			}
-			catch(Exception $e){}
+			else{
+				$data['status'] = 'PERSON_COMMENT_ERROR';
+			}
+
             return $data;
 		}
 		
@@ -962,31 +969,37 @@
 				$query = "insert into animals_comments (nick, body, animal_id) 	
 				values ('".$options['nick']."',
 				'".$options['body']."',
-				'".$options['animal_id']."')";	
-				Yii::app()->db->createCommand($query)->execute();
+				'".$options['animal_id']."')";
+				if(Yii::app()->db->createCommand($query)->execute()){
+					$data['status'] = 'ANIMAL_COMMENT_ADDED';
+					$data['comment_id'] = Yii::app()->db->getLastInsertID();
+					try{
+						
+						$mail_to   = ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_TO'];
+						$mail_from = ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_FROM'];
 
-				$data['status'] = 'ANIMAL_COMMENT_ADDED';
-				$data['comment_id'] = Yii::app()->db->getLastInsertID();
+						$result = $this->MailContent('NEW_COMMENT', array('id'=>$options['animal_id'], 
+						'nick'=>$options['nick'], 'body'=>$options['body'], 'grave_type'=>'animal'));
+						$message  = wordwrap($result['message'], 100);          
+						$headers  = 'MIME-Version: 1.0' . "\r\n";
+						$headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
+						$headers .= 'From: '.$mail_from. "\r\n";
+
+						//TO-DO = Comment out for live server
+						//@mail($mail_to, $result['subject'], $message, $headers);
+					}
+					catch(Exception $e){
+						$data['status'] = 'ANIMAL_COMMENT_ERROR';
+					}
+						
+				}
+				else{
+					$data['status'] = 'ANIMAL_COMMENT_ERROR';
+				}
 			}
 			else{
 				$data['status']='ANIMAL_NOT_EXISTS';
 			}
-			try{
-				
-				$mail_to   = ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_TO'];
-				$mail_from = ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_FROM'];
-
-				$result = $this->MailContent('NEW_COMMENT', array('id'=>$options['animal_id'], 
-				'nick'=>$options['nick'], 'body'=>$options['body'], 'grave_type'=>'animal'));
-				$message  = wordwrap($result['message'], 100);          
-				$headers  = 'MIME-Version: 1.0' . "\r\n";
-				$headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
-				$headers .= 'From: '.$mail_from. "\r\n";
-
-				//TO-DO = Comment out for live server
-				//@mail($mail_to, $result['subject'], $message, $headers);
-			}
-			catch(Exception $e){}
 			
 			return $data;
 		}
@@ -1632,24 +1645,32 @@
 					'".$valid_upto."', '".$options['comment']."', '".$options['object_name']."', 
 					'".$payment_method."', '".$payment_id."', '".$current_language."')";
 					
-					Yii::app()->db->createCommand($query)->execute();
+					if(Yii::app()->db->createCommand($query)->execute()){
+						$data['status']= "ANIMAL_OBJECT_ADD_SUCCESS";
+						$data['object_id'] = Yii::app()->db->getLastInsertID();
+
+						try{
+							$sendfrom = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_FROM']);
+							$sendto = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_TO']);
+							$result = $this->MailContent('NEW_OBJECT', 
+							array('id'=>$options['animal_id'], 'object_name'=>$options['object_name'], 
+							'valid_upto'=>$valid_upto, 'comment'=>$options['comment'], 'grave_type'=>'animal'));
 					
-					$data['status']= "ANIMAL_OBJECT_ADD_SUCCESS";
-					$data['object_id'] = Yii::app()->db->getLastInsertID();
+							$message  = wordwrap(trim($result['message']), 100);			
+							$headers  = 'MIME-Version: 1.0' . "\r\n";
+							$headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
+							$headers .= 'From: '.$sendfrom. "\r\n";
 
-					$sendfrom = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_FROM']);
-					$sendto = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_TO']);
-					$result = $this->MailContent('NEW_OBJECT', 
-					array('id'=>$options['animal_id'], 'object_name'=>$options['object_name'], 
-					'valid_upto'=>$valid_upto, 'comment'=>$options['comment'], 'grave_type'=>'animal'));
-            
-					$message  = wordwrap(trim($result['message']), 100);			
-					$headers  = 'MIME-Version: 1.0' . "\r\n";
-					$headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
-					$headers .= 'From: '.$sendfrom. "\r\n";
-
-					//TO-DO = Comment out for live server
-					//@mail($sendto, $result['subject'], $message, $headers);
+							//TO-DO = Comment out for live server
+							//@mail($sendto, $result['subject'], $message, $headers);
+						}
+						catch(Exception $e){
+							$data['status'] = 'ANIMAL_OBJECT_ADD_ERROR';
+						}
+					}
+					else{
+						$data['status'] = 'ANIMAL_OBJECT_ADD_ERROR';
+					}
 				}
 				else{
 					$data['status'] = 'ANIMAL_NOT_EXISTS';
@@ -1699,24 +1720,32 @@
 				$options['buyer_id']."', '".$valid_upto."', '".$options['comment']."', 
 				'".$options['object_name']."', '".$payment_method."','".$payment_id."', '".$current_language."')";
 
-				Yii::app()->db->createCommand($query)->execute();
-
-				$data['status']= "PERSON_OBJECT_ADD_SUCCESS";
-				$data['object_id'] = Yii::app()->db->getLastInsertID();
-				$sendfrom = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_FROM']);
-				$sendto = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_TO']);
-				$result = $this->MailContent('NEW_OBJECT', array('id'=>$options['user_id'], 
-				'object_name'=>$options['object_name'], 'grave_type'=>'person',
-				'valid_upto'=>$valid_upto, 'comment'=>$options['comment']));
+				if(Yii::app()->db->createCommand($query)->execute()){
+					$data['status']= "PERSON_OBJECT_ADD_SUCCESS";
+					$data['object_id'] = Yii::app()->db->getLastInsertID();
+					
+					try{
+						$sendfrom = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_FROM']);
+						$sendto = trim(ApiController::PAYMENT_CONFIG['ADMIN_EMAIL_TO']);
+						$result = $this->MailContent('NEW_OBJECT', array('id'=>$options['user_id'], 
+						'object_name'=>$options['object_name'], 'grave_type'=>'person',
+						'valid_upto'=>$valid_upto, 'comment'=>$options['comment']));
+				
+						$message  = wordwrap(trim($result['message']), 100);			
+						$headers  = 'MIME-Version: 1.0' . "\r\n";
+						$headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
+						$headers .= 'From: '.$sendfrom. "\r\n";
 		
-				$message  = wordwrap(trim($result['message']), 100);			
-				$headers  = 'MIME-Version: 1.0' . "\r\n";
-				$headers .= 'Content-type: text/html; charset=iso-8859-2' . "\r\n";
-				$headers .= 'From: '.$sendfrom. "\r\n";
-
-				//TO-DO = Comment out for live server
-				//@mail($sendto, $result['subject'], $message, $headers);
-	
+						//TO-DO = Comment out for live server
+						//@mail($sendto, $result['subject'], $message, $headers);
+					}
+					catch(Exception $e){
+						$data['status']= "PERSON_OBJECT_ADD_ERROR";
+					}
+				}
+				else{
+					$data['status']= "PERSON_OBJECT_ADD_ERROR";
+				}
 			}
 			return $data;
 		}

@@ -36,7 +36,13 @@ export class TranslationService {
     { key: 'REGISTER_LOGIN_EXISTS', value: 'register.login_exists'}, 
     { key: 'REGISTER_SUCCESS', value: 'register.success'}, 
     { key: 'REGISTER_ERROR', value: 'register.error'}, 
-    { key: 'REGISTER_ACCEPT_TERMS', value: 'register.accept_terms'}
+    { key: 'REGISTER_ACCEPT_TERMS', value: 'register.accept_terms'},
+    { key: 'ANIMAL_NOT_EXISTS', value: 'animal_graveyard_burial.animal_not_exists'},
+    { key: 'ADD_COMMENT_ERROR', value: 'app.message.add_comment_error'},
+    { key: 'PROBLEM_UPLOADING_PHOTO', value: 'app.message.problem_uploading_photo'},
+    { key: 'ADD_OBJECT_ERROR', value: 'app.message.add_object_error'},
+    { key: 'ITEM_ALREADY_EXISTS', value: 'shop.form.item_already_exists'},
+    
 ];
 
   constructor(private translateService: TranslateService) { }

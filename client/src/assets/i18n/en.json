@@ -1,5 +1,10 @@
 {
     "app.name" : "Virtual Grave",
+    "app.message" : {
+        "problem_uploading_photo": "Problem uploading photo, Please try again later",
+        "add_comment_error": "Problem adding comment, Please try again later",
+        "add_object_error" : "Problem in shopping object, Please try again later"
+    },
     "header" : {
         "menu" : {
             "you_are_at": "You are at",
@@ -456,6 +461,7 @@
         "of": "of",
         "prev": "Previous",
         "next": "Next",
+        "animal_not_exists": "Pet not exists",
         "step1": {
             "choose_graveyard": "Choose graveyard",
             "choose_grave": "Choose Grave",

@@ -186,6 +186,7 @@ export class PersonNoticeboardComponent implements OnInit {
         this.loadSearchData(parameters);
       }
     }
+
     this.messageService.castMessage.subscribe(object => {
       
     });
@@ -234,7 +235,8 @@ export class PersonNoticeboardComponent implements OnInit {
   getGraveWithFirstname(alphabet: string){
     this.selectedDeadPage = 1;
     this.selectedDeadAlphabet = alphabet;
-    this.options = this._global.refreshObject(this.options, ['limit=15', 'position=0', 'order=user_id', 'firstname='+this.selectedDeadAlphabet, 'death_date=zmarli']);
+    this.options = this._global.refreshObject(this.options, ['limit=15', 'position=0', 'order=user_id', 'firstname='+this.selectedDeadAlphabet, 
+    'death_date=zmarli']);
     this.getGraves(this._global.serializeAndURIEncode(this.options));
   }
 
@@ -248,8 +250,7 @@ export class PersonNoticeboardComponent implements OnInit {
       parameters.push('firstname='+this.selectedDeadAlphabet);
 
     this.options = this._global.refreshObject(this.options, parameters);
-    
-      this.getGraves(this._global.serializeAndURIEncode(this.options));
+    this.getGraves(this._global.serializeAndURIEncode(this.options));
   }
 
   showAllGraves(){
@@ -369,8 +370,7 @@ export class PersonNoticeboardComponent implements OnInit {
 
     if(this.selectedTab == 'book-of-dead'){
       this.selectedDeadPage = 1;
-      let parameters = ['limit=15', 'position='+ (this.selectedDeadPage - 1),
-      'order=user_id', 'death_date=zmarli'];
+      let parameters = ['limit=15', 'position='+ (this.selectedDeadPage - 1), 'order=user_id', 'death_date=zmarli'];
       this.loadData(parameters);
     }
 
@@ -782,6 +782,11 @@ export class PersonNoticeboardComponent implements OnInit {
       
     this.dataService.uploadWithMethodAndOptions(formData, headers)
       .subscribe(result => {
+        if(result){
+          if(result['status'] == 'ERROR'){
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PROBLEM_UPLOADING_PHOTO' });
+          }
+        }
         this.graveyardBurialUploadedImages++;
         this.options = this._global.refreshObject(this.options, ['unique_id='+this.graveyardBurialUniqueId]);
         this.dataService.getAllWithMethodAndOptions('PERSON_TEMP_PHOTOS', this._global.serializeAndURIEncode(this.options))
@@ -1091,16 +1096,24 @@ export class PersonNoticeboardComponent implements OnInit {
       
     this.dataService.uploadWithMethodAndOptions(formData, headers)
       .subscribe(result => {
-        this.reservationUploadedImages++;
-        this.options = this._global.refreshObject(this.options, ['unique_id='+this.reservationUniqueId]);
-        this.dataService.getAllWithMethodAndOptions('PERSON_TEMP_PHOTOS', this._global.serializeAndURIEncode(this.options))
-        .subscribe(result => {
-          this.reservationImages = result;
-          for(let i=0;i<this.reservationImages.length;i++) {
-            this.reservationImages[i].is_portrait = (parseInt(this.reservationImages[i].is_portrait) == 1) ? true : false;
-            this.reservationImages[i].url = './assets/images/zdjecia/large/'+this.reservationImages[i].file_name;
+        if(result){
+          if(result['status'] == 'ERROR'){
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PROBLEM_UPLOADING_PHOTO' });
           }
-        });
+          else{
+            this.reservationUploadedImages++;
+            this.options = this._global.refreshObject(this.options, ['unique_id='+this.reservationUniqueId]);
+            this.dataService.getAllWithMethodAndOptions('PERSON_TEMP_PHOTOS', this._global.serializeAndURIEncode(this.options))
+            .subscribe(result => {
+              this.reservationImages = result;
+              for(let i=0;i<this.reservationImages.length;i++) {
+                this.reservationImages[i].is_portrait = (parseInt(this.reservationImages[i].is_portrait) == 1) ? true : false;
+                this.reservationImages[i].url = './assets/images/zdjecia/large/'+this.reservationImages[i].file_name;
+              }
+            });
+          }
+        }
+        
     });
   }
   

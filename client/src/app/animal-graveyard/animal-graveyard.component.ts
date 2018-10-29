@@ -63,6 +63,7 @@ export class AnimalGraveyardComponent implements OnInit {
     let position = +this.route.snapshot.paramMap.get('position');
     let scene = this.route.snapshot.paramMap.get('scene');
     let season = scene.split('_')[1];
+
     if(Number(season) == 2 || Number(season) == 3){
       this.isRainfallScene = true;
     }
@@ -72,6 +73,7 @@ export class AnimalGraveyardComponent implements OnInit {
     if(Number(season) == 3){
       this.isThunderstromScene = true;
     }
+
     this.skyImage = 'url(./assets/images/sky/'+this._global.getSkyImage(scene)+')';
     this.graveyardImage = 'url(./assets/images/graveyard-backgrounds/'+this._global.getAnimalGraveyardImage(scene)+')';
     if(this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY)){
@@ -81,6 +83,7 @@ export class AnimalGraveyardComponent implements OnInit {
     else{
       this.options = this._global.refreshObject(this.options, ['limit=10', 'position='+position, 'order=animal_id']);
     }
+
     this.dataService.getAllWithMethodAndOptions('ANIMALS', this._global.serializeAndURIEncode(this.options))
       .subscribe(animals => {
         this.animals = animals.reverse();
@@ -88,18 +91,18 @@ export class AnimalGraveyardComponent implements OnInit {
         this.graveyardStartPosition = ((this.totalAnimals - 2) * this.graveSize );
         for(let i=0; i<=animals.length-1;i++){
           //animals[i].graveUrl = 'url(./assets/images/animals/grob'+animals[i].grave_id+'_'+animals[i].grave_image+'.png)';
-          animals[i].graveUrl = 'url(./assets/images/graves/grob_zw1_'+animals[i].grave_image+'.png)';
+          animals[i].graveUrl = 'url(./assets/images/graves/grob_zw1_' + animals[i].grave_image + '.png)';
         }
-debugger;
+
         for(let i=0; i<=animals.length-1;i++){
           if(this.animals[i]['objects'].length > 0){
             this.animals[i]['objects'] = this.updateObjectImages(this.animals[i]['objects']);
           }
         }
 
-        debugger;
         this.isGraveyardLoading = false;
       });
+    
     this.selectedAnimalDetailTab = 'tab1';
 
     this.messageService.castMessage.subscribe(object => {
@@ -111,8 +114,10 @@ debugger;
           this.options = this._global.refreshObject(this.options, ['id='+ + data.id]);
           this.dataService.getAllWithMethodAndOptions('ANIMAL_OBJECTS', this._global.serializeAndURIEncode(this.options))
             .subscribe(result => {
-              this.objects = this.updateObjectImages(result);
-              this.updateAnimalObjects(this.objects, data.id);
+              if(result.length > 0){
+                this.objects = this.updateObjectImages(result);
+                this.updateAnimalObjects(this.objects, data.id);
+              }
             }
           );
           break;
@@ -131,7 +136,6 @@ debugger;
       loadingBackground.addEventListener("mousedown", context.mouseDown); 
     });
   }
-
 
   updateAnimalObjects(objects: any, id: any){
     var animal = this.animals.filter(animal => animal.animal_id == id)[0];
@@ -184,15 +188,18 @@ debugger;
     this.options = this._global.refreshObject(this.options, ['id='+animal.animal_id]);
     this.dataService.getAllWithMethodAndOptions('ANIMAL_DETAILS', this._global.serializeAndURIEncode(this.options))
       .subscribe(animals => {
-        this.animal = animals[0];
-        this.selectedAnimalName = this.animal.name +' '+this.animal.name2;
+        if(animals.length > 0){
+          this.animal = animals[0];
+          this.selectedAnimalName = this.animal.name +' '+this.animal.name2;
+        }
       }
     );
     
     this.options = this._global.refreshObject(this.options, ['id='+animal.animal_id]);
     this.dataService.getAllWithMethodAndOptions('ANIMAL_COMMENTS', this._global.serializeAndURIEncode(this.options))
       .subscribe(data => {
-        this.comments = data;
+        if(data.length > 0)
+          this.comments = data;
       }
     );
 
@@ -207,51 +214,72 @@ debugger;
     this.options = this._global.refreshObject(this.options, ['id='+animal.animal_id]);
     this.dataService.getAllWithMethodAndOptions('ANIMAL_OBJECTS', this._global.serializeAndURIEncode(this.options))
       .subscribe(data => {
-        this.objects = this.updateObjectImages(data);
+        if(data.length > 0 )
+          this.objects = this.updateObjectImages(data);
       }
     );
   }
+  
   closeDetails(): void{
     this.isGraveDetailsOpen = false;
   }
+
   openTab(tabName:string):void{
     this.selectedAnimalDetailTab = tabName;
   }
+
   openRememberanceForm(){
     this.isRemeberanceFormOpen = true;
   }
+
   closeRememberanceForm(){
     this.isRemeberanceFormOpen = false;
   }
+
   addCondolence(){
-    this.options = this._global.refreshObject(this.options, ['nick='+this.condolenceSignature, 
-    'body='+this.condolenceMessage, 'animal_id='+this.selectedAnimalId, 'method=ANIMAL_COMMENT']);
+    this.options = this._global.refreshObject(this.options, ['method=ANIMAL_COMMENT', 'nick='+this.condolenceSignature, 
+    'body='+this.condolenceMessage, 'animal_id='+this.selectedAnimalId]);
     this.dataService.createWithMethodAndOptions(this.options)
       .subscribe(result => {
-        this.options = this._global.refreshObject(this.options, ['id='+this.selectedAnimalId]);
-        this.dataService.getAllWithMethodAndOptions('ANIMAL_COMMENTS', this._global.serializeAndURIEncode(this.options))
-          .subscribe(comments => {
-            this.comments = comments;
-            this.isRemeberanceFormOpen = false;
+        if(result){
+          if(result['status'] == 'ANIMAL_NOT_EXISTS'){
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ANIMAL_NOT_EXISTS' });
           }
-        );
+          else if(result['status'] == 'ANIMAL_COMMENT_ERROR'){
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ADD_COMMENT_ERROR' });
+          }
+          else{
+            this.options = this._global.refreshObject(this.options, ['id='+this.selectedAnimalId]);
+            this.dataService.getAllWithMethodAndOptions('ANIMAL_COMMENTS', this._global.serializeAndURIEncode(this.options))
+              .subscribe(comments => {
+                this.comments = comments;
+                this.isRemeberanceFormOpen = false;
+              }
+            );
+          }
+        }
       });
   }
+
   mouseUp = (event: MouseEvent) => {
     this.moveLogo(event);
   }
+
   mouseDown = (event: MouseEvent) => {
     this.moveLogo(event);
   }
+
   mouseMove = (event: MouseEvent) => {
     this.moveLogo(event);
   }
+
   moveLogo(event:MouseEvent){
     var image = document.getElementById('logo-gif');
     image.style.position = 'absolute';
     image.style.top = event.clientY + 'px';
     image.style.left = event.clientX + 'px';
   }
+
   shopObjects(){
     if(this.selectedAnimalId){
       this.messageService.sendMessage('OPEN_SHOP', {
@@ -260,6 +288,7 @@ debugger;
         });
     }
   }
+  
   openShop(animal: any){
     this.selectedAnimalId = animal.animal_id;
     this.selectedAnimalName = animal.name +' '+animal.name2;

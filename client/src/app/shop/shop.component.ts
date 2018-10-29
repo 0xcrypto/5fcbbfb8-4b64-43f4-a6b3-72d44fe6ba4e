@@ -361,8 +361,11 @@ export class ShopComponent implements OnInit {
         'current_language='+this.currentLang, 'method=ADD_PERSON_OBJECT']);
         this.dataService.createWithMethodAndOptions(this.options)
           .subscribe(result => {
-            if(result['status'] && result['status'] == 'PERSON_OBJECT_ALREADY_EXISTS'){
-              this.isItemAlreadyExists = true;
+            if(result['status'] && result['status'] == 'PERSON_OBJECT_ADD_ERROR'){
+              this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ADD_OBJECT_ERROR' });
+            }
+            else if(result['status'] && result['status'] == 'PERSON_OBJECT_ALREADY_EXISTS'){
+              this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ITEM_ALREADY_EXISTS' });
             }
 
             this.closeShop();
@@ -378,11 +381,14 @@ export class ShopComponent implements OnInit {
         'current_language='+this.currentLang, 'method=ADD_ANIMAL_OBJECT']);
         this.dataService.createWithMethodAndOptions(this.options)
           .subscribe(result => {
-            if(result['status'] && result['status'] == 'ANIMAL_OBJECT_ALREADY_EXISTS'){
-              this.isItemAlreadyExists = true;
+            if(result['status'] && result['status'] == 'ANIMAL_OBJECT_ADD_ERROR'){
+              this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ADD_OBJECT_ERROR' });
             }
-            if(result['status'] && result['status'] == 'ANIMAL_NOT_EXISTS'){
-              alert('Animal not exists');
+            else if(result['status'] && result['status'] == 'ANIMAL_OBJECT_ALREADY_EXISTS'){
+              this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ITEM_ALREADY_EXISTS' });
+            }
+            else if(result['status'] && result['status'] == 'ANIMAL_NOT_EXISTS'){
+              this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ANIMAL_NOT_EXISTS' });
             }
             
             this.closeShop();
@@ -398,9 +404,13 @@ export class ShopComponent implements OnInit {
         'current_language='+this.currentLang, 'method=ADD_PERSON_OBJECT']);
         this.dataService.createWithMethodAndOptions(this.options)
           .subscribe(result => {
-            if(result['status'] && result['status'] == 'PERSON_OBJECT_ALREADY_EXISTS')
-              this.isItemAlreadyExists = true;
-            
+            if(result['status'] && result['status'] == 'PERSON_OBJECT_ADD_ERROR'){
+              this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ADD_OBJECT_ERROR' });
+            }
+            else if(result['status'] && result['status'] == 'PERSON_OBJECT_ALREADY_EXISTS'){
+              this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ITEM_ALREADY_EXISTS' });
+            }
+
             this.closeShop();
             this.messageService.sendMessage('RELOAD_CATACOMB_OBJECTS', {'id': this.selectedGraveId});
           });

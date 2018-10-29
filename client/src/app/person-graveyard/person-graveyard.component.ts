@@ -64,6 +64,7 @@ export class PersonGraveyardComponent implements OnInit {
     let position = +this.route.snapshot.paramMap.get('position');
     let scene = this.route.snapshot.paramMap.get('scene');
     let season = scene.split('_')[1];
+
     if(Number(season) == 2 || Number(season) == 3){
       this.isRainfallScene = true;
     }
@@ -73,6 +74,7 @@ export class PersonGraveyardComponent implements OnInit {
     if(Number(season) == 3){
       this.isThunderstromScene = true;
     }
+
     this.skyImage = 'url(./assets/images/sky/'+this._global.getSkyImage(scene)+')';
     this.graveyardImage = 'url(./assets/images/graveyard-backgrounds/'+this._global.getGraveyardImage(scene)+')';
     if(this.localStorageService.get(this._global.GRAVEYARD_OPTIONS_KEY)){
@@ -84,23 +86,24 @@ export class PersonGraveyardComponent implements OnInit {
     }
 
     this.dataService.getAllWithMethodAndOptions('PERSONS', this._global.serializeAndURIEncode(this.options))
-      .subscribe(graves => {
-        this.graves = graves.reverse();
-        this.totalGraves = graves.length;
-        this.graveyardStartPosition = ((this.totalGraves - 2) * this.graveSize );
-        for(let i=0; i<=graves.length-1;i++){
-          //graves[i].graveUrl = 'url(./assets/images/graves/grob'+graves[i].grave_id+'_'+graves[i].grave_image+'.png)';
-          graves[i].graveUrl = 'url(./assets/images/graves/grob1_'+graves[i].grave_image+'.png)';
-        }
+    .subscribe(graves => {
+      this.graves = graves.reverse();
+      this.totalGraves = graves.length;
+      this.graveyardStartPosition = ((this.totalGraves - 2) * this.graveSize );
+      for(let i=0; i<=graves.length-1;i++){
+        //graves[i].graveUrl = 'url(./assets/images/graves/grob'+graves[i].grave_id+'_'+graves[i].grave_image+'.png)';
+        graves[i].graveUrl = 'url(./assets/images/graves/grob1_'+graves[i].grave_image+'.png)';
+      }
 
-        for(let i=0; i<=graves.length-1;i++){
-          if(this.graves[i]['objects'].length > 0){
-            this.graves[i]['objects'] = this.updateObjectImages(this.graves[i]['objects']);
-          }
+      for(let i=0; i<=graves.length-1;i++){
+        if(this.graves[i]['objects'].length > 0){
+          this.graves[i]['objects'] = this.updateObjectImages(this.graves[i]['objects']);
         }
+      }
 
-        this.isGraveyardLoading = false;
-      });
+      this.isGraveyardLoading = false;
+    });
+
     this.selectedGraveDetailTab = 'tab1';
     
     this.messageService.castMessage.subscribe(object => {
@@ -112,8 +115,10 @@ export class PersonGraveyardComponent implements OnInit {
           this.options = this._global.refreshObject(this.options, ['user_id=' + data.id]);
           this.dataService.getAllWithMethodAndOptions('PERSON_OBJECTS', this._global.serializeAndURIEncode(this.options))
             .subscribe(result => {
-              this.objects = this.updateObjectImages(result);
-              this.updateGraveObjects(this.objects, data.id);
+              if(result.length > 0){
+                this.objects = this.updateObjectImages(result);
+                this.updateGraveObjects(this.objects, data.id);
+              }
             }
           );
           break;
@@ -174,9 +179,6 @@ export class PersonGraveyardComponent implements OnInit {
     this.graveyardStartPosition += this.graveSize;
   }
 
-  getGraves(param: string): void {
-    
-  }
   showGraveDetails(grave:any): void{
     this.selectedGraveId = grave.user_id;
     this.isGraveDetailsOpen = true;
@@ -195,7 +197,8 @@ export class PersonGraveyardComponent implements OnInit {
     this.options = this._global.refreshObject(this.options, ['user_id='+grave.user_id]);
     this.dataService.getAllWithMethodAndOptions('PERSON_COMMENTS', this._global.serializeAndURIEncode(this.options))
       .subscribe(data => {
-        this.comments = data;
+        if(data.length > 0)
+          this.comments = data;
       }
     );
 
@@ -210,51 +213,69 @@ export class PersonGraveyardComponent implements OnInit {
     this.options = this._global.refreshObject(this.options, ['user_id='+grave.user_id]);
     this.dataService.getAllWithMethodAndOptions('PERSON_OBJECTS', this._global.serializeAndURIEncode(this.options))
       .subscribe(data => {
-        this.objects = this.updateObjectImages(data);
+        if(data.length > 0)
+          this.objects = this.updateObjectImages(data);
       }
     );
   }
+
   closeDetails(): void{
     this.isGraveDetailsOpen = false;
   }
+
   openTab(tabName:string):void{
     this.selectedGraveDetailTab = tabName;
   }
+
   openRememberanceForm(){
     this.isRemeberanceFormOpen = true;
   }
+
   closeRememberanceForm(){
     this.isRemeberanceFormOpen = false;
   }
+
   addCondolence(){
-    this.options = this._global.refreshObject(this.options, ['nick='+this.condolenceSignature, 
-    'body='+this.condolenceMessage, 'user_id='+this.selectedGraveId, 'method=PERSON_COMMENT']);
+    this.options = this._global.refreshObject(this.options, ['nick='+this.condolenceSignature, 'body='+this.condolenceMessage, 
+    'user_id='+this.selectedGraveId, 'method=PERSON_COMMENT']);
     this.dataService.createWithMethodAndOptions(this.options)
       .subscribe(result => {
-        this.options = this._global.refreshObject(this.options, ['user_id='+this.selectedGraveId]);
-        this.dataService.getAllWithMethodAndOptions('PERSON_COMMENTS', this._global.serializeAndURIEncode(this.options))
-          .subscribe(comments => {
-            this.comments = comments;
-            this.isRemeberanceFormOpen = false;
+        if(result){
+          if(result['status'] == 'PERSON_COMMENT_ERROR'){
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ADD_COMMENT_ERROR' });
           }
-        );
+          else{
+            this.options = this._global.refreshObject(this.options, ['user_id='+this.selectedGraveId]);
+            this.dataService.getAllWithMethodAndOptions('PERSON_COMMENTS', this._global.serializeAndURIEncode(this.options))
+              .subscribe(comments => {
+                this.comments = comments;
+                this.isRemeberanceFormOpen = false;
+              }
+            );
+          }
+        }
       });
   }
+
   mouseUp = (event: MouseEvent) => {
     this.moveLogo(event);
   }
+
   mouseDown = (event: MouseEvent) => {
     this.moveLogo(event);
   }
+
   mouseMove = (event: MouseEvent) => {
     this.moveLogo(event);
   }
+
   moveLogo(event:MouseEvent){
     var image = document.getElementById('logo-gif');
     image.style.position = 'absolute';
     image.style.top = event.clientY + 'px';
     image.style.left = event.clientX + 'px';
   }
+
   shopObjects(){
     if(this.selectedGraveId){
       this.messageService.sendMessage('OPEN_SHOP', {
@@ -263,6 +284,7 @@ export class PersonGraveyardComponent implements OnInit {
         });
     }
   }
+  
   openShop(grave: any){
     this.selectedGraveId = grave.user_id;
     this.selectedGraveName = grave.name1 +' '+grave.surname;

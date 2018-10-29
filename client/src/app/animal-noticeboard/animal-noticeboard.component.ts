@@ -121,13 +121,15 @@ export class AnimalNoticeboardComponent implements OnInit {
     this.options = this._global.refreshObject(this.options, []);
     this.dataService.getAllWithMethodAndOptions('ANIMAL_TYPES', this._global.serializeAndURIEncode(this.options))
     .subscribe(result => {
-      this.graveyardBurialAnimalGenusList = result;
+      if(result.length > 0)
+        this.graveyardBurialAnimalGenusList = result;
     });
 
     this.options = this._global.refreshObject(this.options, ['type=animal_grave']);
     this.dataService.getAllWithMethodAndOptions('PRICES', this._global.serializeAndURIEncode(this.options))
-      .subscribe(data => {
-        this.graveBurialPrice = parseFloat(data[0].price);
+      .subscribe(result => {
+        if(result.length > 0)
+          this.graveBurialPrice = parseFloat(result[0].price);
       }
     );
 
@@ -145,6 +147,10 @@ export class AnimalNoticeboardComponent implements OnInit {
         this.loadSearchData(parameters);
       }
     }
+    
+    this.messageService.castMessage.subscribe(object => {
+      
+    });
   }
 
   loadingAnimal(animal:any, returnTab:string){
@@ -192,8 +198,7 @@ export class AnimalNoticeboardComponent implements OnInit {
   getAnimalsWithPageNumber(pageNumber: number){
     this.selectedAnimalPage = pageNumber;
     
-    var parameters = ['position='+ (this.selectedAnimalPage - 1),
-    'order=animal_id'];
+    var parameters = ['position='+ (this.selectedAnimalPage - 1), 'order=animal_id'];
 
     if(this.selectedAnimalAlphabet)
       parameters.push('firstname='+this.selectedAnimalAlphabet);
@@ -205,8 +210,7 @@ export class AnimalNoticeboardComponent implements OnInit {
 
   showAllAnimals(){
     this.selectedAnimalPage = 1;
-    this.options = this._global.refreshObject(this.options, ['position='+ (this.selectedAnimalPage - 1),
-     'order=animal_id']);
+    this.options = this._global.refreshObject(this.options, ['position='+ (this.selectedAnimalPage - 1), 'order=animal_id']);
     this.getAnimals(this._global.serializeAndURIEncode(this.options));
   }
 
@@ -215,8 +219,7 @@ export class AnimalNoticeboardComponent implements OnInit {
       return;
     
       this.selectedAnimalPage++;
-      this.options = this._global.refreshObject(this.options, ['position='+ (this.selectedAnimalPage - 1),
-      'order=animal_id']);
+      this.options = this._global.refreshObject(this.options, ['position='+ (this.selectedAnimalPage - 1), 'order=animal_id']);
       this.getAnimals(this._global.serializeAndURIEncode(this.options));
   }
 
@@ -225,23 +228,20 @@ export class AnimalNoticeboardComponent implements OnInit {
       return;
 
       this.selectedAnimalPage--;
-      this.options = this._global.refreshObject(this.options, ['position='+ (this.selectedAnimalPage - 1),
-      'order=animal_id']);
+      this.options = this._global.refreshObject(this.options, ['position='+ (this.selectedAnimalPage - 1), 'order=animal_id']);
       this.getAnimals(this._global.serializeAndURIEncode(this.options));
   }
 
   searchAnimalsWithFirstname(alphabet: string){
     this.selectedSearchedAnimalPage = 1;
     this.selectedSearchedAnimalAlphabet = alphabet;
-    this.searchOptions = this._global.refreshObject(this.searchOptions, ['order=animal_id', 
-    'firstname='+this.selectedSearchedAnimalAlphabet]);
+    this.searchOptions = this._global.refreshObject(this.searchOptions, ['order=animal_id', 'firstname='+this.selectedSearchedAnimalAlphabet]);
     this.searchAnimals(this._global.serializeAndURIEncode(this.searchOptions));
   }
 
   searchAnimalsWithPageNumber(pageNumber: number){
     this.selectedSearchedAnimalPage = pageNumber;
-    var parameters = ['position='+(this.selectedSearchedAnimalPage - 1),
-    'order=animal_id'];
+    var parameters = ['position='+(this.selectedSearchedAnimalPage - 1), 'order=animal_id'];
 
     if(this.selectedSearchedAnimalAlphabet)
       parameters.push('firstname='+this.selectedSearchedAnimalAlphabet);
@@ -252,8 +252,7 @@ export class AnimalNoticeboardComponent implements OnInit {
 
   searchAllAnimals(){
     this.selectedSearchedAnimalPage = 1;
-    this.searchOptions = this._global.refreshObject(this.searchOptions, ['position='+(this.selectedSearchedAnimalPage - 1),
-      'order=animal_id']);
+    this.searchOptions = this._global.refreshObject(this.searchOptions, ['position='+(this.selectedSearchedAnimalPage - 1), 'order=animal_id']);
     this.searchAnimals(this._global.serializeAndURIEncode(this.searchOptions));
   }
 
@@ -262,8 +261,7 @@ export class AnimalNoticeboardComponent implements OnInit {
       return;
 
     this.selectedSearchedAnimalPage++;
-    this.searchOptions = this._global.refreshObject(this.searchOptions, ['position='+(this.selectedSearchedAnimalPage - 1),
-      'order=animal_id']);
+    this.searchOptions = this._global.refreshObject(this.searchOptions, ['position='+(this.selectedSearchedAnimalPage - 1), 'order=animal_id']);
     this.searchAnimals(this._global.serializeAndURIEncode(this.searchOptions));
   }
 
@@ -272,8 +270,7 @@ export class AnimalNoticeboardComponent implements OnInit {
       return;
     
     this.selectedSearchedAnimalPage--;
-    this.searchOptions = this._global.refreshObject(this.searchOptions, ['position='+(this.selectedSearchedAnimalPage - 1),
-      'order=animal_id']);
+    this.searchOptions = this._global.refreshObject(this.searchOptions, ['position='+(this.selectedSearchedAnimalPage - 1), 'order=animal_id']);
     this.searchAnimals(this._global.serializeAndURIEncode(this.searchOptions));
   }
   
@@ -597,16 +594,23 @@ export class AnimalNoticeboardComponent implements OnInit {
       
     this.dataService.uploadWithMethodAndOptions(formData, headers)
       .subscribe(result => {
-        this.graveyardBurialUploadedImages++;
-        this.options = this._global.refreshObject(this.options, ['unique_id='+this.graveyardBurialUniqueId]);
-        this.dataService.getAllWithMethodAndOptions('ANIMAL_TEMP_PHOTOS', this._global.serializeAndURIEncode(this.options))
-        .subscribe(result => {
-          this.graveyardBurialImages = result;
-          for(let i=0;i<this.graveyardBurialImages.length;i++) {
-            this.graveyardBurialImages[i].is_portrait = (parseInt(this.graveyardBurialImages[i].is_portrait) == 1) ? true : false;
-            this.graveyardBurialImages[i].url = './assets/images/zdjecia/large/'+this.graveyardBurialImages[i].file_name;
+        if(result){
+          if(result['status']== 'ERROR'){
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PROBLEM_UPLOADING_PHOTO' });
           }
-        });
+          else{
+            this.graveyardBurialUploadedImages++;
+            this.options = this._global.refreshObject(this.options, ['unique_id='+this.graveyardBurialUniqueId]);
+            this.dataService.getAllWithMethodAndOptions('ANIMAL_TEMP_PHOTOS', this._global.serializeAndURIEncode(this.options))
+            .subscribe(result => {
+              this.graveyardBurialImages = result;
+              for(let i=0;i<this.graveyardBurialImages.length;i++) {
+                this.graveyardBurialImages[i].is_portrait = (parseInt(this.graveyardBurialImages[i].is_portrait) == 1) ? true : false;
+                this.graveyardBurialImages[i].url = './assets/images/zdjecia/large/'+this.graveyardBurialImages[i].file_name;
+              }
+            });
+          }
+        }
     });
   }
 

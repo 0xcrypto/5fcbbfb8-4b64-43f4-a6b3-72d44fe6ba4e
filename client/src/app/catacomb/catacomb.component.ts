@@ -82,22 +82,24 @@ export class CatacombComponent implements OnInit {
         this.isCatacombsLoading = false;
       });
 
-      this.messageService.castMessage.subscribe(object => {
-        let message = object.message;
-        let data = object.data;
-  
-        switch(message){
-          case "RELOAD_CATACOMB_OBJECTS":
-            this.options = this._global.refreshObject(this.options, ['user_id=' + data.id]);
-            this.dataService.getAllWithMethodAndOptions('PERSON_OBJECTS', this._global.serializeAndURIEncode(this.options))
-              .subscribe(result => {
+    this.messageService.castMessage.subscribe(object => {
+      let message = object.message;
+      let data = object.data;
+
+      switch(message){
+        case "RELOAD_CATACOMB_OBJECTS":
+          this.options = this._global.refreshObject(this.options, ['user_id=' + data.id]);
+          this.dataService.getAllWithMethodAndOptions('PERSON_OBJECTS', this._global.serializeAndURIEncode(this.options))
+            .subscribe(result => {
+              if(result.length > 0){
                 this.objects = this.updateObjectImages(result);
                 this.updateCatabombObjects(this.objects, data.id);
               }
-            );
-            break;
-        }
-      });
+            }
+          );
+          break;
+      }
+    });
 
     this.currentLang = this._global.getLanguage();
     let context = this;
@@ -158,6 +160,7 @@ export class CatacombComponent implements OnInit {
       }, 3000);
     }, 3000);
   }
+
   showCatacombDetails(catacomb:any): void{
     this.selectedCatacombId = catacomb.user_id;
     this.isCatacombDetailsOpen = true;
@@ -176,67 +179,84 @@ export class CatacombComponent implements OnInit {
     this.options = this._global.refreshObject(this.options, ['user_id='+catacomb.user_id]);
     this.dataService.getAllWithMethodAndOptions('PERSON_COMMENTS', this._global.serializeAndURIEncode(this.options))
       .subscribe(data => {
-        this.comments = data;
+        if(data.length > 0)
+          this.comments = data;
       }
     );
 
     this.options = this._global.refreshObject(this.options, ['user_id='+catacomb.user_id]);
     this.dataService.getAllWithMethodAndOptions('PERSON_PHOTOS', this._global.serializeAndURIEncode(this.options))
       .subscribe(data => {
-        if(data && data.length > 0){
+        if(data.length > 0)
           this.catacombUserImage = './assets/images/zdjecia/large/'+data[0].file_name;
-        }
-      }
-    );
+      });
 
     this.options = this._global.refreshObject(this.options, ['user_id='+catacomb.user_id]);
     this.dataService.getAllWithMethodAndOptions('PERSON_OBJECTS', this._global.serializeAndURIEncode(this.options))
       .subscribe(data => {
-        this.objects = this.updateObjectImages(data);
+        if(data.length > 0)
+          this.objects = this.updateObjectImages(data);
       }
     );
   }
+
   closeDetails(): void{
     this.isCatacombDetailsOpen = false;
   }
+
   openTab(tabName:string):void{
     this.selectedCatacombDetailTab = tabName;
   }
+
   openRememberanceForm(){
     this.isRemeberanceFormOpen = true;
   }
+
   closeRememberanceForm(){
     this.isRemeberanceFormOpen = false;
   }
+
   addCondolence(){
     this.options = this._global.refreshObject(this.options, ['nick='+this.condolenceSignature, 
-    'body='+this.condolenceMessage, 'user_id='+this.selectedCatacombId, 'method=COMMENT']);
+    'body='+this.condolenceMessage, 'user_id='+this.selectedCatacombId, 'method=PERSON_COMMENT']);
     this.dataService.createWithMethodAndOptions(this.options)
       .subscribe(result => {
-        this.options = this._global.refreshObject(this.options, ['user_id='+this.selectedCatacombId]);
-        this.dataService.getAllWithMethodAndOptions('PERSON_COMMENTS', this._global.serializeAndURIEncode(this.options))
-          .subscribe(comments => {
-            this.comments = comments;
-            this.isRemeberanceFormOpen = false;
+        if(result){
+          if(result['status'] == 'PERSON_COMMENT_ERROR'){
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ADD_COMMENT_ERROR' });
           }
-        );
+          else{
+            this.options = this._global.refreshObject(this.options, ['user_id='+this.selectedCatacombId]);
+            this.dataService.getAllWithMethodAndOptions('PERSON_COMMENTS', this._global.serializeAndURIEncode(this.options))
+              .subscribe(comments => {
+                this.comments = comments;
+                this.isRemeberanceFormOpen = false;
+              }
+            );
+          }
+        }
       });
   }
+
   mouseUp = (event: MouseEvent) => {
     this.moveLogo(event);
   }
+
   mouseDown = (event: MouseEvent) => {
     this.moveLogo(event);
   }
+
   mouseMove = (event: MouseEvent) => {
     this.moveLogo(event);
   }
+
   moveLogo(event:MouseEvent){
     var image = document.getElementById('logo-gif');
     image.style.position = 'absolute';
     image.style.top = event.clientY + 'px';
     image.style.left = event.clientX + 'px';
   }
+  
   shopObjects(){
     if(this.selectedCatacombId){
       this.messageService.sendMessage('OPEN_SHOP', {
