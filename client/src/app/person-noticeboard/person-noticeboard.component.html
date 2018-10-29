@@ -846,51 +846,57 @@
         <li>
             <label translate>graveyard.loading_screen.day</label>
             <button class="day" 
-            [style.backgroundImage]="'url('+ imageService.getImage('assets/images/day.png') +')'" 
-            (click)="setSceneTime(1);" [ngClass]="{'active': (selectedSceneTime == 1) }"><span></span></button>
+            [ngStyle]="{'background-image': (selectedSceneTime == 1) ? 'url('+ imageService.getImage('assets/images/day-active.png') +')' : 
+            'url('+ imageService.getImage('assets/images/day.png') +')' }" (click)="setSceneTime(1);"
+             [ngClass]="{'active': (selectedSceneTime == 1) }"><span></span></button>
         </li>
         <li>
             <label translate>graveyard.loading_screen.night</label>
             <button class="night" 
-            [style.backgroundImage]="'url('+ imageService.getImage('assets/images/night.png') +')'" 
-            (click)="setSceneTime(2);" [ngClass]="{'active': (selectedSceneTime == 2) }"><span></span></button>
+            [ngStyle]="{'background-image': (selectedSceneTime == 2) ? 'url('+ imageService.getImage('assets/images/night-active.png') +')' : 
+            'url('+ imageService.getImage('assets/images/night.png') +')' }" (click)="setSceneTime(2);" 
+            [ngClass]="{'active': (selectedSceneTime == 2) }"><span></span></button>
         </li>
         <li class="seperator"></li>
         <li>
             <label translate>graveyard.loading_screen.blue_sky</label>
             <button class="blue-sky" 
-            [style.backgroundImage]="'url('+ imageService.getImage('assets/images/blue-sky.png') +')'" 
-            (click)="setSceneSeason(1);" [ngClass]="{'active': (selectedSceneSeason == 1) }"><span></span></button>
+            [ngStyle]="{'background-image': (selectedSceneSeason == 1) ? 'url('+ imageService.getImage('assets/images/blue-sky-active.png') +')' : 
+            'url('+ imageService.getImage('assets/images/blue-sky.png') +')' }" (click)="setSceneSeason(1);" 
+            [ngClass]="{'active': (selectedSceneSeason == 1) }"><span></span></button>
         </li>
         <li>
             <label translate>graveyard.loading_screen.rain</label>
             <button class="rain" 
-            [style.backgroundImage]="'url('+ imageService.getImage('assets/images/rain.png') +')'" 
-            (click)="setSceneSeason(2);" [ngClass]="{'active': (selectedSceneSeason == 2) }"><span></span></button>
+            [ngStyle]="{'background-image': (selectedSceneSeason == 2) ? 'url('+ imageService.getImage('assets/images/rain-active.png') +')' : 
+            'url('+ imageService.getImage('assets/images/rain.png') +')' }" (click)="setSceneSeason(2);" 
+            [ngClass]="{'active': (selectedSceneSeason == 2) }"><span></span></button>
         </li>
         <li>
             <label translate>graveyard.loading_screen.thunder_strom</label>
             <button class="thunder-strom" 
-            [style.backgroundImage]="'url('+ imageService.getImage('assets/images/thunder-strom.png') +')'" 
-            (click)="setSceneSeason(3);" [ngClass]="{'active': (selectedSceneSeason == 3) }"><span></span></button>
+            [ngStyle]="{'background-image': (selectedSceneSeason == 3) ? 'url('+ imageService.getImage('assets/images/thunder-strom-active.png') +')' : 
+            'url('+ imageService.getImage('assets/images/thunder-strom.png') +')' }" (click)="setSceneSeason(3);" 
+            [ngClass]="{'active': (selectedSceneSeason == 3) }"><span></span></button>
         </li>
         <li>
             <label translate>graveyard.loading_screen.snow</label>
             <button class="snow" 
-            [style.backgroundImage]="'url('+ imageService.getImage('assets/images/snow.png') +')'" 
-            (click)="setSceneSeason(4);" [ngClass]="{'active': (selectedSceneSeason == 4) }"><span></span></button>
+            [ngStyle]="{'background-image': (selectedSceneSeason == 4) ? 'url('+ imageService.getImage('assets/images/snow-active.png') +')' : 
+            'url('+ imageService.getImage('assets/images/snow.png') +')' }" (click)="setSceneSeason(4);" 
+            [ngClass]="{'active': (selectedSceneSeason == 4) }"><span></span></button>
         </li>
         <li class="seperator"></li>
         <li>
             <label translate>graveyard.loading_screen.random</label>
             <button class="random" 
-            [style.backgroundImage]="'url('+ imageService.getImage('assets/images/random.png') +')'" 
-            (click)="randomSceneSelection();" [ngClass]="{'active': isRandomSceneSelected }"><span></span></button>
+            [ngStyle]="{'background-image': isRandomSceneSelected ? 'url('+ imageService.getImage('assets/images/random-active.png') +')' : 
+            'url('+ imageService.getImage('assets/images/random.png') +')' }"  (click)="randomSceneSelection();" 
+            [ngClass]="{'active': isRandomSceneSelected }"><span></span></button>
         </li>
         <li>
             <label>&nbsp;</label>
-            <button class="ok" 
-            [style.backgroundImage]="'url('+ imageService.getImage('assets/images/ok.png') +')'" 
+            <button class="ok" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/ok.png') +')'" 
              (click)="showGraveyard();"></button>
         </li>
     </ul>
