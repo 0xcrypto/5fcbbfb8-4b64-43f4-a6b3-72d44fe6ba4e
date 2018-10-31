@@ -77,7 +77,6 @@ export class PersonGraveyardComponent implements OnInit {
     if(Number(season) == 3){
       this.isThunderstromScene = true;
     }
-
     this.skyImage = 'url(./assets/images/sky/'+this._global.getSkyImage(scene)+')';
     this.graveyardImage = 'url(./assets/images/graveyard-backgrounds/'+this._global.getGraveyardImage(scene)+')';
     if(this.localStorageService.get(this._global.GRAVEYARD_OPTIONS_KEY)){
@@ -90,12 +89,20 @@ export class PersonGraveyardComponent implements OnInit {
 
     this.dataService.getAllWithMethodAndOptions('PERSONS', this._global.serializeAndURIEncode(this.options))
     .subscribe(graves => {
+      debugger;
       this.graves = graves.reverse();
       this.totalGraves = graves.length;
       this.graveyardStartPosition = ((this.totalGraves - 2) * this.graveSize );
       for(let i=0; i<=graves.length-1;i++){
-        //graves[i].graveUrl = 'url(./assets/images/graves/grob'+graves[i].grave_id+'_'+graves[i].grave_image+'.png)';
-        graves[i].graveUrl = 'url(./assets/images/graves/grob1_'+graves[i].grave_image+'.png)';
+        let graveId = Number(graves[i].grave_id);
+        let imageName = 'grob'+graveId+'_'+graves[i].grave_image;
+        if(graveId == 1 || graveId == 2){
+          graves[i].graveImageUrl = 'url(./assets/images/graves/'+imageName+'.png)';
+        }
+        if(graveId == 3){
+          graves[i].graveImageUrl = 'url(./assets/images/graves/'+imageName+'/building.png)';
+          graves[i].doorImageUrl = 'url(./assets/images/graves/'+imageName+'/door.png)';
+        }
       }
 
       for(let i=0; i<=graves.length-1;i++){

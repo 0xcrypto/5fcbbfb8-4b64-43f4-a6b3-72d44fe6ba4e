@@ -3,7 +3,10 @@
     "app.message" : {
         "problem_uploading_photo": "Problem z przesłaniem zdjęcia. Spróbuj ponownie później",
         "add_comment_error": "Problem adding comment, Please try again later",
-        "add_object_error" : "Problem z obiektem zakupów. Spróbuj ponownie później"
+        "add_object_error" : "Problem z obiektem zakupów. Spróbuj ponownie później",
+        "person_not_found" : "Nie znaleziono grobu",
+        "animal_not_found" : "Grób nie znaleziono",
+        "please_provide_valid_grave_number": "Proszę podać liczbę grobów"
     },
     "header" : {
         "menu" : {

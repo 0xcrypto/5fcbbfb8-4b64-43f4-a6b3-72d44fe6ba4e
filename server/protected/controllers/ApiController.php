@@ -394,6 +394,7 @@
 			--------------------
 			$options['order'] -> 'rand','surname', 'date_death', 'date_birth', 'user_id'
 
+			optional $options['user_id']
 			optional $options['excludedGraves']
 			optional $options['birth_date']
 			optional $options['death_date']
@@ -419,7 +420,6 @@
 			optional $options['profession_id']
 			optional $options['graveyard_id']
 			optional $options['place_id']
-
 		***/
 
 		private function getPersons($options = NULL){
@@ -488,6 +488,7 @@
 								left join sex s on u.sex_id=s.sex_id
 				WHERE ( u.is_deleted=0 OR u.is_deleted=1 )" ;
 
+			if(isset($options['user_id'])) $query.=" and u.user_id like '%".$options['user_id']."%'";
 			if(isset($options['firstname'])) $query.=" and u.name1 like '%".$options['firstname']."%'";
 			if(isset($options['visibility'])) $query.=" and u.visibility = ".$options['visibility'];
 			if(isset($options['lastname'])) $query.=" and u.surname like '%".$options['lastname']."%'";

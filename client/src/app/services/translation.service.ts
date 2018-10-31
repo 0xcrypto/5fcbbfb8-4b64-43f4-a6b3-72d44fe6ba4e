@@ -41,6 +41,8 @@ export class TranslationService {
     { key: 'ADD_COMMENT_ERROR', value: 'app.message.add_comment_error'},
     { key: 'PROBLEM_UPLOADING_PHOTO', value: 'app.message.problem_uploading_photo'},
     { key: 'ADD_OBJECT_ERROR', value: 'app.message.add_object_error'},
+    { key: 'PERSON_NOT_FOUND', value: 'app.message.person_not_found'},
+    { key: 'PLEASE_PROVIDE_GRAVE_NUMBER', value: 'app.message.please_provide_valid_grave_number'},
     { key: 'ITEM_ALREADY_EXISTS', value: 'shop.form.item_already_exists'},
     
 ];

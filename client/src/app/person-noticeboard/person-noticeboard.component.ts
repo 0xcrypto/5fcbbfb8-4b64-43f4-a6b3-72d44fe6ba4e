@@ -117,7 +117,7 @@ export class PersonNoticeboardComponent implements OnInit {
   searchedUsers: User[] = [];
   prioritizeGraves: User[] = [];
   USER_INFO:any = null;
-  
+  grave_number: number;
   datalimit = 15;
   router:Router = null;
   currentLang:string = null;
@@ -200,11 +200,11 @@ export class PersonNoticeboardComponent implements OnInit {
       this.localStorageService.set(this._global.GRAVEYARD_RETURN_TAB, returnTab);
     }
 
-    if(user.place_name == 'cmentarz' || user.place_name == 'Graveyard')
-    {
+    //if(user.place_name == 'cmentarz' || user.place_name == 'Graveyard')
+    //{
       this.selectedDeadPosition = (user.position - 1);
       this.isGraveLoadingScreenVisible = true;
-    }
+    //}
   }
 
   setSceneTime(time:number){
@@ -1129,6 +1129,30 @@ export class PersonNoticeboardComponent implements OnInit {
         b[i] = a[j];
     }
     return b.join("");
+  }
+
+  goToGrave(){
+    let user_id = this.grave_number;
+    if(this.grave_number == null || !Number(this.grave_number)){
+      this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_GRAVE_NUMBER' });
+      return;
+    }
+
+    let parameters = ['user_id='+user_id, 'limit=1', 'position=0'];
+    this.options = this._global.refreshObject(this.options, parameters);
+    this.localStorageService.set(this._global.GRAVEYARD_OPTIONS_KEY, parameters.join('|'));
+    this.dataService.getAllWithMethodAndOptions('PERSONS', this._global.serializeAndURIEncode(this.options))
+      .subscribe(persons => {
+        if(persons.length == 0){
+          this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PERSON_NOT_FOUND' });
+          return;
+        }
+        else{
+          let person = persons[0];
+          person.position = 1;
+          this.loadingGrave(person, 'graveyard-noticeboard');
+        }
+      });
   }
 }
 

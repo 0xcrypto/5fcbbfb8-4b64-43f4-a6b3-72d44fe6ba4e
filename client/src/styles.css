@@ -1081,6 +1081,7 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     top: 85px;
     background-size: contain;
     background-position: bottom;
+    background-repeat: no-repeat;
 }
 .graveyard-container > ul li{
     float: left;
@@ -1116,13 +1117,13 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     height: 50px;
     cursor: pointer;
 }
-.graveyard-container > ul li .style {
+.graveyard-container > ul li .grave .style {
     height: 100%;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center bottom;
 }
-.graveyard-container > ul li .grave > .detail {
+.graveyard-container > ul li .grave .detail {
     color: #a2a2a2;
     width: 200px;
     margin: 320px auto auto;
@@ -1134,22 +1135,22 @@ body #content.graveyard .graveyard-container, body #content.graveyard .catacombs
     top: 0;
     left: 150px;
 }
-.graveyard-container > ul li .grave > .detail p.name{
+.graveyard-container > ul li .grave .detail p.name{
     font-weight: bold;
     font-size: 13px;
     text-align: center;
     cursor: pointer;
 }
-.graveyard-container > ul li .grave > .detail p.name:hover{
+.graveyard-container > ul li .grave .detail p.name:hover{
     color: #b2973d;
 }
-.graveyard-container > ul li .grave > .detail span{
+.graveyard-container > ul li .grave .detail span{
     display: inline-block;
     width: 45%;
     font-size: 10px;
     text-align: center;
 }
-.graveyard-container > ul li .grave > .detail label{
+.graveyard-container > ul li .grave .detail label{
     display: block;
     color: #848484;
 }

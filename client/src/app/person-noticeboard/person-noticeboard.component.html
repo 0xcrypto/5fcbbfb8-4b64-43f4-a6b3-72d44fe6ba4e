@@ -30,7 +30,8 @@
                      translate>graveyard.noticeboard.tabs.graveyard_noticeboard.go_to_graveyard</button>
                 </div>
                 <div class="option">
-                    <button translate>graveyard.noticeboard.tabs.graveyard_noticeboard.choose_graveyard</button>
+                    <button [style.backgroundImage]="'url('+ imageService.getImage('assets/images/option-background.png') +')'" 
+                    translate>graveyard.noticeboard.tabs.graveyard_noticeboard.choose_graveyard</button>
                     <select>
                         <option>Municipal</option>
                         <option>Municipal</option>
@@ -38,14 +39,14 @@
                     </select>
                 </div>
                 <div class="option">
-                    <button (click)="goToCatacomb();" translate>graveyard.noticeboard.tabs.graveyard_noticeboard.catacombs</button>
+                    <button (click)="goToCatacomb();" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/option-background.png') +')'" translate>graveyard.noticeboard.tabs.graveyard_noticeboard.catacombs</button>
                 </div>
                 <div class="option">
-                    <button translate>graveyard.noticeboard.tabs.graveyard_noticeboard.grave_number</button>
-                    <input type="text"/>
+                    <button translate (click)="goToGrave()" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/option-background.png') +')'" >graveyard.noticeboard.tabs.graveyard_noticeboard.grave_number</button>
+                    <input type="text" [(ngModel)]="grave_number"/>
                 </div>
                 <div class="option">
-                    <button routerLink="/home" translate>graveyard.noticeboard.tabs.graveyard_noticeboard.go_back_to_main_gate</button>
+                    <button [style.backgroundImage]="'url('+ imageService.getImage('assets/images/option-background.png') +')'" routerLink="/home" translate>graveyard.noticeboard.tabs.graveyard_noticeboard.go_back_to_main_gate</button>
                 </div>
             </div>
             <div class="advertisement-col">
