@@ -11,6 +11,7 @@ import { User } from '../classes/user';
 import { Router } from '@angular/router';
 import { AppGlobals } from '../app.globals';
 import { CookieStorage, LocalStorage, SessionStorage, LocalStorageService } from 'ngx-store';
+import * as moment from 'moment';
 
 export interface Options {
   limit:number;
@@ -339,15 +340,13 @@ export class PersonNoticeboardComponent implements OnInit {
     }
 
     if(this.dob){
-      let dateComponent = this.dob.split('-');
-      let validDOB = dateComponent[2]+'-'+dateComponent[1]+'-'+dateComponent[0];
-      parameters.push('birth_date='+validDOB);
+      let date_birth = moment(this.dob, "YYYY-MM-DD");
+      parameters.push('birth_date='+date_birth);
     }
     
     if(this.dod){
-      let dateComponent = this.dod.split('-');
-      let validDOD = dateComponent[2]+'-'+dateComponent[1]+'-'+dateComponent[0];
-      parameters.push('death_date='+validDOD);
+      let date_death = moment(this.dob, "YYYY-MM-DD");
+      parameters.push('death_date='+date_death);
     }
 
     this.loadSearchData(parameters);
@@ -623,8 +622,8 @@ export class PersonNoticeboardComponent implements OnInit {
       this.graveyardBurialPersons.push({
         'firstname': this.graveyardBurialFirstname,
         'lastname': this.graveyardBurialLastname,
-        'dob': this.graveyardBurialDOB,
-        'dod': this.graveyardBurialDOD,
+        'dob': moment(this.graveyardBurialDOB, "YYYY-MM-DD"),
+        'dod': moment(this.graveyardBurialDOD, "YYYY-MM-DD"),
         'gender': this.graveyardBurialGender,
         'in_memoriam': this.graveyardBurialInMemoriam,
         'signature': this.graveyardBurialSignature,
@@ -932,7 +931,7 @@ export class PersonNoticeboardComponent implements OnInit {
       this.reservationPersons.push({
         'firstname': this.reservationFirstname,
         'lastname': this.reservationLastname,
-        'dob': this.reservationDOB,
+        'dob': moment(this.reservationDOB, "YYYY-MM-DD"),
         'gender': this.reservationGender,
         'in_memoriam': this.reservationInMemoriam,
         'signature': this.reservationSignature,

@@ -439,22 +439,18 @@
 
 			if(isset($options['birth_date']))
 			{
-				//we're processing the date format
-				$tmp=explode("-", $options['birth_date']);
-				if(count($tmp)==3)
-					$birth_date=$tmp[2].'-'.$tmp[1].'-'.$tmp[0];
-				elseif(count($tmp)==2)
-					$birth_date=$tmp[2].'-'.$tmp[1];
+                $_dateb_y = substr($options['birth_date'], 0,4);
+                $_dateb_m = substr($options['birth_date'], 5,7);
+				$_dateb_d = substr($options['birth_date'], 8,10);
+				$birth_date = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
 			}
 			
 			if(isset($options['death_date']))
 			{
-				//we're processing the date format
-				$tmp=explode("-", $options['death_date']);
-				if(count($tmp)==3)
-					$death_date=$tmp[2].'-'.$tmp[1].'-'.$tmp[0];
-				elseif(count($tmp)==2)
-					$death_date=$tmp[2].'-'.$tmp[1];
+                $_dateb_y = substr($options['death_date'], 0,4);
+                $_dateb_m = substr($options['death_date'], 5,7);
+				$_dateb_d = substr($options['death_date'], 8,10);
+				$death_date = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
 			}
 
 			//znicze = candles
@@ -556,23 +552,21 @@
 				$row['multigrave']=array();//multigrave
 				$row['objects']=array();//znicze -> candles
 				$row['ilosc']=$count_result['total'];// number of all graves
-				
-				$date_birth=explode("-",$row['date_birth']);
-				if($date_birth[1]=='00' && $date_birth[2]=='00')
-					$row['date_birth']=$date_birth[0];
-				elseif($date_birth[1]!='00' && $date_birth[2]=='00')
-					$row['date_birth']=$date_birth[1].'-'.$date_birth[0];
-				else
-					$row['date_birth']=$date_birth[2].'-'.$date_birth[1].'-'.$date_birth[0];
-				
-				$date_death=explode("-",$row['date_death']);
-				if($date_death[1]=='00' && $date_death[2]=='00')
-					$row['date_death']=$date_death[0];
-				elseif($date_death[1]!='00' && $date_death[2]=='00')
-					$row['date_death']=$date_death[1].'-'.$date_death[0];
-				else
-					$row['date_death']=$date_death[2].'-'.$date_death[1].'-'.$date_death[0];
 					
+				if(isset($row['date_birth'])){
+					$_dateb_y = substr($row['date_birth'], 0,4);
+					$_dateb_m = substr($row['date_birth'], 5,7);
+					$_dateb_d = substr($row['date_birth'], 8,10);
+					$row['date_birth'] = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
+				}
+				
+				if(isset($row['date_death'])){
+					$_dateb_y = substr($row['date_death'], 0,4);
+					$_dateb_m = substr($row['date_death'], 5,7);
+					$_dateb_d = substr($row['date_death'], 8,10);
+					$row['date_death'] = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
+				}
+
 				if($order=='rand()')
 					$row['koniec']= ($count_result['total'] == 1 ) ? true : false; // is it the last grave?
 				
@@ -710,22 +704,20 @@
 					$row['reserve_grave_users_data']=array(array($row2['plogin1'],$tmp1[0],$tmp1[1]), array($row2['plogin2'],$tmp2[0],$tmp2[1]));
 				}
 				
-				$date_birth=explode("-",$row['date_birth']);
-				if($date_birth[1]=='00' && $date_birth[2]=='00')
-					$row['date_birth']=$date_birth[0];
-				elseif($date_birth[1]!='00' && $date_birth[2]=='00')
-					$row['date_birth']=$date_birth[1].'-'.$date_birth[0];
-				else
-					$row['date_birth']=$date_birth[2].'-'.$date_birth[1].'-'.$date_birth[0];
+				if(isset($row['date_birth'])){
+					$_dateb_y = substr($row['date_birth'], 0,4);
+					$_dateb_m = substr($row['date_birth'], 5,7);
+					$_dateb_d = substr($row['date_birth'], 8,10);
+					$row['date_birth'] = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
+				}
 				
-				$date_death=explode("-",$row['date_death']);
-				if($date_death[1]=='00' && $date_death[2]=='00')
-					$row['date_death']=$date_death[0];
-				elseif($date_death[1]!='00' && $date_death[2]=='00')
-					$row['date_death']=$date_death[1].'-'.$date_death[0];
-				else
-					$row['date_death']=$date_death[2].'-'.$date_death[1].'-'.$date_death[0];
-				
+				if(isset($options['date_death'])){
+					$_dateb_y = substr($row['date_death'], 0,4);
+					$_dateb_m = substr($row['date_death'], 5,7);
+					$_dateb_d = substr($row['date_death'], 8,10);
+					$row['date_death'] = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
+				}
+
 				$data[] = $row; 
 			} 
 			return ($data); 
@@ -1119,16 +1111,16 @@
 			$data = array();
             
             if (isset($options['date_birth'])){
-                $_dateb_y = substr($options['date_birth'], 6,9);
-                $_dateb_m = substr($options['date_birth'], 3,2);
-                $_dateb_d = substr($options['date_birth'], 0,2);
+                $_dateb_y = substr($options['date_birth'], 0,4);
+                $_dateb_m = substr($options['date_birth'], 5,7);
+                $_dateb_d = substr($options['date_birth'], 8,10);
                 $date_birth = $_dateb_y.'-'.$_dateb_m.'-'.$_dateb_d;
             }
             
             if (isset($options['date_death'])){
-                $_dated_y = substr($options['date_death'], 6,9);
-                $_dated_m = substr($options['date_death'], 3,2);
-                $_dated_d = substr($options['date_death'], 0,2);
+                $_dated_y = substr($options['date_death'], 0,4);
+                $_dated_m = substr($options['date_death'], 5,7);
+                $_dated_d = substr($options['date_death'], 8,10);
                 $date_death = $_dated_y.'-'.$_dated_m.'-'.$_dated_d;
             }
             
@@ -1821,10 +1813,21 @@
 			$current_language = isset($options['current_language']) ? $options['current_language'] : 'en';
 			$today_date = date('Y-m-d');
 
-			$date_birth = $options['date_birth'];
-			$date_death = '0000-00-00';
+			$date_birth = null;
+			$date_death = null;
+
+			if(isset($options['date_birth'])){
+				$_dateb_y = substr($options['date_birth'], 0,4);
+				$_dateb_m = substr($options['date_birth'], 5,7);
+				$_dateb_d = substr($options['date_birth'], 8,10);
+				$date_birth = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
+			}
+
 			if(isset($options['date_death'])){
-				$date_death = $options['date_death'];
+				$_dateb_y = substr($options['date_death'], 0,4);
+				$_dateb_m = substr($options['date_death'], 5,7);
+				$_dateb_d = substr($options['date_death'], 8,10);
+				$date_death = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
 			}
 
 			$data = array();
@@ -1921,8 +1924,22 @@
 			$current_language = isset($options['current_language']) ? $options['current_language'] : 'en';
 			$today_date = date('Y-m-d');
 
-			$date_birth = $options['date_birth'];
-			$date_death = $options['date_death'];
+			$date_birth = null;
+			$date_death = null;
+
+			if(isset($options['date_birth'])){
+				$_dateb_y = substr($options['date_birth'], 0,4);
+				$_dateb_m = substr($options['date_birth'], 5,7);
+				$_dateb_d = substr($options['date_birth'], 8,10);
+				$date_birth = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
+			}
+			
+			if(isset($options['date_death'])){
+				$_dateb_y = substr($options['date_death'], 0,4);
+				$_dateb_m = substr($options['date_death'], 5,7);
+				$_dateb_d = substr($options['date_death'], 8,10);
+				$date_birth = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
+			}
 
 			$data = array();
 
@@ -2152,19 +2169,20 @@
 				$d2[1]='01';//month of January
 			}
 
-			//current format: dd-mm-yyyy
-			$_dateb_y = substr($options['date_birth'], 6,9);
-			$_dateb_m = substr($options['date_birth'], 3,2);
-			$_dateb_d = substr($options['date_birth'], 0,2);
-			$date_birth = $_dateb_y.'-'.$_dateb_m.'-'.$_dateb_d;
-
-			$_dated_y = substr($options['date_death'], 6,9);
-			$_dated_m = substr($options['date_death'], 3,2);
-			$_dated_d = substr($options['date_death'], 0,2);
-			$date_death = $_dated_y.'-'.$_dated_m.'-'.$_dated_d;
+			if(isset($options['date_birth'])){
+				$_dateb_y = substr($options['date_birth'], 0,4);
+				$_dateb_m = substr($options['date_birth'], 5,7);
+				$_dateb_d = substr($options['date_birth'], 8,10);
+				$date_birth = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
+			}
 			
-			if (count($d1)!=3 || !checkdate($d1[1], $d1[0], $d1[2])) 
-				return -3;
+			if(isset($options['date_death'])){
+				$_dateb_y = substr($options['date_death'], 0,4);
+				$_dateb_m = substr($options['date_death'], 5,7);
+				$_dateb_d = substr($options['date_death'], 8,10);
+				$date_birth = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
+			}
+
 	
 			if($date_death!='0000-00-00' && $date_death!='00-00-0000' && $date_death!='' && $date_death!='-00-00')
 			{    

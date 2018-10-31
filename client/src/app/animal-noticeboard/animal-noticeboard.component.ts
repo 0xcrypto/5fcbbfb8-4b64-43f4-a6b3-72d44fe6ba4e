@@ -10,6 +10,7 @@ import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { AppGlobals } from '../app.globals';
 import { CookieStorage, LocalStorage, SessionStorage, LocalStorageService } from 'ngx-store';
+import * as moment from 'moment';
 
 export interface Options {};
 
@@ -280,15 +281,14 @@ export class AnimalNoticeboardComponent implements OnInit {
       parameters.push('name='+this.name);
     
     if(this.dob){
-      let dateComponent = this.dob.split('-');
-      let validDOB = dateComponent[2]+'-'+dateComponent[1]+'-'+dateComponent[0];
-      parameters.push('birth_date='+validDOB);
+      
+      let birth_date = moment(this.dob, "YYYY-MM-DD");
+      parameters.push('birth_date='+birth_date);
     }
     
     if(this.dod){
-      let dateComponent = this.dod.split('-');
-      let validDOD = dateComponent[2]+'-'+dateComponent[1]+'-'+dateComponent[0];
-      parameters.push('death_date='+validDOD);
+      let death_date = moment(this.dod, "YYYY-MM-DD");
+      parameters.push('death_date='+death_date);
     }
 
     this.loadSearchData(parameters);
@@ -489,8 +489,8 @@ export class AnimalNoticeboardComponent implements OnInit {
         'petname': this.graveyardBurialPetName,
         'genus': this.graveyardBurialGenus,
         'type': this.graveyardBurialPetType,
-        'dob': this.graveyardBurialDOB,
-        'dod': this.graveyardBurialDOD,
+        'dob': moment(this.graveyardBurialDOB, "YYYY-MM-DD"),
+        'dod': moment(this.graveyardBurialDOD, "YYYY-MM-DD"),
         'gender': this.graveyardBurialGender,
         'owner_firstname': this.graveyardBurialOwnerFirstname,
         'owner_lastname': this.graveyardBurialOwnerLastname,
