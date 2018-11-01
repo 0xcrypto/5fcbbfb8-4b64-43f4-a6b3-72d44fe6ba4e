@@ -592,6 +592,7 @@
 					$row['name1'] = $row2['family_name'];
 					$row['grave_image'] = $row2['grave_image'];
 					$row2['surname'] = explode("|", $row2['surname']);
+					$row2['user_id'] = $row2['grave_id'];
 
 					///we collect flowers and candles for every deceased person in multigrain
 					//znicze or kmien or kwiatki = candle or stone or flower

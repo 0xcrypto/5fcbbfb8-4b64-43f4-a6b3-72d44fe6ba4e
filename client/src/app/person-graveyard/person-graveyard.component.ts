@@ -43,9 +43,13 @@ export class PersonGraveyardComponent implements OnInit {
   condolenceSignature:string = null;
   selectedGraveId:number = 0;
   selectedGraveName:string = null;
+  isMultigraveOpen:boolean;
+  multigraveStartPosition:number;
+  totalMultigraves: number;
   router:Router = null;
   totalGraves: number = 0;
   graveSize: number = 512;
+  multigraveSize: number = 512;
   options: UserOptions = {
     limit: 10
   };
@@ -89,19 +93,27 @@ export class PersonGraveyardComponent implements OnInit {
 
     this.dataService.getAllWithMethodAndOptions('PERSONS', this._global.serializeAndURIEncode(this.options))
     .subscribe(graves => {
-      debugger;
       this.graves = graves.reverse();
       this.totalGraves = graves.length;
       this.graveyardStartPosition = ((this.totalGraves - 2) * this.graveSize );
       for(let i=0; i<=graves.length-1;i++){
-        let graveId = Number(graves[i].grave_id);
-        let imageName = 'grob'+graveId+'_'+graves[i].grave_image;
-        if(graveId == 1 || graveId == 2){
+        graves[i].grave_id = Number(graves[i].grave_id);
+        let imageName = 'grob'+graves[i].grave_id+'_'+graves[i].grave_image;
+        if(graves[i].grave_id == 1 || graves[i].grave_id == 2){
           graves[i].graveImageUrl = 'url(./assets/images/graves/'+imageName+'.png)';
         }
-        if(graveId == 3){
-          graves[i].graveImageUrl = 'url(./assets/images/graves/'+imageName+'/building.png)';
-          graves[i].doorImageUrl = 'url(./assets/images/graves/'+imageName+'/door.png)';
+        if(graves[i].grave_id == 3){
+          graves[i].graveImageUrl = 'url(./assets/images/graves/'+imageName+'/building-full.png)';
+          graves[i].multigraveFloorImage = 'url(./assets/images/graves/'+imageName+'/floor.jpg)';
+          graves[i].multigraveWallImage = 'url(./assets/images/graves/'+imageName+'/wall.jpg)';
+          graves[i].multigraveStoneImage = 'url(./assets/images/graves/'+imageName+'/stone.png)';
+          graves[i].multigraveStoneSlabImage = 'url(./assets/images/graves/'+imageName+'/slab.png)';
+         
+          for(let j=0; j <= graves[i].multigrave.length - 1; j++){
+            if(this.graves[i].multigrave[j]['objects'].length > 0){
+              this.graves[i].multigrave[j]['objects'] = this.updateObjectImages(this.graves[i].multigrave[j]['objects']);
+            }
+          }
         }
       }
 
@@ -283,5 +295,29 @@ export class PersonGraveyardComponent implements OnInit {
         'selectedGraveName': this.selectedGraveName
       });
     }
+  }
+
+  openMultigrave(multigraves){
+    this.isMultigraveOpen = true;
+    this.multigraveStartPosition = 0;
+    this.totalMultigraves = multigraves.length;
+    this.graveSize = multigraves.length * this.multigraveSize;
+  }
+
+  backToGraveyardFromMultigrave(){
+    this.isMultigraveOpen = false;
+    this.graveSize = this.multigraveSize;
+  }
+
+  nextMultigrave(){
+    if(this.multigraveStartPosition == ((this.totalMultigraves - 2) * this.multigraveSize ))
+    return;
+
+    this.multigraveStartPosition += this.multigraveSize;
+  }
+
+  previousMultigrave(){
+    if(this.multigraveStartPosition >= this.multigraveSize)
+      this.multigraveStartPosition -= this.multigraveSize;
   }
 }

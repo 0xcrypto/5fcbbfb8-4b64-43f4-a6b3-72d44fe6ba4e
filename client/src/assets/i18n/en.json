@@ -129,6 +129,9 @@
         },
         "next_grave": "Next Grave",
         "previous_grave": "Previous Grave",
+        "next_crypt": "Next Crypt",
+        "prev_crypt": "Previous Crypt",
+        "back_to_graveyard": "Back to graveyard",
         "back_to_search_result": "Back to search results"
     },
     "catacomb": {

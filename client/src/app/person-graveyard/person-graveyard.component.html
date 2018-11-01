@@ -6,10 +6,15 @@
 <div id="content" class="graveyard" *ngIf="!isGraveyardLoading">
     <app-user-mgt></app-user-mgt>
     <app-logo></app-logo>
-    <div class="sub-header" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/header.jpg') +')'">
+    <div class="sub-header" *ngIf="!isMultigraveOpen" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/header.jpg') +')'">
         <button (click)="nextGrave()" class="btn-left" translate>graveyard.next_grave<i class="fa fa-play-circle right-icon"></i></button>
         <button (click)="backToSearchResults()" class="btn-middle" translate>graveyard.back_to_search_result</button>
         <button (click)="previousGrave()" class="btn-right" translate><i class="fa fa-play-circle left-icon"></i>graveyard.previous_grave</button>
+    </div>
+    <div class="sub-header" *ngIf="isMultigraveOpen" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/header.jpg') +')'">
+        <button (click)="nextMultigrave()" class="btn-left" translate>graveyard.next_crypt<i class="fa fa-play-circle right-icon"></i></button>
+        <button (click)="backToGraveyardFromMultigrave()" class="btn-middle" translate>graveyard.back_to_catacomb_main_gate</button>
+        <button (click)="previousMultigrave()" class="btn-right" translate><i class="fa fa-play-circle left-icon"></i>graveyard.prev_crypt</button>
     </div>
     <div class="graveyard-sky-container" [ngStyle]="{'background-image': skyImage}"></div>
     <div class="graveyard-container" >
@@ -20,12 +25,32 @@
                 
             <li *ngFor="let grave of graves">
                 <div class="grave" [ngStyle]="{ 'width': graveSize+'px' }" >
-                    {{grave.grave_id}}
                     <div *ngIf="(grave.grave_id === 3)" style="width: 100%; height: 100%">
-                        <div *ngIf="grave.doorImageUrl" [ngStyle]="{ 'background-image': grave.doorImageUrl }"></div>
                         <div class="style" [ngStyle]="{ 'background-image': grave.graveImageUrl }"></div>
-                        <div class="detail">
+                        <div class="detail" (click)="openMultigrave(grave.multigrave)">
                             <p class="name">{{grave.name1}}</p>
+                        </div>
+                       
+                        <div class="multigrave-container" *ngIf="isMultigraveOpen" >
+                            <ul [ngStyle]="{'margin-left': '-'+multigraveStartPosition+'px', 'width': (totalMultigraves == 1) ? (multigraveSize * 2 )+'px' : (multigraveSize * totalMultigraves)+'px', 'background-image': grave.multigraveWallImage}">
+                                <li *ngFor="let mgrave of grave.multigrave">
+                                    <div class="grave" [ngStyle]="{ 'width': multigraveSize+'px' }" >
+                                        <div class="style" [ngStyle]="{ 'background-image': grave.multigraveStoneImage }"></div>
+                                        <p class="slab" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-stand.png') +')'"></p>
+                                        <p class="candle-stand" (click)="openShop(mgrave);" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-candle.png') +')'"></p>
+                                        <div class="object-container" >
+                                            <img (click)="openShop(mgrave);" *ngFor="let object of mgrave.objects" [attr.src]="object.object_url"/>
+                                        </div>
+                                        <div class="detail">
+                                            <p class="name" (click)="showGraveDetails(mgrave);">{{[].constructor.isArray(mgrave.name1) ? mgrave.name1[0] : mgrave.name1}} {{mgrave.surname}}</p>
+                                            <p>
+                                                <span><label>Born</label>{{mgrave.date_birth}}</span>
+                                                <span><label>Passed Away</label>{{mgrave.date_death}}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div *ngIf="(grave.grave_id !== 3)" style="width: 100%; height: 100%">
