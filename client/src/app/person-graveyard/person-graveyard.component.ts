@@ -153,8 +153,18 @@ export class PersonGraveyardComponent implements OnInit {
   }
 
   updateGraveObjects(objects: any, id: any){
-    var grave = this.graves.filter(grave => grave.user_id == id)[0];
-    grave['objects'] = objects;
+    var grave = this.graves.find(grave => grave.user_id == id);
+    if(grave){
+      grave['objects'] = objects;
+    }
+    else{
+      this.graves.forEach( (grave, index) => {
+        var multigrave = grave.multigrave.find(mgrave => mgrave.user_id == id);
+        if(multigrave){
+          multigrave['objects'] = objects;
+        }
+      });
+    }
   }
 
   updateObjectImages(objects: any){

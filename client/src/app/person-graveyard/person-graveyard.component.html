@@ -1,3 +1,11 @@
+<style>
+    .first-element {
+        left: -85px;
+    }
+    .last-element {
+        right: 385px;
+    }
+</style>
 <div id="content" class="loading-bg with-logo-cursor" *ngIf="isGraveyardLoading" 
 [style.backgroundImage]="'url('+ imageService.getImage('assets/images/wall.png') +')'" (document:mousemove)="onMouseMove($event)" >
     <app-user-mgt></app-user-mgt>
@@ -13,7 +21,7 @@
     </div>
     <div class="sub-header" *ngIf="isMultigraveOpen" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/header.jpg') +')'">
         <button (click)="nextMultigrave()" class="btn-left" translate>graveyard.next_crypt<i class="fa fa-play-circle right-icon"></i></button>
-        <button (click)="backToGraveyardFromMultigrave()" class="btn-middle" translate>graveyard.back_to_catacomb_main_gate</button>
+        <button (click)="backToGraveyardFromMultigrave()" class="btn-middle" translate>graveyard.back_to_graveyard</button>
         <button (click)="previousMultigrave()" class="btn-right" translate><i class="fa fa-play-circle left-icon"></i>graveyard.prev_crypt</button>
     </div>
     <div class="graveyard-sky-container" [ngStyle]="{'background-image': skyImage}"></div>
@@ -25,12 +33,50 @@
                 
             <li *ngFor="let grave of graves">
                 <div class="grave" [ngStyle]="{ 'width': graveSize+'px' }" >
+                    <div *ngIf="(grave.grave_id === 1)" style="width: 100%; height: 100%">
+                        <div class="style" [ngStyle]="{ 'background-image': grave.graveImageUrl }"></div>
+                        <p class="candle-stand" (click)="openShop(grave)" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-candle.png') +')'"></p>
+                        <div class="object-container" >
+                            <img (click)="openShop(grave);" *ngFor="let object of grave.objects" [attr.src]="object.object_url"/>
+                        </div>
+                        <div class="detail">
+                            <p class="name" (click)="showGraveDetails(grave);">{{[].constructor.isArray(grave.name1) ? grave.name1[0] : grave.name1}} {{grave.surname}}</p>
+                            <p>
+                                <span><label>Born</label>{{grave.date_birth}}</span>
+                                <span><label>Passed Away</label>{{grave.date_death}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div *ngIf="(grave.grave_id === 2)" style="width: 100%; height: 100%">
+                        <div class="style" [ngStyle]="{ 'background-image': grave.graveImageUrl }"></div>
+                        <div *ngFor="let mgrave of grave.multigrave; let i=index" style="position: absolute;bottom: 0;top: 0;"
+                            [ngClass]="{'first-element': (i==0), 'last-element': (i==1)}">
+                            <p class="candle-stand" (click)="openShop(mgrave)" 
+                            [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-candle.png') +')'"></p>
+                            <div class="object-container" >
+                                <img (click)="openShop(mgrave);" *ngFor="let object of mgrave.objects" 
+                                [attr.src]="object.object_url"/>
+                            </div>
+                            <div class="detail">
+                                <p class="name" (click)="showGraveDetails(mgrave);">
+                                    {{[].constructor.isArray(mgrave.name1) ? mgrave.name1[0] : mgrave.name1}} {{mgrave.surname}}
+                                </p>
+                                <p>
+                                    <span><label>Born</label>{{mgrave.date_birth}}</span>
+                                    <span><label>Passed Away</label>{{mgrave.date_death}}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                     <div *ngIf="(grave.grave_id === 3)" style="width: 100%; height: 100%">
                         <div class="style" [ngStyle]="{ 'background-image': grave.graveImageUrl }"></div>
+                        <p class="candle-stand" (click)="openShop(grave)" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-candle.png') +')'"></p>
+                        <div class="object-container" >
+                            <img (click)="openShop(grave);" *ngFor="let object of grave.objects" [attr.src]="object.object_url"/>
+                        </div>
                         <div class="detail" (click)="openMultigrave(grave.multigrave)">
                             <p class="name">{{grave.name1}}</p>
                         </div>
-                       
                         <div class="multigrave-container" *ngIf="isMultigraveOpen" >
                             <ul [ngStyle]="{'margin-left': '-'+multigraveStartPosition+'px', 'width': (totalMultigraves == 1) ? (multigraveSize * 2 )+'px' : (multigraveSize * totalMultigraves)+'px', 'background-image': grave.multigraveWallImage}">
                                 <li *ngFor="let mgrave of grave.multigrave">
@@ -51,20 +97,6 @@
                                     </div>
                                 </li>
                             </ul>
-                        </div>
-                    </div>
-                    <div *ngIf="(grave.grave_id !== 3)" style="width: 100%; height: 100%">
-                        <div class="style" [ngStyle]="{ 'background-image': grave.graveImageUrl }"></div>
-                        <p class="candle-stand" (click)="openShop(grave)" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/cat-candle.png') +')'"></p>
-                        <div class="object-container" >
-                            <img (click)="openShop(grave);" *ngFor="let object of grave.objects" [attr.src]="object.object_url"/>
-                        </div>
-                        <div class="detail">
-                            <p class="name" (click)="showGraveDetails(grave);">{{[].constructor.isArray(grave.name1) ? grave.name1[0] : grave.name1}} {{grave.surname}}</p>
-                            <p>
-                                <span><label>Born</label>{{grave.date_birth}}</span>
-                                <span><label>Passed Away</label>{{grave.date_death}}</span>
-                            </p>
                         </div>
                     </div>
                 </div>
