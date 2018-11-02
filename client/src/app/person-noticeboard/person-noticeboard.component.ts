@@ -144,7 +144,7 @@ export class PersonNoticeboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.imageService.cachedImages.length == 0)
+    if(!this.imageService.isImagesLoaded)
       this.router.navigateByUrl('/home');
 
     this.selectedTab = 'graveyard-noticeboard';

@@ -70,6 +70,7 @@ export class ImageService {
   ];
   public cachedImages:any[]=[];
   public totalImagesLoaded = 0;
+  public isImagesLoaded: boolean;
 	private protocol = location.protocol === 'https:' ? 'https' : 'http';
   private baseURL = this.protocol + '://localhost/virtualgrave/client/dist/';  
 
@@ -117,6 +118,7 @@ export class ImageService {
     reader.addEventListener("load", () => {
         this.cachedImages.push({ url: url, image: reader.result });
         if(this.cachedImages.length == this.imageUrls.length){
+          this.isImagesLoaded = true;
           this.messageService.sendMessage('APP_IMAGES_LOADED', {});
         }
     }, false);

@@ -30,8 +30,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isImageLoadingScreenVisible = true;
-    this.imageService.load();
+    if(!this.imageService.isImagesLoaded){
+      this.isImageLoadingScreenVisible = true;
+      this.imageService.load();
+    }
+    
     this.messageService.castMessage.subscribe(object => {
       let message = object.message;
       switch(message){
@@ -40,6 +43,7 @@ export class HomeComponent implements OnInit {
           break;
       }
     });
+    //this.messageService.sendMessage('PLAY_BIRDS', {});
   }
   
   ngAfterViewInit(){
@@ -55,12 +59,15 @@ export class HomeComponent implements OnInit {
 
   openGate() {
     this.isGateOpen = true;
+    this.messageService.sendMessage('PLAY_OPEN_GATE', {});
     setTimeout(()=>{  
+      this.messageService.sendMessage('STOP_BIRDS', {});
       this.router.navigateByUrl('/noticeboard');
-    }, 1000);
+    }, 2000);
   }
   
   openPetNoticeboard() {
+    this.messageService.sendMessage('STOP_BIRDS', {});
     this.router.navigateByUrl('/pet-noticeboard');
   }
   
