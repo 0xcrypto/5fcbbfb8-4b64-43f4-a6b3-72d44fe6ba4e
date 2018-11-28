@@ -34,6 +34,7 @@ export class AppGlobals {
   public IS_GUEST_KEY = 'IsGuest';
   public PAYMENT_METHOD = 1; //PAYPAL
   public LANGUAGES:string[] = ['en', 'pl'];
+  public CURRENT_PAGE: string = 'header.menu.main_gate';
   private images: GraveyardImages[] = [{
     scene: '1_1',
     sky: 'niebo3.jpg',

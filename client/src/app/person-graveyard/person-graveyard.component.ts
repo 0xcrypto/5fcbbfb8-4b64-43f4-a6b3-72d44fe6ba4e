@@ -37,7 +37,8 @@ export class PersonGraveyardComponent implements OnInit {
   isSnowfallScene:boolean = false;
   isGraveDetailsOpen:boolean = false;
   isThunderstromScene:boolean = false;
-  isGraveyardLoading:boolean = true;
+  isGraveyardLoading:boolean = false;
+  isSceneSelectionInProgress: boolean = true;
   isRemeberanceFormOpen:boolean = false;
   condolenceMessage:string = null;
   condolenceSignature:string = null;
@@ -50,6 +51,8 @@ export class PersonGraveyardComponent implements OnInit {
   totalGraves: number = 0;
   graveSize: number = 512;
   multigraveSize: number = 512;
+  selectedSceneTime:number = 1;
+  selectedSceneSeason:number = 1;
   options: UserOptions = {
     limit: 10
   };
@@ -69,20 +72,6 @@ export class PersonGraveyardComponent implements OnInit {
       this.router.navigateByUrl('/home');
 
     let position = +this.route.snapshot.paramMap.get('position');
-    let scene = this.route.snapshot.paramMap.get('scene');
-    let season = scene.split('_')[1];
-
-    if(Number(season) == 2 || Number(season) == 3){
-      this.isRainfallScene = true;
-    }
-    if(Number(season) == 4){
-      this.isSnowfallScene = true;
-    }
-    if(Number(season) == 3){
-      this.isThunderstromScene = true;
-    }
-    this.skyImage = 'url(./assets/images/sky/'+this._global.getSkyImage(scene)+')';
-    this.graveyardImage = 'url(./assets/images/graveyard-backgrounds/'+this._global.getGraveyardImage(scene)+')';
     if(this.localStorageService.get(this._global.GRAVEYARD_OPTIONS_KEY)){
       let searchOptions = this.localStorageService.get(this._global.GRAVEYARD_OPTIONS_KEY).split('|');
       this.options = this._global.refreshObject(this.options, searchOptions);
@@ -90,41 +79,6 @@ export class PersonGraveyardComponent implements OnInit {
     else{
       this.options = this._global.refreshObject(this.options, ['limit=10', 'position='+position, 'order=user_id']);
     }
-
-    this.dataService.getAllWithMethodAndOptions('PERSONS', this._global.serializeAndURIEncode(this.options))
-    .subscribe(graves => {
-      this.graves = graves.reverse();
-      this.totalGraves = graves.length;
-      this.graveyardStartPosition = ((this.totalGraves - 2) * this.graveSize );
-      for(let i=0; i<=graves.length-1;i++){
-        graves[i].grave_id = Number(graves[i].grave_id);
-        let imageName = 'grob'+graves[i].grave_id+'_'+graves[i].grave_image;
-        if(graves[i].grave_id == 1 || graves[i].grave_id == 2){
-          graves[i].graveImageUrl = 'url(./assets/images/graves/'+imageName+'.png)';
-        }
-        if(graves[i].grave_id == 3){
-          graves[i].graveImageUrl = 'url(./assets/images/graves/'+imageName+'/building-full.png)';
-          graves[i].multigraveFloorImage = 'url(./assets/images/graves/'+imageName+'/floor.jpg)';
-          graves[i].multigraveWallImage = 'url(./assets/images/graves/'+imageName+'/wall.jpg)';
-          graves[i].multigraveStoneImage = 'url(./assets/images/graves/'+imageName+'/stone.png)';
-          graves[i].multigraveStoneSlabImage = 'url(./assets/images/graves/'+imageName+'/slab.png)';
-         
-          for(let j=0; j <= graves[i].multigrave.length - 1; j++){
-            if(this.graves[i].multigrave[j]['objects'].length > 0){
-              this.graves[i].multigrave[j]['objects'] = this.updateObjectImages(this.graves[i].multigrave[j]['objects']);
-            }
-          }
-        }
-      }
-
-      for(let i=0; i<=graves.length-1;i++){
-        if(this.graves[i]['objects'].length > 0){
-          this.graves[i]['objects'] = this.updateObjectImages(this.graves[i]['objects']);
-        }
-      }
-
-      this.isGraveyardLoading = false;
-    });
 
     this.selectedGraveDetailTab = 'tab1';
     
@@ -329,5 +283,68 @@ export class PersonGraveyardComponent implements OnInit {
   previousMultigrave(){
     if(this.multigraveStartPosition >= this.multigraveSize)
       this.multigraveStartPosition -= this.multigraveSize;
+  }
+
+  setSceneTime(time:number){
+    this.selectedSceneTime = time;
+  }
+
+  setSceneSeason(season:number){
+    this.selectedSceneSeason = season;
+  }
+
+  showGraveyard(){
+    this.isSceneSelectionInProgress = false;
+
+    let scene = this.selectedSceneTime +'_'+this.selectedSceneSeason;
+    let season = this.selectedSceneSeason;
+
+    if(Number(season) == 2 || Number(season) == 3){
+      this.isRainfallScene = true;
+    }
+    if(Number(season) == 4){
+      this.isSnowfallScene = true;
+    }
+    if(Number(season) == 3){
+      this.isThunderstromScene = true;
+    }
+    this.skyImage = 'url(./assets/images/sky/'+this._global.getSkyImage(scene)+')';
+    this.graveyardImage = 'url(./assets/images/graveyard-backgrounds/'+this._global.getGraveyardImage(scene)+')';
+    
+    this.isGraveyardLoading = true;
+    this.dataService.getAllWithMethodAndOptions('PERSONS', this._global.serializeAndURIEncode(this.options))
+    .subscribe(graves => {
+      this.graves = graves.reverse();
+      this.totalGraves = graves.length;
+      this.graveyardStartPosition = ((this.totalGraves - 2) * this.graveSize );
+      for(let i=0; i<=graves.length-1;i++){
+        graves[i].grave_id = Number(graves[i].grave_id);
+        let imageName = 'grob'+graves[i].grave_id+'_'+graves[i].grave_image;
+        if(graves[i].grave_id == 1 || graves[i].grave_id == 2){
+          graves[i].graveImageUrl = 'url(./assets/images/graves/'+imageName+'.png)';
+        }
+        if(graves[i].grave_id == 3){
+          graves[i].graveImageUrl = 'url(./assets/images/graves/'+imageName+'/building-full.png)';
+          graves[i].multigraveFloorImage = 'url(./assets/images/graves/'+imageName+'/floor.jpg)';
+          graves[i].multigraveWallImage = 'url(./assets/images/graves/'+imageName+'/wall.jpg)';
+          graves[i].multigraveStoneImage = 'url(./assets/images/graves/'+imageName+'/stone.png)';
+          graves[i].multigraveStoneSlabImage = 'url(./assets/images/graves/'+imageName+'/slab.png)';
+         
+          for(let j=0; j <= graves[i].multigrave.length - 1; j++){
+            if(this.graves[i].multigrave[j]['objects'].length > 0){
+              this.graves[i].multigrave[j]['objects'] = this.updateObjectImages(this.graves[i].multigrave[j]['objects']);
+            }
+          }
+        }
+      }
+
+      for(let i=0; i<=graves.length-1;i++){
+        if(this.graves[i]['objects'].length > 0){
+          this.graves[i]['objects'] = this.updateObjectImages(this.graves[i]['objects']);
+        }
+      }
+
+      this.isGraveyardLoading = false;
+    });
   }
 }

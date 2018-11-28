@@ -82,7 +82,7 @@ export class CatacombComponent implements OnInit {
           }
         }
 
-        //this.isCatacombsLoading = false;
+        this.isCatacombsLoading = false;
       });
 
     this.messageService.castMessage.subscribe(object => {

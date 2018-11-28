@@ -22,7 +22,6 @@ export interface Options {
   templateUrl: './person-noticeboard.component.html'
 })
 export class PersonNoticeboardComponent implements OnInit {
-  isGraveLoadingScreenVisible:boolean = false;
   isSearchFormVisible:boolean = true;
   isNavigatePreviousDeadDisabled:boolean = false;
   isNavigateNextDeadDisabled:boolean = false;
@@ -203,18 +202,8 @@ export class PersonNoticeboardComponent implements OnInit {
     //if(user.place_name == 'cmentarz' || user.place_name == 'Graveyard')
     //{
       this.selectedDeadPosition = (user.position - 1);
-      this.isGraveLoadingScreenVisible = true;
+      this.router.navigateByUrl('/graveyard/'+this.selectedDeadPosition);
     //}
-  }
-
-  setSceneTime(time:number){
-    this.isRandomSceneSelected = false;
-    this.selectedSceneTime = time;
-  }
-
-  setSceneSeason(season:number){
-    this.isRandomSceneSelected = false;
-    this.selectedSceneSeason = season;
   }
 
   randomSceneSelection(){
@@ -222,12 +211,7 @@ export class PersonNoticeboardComponent implements OnInit {
     this.selectedSceneTime = this._global.getRandomNumber(1,2);
     this.selectedSceneSeason = this._global.getRandomNumber(1,4);
   }
-
-  showGraveyard(){
-    let scene = this.selectedSceneTime+"_"+this.selectedSceneSeason;
-    this.router.navigateByUrl('/graveyard/'+this.selectedDeadPosition+'/'+scene);
-  }
-
+  
   gotoGraveyard(){
     let scene = this._global.getRandomNumber(1,2)+"_"+this._global.getRandomNumber(1,4);
     this.router.navigateByUrl('/graveyard/0/'+scene);

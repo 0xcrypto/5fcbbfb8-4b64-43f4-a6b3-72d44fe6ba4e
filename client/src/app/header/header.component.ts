@@ -72,18 +72,34 @@ export class HeaderComponent implements OnInit {
     this._router.navigate([routeLink]);
   }
   
-  gotoGraveyard(){
-    let scene = this._global.getRandomNumber(1,2)+"_"+this._global.getRandomNumber(1,4);
-    this._router.navigateByUrl('/graveyard/0/'+scene);
+  openGraveyard(){
+    this._global.CURRENT_PAGE = 'header.menu.graveyard'; 
+    this._router.navigateByUrl('/graveyard/0');
   }
 
-  gotoPetGraveyard(){
-    let scene = this._global.getRandomNumber(1,2)+"_"+this._global.getRandomNumber(1,4);
-    this._router.navigateByUrl('/pet-graveyard/0/'+scene);
+  openPetGraveyard(){
+    this._global.CURRENT_PAGE = 'header.menu.pet_graveyard';
+    this._router.navigateByUrl('/pet-graveyard/0');
   }
 
-  gotoPetGraveyardNoticeboard(){
+  openPetGraveyardNoticeboard(){
+    this._global.CURRENT_PAGE = 'header.menu.pet_graveyard_noticeboard';  
     this._router.navigateByUrl('/pet-noticeboard');
+  }
+
+  openCatacomb(){
+    this._global.CURRENT_PAGE = 'header.menu.catacomb';  
+    this._router.navigateByUrl('/catacomb');
+  }
+
+  openMainGate(){
+    this._global.CURRENT_PAGE = 'header.menu.main_gate';
+    this._router.navigateByUrl('/home');
+  }
+
+  openNoticeboard(){
+    this._global.CURRENT_PAGE = 'header.menu.graveyard_noticeboard';  
+    this._router.navigateByUrl('/noticeboard');
   }
   
   openUserMgtDialog(){

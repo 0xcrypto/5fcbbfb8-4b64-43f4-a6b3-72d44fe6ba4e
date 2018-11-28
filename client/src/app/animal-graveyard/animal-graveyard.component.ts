@@ -36,7 +36,8 @@ export class AnimalGraveyardComponent implements OnInit {
   isSnowfallScene:boolean = false;
   isGraveDetailsOpen:boolean = false;
   isThunderstromScene:boolean = false;
-  isGraveyardLoading:boolean = true;
+  isGraveyardLoading:boolean = false;
+  isSceneSelectionInProgress:boolean = true;
   isRemeberanceFormOpen:boolean = false;
   condolenceMessage:string = null;
   condolenceSignature:string = null;
@@ -45,6 +46,9 @@ export class AnimalGraveyardComponent implements OnInit {
   router:Router = null;
   totalAnimals: number = 0;
   graveSize: number = 512;
+  selectedSceneTime:number = 1;
+  selectedSceneSeason:number = 1;
+  isRandomSceneSelected:boolean = false;
   options: UserOptions = {
     limit: 10
   };
@@ -64,21 +68,6 @@ export class AnimalGraveyardComponent implements OnInit {
       this.router.navigateByUrl('/home');
 
     let position = +this.route.snapshot.paramMap.get('position');
-    let scene = this.route.snapshot.paramMap.get('scene');
-    let season = scene.split('_')[1];
-
-    if(Number(season) == 2 || Number(season) == 3){
-      this.isRainfallScene = true;
-    }
-    if(Number(season) == 4){
-      this.isSnowfallScene = true;
-    }
-    if(Number(season) == 3){
-      this.isThunderstromScene = true;
-    }
-
-    this.skyImage = 'url(./assets/images/sky/'+this._global.getSkyImage(scene)+')';
-    this.graveyardImage = 'url(./assets/images/graveyard-backgrounds/'+this._global.getAnimalGraveyardImage(scene)+')';
     if(this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY)){
       let searchOptions = this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY).split('|');
       this.options = this._global.refreshObject(this.options, searchOptions);
@@ -87,25 +76,6 @@ export class AnimalGraveyardComponent implements OnInit {
       this.options = this._global.refreshObject(this.options, ['limit=10', 'position='+position, 'order=animal_id']);
     }
 
-    this.dataService.getAllWithMethodAndOptions('ANIMALS', this._global.serializeAndURIEncode(this.options))
-      .subscribe(animals => {
-        this.animals = animals.reverse();
-        this.totalAnimals = animals.length;
-        this.graveyardStartPosition = ((this.totalAnimals - 2) * this.graveSize );
-        for(let i=0; i<=animals.length-1;i++){
-          //animals[i].graveUrl = 'url(./assets/images/animals/grob'+animals[i].grave_id+'_'+animals[i].grave_image+'.png)';
-          animals[i].graveUrl = 'url(./assets/images/graves/grob_zw1_' + animals[i].grave_image + '.png)';
-        }
-
-        for(let i=0; i<=animals.length-1;i++){
-          if(this.animals[i]['objects'].length > 0){
-            this.animals[i]['objects'] = this.updateObjectImages(this.animals[i]['objects']);
-          }
-        }
-
-        this.isGraveyardLoading = false;
-      });
-    
     this.selectedAnimalDetailTab = 'tab1';
 
     this.messageService.castMessage.subscribe(object => {
@@ -280,5 +250,61 @@ export class AnimalGraveyardComponent implements OnInit {
       image.style.top = (event.clientY - 50 ) + 'px';
       image.style.left = (event.clientX - 500 ) + 'px';
     }
+  }
+
+  setSceneTime(time:number){
+    this.isRandomSceneSelected = false;
+    this.selectedSceneTime = time;
+  }
+
+  setSceneSeason(season:number){
+    this.isRandomSceneSelected = false;
+    this.selectedSceneSeason = season;
+  }
+
+  randomSceneSelection(){
+    this.isRandomSceneSelected = true;
+    this.selectedSceneTime = this._global.getRandomNumber(1,2);
+    this.selectedSceneSeason = this._global.getRandomNumber(1,4);
+  }
+
+  showGraveyard(){
+    this.isSceneSelectionInProgress = false;
+
+    let scene = this.selectedSceneTime+'_'+this.selectedSceneSeason;
+    let season = scene.split('_')[1];
+
+    if(Number(season) == 2 || Number(season) == 3){
+      this.isRainfallScene = true;
+    }
+    if(Number(season) == 4){
+      this.isSnowfallScene = true;
+    }
+    if(Number(season) == 3){
+      this.isThunderstromScene = true;
+    }
+
+    this.skyImage = 'url(./assets/images/sky/'+this._global.getSkyImage(scene)+')';
+    this.graveyardImage = 'url(./assets/images/graveyard-backgrounds/'+this._global.getAnimalGraveyardImage(scene)+')';
+    this.isGraveyardLoading = true;
+    this.dataService.getAllWithMethodAndOptions('ANIMALS', this._global.serializeAndURIEncode(this.options))
+      .subscribe(animals => {
+        this.animals = animals.reverse();
+        this.totalAnimals = animals.length;
+        this.graveyardStartPosition = ((this.totalAnimals - 2) * this.graveSize );
+        for(let i=0; i<=animals.length-1;i++){
+          //animals[i].graveUrl = 'url(./assets/images/animals/grob'+animals[i].grave_id+'_'+animals[i].grave_image+'.png)';
+          animals[i].graveUrl = 'url(./assets/images/graves/grob_zw1_' + animals[i].grave_image + '.png)';
+        }
+
+        for(let i=0; i<=animals.length-1;i++){
+          if(this.animals[i]['objects'].length > 0){
+            this.animals[i]['objects'] = this.updateObjectImages(this.animals[i]['objects']);
+          }
+        }
+
+        this.isGraveyardLoading = false;
+      });
+    
   }
 }

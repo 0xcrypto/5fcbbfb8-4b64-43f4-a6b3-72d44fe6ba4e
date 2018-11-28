@@ -17,14 +17,14 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'home/:isReturned', component: HomeComponent },
   { path: 'noticeboard', component: PersonNoticeboardComponent },
-  { path: 'graveyard/:position/:scene', component: PersonGraveyardComponent },
+  { path: 'graveyard/:position', component: PersonGraveyardComponent },
   { path: 'contactus', component: ContactusComponent },
   { path: 'forum', component: ForumComponent },
   { path: 'pricing', component: PricingComponent },
   { path: 'staticpage/:id', component: StaticpageComponent },
   { path: 'catacomb', component: CatacombComponent },
   { path: 'pet-noticeboard', component: AnimalNoticeboardComponent },
-  { path: 'pet-graveyard/:position/:scene', component: AnimalGraveyardComponent },
+  { path: 'pet-graveyard/:position', component: AnimalGraveyardComponent },
 ];
 
 @NgModule({

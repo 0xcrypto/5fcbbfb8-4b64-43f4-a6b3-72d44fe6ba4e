@@ -336,6 +336,7 @@ body #content .gate-left{
    -webkit-transform: perspective(300) rotateY(0deg);
    -webkit-transform-origin: 0% 0%;
    display: inline-block;
+   cursor: pointer;
 }
 body #content .gate-right{
     width: 165px;
@@ -350,6 +351,7 @@ body #content .gate-right{
     -webkit-transform: perspective(300) rotateY(0deg);
     -webkit-transform-origin: 0% 0%;
     display: inline-block;
+    cursor: pointer;
 }
 body #content.return-to-maingate .main-gate .gate-left{
 	-webkit-transform: perspective(300) rotateY(0deg);
@@ -1077,8 +1079,7 @@ body #content.graveyard .multigrave-container{
     position: absolute;
     top: 0;
 }
-
-.graveyard-container > ul, .graveyard-container > ul{
+.graveyard-container > ul{
     transition: margin-left 1s linear;
     list-style-type: none;
     padding: 0;
@@ -1088,7 +1089,7 @@ body #content.graveyard .multigrave-container{
     top: 85px;
     background-size: contain;
     background-position: bottom;
-    background-repeat: no-repeat;
+    background-repeat: repeat-x;
 }
 .graveyard-container > ul li{
     float: left;

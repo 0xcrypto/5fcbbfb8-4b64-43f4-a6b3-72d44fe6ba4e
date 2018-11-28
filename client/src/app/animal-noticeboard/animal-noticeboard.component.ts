@@ -25,7 +25,6 @@ export class AnimalNoticeboardComponent implements OnInit {
   isNavigateNextAnimalDisabled:boolean = false;
   isNavigatePreviousSearchedAnimalDisabled:boolean = false;
   isNavigateNextSearchedAnimalDisabled:boolean = false;
-  isRandomSceneSelected:boolean = false;
   selectedTab:string = null;
   selectedAnimalPosition: number = 0;
   totalAnimals: number = 0;
@@ -38,8 +37,6 @@ export class AnimalNoticeboardComponent implements OnInit {
   selectedAnimalAlphabet:string = null;
   selectedSearchedAnimalPage:number = 1;
   selectedSearchedAnimalAlphabet:string = null;
-  selectedSceneTime:number = 1;
-  selectedSceneSeason:number = 1;
   datalimit = 15;
 
   /* GRAVEYARD BURIAL INFORMATION */
@@ -160,28 +157,7 @@ export class AnimalNoticeboardComponent implements OnInit {
     }
 
     this.selectedAnimalPosition = (animal.position - 1);
-    this.isAnimalLoadingScreenVisible = true;
-  }
-
-  setSceneTime(time:number){
-    this.isRandomSceneSelected = false;
-    this.selectedSceneTime = time;
-  }
-
-  setSceneSeason(season:number){
-    this.isRandomSceneSelected = false;
-    this.selectedSceneSeason = season;
-  }
-
-  randomSceneSelection(){
-    this.isRandomSceneSelected = true;
-    this.selectedSceneTime = this._global.getRandomNumber(1,2);
-    this.selectedSceneSeason = this._global.getRandomNumber(1,4);
-  }
-
-  showGraveyard(){
-    let scene = this.selectedSceneTime+"_"+this.selectedSceneSeason;
-    this.router.navigateByUrl('/pet-graveyard/'+this.selectedAnimalPosition+'/'+scene);
+    this.router.navigateByUrl('/pet-graveyard/'+this.selectedAnimalPosition);
   }
 
   gotoGraveyard(){

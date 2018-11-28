@@ -2,18 +2,18 @@
     <div>
         <div>
             <ul>
-                <li><span translate>header.menu.you_are_at</span><span  [innerHTML]="currentRoute"></span></li>
+                <li><span translate>header.menu.you_are_at</span>: <span translate>{{_global.CURRENT_PAGE}}</span></li>
                 <li><span translate>header.menu.go_to</span>:
                     <ul>
-                        <li routerLink="/home" translate>header.menu.main_gate</li>
-                        <li routerLink="/noticeboard" translate>header.menu.graveyard_noticeboard</li>
-                        <li (click)="gotoGraveyard();">
+                        <li (click)="openMainGate()" translate>header.menu.main_gate</li>
+                        <li (click)="openNoticeboard()" translate>header.menu.graveyard_noticeboard</li>
+                        <li (click)="openGraveyard();">
                             <i class="fa fa-caret-right"></i>
                             <span translate>header.menu.graveyard</span>
                         </li>
-                        <li routerLink="/catacomb" translate>header.menu.catacomb</li>
-                        <li (click)="gotoPetGraveyardNoticeboard();" translate>header.menu.pet_graveyard_noticeboard</li>
-                        <li (click)="gotoPetGraveyard();" translate>
+                        <li (click)="openCatacomb()" translate>header.menu.catacomb</li>
+                        <li (click)="openPetGraveyardNoticeboard();" translate>header.menu.pet_graveyard_noticeboard</li>
+                        <li (click)="openPetGraveyard();" translate>
                             <i class="fa fa-caret-right"></i>
                             <span translate>header.menu.pet_graveyard</span>    
                         </li>
@@ -32,8 +32,6 @@
                 <app-shop></app-shop>
                 <li class="inline" *ngIf="!_userMgtDialog.isDialogOpen && (IS_GUEST=='YES')" translate (click)="openUserMgtDialog();">header.menu.login</li>
                 <li class="inline" *ngIf="(IS_GUEST=='NO')" translate (click)="logOut();">header.menu.logout</li>
-                
-                <li class="inline" routerLink="/home" translate>header.menu.exit</li>
                 <div class="clear"></div>
                 <app-sound></app-sound>
                

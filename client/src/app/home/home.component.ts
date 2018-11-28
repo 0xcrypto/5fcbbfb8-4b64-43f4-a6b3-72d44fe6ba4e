@@ -59,15 +59,15 @@ export class HomeComponent implements OnInit {
 
   openGate() {
     this.isGateOpen = true;
-    this.messageService.sendMessage('PLAY_OPEN_GATE', {});
+    //this.messageService.sendMessage('PLAY_OPEN_GATE', {});
     setTimeout(()=>{  
-      this.messageService.sendMessage('STOP_BIRDS', {});
+      //this.messageService.sendMessage('STOP_BIRDS', {});
       this.router.navigateByUrl('/noticeboard');
     }, 2000);
   }
   
   openPetNoticeboard() {
-    this.messageService.sendMessage('STOP_BIRDS', {});
+    //this.messageService.sendMessage('STOP_BIRDS', {});
     this.router.navigateByUrl('/pet-noticeboard');
   }
   
