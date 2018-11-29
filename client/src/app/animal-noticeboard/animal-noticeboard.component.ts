@@ -160,6 +160,15 @@ export class AnimalNoticeboardComponent implements OnInit {
     this.router.navigateByUrl('/pet-graveyard/'+this.selectedAnimalPosition);
   }
 
+  loadingPopularAnimal(animal:any, returnTab:string){
+    if(returnTab)
+      this.localStorageService.set(this._global.ANIMAL_GRAVEYARD_RETURN_TAB, returnTab);
+    
+    let parameters = ['animal_id='+animal.animal_id, 'limit=1', 'position=0', 'order=animal_id'];
+    this.localStorageService.set(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY, parameters.join('|'));
+    this.router.navigateByUrl('/pet-graveyard/0');
+  }
+
   gotoGraveyard(){
     let scene = this._global.getRandomNumber(1,2)+"_"+this._global.getRandomNumber(1,4);
     this.router.navigateByUrl('/pet-graveyard/0/'+scene);

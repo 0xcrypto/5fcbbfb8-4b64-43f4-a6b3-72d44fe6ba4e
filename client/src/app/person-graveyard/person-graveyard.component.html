@@ -92,7 +92,9 @@
     </div>
     <div class="graveyard-sky-container" [ngStyle]="{'background-image': skyImage}"></div>
     <div class="graveyard-container" >
-        <ul [ngStyle]="{'margin-left': '-'+graveyardStartPosition+'px', 'width': (totalGraves == 1) ? (graveSize * 2 )+'px' : (graveSize * totalGraves)+'px', 'background-image': graveyardImage}">
+        <ul [ngStyle]="{'margin-left': '-'+graveyardStartPosition+'px', 
+        'width': (totalGraves == 1) ? (graveSize * 2 )+'px' : (graveSize * totalGraves)+'px', 
+        'background-image': graveyardImage}">
             <div *ngIf="isRainfallScene" class="rainfall" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/rain.gif') +')'">&nbsp;</div>
             <div *ngIf="isSnowfallScene" class="snowfall" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/snow.gif') +')'">&nbsp;</div>
             <div *ngIf="isThunderstromScene" class="thunderstrom" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/thunderstrom.gif') +')'">&nbsp;</div>

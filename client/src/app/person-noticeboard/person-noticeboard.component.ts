@@ -206,6 +206,15 @@ export class PersonNoticeboardComponent implements OnInit {
     //}
   }
 
+  loadingPopularGrave(user:User, returnTab:string){
+    if(returnTab)
+      this.localStorageService.set(this._global.GRAVEYARD_RETURN_TAB, returnTab);
+    
+    let parameters = ['user_id='+user.user_id, 'limit=1', 'position=0'];
+    this.localStorageService.set(this._global.GRAVEYARD_OPTIONS_KEY, parameters.join('|'));
+    this.router.navigateByUrl('/graveyard/0');
+  }
+
   randomSceneSelection(){
     this.isRandomSceneSelected = true;
     this.selectedSceneTime = this._global.getRandomNumber(1,2);
@@ -213,8 +222,11 @@ export class PersonNoticeboardComponent implements OnInit {
   }
   
   gotoGraveyard(){
-    let scene = this._global.getRandomNumber(1,2)+"_"+this._global.getRandomNumber(1,4);
-    this.router.navigateByUrl('/graveyard/0/'+scene);
+    if(this.localStorageService.get(this._global.GRAVEYARD_OPTIONS_KEY))
+      this.localStorageService.set(this._global.GRAVEYARD_OPTIONS_KEY, null);
+
+    this._global.CURRENT_PAGE = 'header.menu.graveyard';
+    this._router.navigateByUrl('/graveyard/0');
   }
 
   getGraveWithFirstname(alphabet: string){

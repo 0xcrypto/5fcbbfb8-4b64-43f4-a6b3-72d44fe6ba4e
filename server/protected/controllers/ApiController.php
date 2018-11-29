@@ -438,20 +438,10 @@
 			} 
 
 			if(isset($options['birth_date']))
-			{
-                $_dateb_y = substr($options['birth_date'], 0,4);
-                $_dateb_m = substr($options['birth_date'], 5,7);
-				$_dateb_d = substr($options['birth_date'], 8,10);
-				$birth_date = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
-			}
+				$birth_date = $this->getValidDate($options['birth_date']);
 			
 			if(isset($options['death_date']))
-			{
-                $_dateb_y = substr($options['death_date'], 0,4);
-                $_dateb_m = substr($options['death_date'], 5,7);
-				$_dateb_d = substr($options['death_date'], 8,10);
-				$death_date = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
-			}
+				$death_date = $this->getValidDate($options['death_date']);
 
 			//znicze = candles
 			//kwiatki = flowers
@@ -554,19 +544,11 @@
 				$row['objects']=array();//znicze -> candles
 				$row['ilosc']=$count_result['total'];// number of all graves
 					
-				if(isset($row['date_birth'])){
-					$_dateb_y = substr($row['date_birth'], 0,4);
-					$_dateb_m = substr($row['date_birth'], 5,7);
-					$_dateb_d = substr($row['date_birth'], 8,10);
-					$row['date_birth'] = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
-				}
+				if(isset($row['date_birth']))             
+					$row['date_birth'] = $this->getValidDate($row['date_birth']);
 				
-				if(isset($row['date_death'])){
-					$_dateb_y = substr($row['date_death'], 0,4);
-					$_dateb_m = substr($row['date_death'], 5,7);
-					$_dateb_d = substr($row['date_death'], 8,10);
-					$row['date_death'] = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
-				}
+				if(isset($row['date_death']))
+					$row['date_death'] = $this->getValidDate($row['date_death']);
 
 				if($order=='rand()')
 					$row['koniec']= ($count_result['total'] == 1 ) ? true : false; // is it the last grave?
@@ -706,19 +688,11 @@
 					$row['reserve_grave_users_data']=array(array($row2['plogin1'],$tmp1[0],$tmp1[1]), array($row2['plogin2'],$tmp2[0],$tmp2[1]));
 				}
 				
-				if(isset($row['date_birth'])){
-					$_dateb_y = substr($row['date_birth'], 0,4);
-					$_dateb_m = substr($row['date_birth'], 5,7);
-					$_dateb_d = substr($row['date_birth'], 8,10);
-					$row['date_birth'] = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
-				}
+				if(isset($row['date_birth']))
+					$row['date_birth'] = $this->getValidDate($row['date_birth']);
 				
-				if(isset($options['date_death'])){
-					$_dateb_y = substr($row['date_death'], 0,4);
-					$_dateb_m = substr($row['date_death'], 5,7);
-					$_dateb_d = substr($row['date_death'], 8,10);
-					$row['date_death'] = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
-				}
+				if(isset($options['date_death']))
+					$row['date_death'] = $this->getValidDate($row['date_death']);
 
 				$data[] = $row; 
 			} 
@@ -1112,19 +1086,12 @@
 			$limit = isset($options['limit']) ? $options['limit'] : 15;
 			$data = array();
             
-            if (isset($options['date_birth'])){
-                $_dateb_y = substr($options['date_birth'], 0,4);
-                $_dateb_m = substr($options['date_birth'], 5,7);
-                $_dateb_d = substr($options['date_birth'], 8,10);
-                $date_birth = $_dateb_y.'-'.$_dateb_m.'-'.$_dateb_d;
-            }
+            if (isset($options['date_birth']))
+				$date_birth = $this->getValidDate($options['date_birth']);
+				
             
-            if (isset($options['date_death'])){
-                $_dated_y = substr($options['date_death'], 0,4);
-                $_dated_m = substr($options['date_death'], 5,7);
-                $_dated_d = substr($options['date_death'], 8,10);
-                $date_death = $_dated_y.'-'.$_dated_m.'-'.$_dated_d;
-            }
+            if (isset($options['date_death']))
+                $date_death = $this->getValidDate($options['date_death']);
             
             $query = "SELECT 
                         u.animal_id,
@@ -1184,7 +1151,7 @@
             $counter = 1;
             foreach ($result as $row)
             { 
-                $row['total'] = $count_result;
+				$row['total'] = $count_result;
                 $animal_id=$row['animal_id'];
 
                 $query="select object_id,object_name,comment from animals_objects where animal_id=".$animal_id." and object_name like 'kwiat%' and end_time>now() order by add_date desc";
@@ -1818,20 +1785,12 @@
 			$date_birth = null;
 			$date_death = null;
 
-			if(isset($options['date_birth'])){
-				$_dateb_y = substr($options['date_birth'], 0,4);
-				$_dateb_m = substr($options['date_birth'], 5,7);
-				$_dateb_d = substr($options['date_birth'], 8,10);
-				$date_birth = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
-			}
+			if(isset($options['date_birth']))
+				$date_birth = $this->getValidDate($options['date_birth']);
 
-			if(isset($options['date_death'])){
-				$_dateb_y = substr($options['date_death'], 0,4);
-				$_dateb_m = substr($options['date_death'], 5,7);
-				$_dateb_d = substr($options['date_death'], 8,10);
-				$date_death = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
-			}
-
+			if(isset($options['date_death']))
+				$date_death = $this->getValidDate($options['date_death']);
+			
 			$data = array();
 
 			$query="insert into $table ( buyer_id, place_id, grave_id, graveyard_id, 
@@ -1929,20 +1888,12 @@
 			$date_birth = null;
 			$date_death = null;
 
-			if(isset($options['date_birth'])){
-				$_dateb_y = substr($options['date_birth'], 0,4);
-				$_dateb_m = substr($options['date_birth'], 5,7);
-				$_dateb_d = substr($options['date_birth'], 8,10);
-				$date_birth = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
-			}
+			if(isset($options['date_birth']))
+				$date_birth = $this->getValidDate($options['date_birth']);
 			
-			if(isset($options['date_death'])){
-				$_dateb_y = substr($options['date_death'], 0,4);
-				$_dateb_m = substr($options['date_death'], 5,7);
-				$_dateb_d = substr($options['date_death'], 8,10);
-				$date_birth = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
-			}
-
+			if(isset($options['date_death']))
+				$date_death = $this->getValidDate($options['date_death']);
+			
 			$data = array();
 
 			$query="insert into $table ( buyer_id, al_id, gender, animalkind, 
@@ -2171,21 +2122,12 @@
 				$d2[1]='01';//month of January
 			}
 
-			if(isset($options['date_birth'])){
-				$_dateb_y = substr($options['date_birth'], 0,4);
-				$_dateb_m = substr($options['date_birth'], 5,7);
-				$_dateb_d = substr($options['date_birth'], 8,10);
-				$date_birth = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
-			}
+			if(isset($options['date_birth']))
+				$date_birth = $this->getValidDate($options['date_birth']);
 			
-			if(isset($options['date_death'])){
-				$_dateb_y = substr($options['date_death'], 0,4);
-				$_dateb_m = substr($options['date_death'], 5,7);
-				$_dateb_d = substr($options['date_death'], 8,10);
-				$date_birth = $_dateb_y."-".$_dateb_m."-".$_dateb_d;
-			}
-
-	
+			if(isset($options['date_death']))
+				$date_death = $this->getValidDate($options['date_death']);
+			
 			if($date_death!='0000-00-00' && $date_death!='00-00-0000' && $date_death!='' && $date_death!='-00-00')
 			{    
 				if (count($d2)!=3 || !checkdate($d2[1], $d2[0], $d2[2])) 
@@ -2486,6 +2428,11 @@
 			elseif($religion_id == 13 || $religion_id == 18) $graveyard_id = 10;
 			elseif($religion_id == 17) $graveyard_id = 11;
 			return $graveyard_id;
+		}
+
+		private function getValidDate($value){
+			$date = DateTime::createFromFormat('Y-m-d', $value);
+			return $date ? $date->format('Y-m-d') : '0000-00-00';
 		}
 	}
 ?>

@@ -14,12 +14,12 @@
           [style.display]="(selectedTab == 'graveyard-noticeboard') ? 'block' : 'none'">
           <div class="popular-grave-col">
               <div class="tile" *ngFor="let animal of prioritizedAnimals" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/floating-tile.png') +')'">
-                <p translate>animal_graveyard.noticeboard.tabs.graveyard_noticeboard.will_be_sadly_missed</p>
-                <p class="name">{{animal.name}}</p>
-                  <p>
-                      <span><label><i class="fas fas-select-all"></i></label>{{animal.date_birth}}</span>
-                      <span><label><i class="fa fa-plus"></i></label>{{animal.date_death}}</span>
-                  </p>
+                    <p translate>animal_graveyard.noticeboard.tabs.graveyard_noticeboard.will_be_sadly_missed</p>
+                    <p (click)="loadingPopularAnimal(animal, 'graveyard-noticeboard')" class="name">{{animal.name}}</p>
+                    <p>
+                        <span><label><i class="fas fas-select-all"></i></label>{{animal.date_birth}}</span>
+                        <span><label><i class="fa fa-plus"></i></label>{{animal.date_death}}</span>
+                    </p>
               </div>
           </div>
           <div class="options-col">

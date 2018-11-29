@@ -810,6 +810,7 @@ form .text-right{
     color: #a2a2a2;
     font-weight: bold;
     font-size: 13px;
+    cursor: pointer;
 }
 .popular-grave-col .tile a,
 .advertisement-col .tile a{

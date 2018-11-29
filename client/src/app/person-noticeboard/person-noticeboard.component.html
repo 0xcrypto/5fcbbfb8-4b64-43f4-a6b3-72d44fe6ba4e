@@ -15,7 +15,7 @@
             [style.display]="(selectedTab == 'graveyard-noticeboard') ? 'block' : 'none'">
             <div class="popular-grave-col">
                 <div class="tile" *ngFor="let user of prioritizeGraves" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/floating-tile.png') +')'">
-                    <p class="name">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</p>
+                    <p class="name" (click)="loadingPopularGrave(user, 'graveyard-noticeboard')">{{[].constructor.isArray(user.name1) ? user.name1[0] : user.name1}} {{user.surname}}</p>
                     <p translate>graveyard.noticeboard.tabs.graveyard_noticeboard.will_be_sadly_missed</p>
                     <p>
                         <span><label>Born</label>{{user.date_birth}}</span>
