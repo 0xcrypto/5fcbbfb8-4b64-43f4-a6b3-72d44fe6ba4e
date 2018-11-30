@@ -1405,7 +1405,7 @@ body #content.graveyard .multigrave-container{
     display: block;
     color: #848484;
 }
-.dialog {
+.custom-dialog {
     padding: 20px 10px;
     background: rgba(0, 0, 0, 0.9);
     border: 1px solid #999;
@@ -1419,12 +1419,12 @@ body #content.graveyard .multigrave-container{
     left: 50%;
     margin-left: -240px;
 }
-.dialog p {
+.custom-dialog p {
     color: #fff;
     font-size: 12px;
     text-align: center;
 }
-.dialog .close-btn{
+.custom-dialog .close-btn{
     background: none;
     color: #FFF;
     font-size: 12px;
@@ -1433,6 +1433,37 @@ body #content.graveyard .multigrave-container{
     text-align: center;
     width: 100%;
     margin-top: 50px;
+}
+.dialog {
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid #999;
+    border-radius: 5px;
+    margin: 0 auto;
+    width: 550px;
+    position: absolute;
+    z-index: 999;
+    top: 150px;
+    min-height: 150px;
+    left: 50%;
+    margin-left: -300px;
+}
+.dialog p {
+    color: #848484;
+    font-size: 11px;
+}
+.dialog .close-btn{
+    background: none;
+    color: #FFF;
+    border: none;
+    display: block;
+    width: 100%;
+    position: absolute;
+    right: -10px;
+    top: -30px;
+    width: 40px;
+    font-size: 20px;
+    cursor: pointer;
 }
 .dialog-overlay {    
     display: block;

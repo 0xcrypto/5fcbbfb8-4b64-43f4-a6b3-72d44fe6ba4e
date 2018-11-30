@@ -44,7 +44,8 @@ export class TranslationService {
     { key: 'PERSON_NOT_FOUND', value: 'app.message.person_not_found'},
     { key: 'PLEASE_PROVIDE_GRAVE_NUMBER', value: 'app.message.please_provide_valid_grave_number'},
     { key: 'ITEM_ALREADY_EXISTS', value: 'shop.form.item_already_exists'},
-    
+    { key: 'PLEASE_SELECT_GRAVEYARD', value: 'app.message.please_select_graveyard'},
+    { key: 'PLEASE_SELECT_GENUS', value: 'app.message.please_select_genus'}
 ];
 
   constructor(private translateService: TranslateService) { }

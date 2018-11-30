@@ -503,7 +503,6 @@
 			if(isset($options['country_birth'])) $query.=" and u.country_birth='".$options['country_birth']."'";
 			if(isset($options['country_death'])) $query.=" and u.country_death='".$options['country_death']."'";
 			if(isset($options['sex_id'])) $query.=" and u.sex_id='".$options['sex_id']."'";
-			if(isset($options['religion_id'])) $query.=" and u.religion_id='".$options['religion_id']."'";
 			if(isset($options['profession_id'])) $query.=" and u.profession_id='".$options['profession_id']."'";
 
 			// --------------military 12 - military cemetery, 69 - professional military

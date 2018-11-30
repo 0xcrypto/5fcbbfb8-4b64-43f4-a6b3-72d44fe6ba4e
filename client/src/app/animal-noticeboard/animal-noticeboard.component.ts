@@ -73,6 +73,8 @@ export class AnimalNoticeboardComponent implements OnInit {
   graveyardBurialData:any;
   graveBurialPrice: number;
 
+  selectedAnimalGraveyardGenusId: string = null;
+  animalGraveyardGenusList: any[] = [];
   animalListPages: number[] = [];
   searchedAnimalPages: number[] = [];
   advertisements: Advertisement[] = [];
@@ -81,6 +83,7 @@ export class AnimalNoticeboardComponent implements OnInit {
   prioritizedAnimals: any[] = [];
   USER_INFO:any = null;
 
+  grave_number: number;
   router:Router = null;
   currentLang:string = null;
   alphabetPages: any[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -120,7 +123,7 @@ export class AnimalNoticeboardComponent implements OnInit {
     this.dataService.getAllWithMethodAndOptions('ANIMAL_TYPES', this._global.serializeAndURIEncode(this.options))
     .subscribe(result => {
       if(result.length > 0)
-        this.graveyardBurialAnimalGenusList = result;
+        this.graveyardBurialAnimalGenusList = this.animalGraveyardGenusList = result;
     });
 
     this.options = this._global.refreshObject(this.options, ['type=animal_grave']);
@@ -170,8 +173,11 @@ export class AnimalNoticeboardComponent implements OnInit {
   }
 
   gotoGraveyard(){
-    let scene = this._global.getRandomNumber(1,2)+"_"+this._global.getRandomNumber(1,4);
-    this.router.navigateByUrl('/pet-graveyard/0/'+scene);
+    if(this.localStorageService.get(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY))
+      this.localStorageService.set(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY, null);
+
+    this._global.CURRENT_PAGE = 'header.menu.pet_graveyard_noticeboard';
+    this._router.navigateByUrl('/pet-graveyard/0');
   }
 
   getAnimalWithFirstname(alphabet: string){
@@ -612,5 +618,42 @@ export class AnimalNoticeboardComponent implements OnInit {
         b[i] = a[j];
     }
     return b.join("");
+  }
+
+  goToGrave(){
+    let animal_id = this.grave_number;
+    if(this.grave_number == null || !Number(this.grave_number)){
+      this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_PROVIDE_GRAVE_NUMBER' });
+      return;
+    }
+
+    let parameters = ['animal_id='+animal_id, 'limit=1', 'position=0', 'order=animal_id'];
+    this.options = this._global.refreshObject(this.options, parameters);
+    this.localStorageService.set(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY, parameters.join('|'));
+    this.dataService.getAllWithMethodAndOptions('ANIMALS', this._global.serializeAndURIEncode(this.options))
+      .subscribe(animals => {
+        if(animals.length == 0){
+          this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ANIMAL_NOT_EXISTS' });
+          return;
+        }
+        else{
+          let animal = animals[0];
+          animal.position = 1;
+          this.loadingAnimal(animal, 'graveyard-noticeboard');
+        }
+      });
+  }
+  gotoGraveyardByGenus(returnTab: string){
+    if(this.selectedAnimalGraveyardGenusId == null){
+      this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_SELECT_GENUS' });
+      return;
+    }
+
+    if(returnTab)
+      this.localStorageService.set(this._global.ANIMAL_GRAVEYARD_RETURN_TAB, returnTab);
+    debugger;
+    let parameters = ['al_id='+this.selectedAnimalGraveyardGenusId, 'limit=15', 'position=0', 'order=animal_id'];
+    this.localStorageService.set(this._global.ANIMAL_GRAVEYARD_OPTIONS_KEY, parameters.join('|'));
+    this.router.navigateByUrl('/pet-graveyard/0');
   }
 }

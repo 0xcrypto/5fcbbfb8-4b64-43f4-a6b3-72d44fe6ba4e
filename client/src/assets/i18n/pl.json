@@ -6,7 +6,9 @@
         "add_object_error" : "Problem z obiektem zakupów. Spróbuj ponownie później",
         "person_not_found" : "Nie znaleziono grobu",
         "animal_not_found" : "Grób nie znaleziono",
-        "please_provide_valid_grave_number": "Proszę podać liczbę grobów"
+        "please_provide_valid_grave_number": "Proszę podać liczbę grobów",
+        "please_select_graveyard": "Proszę wybrać cmentarz",
+        "please_select_genus": "Wybierz rodzaj"
     },
     "header" : {
         "menu" : {

@@ -23,23 +23,27 @@
               </div>
           </div>
           <div class="options-col">
-              <div class="option">
-                  <button (click)="gotoGraveyard();" translate>animal_graveyard.noticeboard.tabs.graveyard_noticeboard.go_to_graveyard</button>
+              <div class="option" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/option-shadow.png') +')'">
+                  <button (click)="gotoGraveyard();" 
+                  [style.backgroundImage]="'url('+ imageService.getImage('assets/images/option-background.png') +')'" translate>animal_graveyard.noticeboard.tabs.graveyard_noticeboard.go_to_graveyard</button>
               </div>
               <div class="option">
-                  <button translate>animal_graveyard.noticeboard.tabs.graveyard_noticeboard.choose_graveyard</button>
-                  <select>
-                      <option>Municipal</option>
-                      <option>Municipal</option>
-                      <option>Municipal</option>
-                  </select>
+                  <button [style.backgroundImage]="'url('+ imageService.getImage('assets/images/option-background.png') +')'" 
+                   (click)="gotoGraveyardByGenus('graveyard-noticeboard')"
+                    translate>animal_graveyard.noticeboard.tabs.graveyard_noticeboard.choose_graveyard</button>
+                  <select [(ngModel)]="selectedAnimalGraveyardGenusId" name="selectedAnimalGraveyardGenusId">
+                    <option *ngFor="let object of animalGraveyardGenusList" [value]="object.al_id">{{(currentLang == 'en') ? object.name_en : object.name_pl }}</option>
+                </select>
               </div>
               <div class="option">
-                  <button translate>animal_graveyard.noticeboard.tabs.graveyard_noticeboard.grave_number</button>
-                  <input type="text"/>
+                  <button  (click)="goToGrave()" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/option-background.png') +')'" 
+                  translate>animal_graveyard.noticeboard.tabs.graveyard_noticeboard.grave_number</button>
+                  <input type="text" [(ngModel)]="grave_number"/>
               </div>
               <div class="option">
-                  <button routerLink="/home" translate>animal_graveyard.noticeboard.tabs.graveyard_noticeboard.go_back_to_main_gate</button>
+                  <button routerLink="/home" 
+                  [style.backgroundImage]="'url('+ imageService.getImage('assets/images/option-background.png') +')'" 
+                  translate>animal_graveyard.noticeboard.tabs.graveyard_noticeboard.go_back_to_main_gate</button>
               </div>
           </div>
           <div class="advertisement-col">

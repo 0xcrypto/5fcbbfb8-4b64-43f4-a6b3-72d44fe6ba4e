@@ -109,6 +109,8 @@ export class PersonNoticeboardComponent implements OnInit {
   graveyardBurialSelectedReligionName: string;
   graveBurialPrice: number;
   
+  selectedGraveyardReligionId:string = null;
+  graveyardReligions:any[]=[];
   deadlistPages: number[] = [];
   searchedDeadPages: number[] = [];
   advertisements: Advertisement[] = [];
@@ -162,7 +164,7 @@ export class PersonNoticeboardComponent implements OnInit {
 
     this.dataService.getAllWithMethodAndOptions('RELIGIONS', this._global.serializeAndURIEncode(this.options))
     .subscribe(result => {
-      this.graveyardBurialReligions = this.reservationReligions = result;
+      this.graveyardBurialReligions = this.reservationReligions = this.graveyardReligions = result;
     });
     
     this.options = this._global.refreshObject(this.options, ['type=person_grave']);
@@ -1149,6 +1151,20 @@ export class PersonNoticeboardComponent implements OnInit {
           this.loadingGrave(person, 'graveyard-noticeboard');
         }
       });
+  }
+
+  goToGraveyardByReligion(returnTab: string){debugger;
+    if(this.selectedGraveyardReligionId == null){
+      this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_SELECT_GRAVEYARD' });
+      return;
+    }
+
+    if(returnTab)
+      this.localStorageService.set(this._global.GRAVEYARD_RETURN_TAB, returnTab);
+  
+    let parameters = ['religion_id='+this.selectedGraveyardReligionId, 'limit=10', 'position=0'];
+    this.localStorageService.set(this._global.GRAVEYARD_OPTIONS_KEY, parameters.join('|'));
+    this.router.navigateByUrl('/graveyard/0');
   }
 }
 

@@ -31,11 +31,10 @@
                 </div>
                 <div class="option">
                     <button [style.backgroundImage]="'url('+ imageService.getImage('assets/images/option-background.png') +')'" 
+                    (click)="goToGraveyardByReligion('graveyard-noticeboard')"
                     translate>graveyard.noticeboard.tabs.graveyard_noticeboard.choose_graveyard</button>
-                    <select>
-                        <option>Municipal</option>
-                        <option>Municipal</option>
-                        <option>Municipal</option>
+                    <select name="selectedGraveyardReligionId" [(ngModel)]="selectedGraveyardReligionId">
+                        <option *ngFor="let object of graveyardReligions" [value]="object.religion_id">{{(currentLang == 'en') ? object.name_en : object.name_pl }}</option>
                     </select>
                 </div>
                 <div class="option">

@@ -6,7 +6,9 @@
         "add_object_error" : "Problem in shopping object, Please try again later",
         "person_not_found" : "Grave not found",
         "animal_not_found" : "Pet grave not found",
-        "please_provide_valid_grave_number": "Please provide grave number"
+        "please_provide_valid_grave_number": "Please provide grave number",
+        "please_select_graveyard": "Please select graveyard",
+        "please_select_genus": "Please select genus"
     },
     "header" : {
         "menu" : {

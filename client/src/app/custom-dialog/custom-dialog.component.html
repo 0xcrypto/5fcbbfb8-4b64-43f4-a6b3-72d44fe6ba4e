@@ -1,4 +1,4 @@
-<div class="dialog small" [ngStyle]="{'display': isOpen ? 'block': 'none'}">
+<div class="custom-dialog" [ngStyle]="{'display': isOpen ? 'block': 'none'}">
   <p>{{message}}</p>
   <button class="close-btn" (click)="close()">
     <span translate>custom_dialog.ok</span>&nbsp;
