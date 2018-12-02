@@ -268,20 +268,16 @@ export class AnimalNoticeboardComponent implements OnInit {
   
   submitSearch(){
     var parameters = ['order=animal_id']
+    
     if(this.name)
       parameters.push('name='+this.name);
     
-    if(this.dob){
-      
-      let birth_date = moment(this.dob, "YYYY-MM-DD");
-      parameters.push('birth_date='+birth_date);
-    }
+    if(this.dob)
+      parameters.push('birth_date='+moment(this.dob).format("YYYY-MM-DD"));
     
-    if(this.dod){
-      let death_date = moment(this.dod, "YYYY-MM-DD");
-      parameters.push('death_date='+death_date);
-    }
-
+    if(this.dod)
+      parameters.push('death_date='+moment(this.dod).format("YYYY-MM-DD"));
+    
     this.loadSearchData(parameters);
   }
 

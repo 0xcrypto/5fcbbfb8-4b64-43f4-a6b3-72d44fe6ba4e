@@ -99,7 +99,9 @@ export class UserMgtComponent implements OnInit {
             return;
           }
           else{
-            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'REGISTER_SUCCESS' });
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'REGISTER_SUCCESS' }, ()=>{
+              this.currentContent = 'login';
+            });
             return;
           }
         }

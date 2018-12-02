@@ -743,6 +743,9 @@ form .text-right{
     margin: 0 auto;
     cursor: pointer;
 }
+.options-col .option button:hover{
+    color: #b2973d;
+}
 .options-col .option select{
     display: block;
     padding: 5px;
@@ -811,6 +814,9 @@ form .text-right{
     font-weight: bold;
     font-size: 13px;
     cursor: pointer;
+}
+.popular-grave-col .tile p.name:hover{
+    color: #947F1D;
 }
 .popular-grave-col .tile a,
 .advertisement-col .tile a{

@@ -9,6 +9,7 @@ import { DataService } from '../services/data.service';
 import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
 import { AppGlobals } from '../app.globals';
+import { ignoreElements } from 'rxjs/operators';
 
 export interface Options {};
 
@@ -29,6 +30,7 @@ export class ShopComponent implements OnInit {
   selectedGraveName:string;
   source:string;
   TODAY_DATE:string;
+  objectSelectedForDays: number = 0;
   valid_upto:string = null;
   dedication:string = null;
   currentLang:string = null;
@@ -352,72 +354,75 @@ export class ShopComponent implements OnInit {
   addObject(){
     this.isItemAlreadyExists = false;
     let temp = 0;
-    if(this.USER_INFO){
-      if(this.source == 'person-graveyard'){
-        this.options = this._global.refreshObject(this.options, ['payment_method='+this._global.PAYMENT_METHOD,
-        'payment_id='+this.payment_id, 'temp='+temp, 'valid_upto='+ this.valid_upto, 
-        'user_id='+this.selectedGraveId, 'comment='+this.dedication, 'object_name='+this.selectedObjectName, 
-        'object_id='+this.selectedObjectId, 'buyer_id='+this.USER_INFO.buyer_id, 
-        'current_language='+this.currentLang, 'method=ADD_PERSON_OBJECT']);
-        this.dataService.createWithMethodAndOptions(this.options)
-          .subscribe(result => {
-            if(result['status'] && result['status'] == 'PERSON_OBJECT_ADD_ERROR'){
-              this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ADD_OBJECT_ERROR' });
-            }
-            else if(result['status'] && result['status'] == 'PERSON_OBJECT_ALREADY_EXISTS'){
-              this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ITEM_ALREADY_EXISTS' });
-            }
 
-            this.closeShop();
-            this.messageService.sendMessage('RELOAD_PERSON_OBJECTS', {'id': this.selectedGraveId});
-          });
-      }
-
-      if(this.source == 'animal-graveyard'){
-        this.options = this._global.refreshObject(this.options, ['payment_method='+this._global.PAYMENT_METHOD,
-        'payment_id='+this.payment_id, 'temp='+temp, 'valid_upto='+ this.valid_upto,
-        'animal_id='+this.selectedGraveId, 'comment='+this.dedication, 'object_name='+this.selectedObjectName, 
-        'object_id='+this.selectedObjectId, 'buyer_id='+this.USER_INFO.buyer_id, 
-        'current_language='+this.currentLang, 'method=ADD_ANIMAL_OBJECT']);
-        this.dataService.createWithMethodAndOptions(this.options)
-          .subscribe(result => {
-            if(result['status'] && result['status'] == 'ANIMAL_OBJECT_ADD_ERROR'){
-              this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ADD_OBJECT_ERROR' });
-            }
-            else if(result['status'] && result['status'] == 'ANIMAL_OBJECT_ALREADY_EXISTS'){
-              this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ITEM_ALREADY_EXISTS' });
-            }
-            else if(result['status'] && result['status'] == 'ANIMAL_NOT_EXISTS'){
-              this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ANIMAL_NOT_EXISTS' });
-            }
-            
-            this.closeShop();
-            this.messageService.sendMessage('RELOAD_ANIMAL_OBJECTS', {'id': this.selectedGraveId});
-          });
-      }
-
-      if(this.source == 'catacomb'){
-        this.options = this._global.refreshObject(this.options, ['payment_method='+this._global.PAYMENT_METHOD,
-        'payment_id='+this.payment_id, 'temp='+temp, 'valid_upto='+ this.valid_upto, 
-        'user_id='+this.selectedGraveId, 'comment='+this.dedication, 'object_name='+this.selectedObjectName, 
-        'object_id='+this.selectedObjectId, 'buyer_id='+this.USER_INFO.buyer_id, 
-        'current_language='+this.currentLang, 'method=ADD_PERSON_OBJECT']);
-        this.dataService.createWithMethodAndOptions(this.options)
-          .subscribe(result => {
-            if(result['status'] && result['status'] == 'PERSON_OBJECT_ADD_ERROR'){
-              this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ADD_OBJECT_ERROR' });
-            }
-            else if(result['status'] && result['status'] == 'PERSON_OBJECT_ALREADY_EXISTS'){
-              this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ITEM_ALREADY_EXISTS' });
-            }
-
-            this.closeShop();
-            this.messageService.sendMessage('RELOAD_CATACOMB_OBJECTS', {'id': this.selectedGraveId});
-          });
-      }
-    }
-    else{
+    if(this.objectSelectedForDays > 1 && !this.USER_INFO){
       this.messageService.sendMessage('OPEN_LOGIN_DIALOG', {});
+      return;
+    }
+
+    let buyer_id = this.USER_INFO ? this.USER_INFO.buyer_id : 0;
+
+    if(this.source == 'person-graveyard'){
+      this.options = this._global.refreshObject(this.options, ['payment_method='+this._global.PAYMENT_METHOD,
+      'payment_id='+this.payment_id, 'temp='+temp, 'valid_upto='+ this.valid_upto, 
+      'user_id='+this.selectedGraveId, 'comment='+this.dedication, 'object_name='+this.selectedObjectName, 
+      'object_id='+this.selectedObjectId, 'buyer_id='+buyer_id, 
+      'current_language='+this.currentLang, 'method=ADD_PERSON_OBJECT']);
+      this.dataService.createWithMethodAndOptions(this.options)
+        .subscribe(result => {
+          if(result['status'] && result['status'] == 'PERSON_OBJECT_ADD_ERROR'){
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ADD_OBJECT_ERROR' });
+          }
+          else if(result['status'] && result['status'] == 'PERSON_OBJECT_ALREADY_EXISTS'){
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ITEM_ALREADY_EXISTS' });
+          }
+
+          this.closeShop();
+          this.messageService.sendMessage('RELOAD_PERSON_OBJECTS', {'id': this.selectedGraveId});
+        });
+    }
+
+    if(this.source == 'animal-graveyard'){
+      this.options = this._global.refreshObject(this.options, ['payment_method='+this._global.PAYMENT_METHOD,
+      'payment_id='+this.payment_id, 'temp='+temp, 'valid_upto='+ this.valid_upto,
+      'animal_id='+this.selectedGraveId, 'comment='+this.dedication, 'object_name='+this.selectedObjectName, 
+      'object_id='+this.selectedObjectId, 'buyer_id='+buyer_id, 
+      'current_language='+this.currentLang, 'method=ADD_ANIMAL_OBJECT']);
+      this.dataService.createWithMethodAndOptions(this.options)
+        .subscribe(result => {
+          if(result['status'] && result['status'] == 'ANIMAL_OBJECT_ADD_ERROR'){
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ADD_OBJECT_ERROR' });
+          }
+          else if(result['status'] && result['status'] == 'ANIMAL_OBJECT_ALREADY_EXISTS'){
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ITEM_ALREADY_EXISTS' });
+          }
+          else if(result['status'] && result['status'] == 'ANIMAL_NOT_EXISTS'){
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ANIMAL_NOT_EXISTS' });
+          }
+          
+          this.closeShop();
+          this.messageService.sendMessage('RELOAD_ANIMAL_OBJECTS', {'id': this.selectedGraveId});
+        });
+    }
+
+    if(this.source == 'catacomb'){
+      this.options = this._global.refreshObject(this.options, ['payment_method='+this._global.PAYMENT_METHOD,
+      'payment_id='+this.payment_id, 'temp='+temp, 'valid_upto='+ this.valid_upto, 
+      'user_id='+this.selectedGraveId, 'comment='+this.dedication, 'object_name='+this.selectedObjectName, 
+      'object_id='+this.selectedObjectId, 'buyer_id='+buyer_id, 
+      'current_language='+this.currentLang, 'method=ADD_PERSON_OBJECT']);
+      this.dataService.createWithMethodAndOptions(this.options)
+        .subscribe(result => {
+          if(result['status'] && result['status'] == 'PERSON_OBJECT_ADD_ERROR'){
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ADD_OBJECT_ERROR' });
+          }
+          else if(result['status'] && result['status'] == 'PERSON_OBJECT_ALREADY_EXISTS'){
+            this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'ITEM_ALREADY_EXISTS' });
+          }
+
+          this.closeShop();
+          this.messageService.sendMessage('RELOAD_CATACOMB_OBJECTS', {'id': this.selectedGraveId});
+        });
     }
   }
 
@@ -429,6 +434,7 @@ export class ShopComponent implements OnInit {
     currency = priceObject.currency;
 
     this.valid_upto = moment(today, "YYYY-MM-DD").add(parseInt(priceObject.days), 'days').format("YYYY-MM-DD");
+    this.objectSelectedForDays = Number(priceObject.days);
     this.selectedObjectPrice = price;
     this.selectedObjectCurrency = currency;
 

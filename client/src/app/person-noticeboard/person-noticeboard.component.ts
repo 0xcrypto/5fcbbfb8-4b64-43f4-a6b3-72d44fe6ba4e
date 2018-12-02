@@ -329,24 +329,19 @@ export class PersonNoticeboardComponent implements OnInit {
   submitSearch(){
     //, 'death_date=zmarli'
     var parameters = ['limit=15', 'order=user_id']
-    if(this.firstname){
+    if(this.firstname)
       parameters.push('firstname='+this.firstname);
-    }
-
-    if(this.surname){
-      parameters.push('lastname='+this.surname);
-    }
-
-    if(this.dob){
-      let date_birth = moment(this.dob, "YYYY-MM-DD");
-      parameters.push('birth_date='+date_birth);
-    }
     
-    if(this.dod){
-      let date_death = moment(this.dob, "YYYY-MM-DD");
-      parameters.push('death_date='+date_death);
-    }
-
+    if(this.surname)
+      parameters.push('lastname='+this.surname);
+    
+    if(this.dob)
+      parameters.push('birth_date='+moment(this.dob).format('YYYY-MM-DD'));
+    
+    if(this.dod)
+      parameters.push('death_date='+moment(this.dod).format('YYYY-MM-DD'));
+    
+debugger;
     this.loadSearchData(parameters);
   }
 
@@ -1153,7 +1148,7 @@ export class PersonNoticeboardComponent implements OnInit {
       });
   }
 
-  goToGraveyardByReligion(returnTab: string){debugger;
+  goToGraveyardByReligion(returnTab: string){
     if(this.selectedGraveyardReligionId == null){
       this.messageService.sendMessage('OPEN_CUSTOM_DIALOG', {'translationKey': 'PLEASE_SELECT_GRAVEYARD' });
       return;
