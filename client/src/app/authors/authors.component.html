@@ -1,0 +1,68 @@
+<a href="javascript:void(0);" class="author-link" [ngStyle]="{'display': isOpen ? 'none': 'block'}" 
+(click)="openAuthorsDialog()" translate>app.authors</a>
+<div class="author-dialog" [ngStyle]="{'display': isOpen ? 'block': 'none'}">
+  <button class="close-btn" (click)="closeButtonClick();"><i class="fas fa-times"></i></button>
+  <div class="left-col">
+    <form>
+      <label>
+          <span>conception</span>
+          <span>
+            <p>Dariusz palecki [<span> pragmator </span>] </p>
+            <p>Marcin Najdyhor[ <span> cyber.pl </span> ]</p>
+          </span>
+      </label>
+      <label>
+          <span>conception</span>
+          <span>
+            <p>Dariusz palecki [<span> pragmator </span>] </p>
+            <p>Marcin Najdyhor[ <span> cyber.pl </span> ]</p>
+          </span>
+      </label>
+      <label>
+          <span>conception</span>
+          <span>
+            <p>Dariusz palecki [<span> pragmator </span>] </p>
+            <p>Marcin Najdyhor[ <span> cyber.pl </span> ]</p>
+          </span>
+      </label>
+      <label>
+          <span>conception</span>
+          <span>
+            <p>Dariusz palecki [<span> pragmator </span>] </p>
+            <p>Marcin Najdyhor[ <span> cyber.pl </span> ]</p>
+          </span>
+      </label>
+    </form>
+  </div>
+  <div class="right-col">
+    <form>
+      <h4>Cyber.pl</h4>
+      <label>
+          <span>email: </span>
+          <span>
+            <p><span>info@cyber.pl</span></p>
+          </span>
+      </label>
+      <label>
+          <span>phone: </span>
+          <span>
+            <p>+48 083 342 67 84</p>
+          </span>
+      </label>
+      <h4>42net</h4>
+      <label>
+          <span>email: </span>
+          <span>
+            <p><span>info@42net.eu</span></p>
+          </span>
+      </label>
+      <label>
+          <span>phone: </span>
+          <span>
+            <p>+48 509 981 238</p>
+          </span>
+      </label>
+    </form>
+  </div>
+</div>
+<div class="dialog-overlay" [ngStyle]="{'display': isOpen ? 'block': 'none'}"></div>

@@ -242,7 +242,7 @@ export class CatacombComponent implements OnInit {
       image.style.left = (event.clientX - 500 ) + 'px';
     }
   }
-  
+
   shopObjects(){
     if(this.selectedCatacombId){
       this.messageService.sendMessage('OPEN_SHOP', {

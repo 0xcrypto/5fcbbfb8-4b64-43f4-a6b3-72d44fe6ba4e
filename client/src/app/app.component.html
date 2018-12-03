@@ -1,6 +1,13 @@
 <div id="wrapper">
     <app-header></app-header>
+    <div id="vg-left-container" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/home-left-gradient-background.png') +')'">
+        <img id="vg-left-logo" [attr.src]="imageService.getImage('assets/images/vg-left-logo.png')">
+    </div>
     <router-outlet></router-outlet>
+    <div id="vg-right-container" [style.backgroundImage]="'url('+ imageService.getImage('assets/images/home-right-gradient-background.png') +')'">
+        <img id="vg-right-logo" [attr.src]="imageService.getImage('assets/images/vg-right-logo.png')">
+    </div>
     <app-footer></app-footer>
     <app-custom-dialog></app-custom-dialog>
+    <app-authors></app-authors>
 </div>

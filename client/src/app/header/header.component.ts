@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit {
   }
 
   changeLanguage(lang:string){
-    let app = new AppComponent(this.translate, this._global);
+    let app = new AppComponent(this.translate, this._global, this.imageService);
     app.changeLang(lang);
     this.selectedLanguage = this.getSelectedLanguage();
   }

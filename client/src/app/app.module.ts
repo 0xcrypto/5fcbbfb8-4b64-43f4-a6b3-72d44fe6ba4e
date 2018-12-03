@@ -32,6 +32,7 @@ import { UserService } from './services/user.service';
 import { MessageService } from './services/message.service';
 import { AppGlobals } from './app.globals';
 import { AccountComponent } from './account/account.component';
+import { AuthorsComponent } from './authors/authors.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
@@ -58,6 +59,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserMgtComponent,
     AccountComponent,
     CustomDialogComponent,
+    AuthorsComponent,
   ],
   imports: [
     BrowserModule,

@@ -81,10 +81,10 @@ table button{
 }
 #vg-logo{
     cursor: pointer;
-    position: absolute;
+    position: fixed;
     height: 75px;
     width: 75px;
-    z-index: 9;    
+    z-index: 10;
     top: 15px;
     left: 70px;
     background-position: center;
@@ -93,30 +93,44 @@ table button{
 #vg-logo:hover{
     background-image: url(./assets/images/vg-logo-hover.png);
 }
-#vg-left-logo{
+#vg-left-container{
     position: absolute;
-    height: 200px;
-    width: 100px;
+    height: 550px;
+    width: 127px;
     z-index: 9;
-    top: 60px;
-    left: 30px;
+    top: 50px;
     background-position: center;
     background-size: 100%;
 }
-#vg-right-logo{
-    position: absolute;
+#vg-left-container > #vg-left-logo{
     height: 200px;
     width: 100px;
+    float: right;
+    left: 0;
+    margin-top: 15px;
+    margin-left: -15px;
+}
+#vg-right-container{
+    position: absolute;
+    height: 550px;
+    width: 127px;
     z-index: 9;
-    top: 60px;
-    right: 30px;
+    top: 50px;
     background-position: center;
     background-size: 100%;
+    right: 0;
+}
+#vg-right-container > #vg-right-logo{
+    height: 200px;
+    width: 100px;
+    float: left;
+    margin-top: 0;
 }
 body{
     background-color: #000;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 body header{
     height: 50px;
@@ -231,10 +245,6 @@ body #content{
     position: relative;
     color: #fff;
     margin: 0 auto;
-    border: 3px solid #545151;
-    box-shadow: 0 0 70px 0 #a5a5a5;
-    border-top: none;
-    border-bottom: none;
 }
 body #content.notice-bg{
     overflow: inherit;
@@ -1478,6 +1488,79 @@ body #content.graveyard .multigrave-container{
     position: absolute;
     top: 0;
     background: rgba(0,0,0,0.3);
+}
+.author-dialog {
+    padding: 20px 10px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid #999;
+    border-radius: 5px;
+    margin: 0 auto;
+    width: 600px;
+    position: absolute;
+    z-index: 999;
+    top: 100px;
+    min-height: 150px;
+    left: 50%;
+    margin-left: -320px;
+}
+.author-dialog h4 {
+    color: #a6a6a6;
+    font-size: 12px;
+    margin: 5px 0;
+}
+.author-dialog p {
+    color: #848484;
+    font-size: 11px;
+    margin: 0;
+}
+.author-dialog p span{
+    color: #fff;
+}
+.author-dialog .close-btn{
+    background: none;
+    color: #FFF;
+    border: none;
+    display: block;
+    width: 100%;
+    position: absolute;
+    right: -10px;
+    top: -30px;
+    width: 40px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.author-dialog .left-col {
+    width: 60%;
+    border-right: 1px solid #848484;
+}
+.author-dialog .right-col {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 35%;
+    min-height: 200px;
+    padding: 10px;
+}
+.author-dialog .right-col form > label > span{
+    width: 50px;
+}
+.author-dialog .right-col form > label > span + span{
+    width: 120px;
+}
+.author-link{
+    display: block;
+    position: absolute;
+    bottom: 70px;
+    left: 85px;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    z-index: 999;
+    color: #585858;
+    font-size: 12px;
+    text-decoration: none;
+}
+.author-link:hover{
+    color: #b2973d;
 }
 @keyframes backgroundScroll {
     from {background-position: 0 0;}

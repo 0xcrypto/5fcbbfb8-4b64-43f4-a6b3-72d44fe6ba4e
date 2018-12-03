@@ -1,5 +1,6 @@
 {
     "app.name" : "Virtual Grave",
+    "app.authors": "Authors",
     "app.message" : {
         "problem_uploading_photo": "Problem uploading photo, Please try again later",
         "add_comment_error": "Problem adding comment, Please try again later",

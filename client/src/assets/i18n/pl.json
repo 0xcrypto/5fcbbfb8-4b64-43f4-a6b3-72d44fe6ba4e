@@ -1,5 +1,6 @@
 {
     "app.name" : "Wirtualny grób",
+    "app.authors": "Autorski",
     "app.message" : {
         "problem_uploading_photo": "Problem z przesłaniem zdjęcia. Spróbuj ponownie później",
         "add_comment_error": "Problem adding comment, Please try again later",

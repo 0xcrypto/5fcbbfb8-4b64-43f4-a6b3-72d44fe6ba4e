@@ -67,6 +67,8 @@ export class ImageService {
     'assets/images/vg-logo-hover.png',
     'assets/images/vg-right-logo.png',
     'assets/images/wall.png',
+    'assets/images/home-left-gradient-background.png',
+    'assets/images/home-right-gradient-background.png'
   ];
   public cachedImages:any[]=[];
   public totalImagesLoaded = 0;
