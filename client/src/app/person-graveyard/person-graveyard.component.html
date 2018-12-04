@@ -37,14 +37,16 @@
         <li>
             <label translate>graveyard.loading_screen.blue_sky</label>
             <button class="blue-sky" 
-            [ngStyle]="{'background-image': (selectedSceneSeason == 1) ? 'url('+ imageService.getImage('assets/images/blue-sky-active.png') +')' : 
+            [ngStyle]="{'background-image': (selectedSceneSeason == 1) ? 
+            'url('+ imageService.getImage('assets/images/blue-sky-active.png') +')' : 
             'url('+ imageService.getImage('assets/images/blue-sky.png') +')' }" (click)="setSceneSeason(1);" 
             [ngClass]="{'active': (selectedSceneSeason == 1) }"><span></span></button>
         </li>
         <li>
             <label translate>graveyard.loading_screen.rain</label>
             <button class="rain" 
-            [ngStyle]="{'background-image': (selectedSceneSeason == 2) ? 'url('+ imageService.getImage('assets/images/rain-active.png') +')' : 
+            [ngStyle]="{'background-image': (selectedSceneSeason == 2) ? 
+            'url('+ imageService.getImage('assets/images/rain-active.png') +')' : 
             'url('+ imageService.getImage('assets/images/rain.png') +')' }" (click)="setSceneSeason(2);" 
             [ngClass]="{'active': (selectedSceneSeason == 2) }"><span></span></button>
         </li>

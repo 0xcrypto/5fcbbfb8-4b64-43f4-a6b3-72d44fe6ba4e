@@ -986,6 +986,7 @@ table tbody{
     background-position: -1px -2px;
     background-size: 51px 55px !important;
     position: relative;
+    margin-top: 20px;
 }
 #loading-options li button span{
     position: absolute;
@@ -993,7 +994,7 @@ table tbody{
     width: 20px;
     background: #fffe03;
     transform: rotate(45deg);
-    top: 92px;
+    top: 80px;
     left: 15px;
     display: none;
 }

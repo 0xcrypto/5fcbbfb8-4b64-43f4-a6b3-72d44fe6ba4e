@@ -53,6 +53,7 @@ export class PersonGraveyardComponent implements OnInit {
   multigraveSize: number = 512;
   selectedSceneTime:number = 1;
   selectedSceneSeason:number = 1;
+  isRandomSceneSelected:boolean = false;
   options: UserOptions = {
     limit: 10
   };
@@ -291,6 +292,12 @@ export class PersonGraveyardComponent implements OnInit {
 
   setSceneSeason(season:number){
     this.selectedSceneSeason = season;
+  }
+
+  randomSceneSelection(){
+    this.isRandomSceneSelected = true;
+    this.selectedSceneTime = this._global.getRandomNumber(1,2);
+    this.selectedSceneSeason = this._global.getRandomNumber(1,4);
   }
 
   showGraveyard(){
